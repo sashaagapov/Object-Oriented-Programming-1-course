@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Security.Cryptography.X509Certificates;
 using System.Text;
+using System.Xml;
 
 namespace lab1agapov
 {
@@ -7,17 +9,17 @@ namespace lab1agapov
     {
         static void Main(string[] args)
         {
-        
+            
             Console.OutputEncoding = Encoding.UTF8;
-
+            WelcomeInfo();
             bool menuStopping = true;
             while (menuStopping)
             {
-                Console.Clear();
-                Console.WriteLine("=== ГОЛОВНЕ МЕНЮ (Варіант 1) ===");
-                Console.WriteLine("1. Анкетні дані");
-                Console.WriteLine("2. Обчислення поліному (Math)");
-                Console.WriteLine("3. Рівняння номер 2");
+               
+                Console.WriteLine("    === ГОЛОВНЕ МЕНЮ  ===");
+                Console.WriteLine("1.  Обчислення поліному (Math)");
+                Console.WriteLine("2. Використання математичних функцій");
+                Console.WriteLine("3. f(x)");
                 Console.WriteLine("4. Назва місяця (switch)");
                 Console.WriteLine("0. Вихід");
                 Console.Write("\nОберіть номер завдання: ");
@@ -31,16 +33,16 @@ namespace lab1agapov
                 switch (choice)
                 {
                     case "1":
-                        StudentInfo();
-                        break;
-                    case "2":
                         CalculatePolynomial();
                         break;
+                    case "2":
+                         CalculateMathFunction();
+                        break;
                     case "3":
-                        CalculateSecondEquation();
+                       CalculatePiecewiseFunction();
                         break;
                     case "4":
-                        GetMonthName();
+                     GetMonthName();
                         break;
                     case "0":
                         return; 
@@ -55,7 +57,7 @@ namespace lab1agapov
             }
         }
 
-        static void StudentInfo()
+        static void WelcomeInfo()
         {
             Console.WriteLine("---------------------------------------------------");
             Console.WriteLine("Агапов Олександр, ІПЗ-11(1), лабораторна робота №1");
@@ -65,8 +67,8 @@ namespace lab1agapov
         static void CalculatePolynomial()
         {
             Console.WriteLine("\n--- Завдання 2: Поліном ---");
-            double coefficientA = 2.5;
-            double coefficientB = 1.2;
+            double coefficientA = 5;
+            double coefficientB = 1.3;
             double coefficientC = -4.0;
             double freeTermD = 10.5;
             
@@ -86,7 +88,7 @@ namespace lab1agapov
             }
         }
 
-        static void CalculateSecondEquation()
+        static void CalculateMathFunction()
         {
             Console.WriteLine("\n--- Завдання 3: Рівняння 2 ---");
             Console.WriteLine("Умова: x = sqrt((a-b)/a + |sin(a)/cos(b)|)");
@@ -129,6 +131,33 @@ namespace lab1agapov
                 Console.WriteLine($"Результат x = {resultX:F4}");
             }
         }
+        static void CalculatePiecewiseFunction()
+        {
+            int valX = 0;
+            int result = 0;
+            Console.WriteLine("\n--- f(x) ---");
+            Console.WriteLine("Умова: x>0 -> x^2+4;  x<0 -> x-5;  x=0 -> 0");
+            Console.Write("Введіть значення x: ");
+            
+            if(!int.TryParse(Console.ReadLine(),out valX))
+            {
+              Console.WriteLine("Неправильно.Введіть число");
+              return;  
+            }
+            if(valX > 0)
+            {
+                result  = valX * valX + 4;
+            }
+            else if(valX < 0)
+            {
+                result = valX - 5;
+            }
+            else
+            {
+                result = 0;
+            }
+            Console.WriteLine($"Результат: {result}");
+        }
 
         static void GetMonthName()
         {
@@ -157,5 +186,6 @@ namespace lab1agapov
                     break;
             }
         }
+        
     }
 }
