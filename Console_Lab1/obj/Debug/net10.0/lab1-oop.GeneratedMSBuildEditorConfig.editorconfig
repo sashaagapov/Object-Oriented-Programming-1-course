@@ -10,7 +10,11 @@ build_property.PlatformNeutralAssembly =
 build_property.EnforceExtendedAnalyzerRules = 
 build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property.RootNamespace = lab1_oop
+<<<<<<< HEAD:lab1-oop/obj/Debug/net10.0/lab1-oop.GeneratedMSBuildEditorConfig.editorconfig
 build_property.ProjectDir = c:\Users\sasha\OneDrive\Рабочий стол\OOP\Object-Oriented-Programming-1-course\lab1-oop\
+=======
+build_property.ProjectDir = /Users/agapov/LABS_OOP/Object-Oriented-Programming-1-course/lab1-oop/
+>>>>>>> 5c5130d3a06c05489f547196fcbd4eaf7518c787:Console_Lab1/obj/Debug/net10.0/lab1-oop.GeneratedMSBuildEditorConfig.editorconfig
 build_property.EnableComHosting = 
 build_property.EnableGeneratedComInterfaceComImportInterop = 
 build_property.EffectiveAnalysisLevelStyle = 10.0
