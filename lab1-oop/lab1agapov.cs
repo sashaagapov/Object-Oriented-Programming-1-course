@@ -21,6 +21,7 @@ namespace lab1agapov
                 Console.WriteLine("2. Використання математичних функцій");
                 Console.WriteLine("3. f(x)");
                 Console.WriteLine("4. Назва місяця (switch)");
+                Console.WriteLine("5. Порахувати добуток за формулою");
                 Console.WriteLine("0. Вихід");
                 Console.Write("\nОберіть номер завдання: ");
 
@@ -43,6 +44,9 @@ namespace lab1agapov
                         break;
                     case "4":
                      GetMonthName();
+                        break;
+                    case "5":
+                        CalculateSeries();
                         break;
                     case "0":
                         return; 
@@ -186,6 +190,35 @@ namespace lab1agapov
                     break;
             }
         }
+        static void CalculateSeries()
+        {
+            double result;
+            int valN ;
+            Console.WriteLine("Програма для обчислення добутку членів ряду");
+            Console.WriteLine("Формула: P = (2/1) * (3/2) * (4/3) * ... * ((n+1)/n)");
+            Console.WriteLine("Введіть натуральне число n, щоб отримати результат:");
+            Console.WriteLine("Введіть натуральне число n: ");
+            if (!int.TryParse(Console.ReadLine(),out valN))
+            {
+                Console.WriteLine("Введіть натуральне число");
+                return;
+            }
+            result = Product(valN);
+          Console.WriteLine($"Результат множення: {result}");
+        }
+        static double Product(int n)
+        {
+            double tempResult = 1;
+            double multiplier;
+            for (double k = 1;k <= n;k++)
+            {
+                multiplier = (k + 1)/k;
+                tempResult *= multiplier; 
+                Console.Write($"{k}.ітерація = {tempResult}; ");
+            }
+            return tempResult;
+        }
+        
         
     }
 }
