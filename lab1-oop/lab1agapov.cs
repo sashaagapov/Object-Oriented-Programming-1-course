@@ -195,8 +195,7 @@ namespace lab1agapov
             double result;
             int valN ;
             Console.WriteLine("Програма для обчислення добутку членів ряду");
-            Console.WriteLine("Формула: P = (2/1) * (3/2) * (4/3) * ... * ((n+1)/n)");
-            Console.WriteLine("Введіть натуральне число n, щоб отримати результат:");
+            Console.WriteLine("Формула: P = П ((k + 1) / k)   (де k від 1 до n)");
             Console.WriteLine("Введіть натуральне число n: ");
             if (!int.TryParse(Console.ReadLine(),out valN))
             {
@@ -204,6 +203,7 @@ namespace lab1agapov
                 return;
             }
             result = Product(valN);
+            Console.WriteLine();
           Console.WriteLine($"Результат множення: {result}");
         }
         static double Product(int n)
@@ -213,8 +213,8 @@ namespace lab1agapov
             for (double k = 1;k <= n;k++)
             {
                 multiplier = (k + 1)/k;
+                Console.WriteLine($"ітерація {k} = {multiplier}; ");
                 tempResult *= multiplier; 
-                Console.Write($"{k}.ітерація = {tempResult}; ");
             }
             return tempResult;
         }
