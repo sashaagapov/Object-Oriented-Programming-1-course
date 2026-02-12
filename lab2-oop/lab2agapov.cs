@@ -2,17 +2,18 @@
 
 namespace lab2agapov
 {
-    class Program
+    static class Program
     {
         static public void Main(string[] args)
         {
-            Service service = new Service(); 
-            Vector myVector = service.SetSize();
+            Vector myVector = Service.SetSize();
             
             Console.WriteLine("Згенерований масив:");
-            service.PrintVector(myVector);
-
-          
+            Service.PrintVector(myVector);
+            myVector.SortArray();
+            Console.WriteLine("Відсортований масив");
+             Service.PrintVector(myVector);
+             Service.PrintEratosthenes(myVector);
         }
     }
 }
