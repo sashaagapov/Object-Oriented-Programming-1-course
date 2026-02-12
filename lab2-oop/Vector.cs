@@ -93,9 +93,34 @@ public class Vector
         }
         if(counter == 0)
         {
-            Console.WriteLine($"Нема натуральних чисель в діапазоні [{start} - {end}]:");
+            Console.WriteLine($"Нема простих чисель в діапазоні в цьому діапазоні");
         }
         Console.WriteLine();
+    }
+    
+    public int BinarySearch(int target)
+    {
+        int left = 0;
+        int right = _n - 1;
+        int mid = 0;
+        while(left <= right)
+        {
+            mid = (right + left)/2;
+            if (_array[mid] == target)
+            {
+                return mid;
+            }
+            else if(target > _array[mid])
+            {
+                right = mid - 1;
+            }
+            else
+            {
+                left = mid + 1;
+            }
+        }
+        return -1;
+        
     }
     
  

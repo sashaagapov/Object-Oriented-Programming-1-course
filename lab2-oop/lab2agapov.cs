@@ -6,14 +6,62 @@ namespace lab2agapov
     {
         static public void Main(string[] args)
         {
-            Vector myVector = Service.SetSize();
-            
-            Console.WriteLine("Згенерований масив:");
-            Service.PrintVector(myVector);
-            myVector.SortArray();
-            Console.WriteLine("Відсортований масив");
-             Service.PrintVector(myVector);
-             Service.PrintEratosthenes(myVector);
+            Vector myVector = new Vector(0); // Масив зберігається тут, поки працює програма
+            bool isRunning = true;
+
+            while (isRunning)
+            {
+                // Викликаємо меню з Service
+                int choice = Service.GetMenuChoice();
+
+                switch (choice)
+                {
+                    case 1:
+                        // Створення
+                        myVector = Service.SetSize();
+                        Console.WriteLine("--> Згенерований масив:");
+                        Service.PrintVector(myVector);
+                        
+                        // Сортування (обов'язкове для бінарного пошуку)
+                        myVector.SortArray();
+                        Console.WriteLine("--> Масив відсортовано за спаданням:");
+                        Service.PrintVector(myVector);
+                        break;
+
+                    case 2:
+                        // Ератосфен
+                        if (myVector.GetArray().Length == 0)
+                        {
+                            Console.WriteLine(" Помилка: Спочатку створіть масив (пункт 1).");
+                        }
+                        else
+                        {
+                            Service.PrintEratosthenes(myVector);
+                        }
+                        break;
+
+                    case 3:
+                        // Бінарний пошук
+                        if (myVector.GetArray().Length == 0)
+                        {
+                            Console.WriteLine(" Помилка: Спочатку створіть масив (пункт 1).");
+                        }
+                        else
+                        {
+                            Service.BinarySearchArray(myVector);
+                        }
+                        break;
+
+                    case 0:
+                        Console.WriteLine("Роботу завершено.");
+                        isRunning = false;
+                        break;
+
+                    default:
+                        Console.WriteLine("Невірний вибір. Спробуйте ще раз.");
+                        break;
+                }
+            }
         }
     }
 }
