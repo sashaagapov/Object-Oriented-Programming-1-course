@@ -30,7 +30,7 @@ public class Vector
     }
     public void QuickSort(int low,int high)
     {
-        if(low >= high)
+        if(low > high)
         {
             return;//base case
         }
@@ -59,44 +59,52 @@ public class Vector
         _array[i] = tempN;
         return i;
     }
-    public void EratosthenesSieve(int start,int end)
+   
+   public void EratosthenesSieve(int start, int end)
+{
+    bool[] isPrime = new bool[end + 1];
+    
+    for (int i = 0; i <= end; i++)
     {
-        bool[] isPrime = new bool[end+1];
-        int counter = 0;
-        for (int i =0 ;i <= end; i++)
-        {
-            isPrime[i] = true;
-            
-        }
-       isPrime[0] = false;
-       isPrime[1] = false;
-        for(int p = 2;p * p <= end; p++)
-        {
-            if(isPrime[p])
-            {
-                for(int j = 2 * p; j <= end; j += p)
-                {
-                    isPrime[j] = false;
-                }
-            }
-        }
-        Console.WriteLine($"Прості числа в діапазоні [{start} - {end}]:");
-        for(int i = 0;i < _n;i++)
-        {
-            
-            int num = _array[i];
-            if(num >= start && num <= end && isPrime[num] )
-            {
-                counter++;
-                Console.Write(num + " ");
-            }
-        }
-        if(counter == 0)
-        {
-            Console.WriteLine($"Нема простих чисель в діапазоні в цьому діапазоні");
-        }
-        Console.WriteLine();
+        isPrime[i] = true;
     }
+
+    isPrime[0] = false;
+    isPrime[1] = false;
+
+    int limit = (int)Math.Sqrt(end);
+
+    for (int p = 2; p <= limit; p++)
+    {
+        if (isPrime[p])
+        {
+            for (int j = p * p; j <= end; j += p)
+            {
+                isPrime[j] = false;
+            }
+        }
+    }
+
+    Console.WriteLine($"Прості числа в діапазоні [{start} - {end}]:");
+    int counter = 0;
+
+    for (int i = 0; i < _n; i++)
+    {
+        int num = _array[i];
+        if (num >= start && num <= end && isPrime[num])
+        {
+            Console.Write(num + " ");
+            counter++;
+        }
+    }
+    
+    Console.WriteLine();
+
+    if (counter == 0)
+    {
+        Console.WriteLine("В цьому діапазоні простих чисел не знайдено.");
+    }
+}
     
     public int BinarySearch(int target)
     {

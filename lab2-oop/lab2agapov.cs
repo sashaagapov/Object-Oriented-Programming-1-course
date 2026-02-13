@@ -7,6 +7,7 @@ namespace lab2agapov
         static public void Main(string[] args)
         {
             Vector myVector = new Vector(0); // Масив зберігається тут, поки працює програма
+            Matrix myMatrix = new Matrix(0,0);
             bool isRunning = true;
 
             while (isRunning)
@@ -51,6 +52,22 @@ namespace lab2agapov
                             Service.BinarySearchArray(myVector);
                         }
                         break;
+                    case 4: 
+                      //Створення матриці
+                      myMatrix = Service.FillMatrix();
+                      Service.PrintMatrix(myMatrix);
+                      break;
+
+                     case 5:
+                    if (myMatrix?.GetRow() == 0)
+                    {
+                         Console.WriteLine(" Помилка: Спочатку створіть матрицю (пункт 4)."); 
+                    }     
+                    else
+                    {
+                        Service.ActionWithMatrix(myMatrix);
+                    }    
+                    break;
 
                     case 0:
                         Console.WriteLine("Роботу завершено.");
