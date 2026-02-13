@@ -28,18 +28,18 @@ C:/Users/sasha/OneDrive/Рабочий стол/OOP/Object-Oriented-Programming-
 /Users/agapov/LABS_OOP/Object-Oriented-Programming-1-course/lab2-oop/obj/Debug/net10.0/lab2-oop.pdb
 /Users/agapov/LABS_OOP/Object-Oriented-Programming-1-course/lab2-oop/obj/Debug/net10.0/lab2-oop.genruntimeconfig.cache
 /Users/agapov/LABS_OOP/Object-Oriented-Programming-1-course/lab2-oop/obj/Debug/net10.0/ref/lab2-oop.dll
-C:\Users\sasha\OneDrive\Рабочий стол\OOP\Object-Oriented-Programming-1-course\lab2-oop\bin\Debug\net10.0\lab2-oop.exe
-C:\Users\sasha\OneDrive\Рабочий стол\OOP\Object-Oriented-Programming-1-course\lab2-oop\bin\Debug\net10.0\lab2-oop.deps.json
-C:\Users\sasha\OneDrive\Рабочий стол\OOP\Object-Oriented-Programming-1-course\lab2-oop\bin\Debug\net10.0\lab2-oop.runtimeconfig.json
-C:\Users\sasha\OneDrive\Рабочий стол\OOP\Object-Oriented-Programming-1-course\lab2-oop\bin\Debug\net10.0\lab2-oop.dll
-C:\Users\sasha\OneDrive\Рабочий стол\OOP\Object-Oriented-Programming-1-course\lab2-oop\bin\Debug\net10.0\lab2-oop.pdb
-C:\Users\sasha\OneDrive\Рабочий стол\OOP\Object-Oriented-Programming-1-course\lab2-oop\obj\Debug\net10.0\lab2-oop.GeneratedMSBuildEditorConfig.editorconfig
-C:\Users\sasha\OneDrive\Рабочий стол\OOP\Object-Oriented-Programming-1-course\lab2-oop\obj\Debug\net10.0\lab2-oop.AssemblyInfoInputs.cache
-C:\Users\sasha\OneDrive\Рабочий стол\OOP\Object-Oriented-Programming-1-course\lab2-oop\obj\Debug\net10.0\lab2-oop.AssemblyInfo.cs
-C:\Users\sasha\OneDrive\Рабочий стол\OOP\Object-Oriented-Programming-1-course\lab2-oop\obj\Debug\net10.0\lab2-oop.csproj.CoreCompileInputs.cache
-C:\Users\sasha\OneDrive\Рабочий стол\OOP\Object-Oriented-Programming-1-course\lab2-oop\obj\Debug\net10.0\lab2-oop.sourcelink.json
-C:\Users\sasha\OneDrive\Рабочий стол\OOP\Object-Oriented-Programming-1-course\lab2-oop\obj\Debug\net10.0\lab2-oop.dll
-C:\Users\sasha\OneDrive\Рабочий стол\OOP\Object-Oriented-Programming-1-course\lab2-oop\obj\Debug\net10.0\refint\lab2-oop.dll
-C:\Users\sasha\OneDrive\Рабочий стол\OOP\Object-Oriented-Programming-1-course\lab2-oop\obj\Debug\net10.0\lab2-oop.pdb
-C:\Users\sasha\OneDrive\Рабочий стол\OOP\Object-Oriented-Programming-1-course\lab2-oop\obj\Debug\net10.0\lab2-oop.genruntimeconfig.cache
-C:\Users\sasha\OneDrive\Рабочий стол\OOP\Object-Oriented-Programming-1-course\lab2-oop\obj\Debug\net10.0\ref\lab2-oop.dll
+/Users/agapov/Desktop/LABS_OOP/Object-Oriented-Programming-1-course/lab2-oop/obj/Debug/net10.0/lab2-oop.GeneratedMSBuildEditorConfig.editorconfig
+/Users/agapov/Desktop/LABS_OOP/Object-Oriented-Programming-1-course/lab2-oop/obj/Debug/net10.0/lab2-oop.AssemblyInfoInputs.cache
+/Users/agapov/Desktop/LABS_OOP/Object-Oriented-Programming-1-course/lab2-oop/obj/Debug/net10.0/lab2-oop.AssemblyInfo.cs
+/Users/agapov/Desktop/LABS_OOP/Object-Oriented-Programming-1-course/lab2-oop/obj/Debug/net10.0/lab2-oop.csproj.CoreCompileInputs.cache
+/Users/agapov/Desktop/LABS_OOP/Object-Oriented-Programming-1-course/lab2-oop/obj/Debug/net10.0/lab2-oop.sourcelink.json
+/Users/agapov/Desktop/LABS_OOP/Object-Oriented-Programming-1-course/lab2-oop/obj/Debug/net10.0/lab2-oop.dll
+/Users/agapov/Desktop/LABS_OOP/Object-Oriented-Programming-1-course/lab2-oop/obj/Debug/net10.0/refint/lab2-oop.dll
+/Users/agapov/Desktop/LABS_OOP/Object-Oriented-Programming-1-course/lab2-oop/obj/Debug/net10.0/lab2-oop.pdb
+/Users/agapov/Desktop/LABS_OOP/Object-Oriented-Programming-1-course/lab2-oop/bin/Debug/net10.0/lab2-oop
+/Users/agapov/Desktop/LABS_OOP/Object-Oriented-Programming-1-course/lab2-oop/bin/Debug/net10.0/lab2-oop.deps.json
+/Users/agapov/Desktop/LABS_OOP/Object-Oriented-Programming-1-course/lab2-oop/bin/Debug/net10.0/lab2-oop.runtimeconfig.json
+/Users/agapov/Desktop/LABS_OOP/Object-Oriented-Programming-1-course/lab2-oop/bin/Debug/net10.0/lab2-oop.dll
+/Users/agapov/Desktop/LABS_OOP/Object-Oriented-Programming-1-course/lab2-oop/bin/Debug/net10.0/lab2-oop.pdb
+/Users/agapov/Desktop/LABS_OOP/Object-Oriented-Programming-1-course/lab2-oop/obj/Debug/net10.0/lab2-oop.genruntimeconfig.cache
+/Users/agapov/Desktop/LABS_OOP/Object-Oriented-Programming-1-course/lab2-oop/obj/Debug/net10.0/ref/lab2-oop.dll

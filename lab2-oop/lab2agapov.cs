@@ -2,8 +2,15 @@
 
 namespace lab2agapov
 {
+    /// <summary>
+    /// Головний клас програми. Містить точку входу та управління основним циклом меню.
+    /// </summary>
     static class Program
     {
+        /// <summary>
+        /// Точка входу програми. Керує основним меню та обробляє вибір користувача.
+        /// </summary>
+        /// <param name="args">Аргументи командного рядка (не використовуються).</param>
         static public void Main(string[] args)
         {
             Vector myVector = new Vector(0); // Масив зберігається тут, поки працює програма
@@ -59,7 +66,7 @@ namespace lab2agapov
                       break;
 
                      case 5:
-                    if (myMatrix?.GetRow() == 0)
+                    if (myMatrix == null || myMatrix.GetRow() == 0)
                     {
                          Console.WriteLine(" Помилка: Спочатку створіть матрицю (пункт 4)."); 
                     }     
