@@ -8,6 +8,13 @@ namespace lab2agapov;
 /// </summary>
 public static class Service
 {
+      public static void WelcomeInfo()
+        {
+            Console.WriteLine("-------------------------------------------------------------------");
+            Console.WriteLine("Агапов Олександр , 18 років, ІПЗ-11(1), 1 курс, sasha_agapov@knu.ua");
+            Console.WriteLine("                  Лабораторна робота №2(Варіант 1)                 ");
+            Console.WriteLine("-------------------------------------------------------------------");
+        }
     private const string ErrorMessageInputNumber = "Введіть число";
     /// <summary>
     /// Виводить головне меню програми та повертає вибір користувача.
@@ -118,7 +125,7 @@ public static class Service
         targetIdx = vector.BinarySearch(target);
         if (targetIdx != -1)
             {
-                Console.Write($"Індекс шуканого елемента: {targetIdx}");
+                Console.WriteLine($"Індекс шуканого елемента: {targetIdx}");
             }
         else
             {
@@ -235,7 +242,7 @@ public static class Service
             }
             else
             {
-                Console.WriteLine($"Сума {targetForCol} стовпця: {sumForCol}");
+                Console.WriteLine($"Сума стовпця {targetForCol}: {sumForCol}");
             }   
     }
     else

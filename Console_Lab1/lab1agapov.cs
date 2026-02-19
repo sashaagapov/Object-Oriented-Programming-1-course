@@ -2,7 +2,7 @@
  * Ім'я файлу: Program.cs
  * Автор: Агапов Олександр, гр. ІПЗ-11(1)
  * Дата модифікації: 11.02.2026
- * Номер версії модуля: 1.0
+ * Номер версії модуля: 2.0
  * Запланована ціль: Лабораторна робота №1. Реалізація консольного меню,
  * обчислення математичних функцій та робота з циклами.
  */
@@ -158,7 +158,11 @@ namespace lab1agapov
         /// </summary>
         static void CalculatePiecewiseFunction()
         {
-            Console.WriteLine("\n--- Завдання 3: f(x) ---");
+            Console.WriteLine("Завдання 3: Обчислити значення кусково-заданої функції f(x):");
+            Console.WriteLine();
+            Console.WriteLine("       / x² + 4, якщо x > 0");
+            Console.WriteLine("f(x) = | x - 5,  якщо x < 0");
+            Console.WriteLine("       \\ 0,      якщо x = 0");
             Console.Write("Введіть значення x: ");
 
             double x;
