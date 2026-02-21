@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "/Users/agapov/Desktop/LABS_OOP/Object-Oriented-Programming-1-course/LAB_3/LAB_3.csproj": {}
+    "/Users/agapov/Desktop/LAB_OOP/Object-Oriented-Programming-1-course/LAB_3/LAB_3.csproj": {}
   },
   "projects": {
-    "/Users/agapov/Desktop/LABS_OOP/Object-Oriented-Programming-1-course/LAB_3/LAB_3.csproj": {
+    "/Users/agapov/Desktop/LAB_OOP/Object-Oriented-Programming-1-course/LAB_3/LAB_3.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/Users/agapov/Desktop/LABS_OOP/Object-Oriented-Programming-1-course/LAB_3/LAB_3.csproj",
+        "projectUniqueName": "/Users/agapov/Desktop/LAB_OOP/Object-Oriented-Programming-1-course/LAB_3/LAB_3.csproj",
         "projectName": "LAB_3",
-        "projectPath": "/Users/agapov/Desktop/LABS_OOP/Object-Oriented-Programming-1-course/LAB_3/LAB_3.csproj",
+        "projectPath": "/Users/agapov/Desktop/LAB_OOP/Object-Oriented-Programming-1-course/LAB_3/LAB_3.csproj",
         "packagesPath": "/Users/agapov/.nuget/packages/",
-        "outputPath": "/Users/agapov/Desktop/LABS_OOP/Object-Oriented-Programming-1-course/LAB_3/obj/",
+        "outputPath": "/Users/agapov/Desktop/LAB_OOP/Object-Oriented-Programming-1-course/LAB_3/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "/Users/agapov/.nuget/NuGet/NuGet.Config"

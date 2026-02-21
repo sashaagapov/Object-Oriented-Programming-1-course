@@ -97,6 +97,7 @@ namespace lab1agapov
             double c = -4.0;
             double d = 10.5;
 
+            Console.WriteLine("Рівняння: p = a*x^5 - 1 / (b*x^4) + (c)*x + d");
             Console.WriteLine($"Рівняння: p = {a}*x^5 - 1 / ({b}*x^4) + ({c})*x + {d}");
             Console.Write("Введіть значення x: ");
 
