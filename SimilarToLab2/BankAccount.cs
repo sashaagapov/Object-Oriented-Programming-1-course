@@ -5,9 +5,9 @@ public class BankAccount
 {
     private int _balance = 0;
     private string _ownerName;
-    private string _password; // Нове приватне поле для пароля
+    private string _password; 
 
-    // Конструктор тепер вимагає ще й пароль при реєстрації
+   
     public BankAccount(int balance, string ownerName, string password)
     {
         _balance = balance;
@@ -15,7 +15,7 @@ public class BankAccount
         _password = password;
     }
 
-    // НОВИЙ МЕТОД: Перевірка пароля
+    
     public bool CheckPassword(string inputPassword)
     {
        if(inputPassword == _password)
@@ -28,7 +28,7 @@ public class BankAccount
         }
     }
 
-    // Твої старі методи (вони ідеальні, я їх просто згорнув для зручності)
+  
     public void Deposit(int amount) { _balance = _balance + amount; }
     public int GetBalance() { return _balance; }
     public bool Withdraw(int amount) 

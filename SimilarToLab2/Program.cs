@@ -7,6 +7,51 @@ static class Program
 {
     static void Main(string[] args)
     {
+        bool runningMenu = true;
+        while(runningMenu)
+        {
+            Console.WriteLine("--------------------------------");
+            Console.WriteLine("Вітаємо у банківській системі!");
+            Console.WriteLine("Оберіть дію: 1 - Зареєструватися | 2 - Увійти | 3 - Вихід");
+            if(!int.TryParse(Console.ReadLine(),out int choice))
+            {
+                Console.WriteLine("Невірний вибір. Спробуйте ще раз.");
+                continue;
+            }
+            else
+            {
+                switch(choice)
+            {
+                case 1:
+                RegisterAccount();
+                break;
+                
+                case 2:
+                LoginAccount();
+                break;
+
+                case 3:
+                runningMenu = false;
+                break;
+
+                default:
+                Console.WriteLine("Невірний вибір. Спробуйте ще раз.");
+                break;
+
+            }
+
+            
+
+            }
+        }
+    }
+        
+
+        
+
+        
+    static void RegisterAccount()
+    {
         Console.WriteLine("=== РЕЄСТРАЦІЯ ===");
         Console.Write("Введіть ім'я власника рахунку: ");
         string ownerName = Console.ReadLine();
@@ -18,7 +63,9 @@ static class Program
         string password = Console.ReadLine();
        
         BankService.RegisterAccount(balance, ownerName,password);
-
+    }
+    static void LoginAccount()
+    {
         Console.WriteLine("\n=== ВХІД ===");
         Console.Write("Введіть ім'я для входу: ");
         string loginName = Console.ReadLine();
@@ -27,52 +74,9 @@ static class Program
         string inputPassword = Console.ReadLine();
 
         BankAccount currentAccount = BankService.Login(loginName, inputPassword);
-
-        if (currentAccount != null)
-        {
-            Console.WriteLine("Доступ дозволено!\n");
-            bool isRunning = true;
-            
-            while (isRunning)
-            {
-                Console.WriteLine("Оберіть дію: 1 - Поповнити | 2 - Зняти | 3 - Інфо | 4 - Вихід");
-                string choice = Console.ReadLine();
-                
-                switch (choice)
-                {
-                    case "1":
-                        Console.Write("Введіть суму для поповнення: ");
-                        int depositAmount = int.Parse(Console.ReadLine());
-                        currentAccount.Deposit(depositAmount);
-                        BankService.ShowBalance(currentAccount);
-                        break;
-                    case "2":
-                        Console.Write("Введіть суму для зняття: ");
-                        int withdrawAmount = int.Parse(Console.ReadLine());
-                        if (currentAccount.Withdraw(withdrawAmount))
-                        {
-                            BankService.ShowBalance(currentAccount);
-                        }
-                        else
-                        {
-                            Console.WriteLine("Недостатньо коштів на рахунку.");
-                        }
-                        break;
-                    case "3":
-                        Console.WriteLine(currentAccount.GetInfo());
-                        break;
-                    case "4":
-                        isRunning = false;
-                        break;
-                    default:
-                        Console.WriteLine("Невірний вибір. Спробуйте ще раз.");
-                        break;
-                }
-            }
-        }
-        else
-        {
-            Console.WriteLine("Невірне ім'я або пароль. Доступ заборонено.");
-        }
+        BankService.ExistingAccount(currentAccount);
     }
+   
+    
+
 }
