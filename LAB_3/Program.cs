@@ -1,139 +1,63 @@
-﻿using System;
-using System.IO;
+﻿/* 
+    *Версія 1.0
+    * Лабораторна робота №3 з курсу "Об'єктно-орієнтоване програмування 1" (OOP1)
+    * Виконав: Агапов Олександр
+    * Група: ІПЗ-11(1)
+    * Варіант: 3
+    * 
+    * Завдання:
+    * 1. Створити клас Teacher, який містить поля для зберігання інформації про викладача, такі як ім'я, назва предмету, кількість студентів та години викладання. Реалізувати конструктори для ініціалізації цих полів та метод для зміни кількості студентів та годин.
+    * 2. Створити клас Student, який містить поля для зберігання інформації про студента, такі як ім'я, назва предмету, список оцінок та кількість виконаних завдань. Реалізувати конструктори для ініціалізації цих полів та метод для додавання нової оцінки та оновлення кількості виконаних завдань.
+    * 3. Створити сервісний клас Service, який містить статичні методи для роботи з об'єктами класу Student, включаючи читання та запис даних у файл, а також виведення інформації про студента на консоль.
+    * 4. У головній програмі (Main) створити об'єкти класу Teacher та Student, використовуючи різні конструктори, та продемонструвати роботу методів цих класів, а також методів сервісного класу Service.
+    */
+using System;
 
-namespace Lab3;
+namespace lab3agapov;
 
-public static class Program
+class Program
 {
-    private static readonly string teacherFile = "teachers.txt";
-    private static readonly string studentFile = "students.txt";
-    private static readonly string topicsFile = "topics.txt";
-
-    public static void Main()
+    static void Main(string[] args)
     {
-        EnsureTopicsFileExists();
 
-        Teacher currentTeacher = new Teacher("Олександр Петрович", 120, "Програмування", 30);
-        Student currentStudent = new Student();
-        Student.DiplomaProject currentDiploma = new Student.DiplomaProject();
+        // --- 1. Робота з класом Teacher ---
+        Console.WriteLine("\n--- Акт 1: Викладач ---");
+        // Створюємо викладача (використовуючи конструктор за замовчуванням або з параметрами)
+        Teacher myTeacher = new Teacher(); 
+        
+        // Викликаємо метод для зміни кількості студентів та годин
+        Console.WriteLine("Оновлюємо навантаження викладача (додаємо 5 студентів)...");
+        myTeacher.UpdateStudentCount(5);
+        Console.WriteLine("Навантаження успішно оновлено.");
 
-        bool isRunning = true;
-        while (isRunning)
-        {
-            ShowMenu();
-            string? choice = Console.ReadLine();
-            Console.WriteLine();
-            isRunning = ProcessChoice(choice, currentTeacher, currentStudent, currentDiploma);
-        }
-    }
 
-    private static void EnsureTopicsFileExists()
-    {
-        if (!File.Exists(topicsFile))
-        {
-            File.WriteAllLines(topicsFile, new string[] { 
-                "Штучний інтелект в іграх", 
-                "Веб-додаток для деканату", 
-                "Аналіз даних алгоритмами машинного навчання" 
-            });
-        }
-    }
+        // --- 2. Робота з класом Student через Service ---
+        Console.WriteLine("\n--- Акт 2: Створення студента ---");
+        // Створюємо студента, зчитуючи дані з консолі
+        Student myStudent = Service.ReadStudentFromConsole();
 
-    private static void ShowMenu()
-    {
-        Console.WriteLine();
-        CreativeWork.PrintHeader();
-        Console.WriteLine("1. Перевизначити викладача (ввести нові дані)");
-        Console.WriteLine("2. Змінити кількість студентів у викладача");
-        Console.WriteLine("3. Зберегти дані викладача у файл");
-        Console.WriteLine("4. Ввести дані нового студента");
-        Console.WriteLine("5. Розрахувати рейтинг студента");
-        Console.WriteLine("6. Зберегти дані студента у файл");
-        Console.WriteLine("7. Пошук теми дипломної та розрахунок оцінки");
-        Console.WriteLine("8. Викликати статичні методи (тест Лаб 2)");
-        Console.WriteLine("0. Вийти з програми");
-        Console.Write("Ваш вибір: ");
-    }
 
-    private static bool ProcessChoice(string? choice, Teacher teacher, Student student, Student.DiplomaProject diploma)
-    {
-        switch (choice)
-        {
-            case "1": 
-                teacher.InputFromConsole(); 
-                teacher.PrintInfo(); 
-                break;
-            case "2": 
-                HandleTeacherStudentCount(teacher); 
-                break;
-            case "3": 
-                teacher.SaveToFile(teacherFile); 
-                break;
-            case "4": 
-                student.InputFromConsole(); 
-                student.PrintInfo(); 
-                break;
-            case "5": 
-                student.CalculateRating(); 
-                break;
-            case "6": 
-                student.SaveToFile(studentFile); 
-                break;
-            case "7": 
-                HandleDiploma(diploma); 
-                break;
-            case "8": 
-                HandleCreativeWork(); 
-                break;
-            case "0": 
-                Console.WriteLine("Завершення роботи програми."); 
-                return false;
-            default: 
-                Console.WriteLine("Невірний вибір. Спробуйте ще раз."); 
-                break;
-        }
-        return true;
-    }
+        // --- 3. Додавання оцінок студенту ---
+        Console.WriteLine("\n--- Акт 3: Додавання оцінок ---");
+        myStudent.AddGrade(90);
+        myStudent.AddGrade(85);
+        myStudent.AddGrade(95);
+        Console.WriteLine("Студенту додано 3 оцінки (90, 85, 95).");
 
-    private static void HandleTeacherStudentCount(Teacher teacher)
-    {
-        Console.Write("Введіть зміну кількості студентів (наприклад 5 або -3): ");
-        if (int.TryParse(Console.ReadLine(), out int delta))
-            teacher.ChangeStudentCount(delta);
-    }
 
-    private static void HandleDiploma(Student.DiplomaProject diploma)
-    {
-        diploma.SelectTopic(topicsFile);
-        Console.Write("Введіть кількість реалізованих алгоритмів: ");
-        if (int.TryParse(Console.ReadLine(), out int algs)) diploma.AlgorithmsCount = algs;
-        Console.Write("Введіть рівень складності (1-легко, 2-середньо, 3-складно): ");
-        if (int.TryParse(Console.ReadLine(), out int comp)) diploma.ComplexityLevel = comp;
-        diploma.CalculateGrade();
-    }
+        // --- 4. Використання методів Service (Вивід, Запис, Читання) ---
+        Console.WriteLine("\n--- Акт 4: Робота з даними (Service) ---");
+        
+        // Виводимо інформацію на екран
+        Service.PrintStudentInfo(myStudent);
 
-    private static void HandleCreativeWork()
-    {
-        Console.WriteLine("--- Демонстрація методів з Лаб 2 (CreativeWork) ---");
-        int[] testArray = { 15, 3, 9, 8, 22, 1, 7 };
-        Console.WriteLine($"Початковий масив: {string.Join(", ", testArray)}");
+        // Зберігаємо у файл
+        string fileName = "student_data.txt";
+        Service.SaveStudentToFile(myStudent, fileName);
 
-        CreativeWork.QuickSortDescending(testArray, 0, testArray.Length - 1);
-        Console.WriteLine($"Відсортований за спаданням: {string.Join(", ", testArray)}");
-
-        Console.Write("Введіть число для бінарного пошуку в масиві: ");
-        if (int.TryParse(Console.ReadLine(), out int target))
-        {
-            int index = CreativeWork.BinarySearchDescending(testArray, target);
-            if (index != -1) Console.WriteLine($"Знайдено на індексі: {index}");
-            else Console.WriteLine("Не знайдено.");
-        }
-
-        Console.Write("Введіть межу для решета Ератосфена (наприклад 30): ");
-        if (int.TryParse(Console.ReadLine(), out int limit) && limit >= 2)
-        {
-            var primes = CreativeWork.SieveOfEratosthenes(limit);
-            Console.WriteLine($"Прості числа до {limit}: {string.Join(", ", primes)}");
-        }
+        // Читаємо з файлу
+        Service.ReadStudentFromFile(fileName);
+        
+        Console.ReadLine(); // Щоб консоль не закрилася миттєво
     }
 }
