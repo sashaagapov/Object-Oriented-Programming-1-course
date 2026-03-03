@@ -8,13 +8,13 @@ public class Student
     private string subjectName = "";
     private List<int> grades = new List<int>();
     private int tasksDone = 0;
-/// <summary>
-/// Конструктор за замовчуванням, конструктор з параметрами та конструктор копіювання для класу Student.
-/// </summary>
-/// <param name="studentName">Ім'я студента.</param>
-/// <param name="subjectName">Назва предмету, який вивчає студент
-/// </param> <param name="grades">Список оцінок студента.</param>
-/// <param name="tasksDone">Кількість виконаних завдань студентом.</param>
+    /// <summary>
+    /// Конструктор за замовчуванням, конструктор з параметрами та конструктор копіювання для класу Student.
+    /// </summary>
+    /// <param name="studentName">Ім'я студента.</param>
+    /// <param name="subjectName">Назва предмету, який вивчає студент
+    /// </param> <param name="grades">Список оцінок студента.</param>
+    /// <param name="tasksDone">Кількість виконаних завдань студентом.</param>
     public Student()
     {
         studentName = string.Empty;
@@ -32,7 +32,7 @@ public class Student
     /// <param name="tasksDone"></param>
     public Student(string studentName, string subjectName, List<int> grades, int tasksDone)
     {
-         this.studentName = studentName;
+        this.studentName = studentName;
         this.subjectName = subjectName;
         this.grades = grades;
         this.tasksDone = tasksDone;
@@ -41,40 +41,42 @@ public class Student
     /// Конструктор копіювання для класу Student, який створює новий об'єкт на основі існуючого об'єкта Student, копіюючи всі його поля.
     /// </summary>
     /// <param name="previousStudent"></param>
-        public Student(Student previousStudent)
+    public Student(Student previousStudent)
     {
-         this.studentName = previousStudent.studentName;
+        this.studentName = previousStudent.studentName;
         this.subjectName = previousStudent.subjectName;
         this.grades = new List<int>(previousStudent.grades);
         this.tasksDone = previousStudent.tasksDone;
     }
-/// <summary>
-/// Властивості для доступу до полів класу Student: StudentName, SubjectName, Grades та TasksDone. Вони дозволяють отримувати та встановлювати значення відповідних полів.
-/// </summary>
+    /// <summary>
+    /// Властивості для доступу до полів класу Student: StudentName, SubjectName, Grades та TasksDone. Вони дозволяють отримувати та встановлювати значення відповідних полів.
+    /// </summary>
     public string StudentName
     {
-        get{return studentName; }
-        set{studentName = value; }
+        get { return studentName; }
+        set { studentName = value; }
     }
     public string SubjectName
     {
-        get{ return subjectName; }
-        set{ subjectName = value; }
+        get { return subjectName; }
+        set { subjectName = value; }
     }
     public List<int> Grades
     {
-        get{return grades; }
-        set{ grades = value; }
+        get { return grades; }
+        set { grades = value; }
     }
     public int TasksDone
     {
-        get{return tasksDone; }
-        set{ tasksDone = value; }
+        get { return tasksDone; }
+        set { tasksDone = value; }
     }
-/// <summary>
-/// Метод AddGrade, який приймає ціле число grade і додає його до списку оцінок студента, а також збільшує кількість виконаних завдань на 1. Цей метод використовується для додавання нової оцінки студенту та оновлення кількості виконаних завдань відповідно до цієї оцінки.
-/// </summary>
-/// <param name="grade"></param>
+
+
+    /// <summary>
+    /// Метод AddGrade, який приймає ціле число grade і додає його до списку оцінок студента, а також збільшує кількість виконаних завдань на 1. Цей метод використовується для додавання нової оцінки студенту та оновлення кількості виконаних завдань відповідно до цієї оцінки.
+    /// </summary>
+    /// <param name="grade"></param>
     public void AddGrade(int grade)
     {
         grades.Add(grade);
@@ -87,15 +89,96 @@ public class Student
     public double CalculateRating()
     {
         ArgumentNullException.ThrowIfNull(grades);
-       if (grades.Count == 0 || tasksDone == 0)
+        if (grades.Count == 0 || tasksDone == 0)
         {
             return 0;
         }
         double rating = 0;
-        foreach(int grade in grades)
+        foreach (int grade in grades)
         {
             rating += grade;
         }
-        return rating/tasksDone;
+        return rating / tasksDone;
     }
+    public class DiplomaProject
+    {
+        private string _nameOfTheme;
+        private int _numOfCompletedAlgorithms;
+
+        private int _dificultyOfTheme;
+        private int _mark;
+        private string _nameOfTeacher;
+
+        public DiplomaProject()
+        {
+            _nameOfTheme = "";
+            _numOfCompletedAlgorithms = 0;
+            _dificultyOfTheme = 0;
+            _mark = 0;
+            _nameOfTeacher = "";
+        }
+
+        public string NameOfTheme
+        {
+            get { return _nameOfTheme; }
+            set { _nameOfTheme = value; }
+        }
+
+        public int NumOfCompletedAlgorithms
+        {
+            get { return _numOfCompletedAlgorithms; }
+            set { _numOfCompletedAlgorithms = value; }
+        }
+        public string NameOfTeacher
+        {
+            get { return _nameOfTeacher; }
+            set { _nameOfTeacher = value; }
+        }
+        public int DificultyOfTheme
+        {
+            get { return _dificultyOfTheme; }
+            set { _dificultyOfTheme = value; }
+        }
+        public int Mark
+        {
+            get { return _mark; }
+            set { _mark = value; }
+        }
+        public void ChooseTheme()
+        {
+            Console.WriteLine("Введіть ключове слово для пошуку теми: ");
+            string themeName = Console.ReadLine();
+
+            // Шлях до файлу 
+            string filePath = "/Users/agapov/Desktop/LAB_OOP/Object-Oriented-Programming-1-course/LAB_3/themes.txt";
+
+            // ПЕРЕВІРКА: чи існує файл 
+            if (!File.Exists(filePath))
+            {
+                Console.WriteLine("Помилка: Файл із темами не знайдено!");
+                return;
+            }
+            string[] linesArray = File.ReadAllLines(filePath);
+
+            Console.WriteLine("\nЗнайдені теми:");
+            bool found = false;
+
+            foreach (string line in linesArray)
+            {
+                // Перевіряємо, чи містить рядок ключове слово
+                // ToLower() додаємо для того, щоб пошук не залежав від регістру (великі/малі літери)
+                if (line.ToLower().Contains(themeName.ToLower()))
+                {
+                    Console.WriteLine($"- {line}");
+                    found = true;
+                }
+            }
+
+            if (!found)
+            {
+                Console.WriteLine("Тем за таким ключовим словом не знайдено.");
+            }
+        }
+    }
+
 }

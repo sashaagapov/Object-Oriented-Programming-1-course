@@ -16,7 +16,7 @@ public static class Service
     {
         Console.WriteLine("Введіть ім'я студента:");
         string name = Console.ReadLine();
-        
+
         Console.WriteLine("Введіть назву предмета:");
         string subject = Console.ReadLine();
         return new Student(name, subject, new List<int>(), 0);

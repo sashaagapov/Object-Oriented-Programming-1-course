@@ -23,8 +23,8 @@ class Program
         // --- 1. Робота з класом Teacher ---
         Console.WriteLine("\n--- Акт 1: Викладач ---");
         // Створюємо викладача (використовуючи конструктор за замовчуванням або з параметрами)
-        Teacher myTeacher = new Teacher(); 
-        
+        Teacher myTeacher = new Teacher();
+
         // Викликаємо метод для зміни кількості студентів та годин
         Console.WriteLine("Оновлюємо навантаження викладача (додаємо 5 студентів)...");
         myTeacher.UpdateStudentCount(5);
@@ -47,7 +47,7 @@ class Program
 
         // --- 4. Використання методів Service (Вивід, Запис, Читання) ---
         Console.WriteLine("\n--- Акт 4: Робота з даними (Service) ---");
-        
+
         // Виводимо інформацію на екран
         Service.PrintStudentInfo(myStudent);
 
@@ -57,7 +57,7 @@ class Program
 
         // Читаємо з файлу
         Service.ReadStudentFromFile(fileName);
-        
+
         Console.ReadLine(); // Щоб консоль не закрилася миттєво
     }
 }
