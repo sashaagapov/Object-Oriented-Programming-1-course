@@ -1,0 +1,11 @@
+# Ignore Visual Studio temporary files, build results, and VS Code settings
+
+bin/
+obj/
+.vs/
+.vscode/
+.DS_Store
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
