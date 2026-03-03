@@ -31,14 +31,5 @@ To make the most out of this course, follow these steps:
 - Objective: Implement polymorphism and understand interfaces.
 - Deliverables: A program that demonstrates method overriding and interface implementation.
 
-### LAB 4: Encapsulation Practices
-- Objective: Understand encapsulation and data hiding.
-- Deliverables: A program that uses getter and setter methods for private attributes.
-
-### LAB 5: Design Patterns
-- Objective: Explore common design patterns in object-oriented design.
-- Deliverables: Implement a selected design pattern.
-
-
 ## Conclusion
 By the end of this course, students will have a solid foundation in Object-Oriented Programming, and will be equipped with the skills necessary to design and implement OOP concepts in their projects.
