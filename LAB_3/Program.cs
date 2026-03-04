@@ -58,6 +58,12 @@ class Program
         // Читаємо з файлу
         Service.ReadStudentFromFile(fileName);
 
+        Console.WriteLine("\n--- Акт 5: Дипломний проєкт ---");
+        myStudent.Diploma.ChooseTheme();
+        myStudent.Diploma.CalculateDifficulty();
+        myStudent.Diploma.AssignMark();
+        Console.WriteLine($"Підсумкова оцінка за диплом: {myStudent.Diploma.Mark} балів");
+
         Console.ReadLine(); // Щоб консоль не закрилася миттєво
     }
 }
