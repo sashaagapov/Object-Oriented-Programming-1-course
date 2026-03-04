@@ -47,6 +47,7 @@ public class Student
         this.subjectName = subjectName;
         this.grades = grades;
         this.tasksDone = tasksDone;
+        studentDiploma = new DiplomaProject();
     }
     /// <summary>
     /// Конструктор копіювання для класу Student, який створює новий об'єкт на основі існуючого об'єкта Student, копіюючи всі його поля.
