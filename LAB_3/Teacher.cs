@@ -1,7 +1,10 @@
 using System;
 
 namespace lab3agapov;
-
+/// <summary>
+/// Клас Teacher, який містить поля для зберігання інформації про викладача
+/// та метод для зміни кількості студентів та годин викладання.
+/// </summary>
 public class Teacher
 {
     private string teacherName;
