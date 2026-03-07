@@ -1,4 +1,4 @@
-﻿/* * Версія 3.0
+﻿/* * Версія 4.0
  * Лабораторна робота №3 з курсу "Об'єктно-орієнтоване програмування 1"
  * Виконав: Агапов Олександр | Група: ІПЗ-11(1) | Варіант: 1
  * * ЕТАПИ ЗАВДАННЯ:
@@ -9,6 +9,7 @@
  * алгоритмів та автоматичне виставлення оцінки.
  * 5. Часткові класи (Версія 3): використання модифікатора partial для розділення 
  * класу Student та його вкладеного класу на кілька фізичних файлів.
+ * 6. Статичний клас ScientificPaper (Версія 4): бінарний пошук ідентифікатора джерела.
  * * ОСНОВНІ ВИМОГИ:
  * - Інкапсуляція даних (приватні поля + публічні властивості).
  * - Наявність конструкторів (за замовчуванням, з параметрами, копіювання).
@@ -16,57 +17,120 @@
  */
 using System;
 
-namespace lab3agapov;
-
-class Program
+namespace lab3agapov
 {
-    static void Main(string[] args)
+
+    class Program
     {
+        static void Main(string[] args)
+        {
+            Console.Clear();
+            bool isRunning = true;
 
-        // --- 1. Робота з класом Teacher ---
-        Console.WriteLine("\n--- Акт 1: Викладач ---");
-        // Створюємо викладача (використовуючи конструктор за замовчуванням або з параметрами)
-        Teacher myTeacher = new Teacher();
+            // Ініціалізуємо об'єкти на старті програми
+            Teacher myTeacher = new Teacher();
+            Student myStudent = new Student();
+            bool isStudentCreated = false; // Прапорець для перевірки, чи вводилися дані студента
 
-        // Викликаємо метод для зміни кількості студентів та годин
-        Console.WriteLine("Оновлюємо навантаження викладача (додаємо 5 студентів)...");
-        myTeacher.UpdateStudentCount(5);
-        Console.WriteLine("Навантаження успішно оновлено.");
+            while (isRunning)
+            {
+                Console.WriteLine("\n==========================================");
+                Console.WriteLine("          ГОЛОВНЕ МЕНЮ ПРОГРАМИ           ");
+                Console.WriteLine("==========================================");
+                Console.WriteLine("1. Оновити навантаження викладача (Акт 1)");
+                Console.WriteLine("2. Ввести дані студента з консолі (Акт 2)");
+                Console.WriteLine("3. Додати оцінки студенту (Акт 3)");
+                Console.WriteLine("4. Вивести дані та зберегти у файл (Акт 4)");
+                Console.WriteLine("5. Робота з дипломним проєктом (Акт 5)");
+                Console.WriteLine("6. Пошук у науковій статті (Акт 6)");
+                Console.WriteLine("0. Вихід");
+                Console.WriteLine("------------------------------------------");
+                Console.Write("Ваш вибір: ");
 
+                string choice = Console.ReadLine();
 
-        // --- 2. Робота з класом Student через Service ---
-        Console.WriteLine("\n--- Акт 2: Створення студента ---");
-        // Створюємо студента, зчитуючи дані з консолі
-        Student myStudent = Service.ReadStudentFromConsole();
+                switch (choice)
+                {
+                    case "1":
+                        Console.WriteLine("\n--- Акт 1: Викладач ---");
+                        myTeacher.UpdateStudentCount(5);
+                        Console.WriteLine($"Навантаження оновлено. Поточна кількість студентів: {myTeacher.QuantityOfStudents}");
+                        break;
 
+                    case "2":
+                        Console.WriteLine("\n--- Акт 2: Створення студента ---");
+                        myStudent = Service.ReadStudentFromConsole();
+                        isStudentCreated = true;
+                        Console.WriteLine("Об'єкт студента успішно створено.");
+                        break;
 
-        // --- 3. Додавання оцінок студенту ---
-        Console.WriteLine("\n--- Акт 3: Додавання оцінок ---");
-        myStudent.AddGrade(90);
-        myStudent.AddGrade(85);
-        myStudent.AddGrade(95);
-        Console.WriteLine("Студенту додано 3 оцінки (90, 85, 95).");
+                    case "3":
+                        if (!isStudentCreated)
+                        {
+                            Console.WriteLine("Помилка: Спочатку створіть студента (пункт 2)!");
+                            break;
+                        }
+                        Console.WriteLine("\n--- Акт 3: Додавання оцінок ---");
+                        myStudent.AddGrade(90);
+                        myStudent.AddGrade(85);
+                        myStudent.AddGrade(95);
+                        Console.WriteLine("Додано тестові оцінки: 90, 85, 95.");
+                        break;
 
+                    case "4":
+                        if (!isStudentCreated)
+                        {
+                            Console.WriteLine("Помилка: Спочатку створіть студента (пункт 2)!");
+                            break;
+                        }
+                        Console.WriteLine("\n--- Акт 4: Робота з даними (Service) ---");
+                        Service.PrintStudentInfo(myStudent);
+                        string fileName = "student_data.txt";
+                        Service.SaveStudentToFile(myStudent, fileName);
+                        Service.ReadStudentFromFile(fileName);
+                        break;
 
-        // --- 4. Використання методів Service (Вивід, Запис, Читання) ---
-        Console.WriteLine("\n--- Акт 4: Робота з даними (Service) ---");
+                    case "5":
+                        if (!isStudentCreated)
+                        {
+                            Console.WriteLine("Помилка: Спочатку створіть студента (пункт 2)!");
+                            break;
+                        }
+                        Console.WriteLine("\n--- Акт 5: Дипломний проєкт ---");
+                        // Використовуємо новий сервісний метод для вибору теми
+                        Service.ChooseDiplomaTheme(myStudent);
 
-        // Виводимо інформацію на екран
-        Service.PrintStudentInfo(myStudent);
+                        // Обчислюємо складність та виставляємо оцінку
+                        myStudent.Diploma.CalculateDifficulty();
+                        myStudent.Diploma.AssignMark();
 
-        // Зберігаємо у файл
-        string fileName = "student_data.txt";
-        Service.SaveStudentToFile(myStudent, fileName);
+                        Console.WriteLine($"\nРезультат: {myStudent.Diploma.NameOfTheme}");
+                        Console.WriteLine($"Підсумкова оцінка за диплом: {myStudent.Diploma.Mark} балів");
+                        break;
 
-        // Читаємо з файлу
-        Service.ReadStudentFromFile(fileName);
+                    case "6":
+                        Console.WriteLine("\n--- Акт 6: Наукова стаття (Версія 4) ---");
+                        int[] references = { 12, 34, 56, 78, 90 };
+                        int targetId = 56;
+                        Console.WriteLine($"Пошук ID {targetId} у масиві...");
 
-        Console.WriteLine("\n--- Акт 5: Дипломний проєкт ---");
-        myStudent.Diploma.ChooseTheme();
-        myStudent.Diploma.CalculateDifficulty();
-        myStudent.Diploma.AssignMark();
-        Console.WriteLine($"Підсумкова оцінка за диплом: {myStudent.Diploma.Mark} балів");
+                        int foundIndex = ScientificPaper.SearchReference(references, targetId);
+                        if (foundIndex != -1)
+                            Console.WriteLine($"ID знайдено. Позиція в списку: {foundIndex}");
+                        else
+                            Console.WriteLine("ID в списку літератури не знайдено.");
+                        break;
 
-        Console.ReadLine(); // Щоб консоль не закрилася миттєво
+                    case "0":
+                        Console.WriteLine("Завершення роботи.");
+                        isRunning = false;
+                        break;
+
+                    default:
+                        Console.WriteLine("Некоректний вибір. Спробуйте ще раз.");
+                        break;
+                }
+            }
+        }
     }
 }

@@ -61,4 +61,45 @@ public static class Service
             Console.WriteLine("Файл не знайдено!");
         }
     }
+
+    /// <summary>
+    /// Метод для вибору теми диплома. Реалізує логіку взаємодії з файлом та користувачем.
+    /// </summary>
+    /// <param name="student">Об'єкт студента, якому призначається тема.</param>
+    public static void ChooseDiplomaTheme(Student student)
+    {
+        Console.WriteLine("\n--- Пошук теми дипломного проєкту ---");
+        Console.Write("Введіть ключове слово для пошуку теми: ");
+        string keyword = Console.ReadLine()?.ToLower() ?? "";
+
+        string filePath = "themes.txt";
+        if (!File.Exists(filePath))
+        {
+            Console.WriteLine("Помилка: Файл 'themes.txt' не знайдено!");
+            return;
+        }
+
+        string[] allThemes = File.ReadAllLines(filePath);
+        var matched = new List<string>();
+
+        Console.WriteLine("\nЗнайдені варіанти:");
+        foreach (var line in allThemes)
+        {
+            if (line.ToLower().Contains(keyword))
+            {
+                matched.Add(line);
+                Console.WriteLine($"{matched.Count}. {line}");
+            }
+        }
+
+        if (matched.Count == 0) return;
+
+        Console.Write("\nОберіть номер теми: ");
+        if (int.TryParse(Console.ReadLine(), out int choice) && choice > 0 && choice <= matched.Count)
+        {
+            student.Diploma.NameOfTheme = matched[choice - 1]; // Записуємо дані в об'єкт
+            Console.WriteLine($"Тема '{student.Diploma.NameOfTheme}' закріплена!");
+        }
+
+    }
 }
