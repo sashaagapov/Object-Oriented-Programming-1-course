@@ -41,7 +41,7 @@ public class Service
     /// <param name="student"></param>
     public void PrintStudentInfo(Student student)
     {
-        Console.WriteLine($"Ім'я студента: {student.StudentName}. Назва предмету: {student.SubjectName}. Його поточний рейтинг: {student.CalculateRating()}");
+        Console.WriteLine($"Ім'я студента: {student.Name}. Назва предмету: {student.SubjectName}. Його поточний рейтинг: {student.CalculateRating()}");
     }
     /// <summary>
     /// Метод SaveStudentToFile, який приймає об'єкт класу Student та ім'я файлу, 
@@ -55,7 +55,7 @@ public class Service
     public void SaveStudentToFile(Student student, string fileName)
     {
         // Додаємо \n в кінці, щоб кожен студент був з нового рядка
-        string data = $"{student.StudentName};{student.SubjectName};{student.CalculateRating()}\n";
+        string data = $"{student.Name};{student.SubjectName};{student.CalculateRating()}\n";
         File.AppendAllText(fileName, data); // AppendAllText ДОДАЄ в кінець файлу, а не стирає!
         Console.WriteLine($"\nДані студента збережено у файл: {fileName}");
     }
@@ -76,6 +76,7 @@ public class Service
             Console.WriteLine("\n--- Дані з файлу ---");
             foreach (string line in lines)
             {
+                // Працюємо з рядком ТІЛЬКИ якщо він не порожній (без continue)
                 if (!string.IsNullOrWhiteSpace(line))
                 {
                     string[] parts = line.Split(';');

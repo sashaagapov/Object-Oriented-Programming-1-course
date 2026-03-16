@@ -40,22 +40,22 @@ public class Vector
     public void SortArray()
     {
         QuickSort(0, _n - 1);
-        
+
     }
     /// <summary>
     /// Рекурсивний метод швидкого сортування (QuickSort). Сортує підмасив від low до high за спаданням.
     /// </summary>
     /// <param name="low">Індекс початку підмасиву.</param>
     /// <param name="high">Індекс кінця підмасиву.</param>
-    public void QuickSort(int low,int high)
+    public void QuickSort(int low, int high)
     {
-        if(low > high)
+        if (low > high)
         {
             return; // Базовий випадок
         }
-        int pivot = Partition(low,high);
-        QuickSort(low,pivot - 1);
-        QuickSort(pivot + 1,high);
+        int pivot = Partition(low, high);
+        QuickSort(low, pivot - 1);
+        QuickSort(pivot + 1, high);
     }
 
     /// <summary>
@@ -64,29 +64,29 @@ public class Vector
     /// <param name="low">Індекс початку розділу.</param>
     /// <param name="high">Індекс кінця розділу (опорний елемент).</param>
     /// <returns>Індекс опорного елемента після розділу.</returns>
-    public int Partition(int low,int high)
+    public int Partition(int low, int high)
     {
         int pivot = _array[high];
         int i = low - 1;
-        for (int j = low;j <= high - 1;j ++)
+        for (int j = low; j <= high - 1; j++)
         {
             // Порівнюємо з pivot, сортуємо за спаданням
-            if(_array[j] > pivot )
+            if (_array[j] > pivot)
             {
-            i++;
-            int temp = _array[j];
-            _array[j] = _array[i];
-            _array[i] = temp;
+                i++;
+                int temp = _array[j];
+                _array[j] = _array[i];
+                _array[i] = temp;
             }
 
         }
         i++;
         int tempN = _array[high];
-        _array[high]= _array[i];
+        _array[high] = _array[i];
         _array[i] = tempN;
         return i;
     }
-   
+
     /// <summary>
     /// Знаходить та виводить всі прості числа з масиву, які знаходяться в діапазоні [start; end].
     /// Використовує алгоритм "Решето Ератосфена".
@@ -94,55 +94,55 @@ public class Vector
     /// <param name="start">Початок діапазону пошуку простих чисел.</param>
     /// <param name="end">Кінець діапазону пошуку простих чисел.</param>
     public void EratosthenesSieve(int start, int end)
-{
-    // Створюємо массив для позначення простих чисел
-    bool[] isPrime = new bool[end + 1];
-    
-    for (int i = 0; i <= end; i++)
     {
-        isPrime[i] = true;
-    }
+        // Створюємо массив для позначення простих чисел
+        bool[] isPrime = new bool[end + 1];
 
-    // 0 і 1 не є простими числами
-    isPrime[0] = false;
-    isPrime[1] = false;
-
-    int limit = (int)Math.Sqrt(end);
-
-    // Основна логіка решета Ератосфена
-    for (int p = 2; p <= limit; p++)
-    {
-        if (isPrime[p])
+        for (int i = 0; i <= end; i++)
         {
-            for (int j = p * p; j <= end; j += p)
+            isPrime[i] = true;
+        }
+
+        // 0 і 1 не є простими числами
+        isPrime[0] = false;
+        isPrime[1] = false;
+
+        int limit = (int)Math.Sqrt(end);
+
+        // Основна логіка решета Ератосфена
+        for (int p = 2; p <= limit; p++)
+        {
+            if (isPrime[p])
             {
-                isPrime[j] = false;
+                for (int j = p * p; j <= end; j += p)
+                {
+                    isPrime[j] = false;
+                }
             }
         }
-    }
 
-    Console.WriteLine($"Прості числа в діапазоні [{start} - {end}]:");
-    int counter = 0;
+        Console.WriteLine($"Прості числа в діапазоні [{start} - {end}]:");
+        int counter = 0;
 
-    // Виводимо прості числа з нашого масиву, які потрапляють в діапазон
-    for (int i = 0; i < _n; i++)
-    {
-        int num = _array[i];
-        if (num >= start && num <= end && isPrime[num])
+        // Виводимо прості числа з нашого масиву, які потрапляють в діапазон
+        for (int i = 0; i < _n; i++)
         {
-            Console.Write(num + " ");
-            counter++;
+            int num = _array[i];
+            if (num >= start && num <= end && isPrime[num])
+            {
+                Console.Write(num + " ");
+                counter++;
+            }
+        }
+
+        Console.WriteLine();
+
+        if (counter == 0)
+        {
+            Console.WriteLine("В цьому діапазоні простих чисел не знайдено.");
         }
     }
-    
-    Console.WriteLine();
 
-    if (counter == 0)
-    {
-        Console.WriteLine("В цьому діапазоні простих чисел не знайдено.");
-    }
-}
-    
     /// <summary>
     /// Здійснює бінарний пошук заданого числа у відсортованому масиві.
     /// Вимагає, щоб масив був попередньо відсортований.
@@ -154,15 +154,15 @@ public class Vector
         int left = 0;
         int right = _n - 1;
         int mid = 0;
-        while(left <= right)
+        while (left <= right)
         {
-            mid = (right + left)/2;
+            mid = (right + left) / 2;
             if (_array[mid] == target)
             {
                 return mid;
             }
             // Масив відсортований у спаданні, тому логіка інвертована
-            else if(target > _array[mid])
+            else if (target > _array[mid])
             {
                 right = mid - 1;
             }
@@ -172,8 +172,8 @@ public class Vector
             }
         }
         return -1;
-        
+
     }
-    
- 
+
+
 }

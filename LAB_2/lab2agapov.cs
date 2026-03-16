@@ -2,7 +2,8 @@
  * Ім'я файлу: Program.cs (або lab2agapov.cs)
  * Автор: Агапов Олександр, гр. ІПЗ-11(1)
  * Дата модифікації: 19.02.2026
- * Номер версії модуля: 2.1
+ * Номер версії модуля: 2
+ * У 2 версії програма позбулась static
  * Запланована ціль: Лабораторна робота №2. Робота з класами та об'єктами.
  * Реалізація алгоритмів QuickSort, бінарного пошуку та Решета Ератосфена.
  * Опрацювання одновимірних масивів (Vector) та двовимірних масивів (Matrix).
@@ -21,27 +22,28 @@ namespace lab2agapov
         /// <param name="args">Аргументи командного рядка (не використовуються).</param>
         static public void Main(string[] args)
         {
-            Service.WelcomeInfo();
+            Service service = new Service();
+            service.WelcomeInfo();
             Vector myVector = new Vector(0); // Масив зберігається тут, поки працює програма
-            Matrix myMatrix = new Matrix(0,0);
+            Matrix myMatrix = new Matrix(0, 0);
             bool isRunning = true;
             while (isRunning)
             {
                 // Викликаємо меню з Service
-                int choice = Service.GetMenuChoice();
+                int choice = service.GetMenuChoice();
 
                 switch (choice)
                 {
                     case 1:
                         // Створення
-                        myVector = Service.SetSize();
+                        myVector = service.SetSize();
                         Console.WriteLine("--> Згенерований масив:");
-                        Service.PrintVector(myVector);
-                        
+                        service.PrintVector(myVector);
+
                         // Сортування (обов'язкове для бінарного пошуку)
                         myVector.SortArray();
                         Console.WriteLine("--> Масив відсортовано за спаданням:");
-                        Service.PrintVector(myVector);
+                        service.PrintVector(myVector);
                         break;
 
                     case 2:
@@ -52,7 +54,7 @@ namespace lab2agapov
                         }
                         else
                         {
-                            Service.PrintEratosthenes(myVector);
+                            service.PrintEratosthenes(myVector);
                         }
                         break;
 
@@ -64,25 +66,25 @@ namespace lab2agapov
                         }
                         else
                         {
-                            Service.BinarySearchArray(myVector);
+                            service.BinarySearchArray(myVector);
                         }
                         break;
-                    case 4: 
-                      //Створення матриці
-                      myMatrix = Service.FillMatrix();
-                      Service.PrintMatrix(myMatrix);
-                      break;
+                    case 4:
+                        //Створення матриці
+                        myMatrix = service.FillMatrix();
+                        service.PrintMatrix(myMatrix);
+                        break;
 
-                     case 5:
-                    if (myMatrix == null || myMatrix.GetRow() == 0)
-                    {
-                         Console.WriteLine(" Помилка: Спочатку створіть матрицю (пункт 4)."); 
-                    }     
-                    else
-                    {
-                        Service.ActionWithMatrix(myMatrix);
-                    }    
-                    break;
+                    case 5:
+                        if (myMatrix == null || myMatrix.GetRow() == 0)
+                        {
+                            Console.WriteLine(" Помилка: Спочатку створіть матрицю (пункт 4).");
+                        }
+                        else
+                        {
+                            service.ActionWithMatrix(myMatrix);
+                        }
+                        break;
 
                     case 0:
                         Console.WriteLine("Роботу завершено.");

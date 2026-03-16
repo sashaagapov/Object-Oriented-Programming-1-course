@@ -21,9 +21,9 @@ namespace lab1agapov
         /// Точка входу програми. Відображає головне меню та обробляє вибір користувача.
         /// </summary>
         /// <param name="args">Аргументи командного рядка (не використовуються).</param>
-        static void Main(string[] args)
+        void Main(string[] args)
         {
-            
+
             Console.OutputEncoding = Encoding.UTF8;
             Console.InputEncoding = Encoding.UTF8;
 
@@ -78,7 +78,7 @@ namespace lab1agapov
         /// <summary>
         /// Виводить анкетні дані студента та інформацію про лабораторну роботу.
         /// </summary>
-        static void WelcomeInfo()
+        void WelcomeInfo()
         {
             Console.WriteLine("-------------------------------------------------------------------");
             Console.WriteLine("Агапов Олександр , 18 років, ІПЗ-11(1), 1 курс, sasha_agapov@knu.ua");
@@ -89,7 +89,7 @@ namespace lab1agapov
         /// <summary>
         /// Обчислює значення полінома p = a*x^5 - 1/(b*x^4) + c*x + d для введеного користувачем значення x.
         /// </summary>
-        static void CalculatePolynomial()
+        void CalculatePolynomial()
         {
             Console.WriteLine("\n--- Завдання: Поліном ---");
             double a = 5;
@@ -115,24 +115,24 @@ namespace lab1agapov
         /// <summary>
         /// Обчислює математичний вираз x = sqrt((a-b)/a + |sin(a)/cos(b)|) для введених значень a та b.
         /// </summary>
-        static void CalculateMathFunction()
+        void CalculateMathFunction()
         {
             Console.WriteLine("\n--- Завдання 2: Рівняння ---");
             Console.WriteLine("Умова: x = sqrt((a-b)/a + |sin(a)/cos(b)|)");
 
-            
+
             double a, b;
 
             Console.Write("Введіть a: ");
-            if (!double.TryParse(Console.ReadLine(), out a)) 
+            if (!double.TryParse(Console.ReadLine(), out a))
             {
-                 Console.WriteLine("Введено не число"); return; 
+                Console.WriteLine("Введено не число"); return;
             }
 
             Console.Write("Введіть b: ");
-            if (!double.TryParse(Console.ReadLine(), out b)) 
+            if (!double.TryParse(Console.ReadLine(), out b))
             {
-                 Console.WriteLine("Введено не число"); return; 
+                Console.WriteLine("Введено не число"); return;
             }
 
             if (a == 0)
@@ -157,7 +157,7 @@ namespace lab1agapov
         /// <summary>
         /// Обчислює значення кускової функції f(x), де f(x) = x^2 + 4 при x > 0, f(x) = x - 5 при x < 0, f(x) = 0 при x = 0.
         /// </summary>
-        static void CalculatePiecewiseFunction()
+        void CalculatePiecewiseFunction()
         {
             Console.WriteLine("Завдання 3: Обчислити значення кусково-заданої функції f(x):");
             Console.WriteLine();
@@ -167,7 +167,7 @@ namespace lab1agapov
             Console.Write("Введіть значення x: ");
 
             double x;
-            
+
             if (!double.TryParse(Console.ReadLine(), out x))
             {
                 Console.WriteLine("Ввести число");
@@ -193,52 +193,52 @@ namespace lab1agapov
         /// <summary>
         /// Виводить назву місяця на основі введеного номера місяця (1-12).
         /// </summary>
-        static void GetMonthName()
+        void GetMonthName()
         {
             Console.WriteLine("\n--- Завдання 4: Місяці ---");
             Console.Write("Введіть номер місяця (1-12): ");
             int month;
-           
+
             if (int.TryParse(Console.ReadLine(), out month))
             {
                 switch (month)
                 {
                     case 1:
-                     Console.WriteLine("Січень"); 
-                     break;
-                    case 2: 
-                    Console.WriteLine("Лютий");
-                     break;
-                    case 3: 
-                    Console.WriteLine("Березень");
-                     break;
-                    case 4: 
-                    Console.WriteLine("Квітень");
-                     break;
+                        Console.WriteLine("Січень");
+                        break;
+                    case 2:
+                        Console.WriteLine("Лютий");
+                        break;
+                    case 3:
+                        Console.WriteLine("Березень");
+                        break;
+                    case 4:
+                        Console.WriteLine("Квітень");
+                        break;
                     case 5:
-                     Console.WriteLine("Травень"); 
-                     break;
+                        Console.WriteLine("Травень");
+                        break;
                     case 6:
-                     Console.WriteLine("Червень");
-                      break;
-                    case 7: 
-                    Console.WriteLine("Липень"); 
-                    break;
+                        Console.WriteLine("Червень");
+                        break;
+                    case 7:
+                        Console.WriteLine("Липень");
+                        break;
                     case 8:
-                     Console.WriteLine("Серпень"); 
-                     break;
+                        Console.WriteLine("Серпень");
+                        break;
                     case 9:
-                     Console.WriteLine("Вересень"); 
-                     break;
-                    case 10: 
-                    Console.WriteLine("Жовтень"); 
-                    break;
+                        Console.WriteLine("Вересень");
+                        break;
+                    case 10:
+                        Console.WriteLine("Жовтень");
+                        break;
                     case 11:
-                     Console.WriteLine("Листопад");
-                      break;
-                    case 12: 
-                    Console.WriteLine("Грудень");
-                     break;
+                        Console.WriteLine("Листопад");
+                        break;
+                    case 12:
+                        Console.WriteLine("Грудень");
+                        break;
                     default:
                         Console.WriteLine("Помилка: такого місяця не існує (введіть 1-12).");
                         break;
@@ -253,7 +253,7 @@ namespace lab1agapov
         /// <summary>
         /// Обчислює добуток ряду для введеного натурального числа n.
         /// </summary>
-        static void CalculateSeries()
+        void CalculateSeries()
         {
             int n;
             double result;
@@ -276,7 +276,7 @@ namespace lab1agapov
         /// </summary>
         /// <param name="n">Натуральне число, до якого виконується добуток ряду.</param>
         /// <returns>Значення добутку ряду.</returns>
-        static double Product(int n)
+        double Product(int n)
         {
             double tempResult = 1;
             int k;

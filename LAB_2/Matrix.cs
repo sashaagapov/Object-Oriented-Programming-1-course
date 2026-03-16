@@ -21,40 +21,40 @@ public class Matrix
         _rows = rows;
         _cols = cols;
         Random random = new Random();
-        _matrix = new int[_rows,_cols];
-        for(int i = 0;i < _rows; i++)
+        _matrix = new int[_rows, _cols];
+        for (int i = 0; i < _rows; i++)
         {
-            for(int j = 0; j < _cols;j++)
+            for (int j = 0; j < _cols; j++)
             {
-                _matrix[i,j] = random.Next(1,101);
+                _matrix[i, j] = random.Next(1, 101);
             }
         }
-       
+
 
     }
-    
+
     /// <summary>
     /// Обчислює суму всіх елементів заданого рядка матриці.
     /// </summary>
     /// <param name="targetRow">Індекс рядка.</param>
     /// <returns>Сума елементів рядка, або -1 якщо індекс виходить за межі.</returns>
     public int CalculateSumOfRow(int targetRow)
-{
-    // Перевіряємо, чи індекс у валідному діапазоні
-    if (targetRow < 0 || targetRow >= _rows)
     {
-        return -1;
+        // Перевіряємо, чи індекс у валідному діапазоні
+        if (targetRow < 0 || targetRow >= _rows)
+        {
+            return -1;
+        }
+
+        int sumOfRow = 0;
+
+        for (int j = 0; j < _cols; j++)
+        {
+            sumOfRow += _matrix[targetRow, j];
+        }
+
+        return sumOfRow;
     }
-
-    int sumOfRow = 0;
-
-    for (int j = 0; j < _cols; j++)
-    {
-        sumOfRow += _matrix[targetRow, j];
-    }
-
-    return sumOfRow;
-}
     /// <summary>
     /// Обчислює суму всіх елементів заданого стовпця матриці.
     /// </summary>
@@ -64,16 +64,16 @@ public class Matrix
     {
         // Перевіряємо, чи індекс у валідному діапазоні
         if (targetCol < 0 || targetCol >= _cols)
-    {
-        return -1;
-    }
-     int sumOfCol = 0;
-      for (int i = 0; i < _rows; i++)
-    {
-        sumOfCol += _matrix[i,targetCol];
-    }
+        {
+            return -1;
+        }
+        int sumOfCol = 0;
+        for (int i = 0; i < _rows; i++)
+        {
+            sumOfCol += _matrix[i, targetCol];
+        }
 
-    return sumOfCol;
+        return sumOfCol;
     }
 
     /// <summary>
