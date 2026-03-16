@@ -81,5 +81,7 @@ public class Teacher : Person // Успадкування
             Console.WriteLine("Некоректні данні");
             return;
         }
+
     }
+
 }
