@@ -65,16 +65,7 @@ public partial class Student : Person // Успадкування
     /// Властивості для доступу до полів класу Student: StudentName, 
     /// SubjectName, Grades та TasksDone. Вони дозволяють отримувати та встановлювати значення відповідних полів.
     /// </summary>
-    public string StudentName
-    {
-        get { return studentName; }
-        set { studentName = value; }
-    }
-    public string SubjectName
-    {
-        get { return subjectName; }
-        set { subjectName = value; }
-    }
+
     public List<int> Grades
     {
         get { return grades; }
