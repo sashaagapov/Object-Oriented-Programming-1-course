@@ -1,6 +1,6 @@
 namespace lab3agapov;
 
-public abstract class Person
+public class Person : IPerson
 {
     protected string name;
     protected string subjectName;
@@ -30,5 +30,10 @@ public abstract class Person
     {
         get { return subjectName; }
         set { subjectName = value; }
+    }
+    // Реалізація методу з інтерфейсу
+    public virtual void DisplayInfo()
+    {
+        Console.WriteLine($"Особа: {Name}, Предмет: {SubjectName}");
     }
 }
