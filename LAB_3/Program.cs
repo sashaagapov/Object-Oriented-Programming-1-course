@@ -1,19 +1,20 @@
-﻿/* * Версія 4.0
+﻿/* * Версія 5.0 
  * Лабораторна робота №3 з курсу "Об'єктно-орієнтоване програмування 1"
  * Виконав: Агапов Олександр | Група: ІПЗ-11(1) | Варіант: 1
  * * ЕТАПИ ЗАВДАННЯ:
  * 1. Клас Teacher: зберігання інформації про викладача та зміна його навантаження.
  * 2. Клас Student: зберігання даних студента, додавання оцінок, розрахунок рейтингу.
- * 3. Статичний клас Service: реалізація вводу/виводу даних на консоль та роботи з файлами.
- * 4. Вкладений клас DiplomaProject (Версія 2): вибір теми з файлу, обчислення складності 
+ * 3. Клас Service: реалізація вводу/виводу даних на консоль та роботи з файлами (робота через екземпляри об'єктів).
+ * 4. Вкладений клас DiplomaProject (Версія 2): вибір теми з текстового файлу, обчислення складності 
  * алгоритмів та автоматичне виставлення оцінки.
  * 5. Часткові класи (Версія 3): використання модифікатора partial для розділення 
  * класу Student та його вкладеного класу на кілька фізичних файлів.
- * 6. Статичний клас ScientificPaper (Версія 4): бінарний пошук ідентифікатора джерела.
+ * 6. Клас ScientificPaper (Версія 4): бінарний пошук ідентифікатора джерела.
  * * ОСНОВНІ ВИМОГИ:
  * - Інкапсуляція даних (приватні поля + публічні властивості).
  * - Наявність конструкторів (за замовчуванням, з параметрами, копіювання).
  * - Перевірка вводу (захист від некоректних даних користувача).
+ * - Дотримання принципу єдиної відповідальності (SRP).
  */
 using System;
 
@@ -25,13 +26,17 @@ namespace lab3agapov
         static void Main(string[] args)
         {
             Console.Clear();
+            Service service = new Service();// Створюємо екземпляр сервісного класу для виклику його методів
+            ScientificPaper scientificPaper = new ScientificPaper(); // Створюємо екземпляр класу для роботи з науковою статтею
+            service.WelcomeInfo();
             bool isRunning = true;
 
             // Ініціалізуємо об'єкти на старті програми
+            // Ініціалізуємо об'єкти на старті програми
             Teacher myTeacher = new Teacher();
-            Student myStudent = new Student();
-            bool isStudentCreated = false; // Прапорець для перевірки, чи вводилися дані студента
-
+            Student myStudent = new Student(); // Повертаємо змінну поточного студента
+            List<Student> students = new List<Student>(); // ДОДАЄМО НАШ СПИСОК (БАЗУ ДАНИХ)
+            bool isStudentCreated = false;     // Повертаємо прапорець
             while (isRunning)
             {
                 Console.WriteLine("\n==========================================");
@@ -59,9 +64,10 @@ namespace lab3agapov
 
                     case "2":
                         Console.WriteLine("\n--- Акт 2: Створення студента ---");
-                        myStudent = Service.ReadStudentFromConsole();
+                        myStudent = service.ReadStudentFromConsole(); // Створюємо
+                        students.Add(myStudent); // ВИПРАВЛЕНО НА students
                         isStudentCreated = true;
-                        Console.WriteLine("Об'єкт студента успішно створено.");
+                        Console.WriteLine($"Студента {myStudent.StudentName} успішно додано до бази. Всього студентів у базі: {students.Count}"); // ВИПРАВЛЕНО НА students
                         break;
 
                     case "3":
@@ -84,10 +90,10 @@ namespace lab3agapov
                             break;
                         }
                         Console.WriteLine("\n--- Акт 4: Робота з даними (Service) ---");
-                        Service.PrintStudentInfo(myStudent);
+                        service.PrintStudentInfo(myStudent);
                         string fileName = "student_data.txt";
-                        Service.SaveStudentToFile(myStudent, fileName);
-                        Service.ReadStudentFromFile(fileName);
+                        service.SaveStudentToFile(myStudent, fileName);
+                        service.ReadStudentFromFile(fileName);
                         break;
 
                     case "5":
@@ -98,7 +104,7 @@ namespace lab3agapov
                         }
                         Console.WriteLine("\n--- Акт 5: Дипломний проєкт ---");
                         // Використовуємо новий сервісний метод для вибору теми
-                        Service.ChooseDiplomaTheme(myStudent);
+                        service.ChooseDiplomaTheme(myStudent);
 
                         // Обчислюємо складність та виставляємо оцінку
                         myStudent.Diploma.CalculateDifficulty();
@@ -114,7 +120,7 @@ namespace lab3agapov
                         int targetId = 56;
                         Console.WriteLine($"Пошук ID {targetId} у масиві...");
 
-                        int foundIndex = ScientificPaper.SearchReference(references, targetId);
+                        int foundIndex = scientificPaper.SearchReference(references, targetId);
                         if (foundIndex != -1)
                             Console.WriteLine($"ID знайдено. Позиція в списку: {foundIndex}");
                         else

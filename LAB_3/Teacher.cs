@@ -82,13 +82,11 @@ public class Teacher
         if (quantityOfStudents + difference >= 0)
         {
             quantityOfStudents += difference;
-            if (difference * 2 >= 0)
-            {
-                subjectHours += difference * 2;
-            }
+            subjectHours += difference * 2;
         }
         else
         {
+            Console.WriteLine("Некоректні данні");
             return;
         }
     }
