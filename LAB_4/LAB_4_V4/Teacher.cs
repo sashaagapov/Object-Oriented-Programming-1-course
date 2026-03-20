@@ -1,5 +1,3 @@
-using System;
-
 namespace lab4agapov;
 /// <summary>
 /// Клас Teacher, який містить поля для зберігання інформації про викладача
