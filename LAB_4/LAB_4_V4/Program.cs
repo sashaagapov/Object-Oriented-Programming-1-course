@@ -1,11 +1,15 @@
-﻿/* * Версія 2.0 
- * * ЕТАПИ ЗАВДАННЯ (Версія 2):
- * 1. Модифікація класу Person: перетворення базового класу на абстрактний (abstract).
- * 2. Перевірка обмежень: підтвердження неможливості створення екземплярів класу Person.
- * 3. Успадкування: збереження можливості використання Person як базового типу для Student та Teacher.
- * 4. Дотримання принципів SOLID: реалізація принципів OCP (відкритості/закритості) та LSP (підстановки Лісков).
- * - Використання ключового слова abstract для запобігання нерелевантній ініціалізації базового класу.
- * - Демонстрація роботи з об'єктами через посилання на базовий абстрактний клас.
+﻿/* * Версія 1.0 
+ * Лабораторна робота №4 з курсу "Об'єктно-орієнтоване програмування 1"
+ * Виконав: Агапов Олександр | Група: ІПЗ-11(1) | Варіант: 1
+ * * ЕТАПИ ЗАВДАННЯ (Версія 1):
+ * 1. Клас Person (базовий): винесення спільних атрибутів (ім'я, назва дисципліни) для учасників освітнього процесу. Конструктор protected.
+ * 2. Клас Teacher (похідний): успадковує Person, додає специфічні поля (навантаження, кількість студентів) та специфічні методи.
+ * 3. Клас Student (похідний): успадковує Person, додає специфічні поля (оцінки, обсяг робіт) та специфічні методи.
+ * 4. Клас Service: інструмент для вводу/виводу даних та роботи з файлами (без успадкування).
+ * * ОСНОВНІ ВИМОГИ:
+ * - Реалізація успадкування класів (відношення "is-a").
+ * - Виклик конструкторів базового класу через ключове слово base.
+ * - Дотримання принципів SOLID (зокрема SRP — єдина відповідальність).
  */
 using System;
 
@@ -17,17 +21,15 @@ namespace lab4agapov
         static void Main(string[] args)
         {
             Console.Clear();
-            Person testPerson = new Person();
             Service service = new Service();// Створюємо екземпляр сервісного класу для виклику його методів
             ScientificPaper scientificPaper = new ScientificPaper(); // Створюємо екземпляр класу для роботи з науковою статтею
             service.WelcomeInfo();
             bool isRunning = true;
 
             // Ініціалізуємо об'єкти на старті програми
-            // Ініціалізуємо об'єкти на старті програмиs
+            StudentGroup group = new StudentGroup();
             Teacher myTeacher = new Teacher();
             Student myStudent = new Student(); // Повертаємо змінну поточного студента
-            List<Student> students = new List<Student>(); // ДОДАЄМО НАШ СПИСОК (БАЗУ ДАНИХ)
             bool isStudentCreated = false;     // Повертаємо прапорець
             while (isRunning)
             {
@@ -40,6 +42,7 @@ namespace lab4agapov
                 Console.WriteLine("4. Вивести дані та зберегти у файл (Акт 4)");
                 Console.WriteLine("5. Робота з дипломним проєктом (Акт 5)");
                 Console.WriteLine("6. Пошук у науковій статті (Акт 6)");
+                Console.WriteLine("7. Перебір студентів через foreach (Версія 4)");
                 Console.WriteLine("0. Вихід");
                 Console.WriteLine("------------------------------------------");
                 Console.Write("Ваш вибір: ");
@@ -56,9 +59,9 @@ namespace lab4agapov
                     case "2":
                         Console.WriteLine("\n--- Акт 2: Створення студента ---");
                         myStudent = service.ReadStudentFromConsole(); // Створюємо
-                        students.Add(myStudent);
+                        group.AddStudent(myStudent);
                         isStudentCreated = true;
-                        Console.WriteLine($"Студента {myStudent.Name} успішно додано до бази. Всього студентів у базі: {students.Count}");
+                        Console.WriteLine($"Студента {myStudent.Name} успішно додано до бази.");
                         break;
 
                     case "3":
@@ -116,6 +119,14 @@ namespace lab4agapov
                             Console.WriteLine($"ID знайдено. Позиція в списку: {foundIndex}");
                         else
                             Console.WriteLine("ID в списку літератури не знайдено.");
+                        break;
+                    case "7":
+                        Console.WriteLine("\n--- Акт 7: Перебір студентів (Версія 4) ---");
+                        // Цей foreach працює саме завдяки тим інтерфейсам, які ми щойно написали
+                        foreach (Student s in group)
+                        {
+                            Console.WriteLine($"Студент: {s.Name}, Предмет: {s.SubjectName}");
+                        }
                         break;
 
                     case "0":

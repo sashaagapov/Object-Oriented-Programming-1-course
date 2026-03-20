@@ -1,4 +1,4 @@
-namespace lab3agapov;
+namespace lab4agapov;
 /// <summary>
 /// Статичний клас ScientificPaper, який містить статичний метод SearchReference 
 /// для пошуку посилання наукової статті за її унікальним ідентифікатором (ID) у 

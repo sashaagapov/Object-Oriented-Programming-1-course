@@ -1,4 +1,4 @@
-namespace lab3agapov;
+namespace lab4agapov;
 
 public class Person : IPerson // 1. Прибрали abstract, 2. Додали IPerson
 {

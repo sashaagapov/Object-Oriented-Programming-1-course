@@ -13,7 +13,7 @@
  */
 using System;
 
-namespace lab3agapov
+namespace lab4agapov
 {
 
     class Program

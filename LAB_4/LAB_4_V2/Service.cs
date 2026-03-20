@@ -2,7 +2,7 @@ using System;
 using System.IO;
 using System.Collections.Generic;
 
-namespace lab3agapov;
+namespace lab4agapov;
 /// <summary>
 /// Сервісний клас service, який містить статичні методи для роботи з об'єктами 
 /// класу Student, включаючи читання та запис даних у файл, а також виведення інформації про студента на консоль.

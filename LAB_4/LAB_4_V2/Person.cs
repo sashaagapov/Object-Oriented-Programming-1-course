@@ -1,4 +1,4 @@
-namespace lab3agapov;
+namespace lab4agapov;
 
 public abstract class Person
 {

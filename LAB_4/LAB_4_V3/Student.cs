@@ -1,6 +1,6 @@
 using System;
 using System.Collections.Generic;
-namespace lab3agapov;
+namespace lab4agapov;
 /// <summary>
 /// Клас Student, який містить поля для зберігання інформації про студента
 /// та методи для роботи з цією інформацією, включаючи вкладений клас DiplomaProject для зберігання інформації про дипломний проект студента.
