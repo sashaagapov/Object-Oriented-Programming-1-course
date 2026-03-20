@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using System.Collections;
 namespace lab4agapov;
 
@@ -42,5 +41,9 @@ public class StudentGroup : IEnumerable, IEnumerator
 
         Reset();
         return this;
+    }
+    public void SortStudents()
+    {
+        students.Sort(); 
     }
 }

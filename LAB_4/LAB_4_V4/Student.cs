@@ -1,5 +1,3 @@
-using System;
-using System.Collections.Generic;
 namespace lab4agapov;
 /// <summary>
 /// Клас Student, який містить поля для зберігання інформації про студента
@@ -219,7 +217,7 @@ public partial class Student : Person, IComparable
         // Перевіряємо, чи об'єкт, з яким нас порівнюють, дійсно є студентом
         if (obj is Student otherStudent)
         {
-
+            return this.CalculateRating().CompareTo(otherStudent.CalculateRating());
         }
         throw new ArgumentException("Некоректний тип для порівняння");
     }

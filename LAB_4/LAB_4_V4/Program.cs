@@ -11,8 +11,6 @@
  * - Виклик конструкторів базового класу через ключове слово base.
  * - Дотримання принципів SOLID (зокрема SRP — єдина відповідальність).
  */
-using System;
-
 namespace lab4agapov
 {
 
@@ -43,6 +41,7 @@ namespace lab4agapov
                 Console.WriteLine("5. Робота з дипломним проєктом (Акт 5)");
                 Console.WriteLine("6. Пошук у науковій статті (Акт 6)");
                 Console.WriteLine("7. Перебір студентів через foreach (Версія 4)");
+                Console.WriteLine("8. Відсортувати студентів (Акт 8)");
                 Console.WriteLine("0. Вихід");
                 Console.WriteLine("------------------------------------------");
                 Console.Write("Ваш вибір: ");
@@ -129,6 +128,16 @@ namespace lab4agapov
                         }
                         break;
 
+                    case "8":
+                        Console.WriteLine("\n--- Акт 8: Сортування студентів за рейтингом (Версія 4) ---");
+                        group.SortStudents(); // Сортуємо шафу
+                        
+                        // Виводимо вже відсортований список
+                        foreach (Student s in group)
+                        {
+                            Console.WriteLine($"Студент: {s.Name}, Рейтинг: {s.CalculateRating()}");
+                        }
+                        break;
                     case "0":
                         Console.WriteLine("Завершення роботи.");
                         isRunning = false;
