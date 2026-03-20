@@ -213,5 +213,6 @@ public partial class Student : Person // Успадкування
         }
 
     }
+    
 
 }

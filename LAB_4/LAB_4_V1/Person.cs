@@ -1,6 +1,6 @@
 namespace lab3agapov;
 
-public class Person : IPerson
+public class Person 
 {
     protected string name;
     protected string subjectName;

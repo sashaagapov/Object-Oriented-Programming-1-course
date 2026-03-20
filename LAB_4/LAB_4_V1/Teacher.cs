@@ -83,10 +83,5 @@ public class Teacher : Person // Успадкування
         }
 
     }
-    // Перевизначення методу для демонстрації поліморфізму
-    public override void DisplayInfo()
-    {
-        base.DisplayInfo(); // Викликаємо базовий метод
-        Console.WriteLine($"[Викладач] Кількість студентів: {QuantityOfStudents}, Годин: {SubjectHours}");
-    }
+
 }

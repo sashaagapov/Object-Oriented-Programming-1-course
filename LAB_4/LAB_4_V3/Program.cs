@@ -23,7 +23,6 @@ namespace lab3agapov
             ScientificPaper scientificPaper = new ScientificPaper(); // Створюємо екземпляр класу для роботи з науковою статтею
             service.WelcomeInfo();
             Console.WriteLine("--- Демонстрація поліморфізму (Версія 3) ---");
-            // Зверни увагу: тип змінних - інтерфейс IPerson!
             IPerson person1 = new Student("Олег", "Математика", new List<int> { 90, 95 }, 2);
             IPerson person2 = new Teacher("Марія Іванівна", "Фізика", 120, 30);
             person1.DisplayInfo();
