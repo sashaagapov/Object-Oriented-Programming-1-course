@@ -9,7 +9,7 @@ namespace lab3agapov;
 /// Цей клас може бути використаний для швидкого пошуку наукових статей за їх 
 /// унікальними ідентифікаторами в базі даних або колекції статей, що зберігаються у відсортованому вигляді.
 /// </summary>
-public class ScientificPaper
+public static class ScientificPaper
 {
     /// <summary>
     /// Метод SearchReference, який приймає відсортований масив унікальних
@@ -24,7 +24,7 @@ public class ScientificPaper
     /// <param name="identifiers">Відсортований масив унікальних ідентифікаторів наукових статей</param>
     /// <param name="target">Цільовий ідентифікатор для пошуку</param>
     /// <returns>Повертає індекс знайденого ідентифікатора або -1, якщо ідентифікатор не знайдено</returns>
-    public int SearchReference(int[] identifiers, int target)
+    public static int SearchReference(int[] identifiers, int target)
     {
         int left = 0;
         int right = identifiers.Length - 1;

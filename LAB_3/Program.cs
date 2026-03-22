@@ -26,9 +26,7 @@ namespace lab3agapov
         static void Main(string[] args)
         {
             Console.Clear();
-            Service service = new Service();// Створюємо екземпляр сервісного класу для виклику його методів
-            ScientificPaper scientificPaper = new ScientificPaper(); // Створюємо екземпляр класу для роботи з науковою статтею
-            service.WelcomeInfo();
+            Service service = new Service();// Створюємо екземпляр сервісного класу для виклику його методів            service.WelcomeInfo();
             bool isRunning = true;
 
             // Ініціалізуємо об'єкти на старті програми
@@ -120,7 +118,7 @@ namespace lab3agapov
                         int targetId = 56;
                         Console.WriteLine($"Пошук ID {targetId} у масиві...");
 
-                        int foundIndex = scientificPaper.SearchReference(references, targetId);
+                        int foundIndex = ScientificPaper.SearchReference(references, targetId);
                         if (foundIndex != -1)
                             Console.WriteLine($"ID знайдено. Позиція в списку: {foundIndex}");
                         else
