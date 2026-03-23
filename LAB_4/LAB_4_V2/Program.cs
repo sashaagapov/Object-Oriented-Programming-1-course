@@ -7,7 +7,6 @@
  * - Використання ключового слова abstract для запобігання нерелевантній ініціалізації базового класу.
  * - Демонстрація роботи з об'єктами через посилання на базовий абстрактний клас.
  */
-using System;
 
 namespace lab4agapov
 {
@@ -17,7 +16,7 @@ namespace lab4agapov
         static void Main(string[] args)
         {
             Console.Clear();
-            Person testPerson = new Person();
+            // Person testPerson = new Person(); // Помилка компіляції: неможливо створити екземпляр абстрактного класу Person
             Service service = new Service();// Створюємо екземпляр сервісного класу для виклику його методів
             ScientificPaper scientificPaper = new ScientificPaper(); // Створюємо екземпляр класу для роботи з науковою статтею
             service.WelcomeInfo();

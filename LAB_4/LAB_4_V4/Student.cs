@@ -107,12 +107,6 @@ public partial class Student : Person, IComparable
         }
         return rating / tasksDone;
     }
-    /// <summary>
-    /// Метод UpdateSubject, який приймає рядок newSubject і 
-    /// оновлює назву предмету, який вивчає студент, на це нове значення.
-    ///  Цей метод використовується для зміни назви предмету, який вивчає
-    ///  студент, відповідно до переданого аргументу.
-    /// </summary>
     public partial class DiplomaProject
     {
         private string _nameOfTheme;

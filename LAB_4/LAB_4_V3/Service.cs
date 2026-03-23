@@ -13,7 +13,7 @@ public class Service
     {
         Console.WriteLine("-------------------------------------------------------------------");
         Console.WriteLine("Агапов Олександр, ІПЗ-11(1), 1 курс, sasha_agapov@knu.ua");
-        Console.WriteLine("                  Лабораторна робота №3(Варіант 1)                 ");
+        Console.WriteLine("                  Лабораторна робота №4(Варіант 1)                 ");
         Console.WriteLine("-------------------------------------------------------------------");
     }
     /// <summary>
