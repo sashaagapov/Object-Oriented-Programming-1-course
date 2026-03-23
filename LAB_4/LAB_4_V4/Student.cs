@@ -3,7 +3,7 @@ namespace lab4agapov;
 /// Клас Student, який містить поля для зберігання інформації про студента
 /// та методи для роботи з цією інформацією, включаючи вкладений клас DiplomaProject для зберігання інформації про дипломний проект студента.
 /// </summary>
-public partial class Student : Person, IComparable
+public partial class Student : Person, IComparable<Student>
 {
     private List<int> grades = new List<int>();
     private int tasksDone = 0;
@@ -206,14 +206,10 @@ public partial class Student : Person, IComparable
 
     }
 
-    public int CompareTo(object? obj)
+    public int CompareTo(Student? other)
     {
-        // Перевіряємо, чи об'єкт, з яким нас порівнюють, дійсно є студентом
-        if (obj is Student otherStudent)
-        {
-            return this.CalculateRating().CompareTo(otherStudent.CalculateRating());
-        }
-        throw new ArgumentException("Некоректний тип для порівняння");
+        if (other == null) return 1;
+        return this.CalculateRating().CompareTo(other.CalculateRating());
     }
 
 

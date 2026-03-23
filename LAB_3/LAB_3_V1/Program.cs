@@ -15,8 +15,6 @@
 
  */
 
-using System;
-
 namespace lab3agapov_v1
 {
 

@@ -46,4 +46,10 @@ public class StudentGroup : IEnumerable, IEnumerator
     {
         students.Sort(); 
     }
+
+    public void SortByTasks()
+    {
+        StudentTasksComparer studentComparer = new StudentTasksComparer();
+        students.Sort(studentComparer);
+    }
 }
