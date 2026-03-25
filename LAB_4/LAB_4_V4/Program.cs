@@ -1,4 +1,4 @@
-
+﻿
 /* * ДЕКЛАРАЦІЯ ПРО ВИКОРИСТАННЯ ШІ:
 
  * Штучний інтелект використовувався у цій лабораторній роботі виключно
@@ -28,11 +28,10 @@ namespace lab4agapov
             Service service = new Service();
             ScientificPaper scientificPaper = new ScientificPaper();
             service.WelcomeInfo();
-
             StudentGroup group = new StudentGroup();
             Teacher myTeacher = new Teacher();
             Student myStudent = new Student();
-
+            service.LoadStudentFromFile(group,"student_data.txt");
             Menu menu = new Menu(service, scientificPaper, group, myTeacher, myStudent);
             menu.Run();
         }

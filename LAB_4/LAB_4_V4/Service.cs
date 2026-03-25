@@ -22,11 +22,20 @@ public class Service
     /// <returns></returns>
     public Student ReadStudentFromConsole()
     {
-        Console.WriteLine("Введіть ім'я студента:");
-        string name = Console.ReadLine() ?? "";
+        string name;
+        do
+        {
+            Console.WriteLine("Введіть ім'я студента:");
+            name = Console.ReadLine() ?? "";
+        } while (string.IsNullOrWhiteSpace(name));
 
-        Console.WriteLine("Введіть назву предмета:");
-        string subject = Console.ReadLine() ?? "";
+        string subject;
+        do
+        {
+            Console.WriteLine("Введіть назву предмета:");
+            subject = Console.ReadLine() ?? "";
+        } while (string.IsNullOrWhiteSpace(subject));
+
         return new Student(name, subject, new List<int>(), 0);
     }
     /// <summary>
@@ -93,6 +102,26 @@ public class Service
         }
     }
 
+    public void LoadStudentFromFile(StudentGroup group, string fileName)
+    {
+        if (File.Exists(fileName))
+        {
+            string[] lines = File.ReadAllLines(fileName);
+            foreach (string line in lines)
+            {
+                if (!(string.IsNullOrWhiteSpace(line)))
+                {
+                    string[] parts = line.Split(';');
+                    int rating = int.Parse(parts[2]);
+                    List<int> grades = new List<int>();
+                    grades.Add(rating);
+                    Student student = new Student(parts[0], parts[1], grades, 1);
+                    group.AddStudent(student);
+                }
+            }
+        }
+    }
+
     /// <summary>
     /// Метод для вибору теми диплома. Реалізує логіку взаємодії з файлом та користувачем.
     /// </summary>
@@ -152,4 +181,5 @@ public class Service
             }
         }
     }
+
 }
