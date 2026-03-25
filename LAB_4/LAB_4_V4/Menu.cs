@@ -69,10 +69,16 @@ namespace lab4agapov
                             break;
                         }
                         Console.WriteLine("\n--- Акт 3: Додавання оцінок ---");
-                        _myStudent.AddGrade(90);
-                        _myStudent.AddGrade(85);
-                        _myStudent.AddGrade(95);
-                        Console.WriteLine("Додано тестові оцінки: 90, 85, 95.");
+                        Console.Write("Введіть оцінку (від 0 до 100): ");
+                        if (int.TryParse(Console.ReadLine(), out int grade))
+                        {
+                            _myStudent.AddGrade(grade);
+                            Console.WriteLine($"Оцінку {grade} успішно додано студенту {_myStudent.Name}.");
+                        }
+                        else
+                        {
+                            Console.WriteLine("Помилка: введіть коректне число.");
+                        }
                         break;
 
                     case "4":
