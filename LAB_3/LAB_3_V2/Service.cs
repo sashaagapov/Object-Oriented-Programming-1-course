@@ -1,6 +1,3 @@
-using System;
-using System.IO;
-using System.Collections.Generic;
 
 namespace lab3agapov_v2;
 /// <summary>
@@ -133,7 +130,6 @@ public class Service
                 }
             }
 
-            // Замість continue використовуємо if-else
             if (matched.Count == 0)
             {
                 Console.WriteLine("За вашим запитом нічого не знайдено. Спробуйте інше слово.");

@@ -33,15 +33,6 @@ public partial class Student
     /// Конструктор з параметрами для класу Student,
     /// який ініціалізує всі поля класу відповідно до переданих аргументів.
     /// </summary>
-    public DiplomaProject Diploma
-    {
-        get { return studentDiploma; }
-        set { studentDiploma = value; }
-    }
-    /// <summary>
-    /// Конструктор з параметрами для класу Student, 
-    /// який ініціалізує всі поля класу відповідно до переданих аргументів.
-    /// </summary>
     /// <param name="studentName"></param>
     /// <param name="subjectName"></param>
     /// <param name="grades"></param>
@@ -90,6 +81,11 @@ public partial class Student
     {
         get { return tasksDone; }
         set { tasksDone = value; }
+    }
+    public DiplomaProject Diploma
+    {
+        get { return studentDiploma; }
+        set { studentDiploma = value; }
     }
 
 

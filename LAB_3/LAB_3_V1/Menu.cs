@@ -1,6 +1,3 @@
-using System;
-using System.Collections.Generic;
-
 namespace lab3agapov_v1;
 
 public class Menu
@@ -64,8 +61,8 @@ public class Menu
                     Console.Write("Введіть оцінку (від 0 до 100): ");
                     if (int.TryParse(Console.ReadLine(), out int grade))
                     {
-                        _myStudent.AddGrade(grade);
-                        Console.WriteLine($"Оцінку {grade} успішно додано студенту {_myStudent.Name}.");
+                        _student.AddGrade(grade);
+                        Console.WriteLine($"Оцінку {grade} успішно додано студенту {_student.StudentName}.");
                     }
                     else
                     {
