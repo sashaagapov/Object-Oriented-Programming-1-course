@@ -23,7 +23,7 @@ public partial class Student
             {
                 Console.WriteLine("Помилка.Введіть число.");
             }
-            _numOfCompletedAlgorithms = numOfCompletedAlgorithms;
+            numOfCompletedAlgorithms = numOfCompletedAlgorithms;
             for (int i = 0; i < numOfCompletedAlgorithms; i++)// Для кожного реалізованого алгоритму запитуємо його складність та додаємо її до загальної складності теми
             {
                 Console.WriteLine($"Введіть складність алгоритму {i + 1}(від 1 до 10): ");
@@ -34,8 +34,8 @@ public partial class Student
                 }
                 totalDifficulty += currentDificulty;
             }
-            _dificultyOfTheme = totalDifficulty;
-            return _dificultyOfTheme;
+            dificultyOfTheme = totalDifficulty;
+            return dificultyOfTheme;
         }
         /// <summary>
         /// Метод AssignMark, який призначає оцінку студенту на основі 
@@ -48,14 +48,14 @@ public partial class Student
         public void AssignMark()
         {
             int curMark = 0;
-            curMark = _dificultyOfTheme * 4;
+            curMark = dificultyOfTheme * 4;
             if (curMark >= 100)
             {
-                _mark = 100;
+                mark = 100;
             }
             else
             {
-                _mark = curMark;
+                mark = curMark;
             }
         }
     }

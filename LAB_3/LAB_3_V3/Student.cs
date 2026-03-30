@@ -128,12 +128,12 @@ public partial class Student
     /// </summary>
     public partial class DiplomaProject
     {
-        private string _nameOfTheme;
-        private int _numOfCompletedAlgorithms;
+        private string nameOfTheme;
+        private int numOfCompletedAlgorithms;
 
-        private int _dificultyOfTheme;
-        private int _mark;
-        private string _nameOfTeacher;
+        private int dificultyOfTheme;
+        private int mark;
+        private string nameOfTeacher;
         /// <summary>
         /// Конструктор за замовчуванням для класу DiplomaProject, 
         /// який ініціалізує всі поля класу значеннями за замовчуванням. 
@@ -144,11 +144,11 @@ public partial class Student
         /// </summary>
         public DiplomaProject()
         {
-            _nameOfTheme = "";
-            _numOfCompletedAlgorithms = 0;
-            _dificultyOfTheme = 0;
-            _mark = 0;
-            _nameOfTeacher = "";
+            nameOfTheme = "";
+            numOfCompletedAlgorithms = 0;
+            dificultyOfTheme = 0;
+            mark = 0;
+            nameOfTeacher = "";
         }
         /// <summary>
         /// Властивості для доступу до полів класу DiplomaProject:
@@ -158,69 +158,44 @@ public partial class Student
         /// </summary>
         public string NameOfTheme
         {
-            get { return _nameOfTheme; }
-            set { _nameOfTheme = value; }
+            get { return nameOfTheme; }
+            set { nameOfTheme = value; }
         }
         /// <summary>
-        /// Метод ChooseTheme, який дозволяє студенту вибрати тему 
-        /// для дипломного проекту. Метод запитує у користувача 
-        /// ключове слово для пошуку теми, а потім зчитує всі теми 
-        /// з файлу "themes.txt" та виводить ті, які містять введене 
-        /// ключове слово. Якщо файл не знайдено, виводиться повідомлення
-        ///  про помилку. Якщо теми за таким ключовим словом не 
-        /// знайдено, також виводиться відповідне повідомлення.
-        ///  Цей метод використовується для допомоги студенту у 
-        /// виборі теми для його дипломного проекту на основі 
-        /// доступних тем у файлі.
+        /// Властивість NumOfCompletedAlgorithms, яка дозволяє отримувати та
+        /// встановлювати кількість реалізованих алгоритмів у дипломному проекті студента.
         /// </summary>
         public int NumOfCompletedAlgorithms
         {
-            get { return _numOfCompletedAlgorithms; }
-            set { _numOfCompletedAlgorithms = value; }
+            get { return numOfCompletedAlgorithms; }
+            set { numOfCompletedAlgorithms = value; }
         }
         /// <summary>
-        /// Метод CalculateDifficulty, який обчислює складність теми 
-        /// дипломного проекту на основі кількості реалізованих 
-        /// алгоритмів та їх складності. Метод запитує у користувача 
-        /// кількість реалізованих алгоритмів, а потім для 
-        /// кожного алгоритму запитує його складність (від 1 до 10). 
-        /// Загальна складність теми обчислюється як сума 
-        /// складностей усіх алгоритмів. Цей метод використовується
-        ///  для визначення загальної складності теми дипломного 
-        /// проекту на основі реалізованих алгоритмів та їх складності.
+        /// Властивість NameOfTeacher, яка дозволяє отримувати та встановлювати 
+        /// ім'я викладача, який керує дипломним проектом студента.
         /// </summary>
         public string NameOfTeacher
         {
-            get { return _nameOfTeacher; }
-            set { _nameOfTeacher = value; }
+            get { return nameOfTeacher; }
+            set { nameOfTeacher = value; }
         }
         /// <summary>
-        /// Метод AssignMark, який призначає оцінку студенту на 
-        /// основі складності теми дипломного проекту. 
-        /// Оцінка розраховується як добуток складності теми та 
-        /// коефіцієнта 4. Якщо розрахована оцінка перевищує 100,
-        ///  то вона встановлюється на рівні 100. Цей метод 
-        /// використовується для визначення оцінки студента за 
-        /// його дипломний проект на основі складності вибраної теми.
+        /// Властивість DificultyOfTheme, яка дозволяє отримувати та встановлювати
+        /// складність теми дипломного проекту студента. 
         /// </summary>
         public int DificultyOfTheme
         {
-            get { return _dificultyOfTheme; }
-            set { _dificultyOfTheme = value; }
+            get { return dificultyOfTheme; }
+            set { dificultyOfTheme = value; }
         }
         /// <summary>
-        /// Метод AssignMark, який призначає оцінку студенту на
-        ///  основі складності теми дипломного проекту. Оцінка 
-        /// розраховується як добуток складності теми та коефіцієнта 
-        /// 4. Якщо розрахована оцінка перевищує 100, то вона 
-        /// встановлюється на рівні 100. Цей метод використовується 
-        /// для визначення оцінки студента за його дипломний 
-        /// проект на основі складності вибраної теми.
+        /// Властивість Mark, яка дозволяє отримувати та встановлювати 
+        /// оцінку за дипломний проект студента.
         /// </summary>
         public int Mark
         {
-            get { return _mark; }
-            set { _mark = value; }
+            get { return mark; }
+            set { mark = value; }
         }
 
     }
