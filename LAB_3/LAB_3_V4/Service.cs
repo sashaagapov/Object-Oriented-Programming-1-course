@@ -123,10 +123,55 @@ public class Service
     /// </summary>
     /// <param name="teacher">Об'єкт викладача.</param>
     /// <param name="fileName">Ім'я файлу для збереження.</param>
+
+    public Teacher ReadTeacherFromConsole()
+    {
+        Console.WriteLine("Введіть ім'я викладача:");
+        string name = Console.ReadLine() ?? "";
+
+        Console.WriteLine("Введіть назву предмета:");
+        string subject = Console.ReadLine() ?? "";
+
+        return new Teacher(name, subject, 0, 0);
+    }
     public void SaveTeacherToFile(Teacher teacher, string fileName)
     {
         string data = $"{teacher.TeacherName};{teacher.SubjectName};{teacher.SubjectHours};{teacher.QuantityOfStudents}\n";
         File.AppendAllText(fileName, data); // AppendAllText ДОДАЄ в кінець файлу, а не стирає!
         Console.WriteLine($"\nДані викладача збережено у файл: {fileName}");
+    }
+    /// <summary>
+    /// Метод ReadTeacherFromFile, який зчитує інформацію про викладача з файлу
+    /// та виводить її на консоль.
+    /// </summary>
+    /// <param name="fileName">Ім'я файлу для читання.</param>
+    public void ReadTeacherFromFile(string fileName)
+    {
+        if (File.Exists(fileName))
+        {
+            string[] lines = File.ReadAllLines(fileName);
+
+            Console.WriteLine("\n--- Дані викладача з файлу ---");
+            foreach (string line in lines)
+            {
+                if (!string.IsNullOrWhiteSpace(line))
+                {
+                    string[] parts = line.Split(';');
+                    // У викладача 4 поля: ім'я, предмет, години, кількість студентів
+                    if (parts.Length >= 4) 
+                    {
+                        Console.WriteLine($"Ім'я: {parts[0]}");
+                        Console.WriteLine($"Предмет: {parts[1]}");
+                        Console.WriteLine($"Годин: {parts[2]}");
+                        Console.WriteLine($"Студентів: {parts[3]}");
+                        Console.WriteLine("-------------------");
+                    }
+                }
+            }
+        }
+        else
+        {
+            Console.WriteLine("Файл з даними викладача не знайдено!");
+        }
     }
 }

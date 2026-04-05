@@ -28,7 +28,7 @@ public class Menu
             Console.WriteLine("\n==========================================");
             Console.WriteLine("          ГОЛОВНЕ МЕНЮ ПРОГРАМИ           ");
             Console.WriteLine("==========================================");
-            Console.WriteLine("1. Оновити навантаження викладача (Акт 1)");
+            Console.WriteLine("1. Ввести данні про викладача та оновити навантаження викладача (Акт 1)");
             Console.WriteLine("2. Ввести дані студента з консолі (Акт 2)");
             Console.WriteLine("3. Додати оцінки студенту (Акт 3)");
             Console.WriteLine("4. Вивести дані та зберегти у файл (Акт 4)");
@@ -43,10 +43,12 @@ public class Menu
             {
                 case "1":
                     Console.WriteLine("\n--- Акт 1: Викладач ---");
+                    _teacher = _service.ReadTeacherFromConsole();
                     _teacher.UpdateStudentCount(5);
                     Console.WriteLine($"Навантаження оновлено. Поточна кількість студентів: {_teacher.QuantityOfStudents}");
                     _service.PrintTeacherInfo(_teacher);
                     _service.SaveTeacherToFile(_teacher, "teacher_data.txt");
+                    _service.ReadTeacherFromFile("teacher_data.txt");
                     break;
 
                 case "2":
@@ -65,7 +67,7 @@ public class Menu
                     }
                     Console.WriteLine("\n--- Акт 3: Додавання оцінок ---");
                     Console.Write("Введіть оцінку (від 0 до 100): ");
-                    if (int.TryParse(Console.ReadLine(), out int grade))
+                    if (int.TryParse(Console.ReadLine(), out int grade) && grade >= 0 && grade <= 100)
                     {
                         _student.AddGrade(grade);
                         Console.WriteLine($"Оцінку {grade} успішно додано студенту {_student.StudentName}.");
