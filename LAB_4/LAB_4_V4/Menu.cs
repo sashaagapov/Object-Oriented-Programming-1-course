@@ -52,6 +52,8 @@ namespace lab4agapov
                         Console.WriteLine("\n--- Акт 1: Викладач ---");
                         _myTeacher.UpdateStudentCount(5);
                         Console.WriteLine($"Навантаження оновлено. Поточна кількість студентів: {_myTeacher.QuantityOfStudents}");
+                        _service.PrintTeacherInfo(_myTeacher);
+                        _service.SaveTeacherToFile(_myTeacher, "teacher_data.txt");
                         break;
 
                     case "2":

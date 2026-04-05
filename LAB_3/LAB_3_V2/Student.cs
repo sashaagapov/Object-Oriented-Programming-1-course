@@ -161,37 +161,27 @@ public partial class Student
             get { return nameOfTheme; }
             set { nameOfTheme = value; }
         }
-        /// <summary>
-        /// Властивість NumOfCompletedAlgorithms, яка дозволяє отримувати та
-        /// встановлювати кількість реалізованих алгоритмів у дипломному проекті студента.
-        /// </summary>
+        // ВИПРАВЛЕНО: XML-коментарі до властивостей у вкладеному класі DiplomaProject
+        // замінено на короткі та коректні (V2).
+        /// <summary>Кількість реалізованих алгоритмів у дипломному проекті.</summary>
         public int NumOfCompletedAlgorithms
         {
             get { return numOfCompletedAlgorithms; }
             set { numOfCompletedAlgorithms = value; }
         }
-        /// <summary>
-        /// Властивість NameOfTeacher, яка дозволяє отримувати та встановлювати 
-        /// ім'я викладача, який керує дипломним проектом студента.
-        /// </summary>
+        /// <summary>Ім'я наукового керівника дипломного проекту.</summary>
         public string NameOfTeacher
         {
             get { return nameOfTeacher; }
             set { nameOfTeacher = value; }
         }
-        /// <summary>
-        /// Властивість DificultyOfTheme, яка дозволяє отримувати та встановлювати
-        /// складність теми дипломного проекту студента. 
-        /// </summary>
+        /// <summary>Складність теми дипломного проекту.</summary>
         public int DificultyOfTheme
         {
             get { return dificultyOfTheme; }
             set { dificultyOfTheme = value; }
         }
-       /// <summary>
-       /// Властивість Mark, яка дозволяє отримувати та встановлювати 
-       /// оцінку за дипломний проект студента.
-       /// </summary>
+        /// <summary>Оцінка за дипломний проект.</summary>
         public int Mark
         {
             get { return mark; }

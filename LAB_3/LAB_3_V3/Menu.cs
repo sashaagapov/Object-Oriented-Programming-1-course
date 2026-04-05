@@ -45,6 +45,8 @@ public class Menu
                     Console.WriteLine("\n--- Акт 1: Викладач ---");
                     _teacher.UpdateStudentCount(5);
                     Console.WriteLine($"Навантаження оновлено. Поточна кількість студентів: {_teacher.QuantityOfStudents}");
+                    _service.PrintTeacherInfo(_teacher);
+                    _service.SaveTeacherToFile(_teacher, "teacher_data.txt");
                     break;
 
                 case "2":

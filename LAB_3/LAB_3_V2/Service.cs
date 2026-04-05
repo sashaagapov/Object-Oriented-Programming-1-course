@@ -93,6 +93,29 @@ public class Service
     }
 
     /// <summary>
+    /// Метод PrintTeacherInfo, який приймає об'єкт класу Teacher і виводить
+    /// інформацію про викладача на консоль: ім'я, предмет, години та кількість студентів.
+    /// </summary>
+    /// <param name="teacher">Об'єкт викладача.</param>
+    public void PrintTeacherInfo(Teacher teacher)
+    {
+        Console.WriteLine($"Ім'я викладача: {teacher.TeacherName}. Предмет: {teacher.SubjectName}. Годин: {teacher.SubjectHours}. Студентів: {teacher.QuantityOfStudents}");
+    }
+
+    /// <summary>
+    /// Метод SaveTeacherToFile, який зберігає інформацію про викладача у файл
+    /// у форматі: teacherName;subjectName;subjectHours;quantityOfStudents.
+    /// </summary>
+    /// <param name="teacher">Об'єкт викладача.</param>
+    /// <param name="fileName">Ім'я файлу для збереження.</param>
+    public void SaveTeacherToFile(Teacher teacher, string fileName)
+    {
+        string data = $"{teacher.TeacherName};{teacher.SubjectName};{teacher.SubjectHours};{teacher.QuantityOfStudents}\n";
+        File.AppendAllText(fileName, data); // AppendAllText ДОДАЄ в кінець файлу, а не стирає!
+        Console.WriteLine($"\nДані викладача збережено у файл: {fileName}");
+    }
+
+    /// <summary>
     /// Метод для вибору теми диплома. Реалізує логіку взаємодії з файлом та користувачем.
     /// </summary>
     /// <param name="student">Об'єкт студента, якому призначається тема.</param>

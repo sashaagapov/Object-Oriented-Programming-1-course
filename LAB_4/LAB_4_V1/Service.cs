@@ -96,6 +96,23 @@ public class Service
         }
     }
 
+    /// <summary>Виводить інформацію про викладача на консоль.</summary>
+    /// <param name="teacher">Об'єкт викладача.</param>
+    public void PrintTeacherInfo(Teacher teacher)
+    {
+        Console.WriteLine($"Викладач: {teacher.Name}, Предмет: {teacher.SubjectName}, Годин: {teacher.SubjectHours}, Студентів: {teacher.QuantityOfStudents}");
+    }
+
+    /// <summary>Зберігає дані викладача у текстовий файл.</summary>
+    /// <param name="teacher">Об'єкт викладача.</param>
+    /// <param name="fileName">Ім'я файлу для збереження.</param>
+    public void SaveTeacherToFile(Teacher teacher, string fileName)
+    {
+        string data = $"{teacher.Name};{teacher.SubjectName};{teacher.SubjectHours};{teacher.QuantityOfStudents}\n";
+        File.AppendAllText(fileName, data);
+        Console.WriteLine($"Дані викладача збережено у файл: {fileName}");
+    }
+
     /// <summary>
     /// Метод для вибору теми диплома. Реалізує логіку взаємодії з файлом та користувачем.
     /// </summary>

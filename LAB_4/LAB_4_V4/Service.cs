@@ -123,63 +123,29 @@ public class Service
     }
 
     /// <summary>
-    /// Метод для вибору теми диплома. Реалізує логіку взаємодії з файлом та користувачем.
+    /// Метод для вибору теми диплома. Делегує логіку вибору методу Student.SelectTheme (Версія 4).
     /// </summary>
     /// <param name="student">Об'єкт студента, якому призначається тема.</param>
     public void ChooseDiplomaTheme(Student student)
     {
-        string filePath = "themes.txt";
-        if (!File.Exists(filePath))
-        {
-            Console.WriteLine("Помилка: Файл 'themes.txt' не знайдено!");
-            return;
-        }
+        student.SelectTheme("themes.txt");
+    }
 
-        string[] allThemes = File.ReadAllLines(filePath);
-        bool themeSelected = false;
+    /// <summary>Виводить інформацію про викладача на консоль.</summary>
+    /// <param name="teacher">Об'єкт викладача.</param>
+    public void PrintTeacherInfo(Teacher teacher)
+    {
+        Console.WriteLine($"Викладач: {teacher.Name}, Предмет: {teacher.SubjectName}, Годин: {teacher.SubjectHours}, Студентів: {teacher.QuantityOfStudents}");
+    }
 
-        while (!themeSelected)
-        {
-            Console.WriteLine("\n--- Пошук теми дипломного проєкту ---");
-            Console.Write("Введіть ключове слово для пошуку теми (або '0' для відміни): ");
-            string keyword = Console.ReadLine()?.ToLower() ?? "";
-
-            if (keyword == "0")
-            {
-                return; // Вихід, якщо користувач передумав
-            }
-
-            var matched = new List<string>();
-            Console.WriteLine("\nЗнайдені варіанти:");
-            for (int i = 0; i < allThemes.Length; i++)
-            {
-                if (allThemes[i].ToLower().Contains(keyword))
-                {
-                    matched.Add(allThemes[i]);
-                    Console.WriteLine($"{matched.Count}. {allThemes[i]}");
-                }
-            }
-
-            // Замість continue використовуємо if-else
-            if (matched.Count == 0)
-            {
-                Console.WriteLine("За вашим запитом нічого не знайдено. Спробуйте інше слово.");
-            }
-            else
-            {
-                Console.Write("\nОберіть номер теми: ");
-                if (int.TryParse(Console.ReadLine(), out int choice) && choice > 0 && choice <= matched.Count)
-                {
-                    student.Diploma.NameOfTheme = matched[choice - 1];
-                    Console.WriteLine($"Тема '{student.Diploma.NameOfTheme}' успішно закріплена!");
-                    themeSelected = true; // Завершуємо цикл
-                }
-                else
-                {
-                    Console.WriteLine("Некоректний вибір номера. Спробуйте ще раз.");
-                }
-            }
-        }
+    /// <summary>Зберігає дані викладача у текстовий файл.</summary>
+    /// <param name="teacher">Об'єкт викладача.</param>
+    /// <param name="fileName">Ім'я файлу для збереження.</param>
+    public void SaveTeacherToFile(Teacher teacher, string fileName)
+    {
+        string data = $"{teacher.Name};{teacher.SubjectName};{teacher.SubjectHours};{teacher.QuantityOfStudents}\n";
+        File.AppendAllText(fileName, data);
+        Console.WriteLine($"Дані викладача збережено у файл: {fileName}");
     }
 
 }
