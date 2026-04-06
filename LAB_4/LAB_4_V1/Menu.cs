@@ -6,21 +6,21 @@ namespace lab4agapov
     /// </summary>
     public class Menu
     {
-        private readonly Service _service;
-        private readonly ScientificPaper _scientificPaper;
-        private Teacher _myTeacher;
-        private Student _myStudent;
-        private List<Student> _students;
-        private bool _isStudentCreated;
+        private readonly Service service;
+        private readonly ScientificPaper scientificPaper;
+        private Teacher myTeacher;
+        private Student myStudent;
+        private List<Student> students;
+        private bool isStudentCreated;
 
         public Menu(Service service, ScientificPaper scientificPaper, Teacher myTeacher, Student myStudent, List<Student> students)
         {
-            _service = service;
-            _scientificPaper = scientificPaper;
-            _myTeacher = myTeacher;
-            _myStudent = myStudent;
-            _students = students;
-            _isStudentCreated = false;
+            this.service = service;
+            this.scientificPaper = scientificPaper;
+            this.myTeacher = myTeacher;
+            this.myStudent = myStudent;
+            this.students = students;
+            isStudentCreated = false;
         }
 
         public void Run()
@@ -47,22 +47,22 @@ namespace lab4agapov
                 {
                     case "1":
                         Console.WriteLine("\n--- Акт 1: Викладач ---");
-                        _myTeacher.UpdateStudentCount(5);
-                        Console.WriteLine($"Навантаження оновлено. Поточна кількість студентів: {_myTeacher.QuantityOfStudents}");
-                        _service.PrintTeacherInfo(_myTeacher);
-                        _service.SaveTeacherToFile(_myTeacher, "teacher_data.txt");
+                        myTeacher.UpdateStudentCount(5);
+                        Console.WriteLine($"Навантаження оновлено. Поточна кількість студентів: {myTeacher.QuantityOfStudents}");
+                        service.PrintTeacherInfo(myTeacher);
+                        service.SaveTeacherToFile(myTeacher, "teacher_data.txt");
                         break;
 
                     case "2":
                         Console.WriteLine("\n--- Акт 2: Створення студента ---");
-                        _myStudent = _service.ReadStudentFromConsole();
-                        _students.Add(_myStudent);
-                        _isStudentCreated = true;
-                        Console.WriteLine($"Студента {_myStudent.Name} успішно додано до бази. Всього студентів у базі: {_students.Count}");
+                        myStudent = service.ReadStudentFromConsole();
+                        students.Add(myStudent);
+                        isStudentCreated = true;
+                        Console.WriteLine($"Студента {myStudent.Name} успішно додано до бази. Всього студентів у базі: {students.Count}");
                         break;
 
                     case "3":
-                        if (!_isStudentCreated)
+                        if (!isStudentCreated)
                         {
                             Console.WriteLine("Помилка: Спочатку створіть студента (пункт 2)!");
                             break;
@@ -71,8 +71,8 @@ namespace lab4agapov
                         Console.Write("Введіть оцінку (від 0 до 100): ");
                         if (int.TryParse(Console.ReadLine(), out int grade))
                         {
-                            _myStudent.AddGrade(grade);
-                            Console.WriteLine($"Оцінку {grade} успішно додано студенту {_myStudent.Name}.");
+                            myStudent.AddGrade(grade);
+                            Console.WriteLine($"Оцінку {grade} успішно додано студенту {myStudent.Name}.");
                         }
                         else
                         {
@@ -81,30 +81,30 @@ namespace lab4agapov
                         break;
 
                     case "4":
-                        if (!_isStudentCreated)
+                        if (!isStudentCreated)
                         {
                             Console.WriteLine("Помилка: Спочатку створіть студента (пункт 2)!");
                             break;
                         }
                         Console.WriteLine("\n--- Акт 4: Робота з даними (Service) ---");
-                        _service.PrintStudentInfo(_myStudent);
+                        service.PrintStudentInfo(myStudent);
                         string fileName = "student_data.txt";
-                        _service.SaveStudentToFile(_myStudent, fileName);
-                        _service.ReadStudentFromFile(fileName);
+                        service.SaveStudentToFile(myStudent, fileName);
+                        service.ReadStudentFromFile(fileName);
                         break;
 
                     case "5":
-                        if (!_isStudentCreated)
+                        if (!isStudentCreated)
                         {
                             Console.WriteLine("Помилка: Спочатку створіть студента (пункт 2)!");
                             break;
                         }
                         Console.WriteLine("\n--- Акт 5: Дипломний проєкт ---");
-                        _service.ChooseDiplomaTheme(_myStudent);
-                        _myStudent.Diploma.CalculateDifficulty();
-                        _myStudent.Diploma.AssignMark();
-                        Console.WriteLine($"\nРезультат: {_myStudent.Diploma.NameOfTheme}");
-                        Console.WriteLine($"Підсумкова оцінка за диплом: {_myStudent.Diploma.Mark} балів");
+                        service.ChooseDiplomaTheme(myStudent);
+                        myStudent.Diploma.CalculateDifficulty();
+                        myStudent.Diploma.AssignMark();
+                        Console.WriteLine($"\nРезультат: {myStudent.Diploma.NameOfTheme}");
+                        Console.WriteLine($"Підсумкова оцінка за диплом: {myStudent.Diploma.Mark} балів");
                         break;
 
                     case "6":
@@ -112,7 +112,7 @@ namespace lab4agapov
                         int[] references = { 12, 34, 56, 78, 90 };
                         int targetId = 56;
                         Console.WriteLine($"Пошук ID {targetId} у масиві...");
-                        int foundIndex = _scientificPaper.SearchReference(references, targetId);
+                        int foundIndex = scientificPaper.SearchReference(references, targetId);
                         if (foundIndex != -1)
                             Console.WriteLine($"ID знайдено. Позиція в списку: {foundIndex}");
                         else

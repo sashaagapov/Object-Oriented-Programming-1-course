@@ -111,64 +111,64 @@ public partial class Student : Person // Успадкування
     }
     public partial class DiplomaProject
     {
-        private string _nameOfTheme;
-        private int _numOfCompletedAlgorithms;
+        private string nameOfTheme;
+        private int numOfCompletedAlgorithms;
 
-        private int _dificultyOfTheme;
-        private int _mark;
-        private string _nameOfTeacher;
+        private int dificultyOfTheme;
+        private int mark;
+        private string nameOfTeacher;
         /// <summary>
-        /// Конструктор за замовчуванням для класу DiplomaProject, 
-        /// який ініціалізує всі поля класу значеннями за замовчуванням. 
-        /// Поля ініціалізуються порожніми рядками або нулями відповідно 
-        /// до їх типів даних. Цей конструктор використовується для 
+        /// Конструктор за замовчуванням для класу DiplomaProject,
+        /// який ініціалізує всі поля класу значеннями за замовчуванням.
+        /// Поля ініціалізуються порожніми рядками або нулями відповідно
+        /// до їх типів даних. Цей конструктор використовується для
         /// створення об'єкта DiplomaProject з початковими значеннями,
         ///  які можуть бути змінені пізніше за допомогою властивостей або методів класу.
         /// </summary>
         public DiplomaProject()
         {
-            _nameOfTheme = "";
-            _numOfCompletedAlgorithms = 0;
-            _dificultyOfTheme = 0;
-            _mark = 0;
-            _nameOfTeacher = "";
+            nameOfTheme = "";
+            numOfCompletedAlgorithms = 0;
+            dificultyOfTheme = 0;
+            mark = 0;
+            nameOfTeacher = "";
         }
         /// <summary>
         /// Властивості для доступу до полів класу DiplomaProject:
         ///  NameOfTheme, NumOfCompletedAlgorithms, NameOfTeacher,
-        ///  DificultyOfTheme та Mark. Вони дозволяють отримувати 
+        ///  DificultyOfTheme та Mark. Вони дозволяють отримувати
         /// та встановлювати значення відповідних полів.
         /// </summary>
         public string NameOfTheme
         {
-            get { return _nameOfTheme; }
-            set { _nameOfTheme = value; }
+            get { return nameOfTheme; }
+            set { nameOfTheme = value; }
         }
         // ВИПРАВЛЕНО: XML-коментарі до властивостей у вкладеному класі DiplomaProject
         // замінено на короткі та коректні (синхронізовано з LAB_3_V4).
         /// <summary>Кількість реалізованих алгоритмів у дипломному проекті.</summary>
         public int NumOfCompletedAlgorithms
         {
-            get { return _numOfCompletedAlgorithms; }
-            set { _numOfCompletedAlgorithms = value; }
+            get { return numOfCompletedAlgorithms; }
+            set { numOfCompletedAlgorithms = value; }
         }
         /// <summary>Ім'я наукового керівника дипломного проекту.</summary>
         public string NameOfTeacher
         {
-            get { return _nameOfTeacher; }
-            set { _nameOfTeacher = value; }
+            get { return nameOfTeacher; }
+            set { nameOfTeacher = value; }
         }
         /// <summary>Складність теми дипломного проекту.</summary>
         public int DificultyOfTheme
         {
-            get { return _dificultyOfTheme; }
-            set { _dificultyOfTheme = value; }
+            get { return dificultyOfTheme; }
+            set { dificultyOfTheme = value; }
         }
         /// <summary>Оцінка за дипломний проект.</summary>
         public int Mark
         {
-            get { return _mark; }
-            set { _mark = value; }
+            get { return mark; }
+            set { mark = value; }
         }
 
     }
