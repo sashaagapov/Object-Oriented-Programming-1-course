@@ -6,6 +6,7 @@ namespace lab4agapov;
 /// </summary>
 public class Service
 {
+    /// <summary>Виводить привітальне повідомлення з інформацією про автора та номер лабораторної роботи.</summary>
     public void WelcomeInfo()
     {
         Console.WriteLine("-------------------------------------------------------------------");
@@ -82,7 +83,6 @@ public class Service
             Console.WriteLine("\n--- Дані з файлу ---");
             foreach (string line in lines)
             {
-                // Працюємо з рядком ТІЛЬКИ якщо він не порожній (без continue)
                 if (!string.IsNullOrWhiteSpace(line))
                 {
                     string[] parts = line.Split(';');
@@ -102,6 +102,12 @@ public class Service
         }
     }
 
+    /// <summary>
+    /// Зчитує студентів з файлу та додає їх до групи StudentGroup.
+    /// Кожен рядок файлу містить: ім'я;предмет;рейтинг.
+    /// </summary>
+    /// <param name="group">Група, до якої додаються студенти.</param>
+    /// <param name="fileName">Ім'я файлу для читання.</param>
     public void LoadStudentFromFile(StudentGroup group, string fileName)
     {
         if (File.Exists(fileName))

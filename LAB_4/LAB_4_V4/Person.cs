@@ -1,37 +1,45 @@
 namespace lab4agapov;
 
+/// <summary>
+/// Базовий клас Person — зберігає загальні дані для учасників освітнього процесу: ім'я та назву предмету.
+/// Конструктори protected — клас призначений тільки для успадкування.
+/// </summary>
 public class Person
 {
     protected string name;
     protected string subjectName;
 
-    // Конструктор за замовчуванням
+    /// <summary>Конструктор за замовчуванням — ініціалізує поля порожніми рядками.</summary>
     protected Person()
     {
         name = string.Empty;
         subjectName = string.Empty;
     }
 
-    // Конструктор з параметрами
+    /// <summary>Конструктор з параметрами для ініціалізації імені та предмету.</summary>
+    /// <param name="name">Ім'я особи.</param>
+    /// <param name="subjectName">Назва дисципліни.</param>
     protected Person(string name, string subjectName)
     {
         this.name = name;
         this.subjectName = subjectName;
     }
 
-    // Властивості для доступу
+    /// <summary>Ім'я особи.</summary>
     public string Name
     {
         get { return name; }
         set { name = value; }
     }
 
+    /// <summary>Назва дисципліни.</summary>
     public string SubjectName
     {
         get { return subjectName; }
         set { subjectName = value; }
     }
-    // Реалізація методу з інтерфейсу
+
+    /// <summary>Виводить базову інформацію про особу. Virtual — дозволяє перевизначення у спадкоємцях.</summary>
     public virtual void DisplayInfo()
     {
         Console.WriteLine($"Особа: {Name}, Предмет: {SubjectName}");

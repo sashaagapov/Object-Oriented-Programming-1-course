@@ -13,6 +13,7 @@ namespace lab4agapov
         private Student myStudent;
         private bool isStudentCreated;
 
+        /// <summary>Ініціалізує меню з посиланнями на сервіс, наукову статтю, групу студентів та об'єкти даних.</summary>
         public Menu(Service service, ScientificPaper scientificPaper, StudentGroup group, Teacher myTeacher, Student myStudent)
         {
             this.service = service;
@@ -23,6 +24,7 @@ namespace lab4agapov
             isStudentCreated = false;
         }
 
+        /// <summary>Запускає головний цикл меню програми та обробляє вибір користувача.</summary>
         public void Run()
         {
             bool isRunning = true;

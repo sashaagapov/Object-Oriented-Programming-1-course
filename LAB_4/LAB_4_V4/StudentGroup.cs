@@ -1,52 +1,35 @@
 using System.Collections;
 namespace lab4agapov;
 
-public class StudentGroup : IEnumerable, IEnumerator
+/// <summary>
+/// Клас StudentGroup представляє групу студентів та реалізує інтерфейс IEnumerable
+/// для підтримки перебору елементів через foreach. Надає методи для додавання студентів
+/// та їх сортування за різними критеріями.
+/// </summary>
+public class StudentGroup : IEnumerable
 {
     private List<Student> students = new List<Student>();
-    private int position = -1;
 
+    /// <summary>Додає студента до групи.</summary>
+    /// <param name="student">Об'єкт студента для додавання.</param>
     public void AddStudent(Student student)
     {
         students.Add(student);
     }
 
-    public bool MoveNext()
-    {
-        position++;
-        if (students.Count > position)
-        {
-            return true;
-        }
-        else
-        {
-            return false;
-        }
-    }
-    public void Reset()
-    {
-        position = -1;
-    }
-
-    public object Current
-    {
-        get
-        {
-            return students[position];
-        }
-    }
-
+    /// <summary>Повертає перелічувач для перебору студентів групи через foreach.</summary>
     public IEnumerator GetEnumerator()
     {
-
-        Reset();
-        return this;
+        return new StudentGroupEnumerator(students);
     }
+
+    /// <summary>Сортує студентів за рейтингом (використовує IComparable&lt;Student&gt;).</summary>
     public void SortStudents()
     {
-        students.Sort(); 
+        students.Sort();
     }
 
+    /// <summary>Сортує студентів за кількістю виконаних завдань.</summary>
     public void SortByTasks()
     {
         StudentTasksComparer studentComparer = new StudentTasksComparer();

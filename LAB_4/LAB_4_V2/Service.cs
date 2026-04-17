@@ -9,6 +9,7 @@ namespace lab4agapov;
 /// </summary>
 public class Service
 {
+    /// <summary>Виводить привітальне повідомлення з інформацією про автора та номер лабораторної роботи.</summary>
     public void WelcomeInfo()
     {
         Console.WriteLine("-------------------------------------------------------------------");
@@ -76,7 +77,6 @@ public class Service
             Console.WriteLine("\n--- Дані з файлу ---");
             foreach (string line in lines)
             {
-                // Працюємо з рядком ТІЛЬКИ якщо він не порожній (без continue)
                 if (!string.IsNullOrWhiteSpace(line))
                 {
                     string[] parts = line.Split(';');
@@ -151,7 +151,6 @@ public class Service
                 }
             }
 
-            // Замість continue використовуємо if-else
             if (matched.Count == 0)
             {
                 Console.WriteLine("За вашим запитом нічого не знайдено. Спробуйте інше слово.");

@@ -13,6 +13,7 @@ namespace lab4agapov
         private List<Student> students;
         private bool isStudentCreated;
 
+        /// <summary>Ініціалізує меню з посиланнями на сервіс, наукову статтю та об'єкти даних.</summary>
         public Menu(Service service, ScientificPaper scientificPaper, Teacher myTeacher, Student myStudent, List<Student> students)
         {
             this.service = service;
@@ -23,6 +24,7 @@ namespace lab4agapov
             isStudentCreated = false;
         }
 
+        /// <summary>Запускає головний цикл меню програми та обробляє вибір користувача.</summary>
         public void Run()
         {
             bool isRunning = true;
@@ -47,10 +49,12 @@ namespace lab4agapov
                 {
                     case "1":
                         Console.WriteLine("\n--- Акт 1: Викладач ---");
+                        myTeacher = service.ReadTeacherFromConsole();
                         myTeacher.UpdateStudentCount(5);
                         Console.WriteLine($"Навантаження оновлено. Поточна кількість студентів: {myTeacher.QuantityOfStudents}");
                         service.PrintTeacherInfo(myTeacher);
                         service.SaveTeacherToFile(myTeacher, "teacher_data.txt");
+                        service.ReadTeacherFromFile("teacher_data.txt");
                         break;
 
                     case "2":

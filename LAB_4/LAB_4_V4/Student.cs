@@ -107,6 +107,20 @@ public partial class Student : Person, IComparable<Student>
         }
         return rating / tasksDone;
     }
+    /// <summary>
+    /// Порівнює поточного студента з іншим за рейтингом.
+    /// Реалізує IComparable&lt;Student&gt; для сортування методом Sort().
+    /// </summary>
+    /// <param name="other">Студент для порівняння.</param>
+    /// <returns>Від'ємне число, 0 або додатне — відповідно менший, рівний або більший рейтинг.</returns>
+    public int CompareTo(Student? other)
+    {
+        if (other == null)
+        {
+            return 1;
+        }
+        return this.CalculateRating().CompareTo(other.CalculateRating());
+    }
     public partial class DiplomaProject
     {
         private string nameOfTheme;
@@ -142,8 +156,6 @@ public partial class Student : Person, IComparable<Student>
             get { return nameOfTheme; }
             set { nameOfTheme = value; }
         }
-        // ВИПРАВЛЕНО: XML-коментарі до властивостей у вкладеному класі DiplomaProject
-        // замінено на короткі та коректні (синхронізовано з LAB_3_V4).
         /// <summary>Кількість реалізованих алгоритмів у дипломному проекті.</summary>
         public int NumOfCompletedAlgorithms
         {
@@ -171,11 +183,7 @@ public partial class Student : Person, IComparable<Student>
 
     }
 
-    public int CompareTo(Student? other)
-    {
-        if (other == null) return 1;
-        return this.CalculateRating().CompareTo(other.CalculateRating());
-    }
+    
 
 
 }

@@ -83,10 +83,13 @@ public class Teacher : Person // Успадкування
         }
 
     }
-    // Перевизначення методу для демонстрації поліморфізму
+    /// <summary>
+    /// Перевизначає базовий метод DisplayInfo — виводить загальну інформацію про особу,
+    /// а також специфічні дані викладача: кількість студентів та годин.
+    /// </summary>
     public override void DisplayInfo()
     {
-        base.DisplayInfo(); // Викликаємо базовий метод
+        base.DisplayInfo();
         Console.WriteLine($"[Викладач] Кількість студентів: {QuantityOfStudents}, Годин: {SubjectHours}");
     }
 }

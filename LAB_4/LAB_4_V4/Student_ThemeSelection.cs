@@ -1,9 +1,4 @@
-using System;
-using System.IO;
-using System.Collections.Generic;
 
-// Namespace змінено з lab3agapov на lab4agapov (відповідає V4).
-// Логіку вибору теми перенесено у метод Student відповідно до V3→V4.
 namespace lab4agapov;
 
 public partial class Student
@@ -47,7 +42,6 @@ public partial class Student
                 }
             }
 
-            // Замість continue використовуємо if-else
             if (matched.Count == 0)
             {
                 Console.WriteLine("За вашим запитом нічого не знайдено. Спробуйте інше слово.");
