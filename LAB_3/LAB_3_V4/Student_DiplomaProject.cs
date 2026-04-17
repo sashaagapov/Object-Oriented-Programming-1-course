@@ -23,7 +23,7 @@ public partial class Student
             {
                 Console.WriteLine("Помилка.Введіть число.");
             }
-            numOfCompletedAlgorithms = numOfCompletedAlgorithms;
+            this.numOfCompletedAlgorithms = numOfCompletedAlgorithms; // FIX: було self-assignment, тепер присвоюємо локальну змінну полю класу
             for (int i = 0; i < numOfCompletedAlgorithms; i++)// Для кожного реалізованого алгоритму запитуємо його складність та додаємо її до загальної складності теми
             {
                 Console.WriteLine($"Введіть складність алгоритму {i + 1}(від 1 до 10): ");

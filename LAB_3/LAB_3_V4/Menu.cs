@@ -3,6 +3,10 @@ using System.Collections.Generic;
 
 namespace lab3agapov;
 
+/// <summary>
+/// Клас Menu відповідає виключно за відображення меню та обробку вибору користувача.
+/// Відповідає принципу SRP: одна відповідальність — управління навігацією в меню.
+/// </summary>
 public class Menu
 {
     private Service service;
@@ -11,6 +15,11 @@ public class Menu
     private List<Student> students;
     private bool isStudentCreated;
 
+    /// <summary>Ініціалізує меню з посиланнями на сервіс та об'єкти даних.</summary>
+    /// <param name="service">Сервісний клас для вводу/виводу та роботи з файлами.</param>
+    /// <param name="teacher">Об'єкт викладача.</param>
+    /// <param name="student">Поточний об'єкт студента.</param>
+    /// <param name="students">Список усіх студентів.</param>
     public Menu(Service service, Teacher teacher, Student student, List<Student> students)
     {
         this.service = service;
@@ -20,6 +29,7 @@ public class Menu
         isStudentCreated = false;
     }
 
+    /// <summary>Запускає головний цикл меню програми та обробляє вибір користувача.</summary>
     public void Run()
     {
         bool isRunning = true;

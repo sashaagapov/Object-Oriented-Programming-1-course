@@ -9,6 +9,7 @@ namespace lab4agapov;
 /// </summary>
 public class Service
 {
+    /// <summary>Виводить привітальне повідомлення з інформацією про автора та номер лабораторної роботи.</summary>
     public void WelcomeInfo()
     {
         Console.WriteLine("-------------------------------------------------------------------");
@@ -76,7 +77,6 @@ public class Service
             Console.WriteLine("\n--- Дані з файлу ---");
             foreach (string line in lines)
             {
-                // Працюємо з рядком ТІЛЬКИ якщо він не порожній (без continue)
                 if (!string.IsNullOrWhiteSpace(line))
                 {
                     string[] parts = line.Split(';');
@@ -103,6 +103,21 @@ public class Service
         Console.WriteLine($"Викладач: {teacher.Name}, Предмет: {teacher.SubjectName}, Годин: {teacher.SubjectHours}, Студентів: {teacher.QuantityOfStudents}");
     }
 
+    /// <summary>
+    /// Зчитує дані викладача з консолі та повертає новий об'єкт Teacher.
+    /// </summary>
+    /// <returns>Об'єкт Teacher з введеними даними.</returns>
+    public Teacher ReadTeacherFromConsole()
+    {
+        Console.WriteLine("Введіть ім'я викладача:");
+        string name = Console.ReadLine() ?? "";
+
+        Console.WriteLine("Введіть назву предмета:");
+        string subject = Console.ReadLine() ?? "";
+
+        return new Teacher(name, subject, 0, 0);
+    }
+
     /// <summary>Зберігає дані викладача у текстовий файл.</summary>
     /// <param name="teacher">Об'єкт викладача.</param>
     /// <param name="fileName">Ім'я файлу для збереження.</param>
@@ -111,6 +126,39 @@ public class Service
         string data = $"{teacher.Name};{teacher.SubjectName};{teacher.SubjectHours};{teacher.QuantityOfStudents}\n";
         File.AppendAllText(fileName, data);
         Console.WriteLine($"Дані викладача збережено у файл: {fileName}");
+    }
+
+    /// <summary>
+    /// Зчитує інформацію про викладача з файлу та виводить її на консоль.
+    /// </summary>
+    /// <param name="fileName">Ім'я файлу для читання.</param>
+    public void ReadTeacherFromFile(string fileName)
+    {
+        if (File.Exists(fileName))
+        {
+            string[] lines = File.ReadAllLines(fileName);
+            Console.WriteLine("\n--- Дані викладача з файлу ---");
+            foreach (string line in lines)
+            {
+                if (!string.IsNullOrWhiteSpace(line))
+                {
+                    string[] parts = line.Split(';');
+                    // У викладача 4 поля: ім'я, предмет, години, кількість студентів
+                    if (parts.Length >= 4)
+                    {
+                        Console.WriteLine($"Ім'я: {parts[0]}");
+                        Console.WriteLine($"Предмет: {parts[1]}");
+                        Console.WriteLine($"Годин: {parts[2]}");
+                        Console.WriteLine($"Студентів: {parts[3]}");
+                        Console.WriteLine("-------------------");
+                    }
+                }
+            }
+        }
+        else
+        {
+            Console.WriteLine("Файл з даними викладача не знайдено!");
+        }
     }
 
     /// <summary>
@@ -151,7 +199,6 @@ public class Service
                 }
             }
 
-            // Замість continue використовуємо if-else
             if (matched.Count == 0)
             {
                 Console.WriteLine("За вашим запитом нічого не знайдено. Спробуйте інше слово.");

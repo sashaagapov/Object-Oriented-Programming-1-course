@@ -9,6 +9,7 @@ namespace lab3agapov_v1;
 /// </summary>
 public class Service
 {
+    /// <summary>Виводить привітальне повідомлення з інформацією про автора та номер лабораторної роботи.</summary>
     public void WelcomeInfo()
     {
         Console.WriteLine("-------------------------------------------------------------------");
@@ -105,6 +106,10 @@ public class Service
         Console.WriteLine($"Ім'я викладача: {teacher.TeacherName}. Предмет: {teacher.SubjectName}. Годин: {teacher.SubjectHours}. Студентів: {teacher.QuantityOfStudents}");
     }
 
+    /// <summary>
+    /// Зчитує дані викладача з консолі та повертає новий об'єкт Teacher.
+    /// </summary>
+    /// <returns>Об'єкт Teacher з введеними даними.</returns>
     public Teacher ReadTeacherFromConsole()
     {
         Console.WriteLine("Введіть ім'я викладача:");

@@ -118,12 +118,9 @@ public class Service
     }
 
     /// <summary>
-    /// Метод SaveTeacherToFile, який зберігає інформацію про викладача у файл
-    /// у форматі: teacherName;subjectName;subjectHours;quantityOfStudents.
+    /// Зчитує дані викладача з консолі та повертає новий об'єкт Teacher.
     /// </summary>
-    /// <param name="teacher">Об'єкт викладача.</param>
-    /// <param name="fileName">Ім'я файлу для збереження.</param>
-
+    /// <returns>Об'єкт Teacher з введеними даними.</returns>
     public Teacher ReadTeacherFromConsole()
     {
         Console.WriteLine("Введіть ім'я викладача:");
@@ -134,6 +131,12 @@ public class Service
 
         return new Teacher(name, subject, 0, 0);
     }
+    /// <summary>
+    /// Зберігає інформацію про викладача у файл
+    /// у форматі: teacherName;subjectName;subjectHours;quantityOfStudents.
+    /// </summary>
+    /// <param name="teacher">Об'єкт викладача.</param>
+    /// <param name="fileName">Ім'я файлу для збереження.</param>
     public void SaveTeacherToFile(Teacher teacher, string fileName)
     {
         string data = $"{teacher.TeacherName};{teacher.SubjectName};{teacher.SubjectHours};{teacher.QuantityOfStudents}\n";
