@@ -132,9 +132,9 @@ public class Service
     /// Метод для вибору теми диплома. Делегує логіку вибору методу Student.SelectTheme (Версія 4).
     /// </summary>
     /// <param name="student">Об'єкт студента, якому призначається тема.</param>
-    public void ChooseDiplomaTheme(Student student)
+    public bool ChooseDiplomaTheme(Student student)
     {
-        student.SelectTheme("themes.txt");
+        return student.SelectTheme("themes.txt");
     }
 
     /// <summary>Виводить інформацію про викладача на консоль.</summary>
