@@ -117,13 +117,13 @@ public class Service
     /// Метод для вибору теми диплома. Реалізує логіку взаємодії з файлом та користувачем.
     /// </summary>
     /// <param name="student">Об'єкт студента, якому призначається тема.</param>
-    public void ChooseDiplomaTheme(Student student)
+    public bool ChooseDiplomaTheme(Student student)
     {
         string filePath = "themes.txt";
         if (!File.Exists(filePath))
         {
             Console.WriteLine("Помилка: Файл 'themes.txt' не знайдено!");
-            return;
+            return false;
         }
 
         string[] allThemes = File.ReadAllLines(filePath);
@@ -137,7 +137,7 @@ public class Service
 
             if (keyword == "0")
             {
-                return; // Вихід, якщо користувач передумав
+                return false;
             }
 
             var matched = new List<string>();
@@ -162,7 +162,7 @@ public class Service
                 {
                     student.Diploma.NameOfTheme = matched[choice - 1];
                     Console.WriteLine($"Тема '{student.Diploma.NameOfTheme}' успішно закріплена!");
-                    themeSelected = true; // Завершуємо цикл
+                    themeSelected = true;
                 }
                 else
                 {
@@ -170,5 +170,6 @@ public class Service
                 }
             }
         }
+        return true;
     }
 }

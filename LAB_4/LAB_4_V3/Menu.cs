@@ -102,11 +102,14 @@ namespace lab4agapov
                             break;
                         }
                         Console.WriteLine("\n--- Акт 5: Дипломний проєкт ---");
-                        service.ChooseDiplomaTheme(myStudent);
-                        myStudent.Diploma.CalculateDifficulty();
-                        myStudent.Diploma.AssignMark();
-                        Console.WriteLine($"\nРезультат: {myStudent.Diploma.NameOfTheme}");
-                        Console.WriteLine($"Підсумкова оцінка за диплом: {myStudent.Diploma.Mark} балів");
+                        bool themeWasSelected = service.ChooseDiplomaTheme(myStudent);
+                        if (themeWasSelected)
+                        {
+                            myStudent.Diploma.CalculateDifficulty();
+                            myStudent.Diploma.AssignMark();
+                            Console.WriteLine($"\nРезультат: {myStudent.Diploma.NameOfTheme}");
+                            Console.WriteLine($"Підсумкова оцінка за диплом: {myStudent.Diploma.Mark} балів");
+                        }
                         break;
 
                     case "6":
