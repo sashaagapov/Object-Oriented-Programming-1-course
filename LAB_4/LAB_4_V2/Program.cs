@@ -25,14 +25,13 @@ namespace lab4agapov
             Console.Clear();
             // Person testPerson = new Person(); // Помилка компіляції: неможливо створити екземпляр абстрактного класу Person
             Service service = new Service();
-            ScientificPaper scientificPaper = new ScientificPaper();
             service.WelcomeInfo();
 
             Teacher myTeacher = new Teacher();
             Student myStudent = new Student();
             List<Student> students = new List<Student>();
 
-            Menu menu = new Menu(service, scientificPaper, myTeacher, myStudent, students);
+            Menu menu = new Menu(service, myTeacher, myStudent, students);
             menu.Run();
         }
     }

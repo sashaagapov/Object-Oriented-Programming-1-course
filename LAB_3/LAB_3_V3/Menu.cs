@@ -34,11 +34,12 @@ public class Menu
             Console.WriteLine("\n==========================================");
             Console.WriteLine("          ГОЛОВНЕ МЕНЮ ПРОГРАМИ           ");
             Console.WriteLine("==========================================");
-            Console.WriteLine("1. Ввести данні про викладача та оновити навантаження викладача (Акт 1)");
-            Console.WriteLine("2. Ввести дані студента з консолі (Акт 2)");
-            Console.WriteLine("3. Додати оцінки студенту (Акт 3)");
-            Console.WriteLine("4. Вивести дані та зберегти у файл (Акт 4)");
-            Console.WriteLine("5. Робота з дипломним проєктом (Акт 5)");
+            Console.WriteLine("1. Створити викладача (Акт 1)");
+            Console.WriteLine("2. Оновити навантаження викладача (Акт 1)");
+            Console.WriteLine("3. Ввести дані студента з консолі (Акт 2)");
+            Console.WriteLine("4. Додати оцінки студенту (Акт 3)");
+            Console.WriteLine("5. Вивести дані та зберегти у файл (Акт 4)");
+            Console.WriteLine("6. Робота з дипломним проєктом (Акт 5)");
             Console.WriteLine("0. Вихід");
             Console.WriteLine("------------------------------------------");
             Console.Write("Ваш вибір: ");
@@ -48,8 +49,21 @@ public class Menu
             switch (choice)
             {
                 case "1":
-                    Console.WriteLine("\n--- Акт 1: Викладач ---");
+                    Console.WriteLine("\n--- Акт 1: Створення викладача ---");
                     teacher = service.ReadTeacherFromConsole();
+                    service.PrintTeacherInfo(teacher);
+                    service.SaveTeacherToFile(teacher, "teacher_data.txt");
+                    service.ReadTeacherFromFile("teacher_data.txt");
+                    break;
+
+                case "2":
+                    // ! Перевірка наявності викладача перед оновленням навантаження
+                    if (teacher == null || string.IsNullOrEmpty(teacher.TeacherName))
+                    {
+                        Console.WriteLine("Помилка: Спочатку створіть викладача");
+                        break;
+                    }
+                    Console.WriteLine("\n--- Акт 1: Оновлення навантаження викладача ---");
                     teacher.UpdateStudentCount(5);
                     Console.WriteLine($"Навантаження оновлено. Поточна кількість студентів: {teacher.QuantityOfStudents}");
                     service.PrintTeacherInfo(teacher);
@@ -57,7 +71,7 @@ public class Menu
                     service.ReadTeacherFromFile("teacher_data.txt");
                     break;
 
-                case "2":
+                case "3":
                     Console.WriteLine("\n--- Акт 2: Створення студента ---");
                     student = service.ReadStudentFromConsole();
                     students.Add(student);
@@ -65,10 +79,10 @@ public class Menu
                     Console.WriteLine($"Студента {student.StudentName} успішно додано до бази. Всього студентів у базі: {students.Count}");
                     break;
 
-                case "3":
+                case "4":
                     if (!isStudentCreated)
                     {
-                        Console.WriteLine("Помилка: Спочатку створіть студента (пункт 2)!");
+                        Console.WriteLine("Помилка: Спочатку створіть студента (пункт 3)!");
                         break;
                     }
                     Console.WriteLine("\n--- Акт 3: Додавання оцінок ---");
@@ -84,10 +98,10 @@ public class Menu
                     }
                     break;
 
-                case "4":
+                case "5":
                     if (!isStudentCreated)
                     {
-                        Console.WriteLine("Помилка: Спочатку створіть студента (пункт 2)!");
+                        Console.WriteLine("Помилка: Спочатку створіть студента (пункт 3)!");
                         break;
                     }
                     Console.WriteLine("\n--- Акт 4: Робота з даними (Service) ---");
@@ -97,15 +111,14 @@ public class Menu
                     service.ReadStudentFromFile(fileName);
                     break;
 
-                case "5":
+                case "6":
                     if (!isStudentCreated)
                     {
-                        Console.WriteLine("Помилка: Спочатку створіть студента (пункт 2)!");
+                        Console.WriteLine("Помилка: Спочатку створіть студента (пункт 3)!");
                         break;
                     }
                     Console.WriteLine("\n--- Акт 5: Дипломний проєкт ---");
-                    // ! Баг №1 та Баг №2 виправлено: прибрано service.ChooseDiplomaTheme,
-                    // ! замінено на виклик методу часткового класу student.SelectTheme
+                    // ! Вибір теми делеговано частковому класу студента
                     bool themeWasSelected = student.SelectTheme("themes.txt");
                     if (themeWasSelected)
                     {

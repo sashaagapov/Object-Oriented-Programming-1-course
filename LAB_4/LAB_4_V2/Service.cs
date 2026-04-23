@@ -172,4 +172,18 @@ public class Service
         }
         return true;
     }
+
+    /// <summary>
+    /// Зчитує дані викладача з консолі та повертає новий об'єкт Teacher.
+    /// </summary>
+    public Teacher ReadTeacherFromConsole()
+    {
+        Console.WriteLine("Введіть ім'я викладача:");
+        string name = Console.ReadLine() ?? "";
+
+        Console.WriteLine("Введіть назву предмета:");
+        string subject = Console.ReadLine() ?? "";
+
+        return new Teacher(name, subject, 0, 0);
+    }
 }

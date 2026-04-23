@@ -118,7 +118,16 @@ public class Service
                 if (!(string.IsNullOrWhiteSpace(line)))
                 {
                     string[] parts = line.Split(';');
-                    int rating = int.Parse(parts[2]);
+                    if (parts.Length < 3)
+                    {
+                        continue;
+                    }
+
+                    if (!int.TryParse(parts[2], out int rating))
+                    {
+                        continue;
+                    }
+
                     List<int> grades = new List<int>();
                     grades.Add(rating);
                     Student student = new Student(parts[0], parts[1], grades, 1);
@@ -154,4 +163,17 @@ public class Service
         Console.WriteLine($"Дані викладача збережено у файл: {fileName}");
     }
 
+    /// <summary>
+    /// Зчитує дані викладача з консолі та повертає новий об'єкт Teacher.
+    /// </summary>
+    public Teacher ReadTeacherFromConsole()
+    {
+        Console.WriteLine("Введіть ім'я викладача:");
+        string name = Console.ReadLine() ?? "";
+
+        Console.WriteLine("Введіть назву предмета:");
+        string subject = Console.ReadLine() ?? "";
+
+        return new Teacher(name, subject, 0, 0);
+    }
 }

@@ -29,14 +29,13 @@ namespace lab4agapov
         {
             Console.Clear();
             Service service = new Service();
-            ScientificPaper scientificPaper = new ScientificPaper();
             service.WelcomeInfo();
 
             Teacher myTeacher = new Teacher();
             Student myStudent = new Student();
             List<Student> students = new List<Student>();
 
-            Menu menu = new Menu(service, scientificPaper, myTeacher, myStudent, students);
+            Menu menu = new Menu(service, myTeacher, myStudent, students);
             menu.Run();
         }
     }

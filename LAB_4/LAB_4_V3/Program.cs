@@ -27,7 +27,6 @@ namespace lab4agapov
         {
             Console.Clear();
             Service service = new Service();
-            ScientificPaper scientificPaper = new ScientificPaper();
             service.WelcomeInfo();
 
             // --- Демонстрація поліморфізму через інтерфейс IPerson (Вимога Версії 3) ---
@@ -43,7 +42,7 @@ namespace lab4agapov
             Student myStudent = new Student();
             List<Student> students = new List<Student>();
 
-            Menu menu = new Menu(service, scientificPaper, myTeacher, myStudent, students);
+            Menu menu = new Menu(service, myTeacher, myStudent, students);
             menu.Run();
         }
     }

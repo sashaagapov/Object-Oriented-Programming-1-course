@@ -88,6 +88,8 @@ public partial class Student : Person, IComparable<Student>
         grades.Add(grade);
         tasksDone++;
     }
+    public void UpdateSubject(string newSubject) { this.SubjectName = newSubject; }
+
     /// <summary>
     /// Метод CalculateRating, який обчислює та повертає рейтинг 
     /// студента на основі його оцінок та кількості виконаних завдань. Рейтинг розраховується як середнє значення оцінок, якщо студент має хоча б одну оцінку та виконав хоча б одне завдання. Якщо студент не має оцінок або не виконав жодного завдання, то рейтинг повертається як 0. Цей метод використовується для визначення поточного рейтингу студента на основі його успішності у навчанні.
@@ -109,7 +111,7 @@ public partial class Student : Person, IComparable<Student>
     }
     /// <summary>
     /// Порівнює поточного студента з іншим за рейтингом.
-    /// Реалізує IComparable&lt;Student&gt; для сортування методом Sort().
+    /// Реалізує IComparable<Student> для сортування методом Sort().
     /// </summary>
     /// <param name="other">Студент для порівняння.</param>
     /// <returns>Від'ємне число, 0 або додатне — відповідно менший, рівний або більший рейтинг.</returns>
@@ -119,8 +121,10 @@ public partial class Student : Person, IComparable<Student>
         {
             return 1;
         }
-        return this.CalculateRating().CompareTo(other.CalculateRating());
+        return other.CalculateRating().CompareTo(this.CalculateRating()); // !
     }
+    public override void DisplayInfo() { base.DisplayInfo(); Console.WriteLine($"   -> Статус: Студент, Рейтинг: {CalculateRating():F2}, Виконано завдань: {TasksDone}"); }
+
     public partial class DiplomaProject
     {
         private string nameOfTheme;
@@ -182,8 +186,6 @@ public partial class Student : Person, IComparable<Student>
         }
 
     }
-
-    
 
 
 }

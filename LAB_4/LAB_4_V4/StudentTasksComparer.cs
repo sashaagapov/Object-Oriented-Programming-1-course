@@ -9,6 +9,6 @@ public class StudentTasksComparer : IComparer<Student>
     /// <summary>Порівнює двох студентів за кількістю виконаних завдань.</summary>
     public int Compare(Student x, Student y)
     {
-       return x.TasksDone.CompareTo(y.TasksDone);
+       return y.TasksDone.CompareTo(x.TasksDone); // !
     }
 }

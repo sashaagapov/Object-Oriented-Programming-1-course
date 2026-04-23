@@ -81,5 +81,6 @@ public class Teacher : Person // Успадкування
         }
 
     }
+    public override void DisplayInfo() { base.DisplayInfo(); Console.WriteLine($"   -> Статус: Викладач, Студентів: {QuantityOfStudents}, Навантаження: {SubjectHours} год."); }
 
 }
