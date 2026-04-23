@@ -58,12 +58,14 @@ public class Student
         set { tasksDone = value; }
     }
 
+    /// <summary>Додає оцінку та збільшує лічильник виконаних завдань.</summary>
     public void AddGrade(int grade)
     {
         grades.Add(grade);
         tasksDone++;
     }
 
+    /// <summary>Середнє арифметичне оцінок. Якщо оцінок немає — повертає 0.</summary>
     public double CalculateRating()
     {
         if (grades.Count == 0 || tasksDone == 0)

@@ -109,11 +109,16 @@ public class Menu
                         break;
                     }
                     Console.WriteLine("\n--- Акт 5: Дипломний проєкт ---");
-                    service.ChooseDiplomaTheme(student);
-                    student.Diploma.CalculateDifficulty();
-                    student.Diploma.AssignMark();
-                    Console.WriteLine($"\nРезультат: {student.Diploma.NameOfTheme}");
-                    Console.WriteLine($"Підсумкова оцінка за диплом: {student.Diploma.Mark} балів");
+                    // ! Баг №1 та Баг №2 виправлено: прибрано service.ChooseDiplomaTheme,
+                    // ! замінено на виклик методу часткового класу student.SelectTheme
+                    bool themeWasSelected = student.SelectTheme("themes.txt");
+                    if (themeWasSelected)
+                    {
+                        student.Diploma.CalculateDifficulty();
+                        student.Diploma.AssignMark();
+                        Console.WriteLine($"\nРезультат: {student.Diploma.NameOfTheme}");
+                        Console.WriteLine($"Підсумкова оцінка за диплом: {student.Diploma.Mark} балів");
+                    }
                     break;
 
                 case "6":

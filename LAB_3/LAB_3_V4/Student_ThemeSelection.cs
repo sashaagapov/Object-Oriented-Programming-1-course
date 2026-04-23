@@ -2,8 +2,6 @@ using System;
 using System.IO;
 using System.Collections.Generic;
 
-// Namespace змінено з lab3agapov_v3 на lab3agapov (відповідає V4).
-// Логіку вибору теми перенесено у метод Student відповідно до V3→V4.
 namespace lab3agapov;
 
 public partial class Student
@@ -14,12 +12,14 @@ public partial class Student
     /// відповідно до принципу розділення відповідальності (часткові класи, Версія 4).
     /// </summary>
     /// <param name="filePath">Шлях до файлу з переліком тем.</param>
-    public void SelectTheme(string filePath)
+    // ! Баг №1 виправлено: тип повернення змінено з void на bool,
+    // ! щоб Menu знав — тему обрано чи скасовано/помилка.
+    public bool SelectTheme(string filePath)
     {
         if (!File.Exists(filePath))
         {
             Console.WriteLine("Помилка: Файл 'themes.txt' не знайдено!");
-            return;
+            return false; // ! файл не знайдено — повертаємо false
         }
 
         string[] allThemes = File.ReadAllLines(filePath);
@@ -33,7 +33,7 @@ public partial class Student
 
             if (keyword == "0")
             {
-                return; // Вихід, якщо користувач передумав
+                return false; // ! користувач скасував — повертаємо false
             }
 
             var matched = new List<string>();
@@ -47,7 +47,6 @@ public partial class Student
                 }
             }
 
-            // Замість continue використовуємо if-else
             if (matched.Count == 0)
             {
                 Console.WriteLine("За вашим запитом нічого не знайдено. Спробуйте інше слово.");
@@ -67,5 +66,6 @@ public partial class Student
                 }
             }
         }
+        return true; // ! тему успішно обрано — повертаємо true
     }
 }

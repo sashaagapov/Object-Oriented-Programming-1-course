@@ -14,13 +14,7 @@ public partial class Student
     private DiplomaProject studentDiploma;// Поле для зберігання інформації про дипломний проект студента
 
 
-    /// <summary>
-    /// Конструктор за замовчуванням, конструктор з параметрами та конструктор копіювання для класу Student.
-    /// </summary>
-    /// <param name="studentName">Ім'я студента.</param>
-    /// <param name="subjectName">Назва предмету, який вивчає студент
-    /// </param> <param name="grades">Список оцінок студента.</param>
-    /// <param name="tasksDone">Кількість виконаних завдань студентом.</param>
+    /// <summary>Порожній конструктор — усі поля ініціалізуються нулями або порожніми значеннями.</summary>
     public Student()
     {
         studentName = string.Empty;

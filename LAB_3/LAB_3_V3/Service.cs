@@ -3,12 +3,10 @@ using System.IO;
 using System.Collections.Generic;
 
 namespace lab3agapov_v3;
-/// <summary>
-/// Сервісний клас service, який містить статичні методи для роботи з об'єктами 
-/// класу Student, включаючи читання та запис даних у файл, а також виведення інформації про студента на консоль.
-/// </summary>
+/// <summary>Допоміжний клас для введення/виведення даних та їх збереження/читання з файлу.</summary>
 public class Service
 {
+    /// <summary>Виводить привітальне повідомлення з інформацією про автора.</summary>
     public void WelcomeInfo()
     {
         Console.WriteLine("-------------------------------------------------------------------");
@@ -114,6 +112,7 @@ public class Service
     {
         Console.WriteLine($"Ім'я викладача: {teacher.TeacherName}. Предмет: {teacher.SubjectName}. Годин: {teacher.SubjectHours}. Студентів: {teacher.QuantityOfStudents}");
     }
+    /// <summary>Зчитує ім'я викладача та предмет з консолі, повертає новий Teacher.</summary>
     public Teacher ReadTeacherFromConsole()
     {
         Console.WriteLine("Введіть ім'я викладача:");

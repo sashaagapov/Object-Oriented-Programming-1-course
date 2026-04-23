@@ -12,12 +12,14 @@ public partial class Student
     /// відповідно до принципу розділення відповідальності (часткові класи, Версія 3).
     /// </summary>
     /// <param name="filePath">Шлях до файлу з переліком тем.</param>
-    public void SelectTheme(string filePath)
+    // ! Баг №1 виправлено: тип повернення змінено з void на bool,
+    // ! щоб Menu знав — тему обрано чи скасовано/помилка.
+    public bool SelectTheme(string filePath)
     {
         if (!File.Exists(filePath))
         {
             Console.WriteLine("Помилка: Файл 'themes.txt' не знайдено!");
-            return;
+            return false; // ! файл не знайдено — повертаємо false
         }
 
         string[] allThemes = File.ReadAllLines(filePath);
@@ -31,7 +33,7 @@ public partial class Student
 
             if (keyword == "0")
             {
-                return; // Вихід, якщо користувач передумав
+                return false; // ! користувач скасував — повертаємо false
             }
 
             var matched = new List<string>();
@@ -65,5 +67,6 @@ public partial class Student
                 }
             }
         }
+        return true; // ! тему успішно обрано — повертаємо true
     }
 }

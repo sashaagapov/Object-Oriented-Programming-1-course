@@ -1,11 +1,9 @@
 
 namespace lab3agapov_v2;
-/// <summary>
-/// Сервісний клас service, який містить статичні методи для роботи з об'єктами 
-/// класу Student, включаючи читання та запис даних у файл, а також виведення інформації про студента на консоль.
-/// </summary>
+/// <summary>Допоміжний клас для введення/виведення даних та їх збереження/читання з файлу.</summary>
 public class Service
 {
+    /// <summary>Виводить привітальне повідомлення з інформацією про автора.</summary>
     public void WelcomeInfo()
     {
         Console.WriteLine("-------------------------------------------------------------------");
@@ -102,6 +100,7 @@ public class Service
         Console.WriteLine($"Ім'я викладача: {teacher.TeacherName}. Предмет: {teacher.SubjectName}. Годин: {teacher.SubjectHours}. Студентів: {teacher.QuantityOfStudents}");
     }
 
+    /// <summary>Зчитує ім'я викладача та предмет з консолі, повертає новий Teacher.</summary>
     public Teacher ReadTeacherFromConsole()
     {
         Console.WriteLine("Введіть ім'я викладача:");
@@ -164,13 +163,15 @@ public class Service
     /// Метод для вибору теми диплома. Реалізує логіку взаємодії з файлом та користувачем.
     /// </summary>
     /// <param name="student">Об'єкт студента, якому призначається тема.</param>
-    public void ChooseDiplomaTheme(Student student)
+    // ! Баг №1 виправлено: тип повернення змінено з void на bool,
+    // ! щоб Menu знав — була обрана тема чи ні (скасування/помилка).
+    public bool ChooseDiplomaTheme(Student student)
     {
         string filePath = "themes.txt";
         if (!File.Exists(filePath))
         {
             Console.WriteLine("Помилка: Файл 'themes.txt' не знайдено!");
-            return;
+            return false; // ! файл не знайдено — повертаємо false
         }
 
         string[] allThemes = File.ReadAllLines(filePath);
@@ -184,7 +185,7 @@ public class Service
 
             if (keyword == "0")
             {
-                return; // Вихід, якщо користувач передумав
+                return false; // ! користувач скасував — повертаємо false
             }
 
             var matched = new List<string>();
@@ -217,5 +218,6 @@ public class Service
                 }
             }
         }
+        return true; // ! тема успішно обрана — повертаємо true
     }
 }
