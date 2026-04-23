@@ -24,8 +24,7 @@ public class StudentGroup : IEnumerable
     /// </summary>
     public IEnumerator GetEnumerator()
     {
-        // Повертаємо власний перелічувач, щоб foreach проходив по внутрішньому списку студентів.
-        return new StudentGroupEnumerator(students);
+        return new StudentGroupEnumerator(students); // Повертаємо власний перелічувач, щоб foreach проходив по внутрішньому списку студентів.
     }
 
     /// <summary>
@@ -33,8 +32,7 @@ public class StudentGroup : IEnumerable
     /// </summary>
     public void SortStudents()
     {
-        // Викликається CompareTo у Student, тому сортування виконується за рейтингом.
-        students.Sort();
+        students.Sort(); // Викликається CompareTo у Student, тому сортування виконується за рейтингом.
     }
 
     /// <summary>
@@ -43,7 +41,6 @@ public class StudentGroup : IEnumerable
     public void SortByTasks()
     {
         StudentTasksComparer studentComparer = new StudentTasksComparer();
-        // Користувацький компаратор задає правило порівняння за кількістю виконаних робіт.
-        students.Sort(studentComparer);
+        students.Sort(studentComparer); // Користувацький компаратор задає правило порівняння за кількістю виконаних робіт.
     }
 }

@@ -150,8 +150,6 @@ public partial class Student : Person // Успадкування
             get { return nameOfTheme; }
             set { nameOfTheme = value; }
         }
-        // ВИПРАВЛЕНО: XML-коментарі до властивостей у вкладеному класі DiplomaProject
-        // замінено на короткі та коректні (синхронізовано з LAB_3_V4).
         /// <summary>
         /// Кількість реалізованих алгоритмів у дипломному проекті.
         /// </summary>

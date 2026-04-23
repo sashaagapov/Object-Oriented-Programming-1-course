@@ -30,24 +30,20 @@ public static class ScientificPaper
         int right = identifiers.Length - 1;
         while (left <= right)
         {
-            // Обчислюємо середину інтервалу без ризику переповнення.
-            int mid = left + (right - left) / 2;
+            int mid = left + (right - left) / 2; // Обчислюємо середину інтервалу без ризику переповнення.
             if (identifiers[mid] == target)
             {
                 return mid;
             }
             else if (identifiers[mid] < target)
             {
-                // Шукана ID більша, тому відкидаємо ліву половину масиву.
-                left = mid + 1;
+                left = mid + 1; // Шукана ID більша, тому відкидаємо ліву половину масиву.
             }
             else
             {
-                // Шукана ID менша, тому відкидаємо праву половину масиву.
-                right = mid - 1;
+                right = mid - 1; // Шукана ID менша, тому відкидаємо праву половину масиву.
             }
         }
-        // Якщо цикл завершився, елемент відсутній у відсортованому масиві.
-        return -1;
+        return -1; // Якщо цикл завершився, елемент відсутній у відсортованому масиві.
     }
 }

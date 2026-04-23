@@ -57,8 +57,7 @@ public class Service
     /// <param name="fileName"></param>
     public void SaveStudentToFile(Student student, string fileName)
     {
-        // Додаємо \n в кінці, щоб кожен студент був з нового рядка
-        string data = $"{student.Name};{student.SubjectName};{student.CalculateRating()}\n";
+        string data = $"{student.Name};{student.SubjectName};{student.CalculateRating()}\n"; // Додаємо \n в кінці, щоб кожен студент був з нового рядка
         File.AppendAllText(fileName, data); // AppendAllText ДОДАЄ в кінець файлу, а не стирає!
         Console.WriteLine($"\nДані студента збережено у файл: {fileName}");
     }

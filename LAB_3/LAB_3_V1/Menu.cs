@@ -61,8 +61,7 @@ public class Menu
                     break;
 
                 case "2":
-                    // Перевірка наявності викладача перед оновленням навантаження
-                    if (teacher == null || string.IsNullOrEmpty(teacher.TeacherName))
+                    if (teacher == null || string.IsNullOrEmpty(teacher.TeacherName)) // Перевірка наявності викладача перед оновленням навантаження
                     {
                         Console.WriteLine("Помилка: Спочатку створіть викладача");
                         break;

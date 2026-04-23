@@ -74,10 +74,8 @@ public class Teacher : Person // Успадкування
     {
         if (quantityOfStudents + difference >= 0)
         {
-            // Оновлюємо кількість студентів у групах викладача.
-            quantityOfStudents += difference;
-            // Навантаження змінюється пропорційно: 2 години на кожного доданого/вилученого студента.
-            subjectHours += difference * 2;
+            quantityOfStudents += difference; // Оновлюємо кількість студентів у групах викладача.
+            subjectHours += difference * 2; // Навантаження змінюється пропорційно: 2 години на кожного доданого/вилученого студента.
         }
         else
         {

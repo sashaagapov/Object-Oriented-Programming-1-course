@@ -61,8 +61,7 @@ public class Menu
                     break;
 
                 case "2":
-                    // Перевірка наявності викладача перед оновленням навантаження
-                    if (teacher == null || string.IsNullOrEmpty(teacher.TeacherName))
+                    if (teacher == null || string.IsNullOrEmpty(teacher.TeacherName)) // Перевірка наявності викладача перед оновленням навантаження
                     {
                         Console.WriteLine("Помилка: Спочатку створіть викладача");
                         break;
@@ -122,8 +121,7 @@ public class Menu
                         break;
                     }
                     Console.WriteLine("\n--- Акт 5: Дипломний проєкт ---");
-                    // Вибір теми делеговано частковому класу студента
-                    bool themeWasSelected = student.SelectTheme("themes.txt");
+                    bool themeWasSelected = student.SelectTheme("themes.txt"); // Вибір теми делеговано частковому класу студента
                     if (themeWasSelected)
                     {
                         student.Diploma.CalculateDifficulty();

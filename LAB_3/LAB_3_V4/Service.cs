@@ -56,8 +56,7 @@ public class Service
     /// <param name="fileName"></param>
     public void SaveStudentToFile(Student student, string fileName)
     {
-        // Додаємо \n в кінці, щоб кожен студент був з нового рядка
-        string data = $"{student.StudentName};{student.SubjectName};{student.CalculateRating()}\n";
+        string data = $"{student.StudentName};{student.SubjectName};{student.CalculateRating()}\n"; // Додаємо \n в кінці, щоб кожен студент був з нового рядка
         File.AppendAllText(fileName, data); // AppendAllText ДОДАЄ в кінець файлу, а не стирає!
         Console.WriteLine($"\nДані студента збережено у файл: {fileName}");
     }
@@ -104,9 +103,7 @@ public class Service
     /// <param name="student">Об'єкт студента, якому призначається тема.</param>
     public void ChooseDiplomaTheme(Student student)
     {
-        // ЗМІНЕНО: замінено дублювання логіки на делегування до Student.SelectTheme,
-        // як у V3, оскільки V4 також використовує часткові класи (Student_ThemeSelection.cs).
-        student.SelectTheme("themes.txt");
+        student.SelectTheme("themes.txt"); // ЗМІНЕНО: замінено дублювання логіки на делегування до Student.SelectTheme, як у V3, оскільки V4 також використовує часткові класи (Student_ThemeSelection.cs).
     }
 
     /// <summary>
@@ -162,8 +159,7 @@ public class Service
                 if (!string.IsNullOrWhiteSpace(line))
                 {
                     string[] parts = line.Split(';');
-                    // У викладача 4 поля: ім'я, предмет, години, кількість студентів
-                    if (parts.Length >= 4) 
+                    if (parts.Length >= 4)  // У викладача 4 поля: ім'я, предмет, години, кількість студентів
                     {
                         Console.WriteLine($"Ім'я: {parts[0]}");
                         Console.WriteLine($"Предмет: {parts[1]}");

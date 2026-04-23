@@ -23,8 +23,7 @@ namespace lab4agapov
         static void Main(string[] args)
         {
             Console.Clear();
-            // Person testPerson = new Person(); // Помилка компіляції: неможливо створити екземпляр абстрактного класу Person
-            Service service = new Service();
+            Service service = new Service(); // Person testPerson = new Person(); // Помилка компіляції: неможливо створити екземпляр абстрактного класу Person
             service.WelcomeInfo();
 
             Teacher myTeacher = new Teacher();

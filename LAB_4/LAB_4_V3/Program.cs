@@ -29,8 +29,7 @@ namespace lab4agapov
             Service service = new Service();
             service.WelcomeInfo();
 
-            // --- Демонстрація поліморфізму через інтерфейс IPerson (Вимога Версії 3) ---
-            Console.WriteLine("--- Демонстрація поліморфізму (Версія 3) ---");
+            Console.WriteLine("--- Демонстрація поліморфізму (Версія 3) ---"); // --- Демонстрація поліморфізму через інтерфейс IPerson (Вимога Версії 3) ---
             IPerson person1 = new Student("Олег", "Математика", new List<int> { 90, 95 }, 2);
             IPerson person2 = new Teacher("Марія Іванівна", "Фізика", 120, 30);
             person1.DisplayInfo();

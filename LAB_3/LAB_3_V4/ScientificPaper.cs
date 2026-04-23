@@ -19,24 +19,20 @@ public static class ScientificPaper
         int right = identifiers.Length - 1;
         while (left <= right)
         {
-            // Обчислюємо середину поточного діапазону пошуку.
-            int mid = left + (right - left) / 2;
+            int mid = left + (right - left) / 2; // Обчислюємо середину поточного діапазону пошуку.
             if (identifiers[mid] == target)
             {
                 return mid;
             }
             else if (identifiers[mid] < target)
             {
-                // Ціль більша за середній елемент: шукаємо праворуч.
-                left = mid + 1;
+                left = mid + 1; // Ціль більша за середній елемент: шукаємо праворуч.
             }
             else
             {
-                // Ціль менша за середній елемент: шукаємо ліворуч.
-                right = mid - 1;
+                right = mid - 1; // Ціль менша за середній елемент: шукаємо ліворуч.
             }
         }
-        // Повертаємо -1, якщо жоден індекс не відповідає шуканому ID.
-        return -1;
+        return -1; // Повертаємо -1, якщо жоден індекс не відповідає шуканому ID.
     }
 }

@@ -63,8 +63,7 @@ public class Service
     /// <param name="fileName"></param>
     public void SaveStudentToFile(Student student, string fileName)
     {
-        // Додаємо \n в кінці, щоб кожен студент був з нового рядка
-        string data = $"{student.Name};{student.SubjectName};{student.CalculateRating()}\n";
+        string data = $"{student.Name};{student.SubjectName};{student.CalculateRating()}\n"; // Додаємо \n в кінці, щоб кожен студент був з нового рядка
         File.AppendAllText(fileName, data); // AppendAllText ДОДАЄ в кінець файлу, а не стирає!
         Console.WriteLine($"\nДані студента збережено у файл: {fileName}");
     }
@@ -80,8 +79,7 @@ public class Service
     {
         if (File.Exists(fileName))
         {
-            // Зчитуємо весь вміст файлу построково, бо один рядок відповідає одному студенту.
-            string[] lines = File.ReadAllLines(fileName);
+            string[] lines = File.ReadAllLines(fileName); // Зчитуємо весь вміст файлу построково, бо один рядок відповідає одному студенту.
 
             Console.WriteLine("\n--- Дані з файлу ---");
             foreach (string line in lines)
@@ -89,8 +87,7 @@ public class Service
                 if (!string.IsNullOrWhiteSpace(line))
                 {
                     string[] parts = line.Split(';');
-                    // Мінімум 3 поля: ім'я, предмет, рейтинг.
-                    if (parts.Length >= 3)
+                    if (parts.Length >= 3) // Мінімум 3 поля: ім'я, предмет, рейтинг.
                     {
                         Console.WriteLine($"Ім'я: {parts[0]}");
                         Console.WriteLine($"Предмет: {parts[1]}");
@@ -124,20 +121,17 @@ public class Service
                     string[] parts = line.Split(';');
                     if (parts.Length < 3)
                     {
-                        // Пропускаємо пошкоджені або неповні рядки без винятків.
-                        continue;
+                        continue; // Пропускаємо пошкоджені або неповні рядки без винятків.
                     }
 
                     if (!int.TryParse(parts[2], out int rating))
                     {
-                        // Якщо рейтинг не число, рядок також ігноруємо.
-                        continue;
+                        continue; // Якщо рейтинг не число, рядок також ігноруємо.
                     }
 
                     List<int> grades = new List<int>();
                     grades.Add(rating);
-                    // Створюємо об'єкт Student з мінімально необхідними даними з файлу.
-                    Student student = new Student(parts[0], parts[1], grades, 1);
+                    Student student = new Student(parts[0], parts[1], grades, 1); // Створюємо об'єкт Student з мінімально необхідними даними з файлу.
                     group.AddStudent(student);
                 }
             }

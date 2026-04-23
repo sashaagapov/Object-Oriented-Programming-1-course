@@ -111,8 +111,7 @@ public partial class Student : Person, IComparable<Student>
         double rating = 0;
         foreach (int grade in grades)
         {
-            // Накопичуємо суму всіх оцінок для подальшого обчислення середнього.
-            rating += grade;
+            rating += grade; // Накопичуємо суму всіх оцінок для подальшого обчислення середнього.
         }
         return rating / tasksDone;
     }
@@ -128,8 +127,7 @@ public partial class Student : Person, IComparable<Student>
         {
             return 1;
         }
-        // Порівняння в зворотному порядку: більший рейтинг має бути раніше після Sort().
-        return other.CalculateRating().CompareTo(this.CalculateRating()); // Сортування виконується у спадаючому порядку, щоб вищі значення були першими.
+        return other.CalculateRating().CompareTo(this.CalculateRating()); // Сортування виконується у спадаючому порядку, щоб вищі значення були першими. // Порівняння в зворотному порядку: більший рейтинг має бути раніше після Sort().
     }
     /// <summary>
     /// Перевизначений поліморфний вивід даних студента.

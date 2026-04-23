@@ -61,8 +61,7 @@ namespace lab4agapov
                         break;
 
                     case "2":
-                        // Перевірка наявності викладача перед оновленням навантаження
-                        if (myTeacher == null || string.IsNullOrEmpty(myTeacher.Name))
+                        if (myTeacher == null || string.IsNullOrEmpty(myTeacher.Name)) // Перевірка наявності викладача перед оновленням навантаження
                         {
                             Console.WriteLine("Помилка: Спочатку створіть викладача");
                             break;

@@ -169,8 +169,6 @@ public partial class Student
             get { return nameOfTheme; }
             set { nameOfTheme = value; }
         }
-        // ВИПРАВЛЕНО: XML-коментарі до властивостей у вкладеному класі DiplomaProject
-        // замінено на короткі та коректні (V3).
         /// <summary>
         /// Кількість реалізованих алгоритмів у дипломному проекті.
         /// </summary>

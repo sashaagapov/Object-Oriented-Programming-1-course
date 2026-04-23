@@ -53,8 +53,7 @@ public class Service
     /// <param name="fileName"></param>
     public void SaveStudentToFile(Student student, string fileName)
     {
-        // Додаємо \n в кінці, щоб кожен студент був з нового рядка
-        string data = $"{student.StudentName};{student.SubjectName};{student.CalculateRating()}\n";
+        string data = $"{student.StudentName};{student.SubjectName};{student.CalculateRating()}\n"; // Додаємо \n в кінці, щоб кожен студент був з нового рядка
         File.AppendAllText(fileName, data); // AppendAllText ДОДАЄ в кінець файлу
         Console.WriteLine($"\nДані студента збережено у файл: {fileName}");
     }
@@ -147,8 +146,7 @@ public class Service
                 if (!string.IsNullOrWhiteSpace(line))
                 {
                     string[] parts = line.Split(';');
-                    // У викладача 4 поля: ім'я, предмет, години, кількість студентів
-                    if (parts.Length >= 4)
+                    if (parts.Length >= 4) // У викладача 4 поля: ім'я, предмет, години, кількість студентів
                     {
                         Console.WriteLine($"Ім'я: {parts[0]}");
                         Console.WriteLine($"Предмет: {parts[1]}");
@@ -169,8 +167,6 @@ public class Service
     /// Метод для вибору теми диплома. Реалізує логіку взаємодії з файлом та користувачем.
     /// </summary>
     /// <param name="student">Об'єкт студента, якому призначається тема.</param>
-    // Баг №1 виправлено: тип повернення змінено з void на bool,
-    // щоб Menu знав — була обрана тема чи ні (скасування/помилка).
     /// <summary>
     /// Координує вибір теми дипломного проєкту для студента через відповідну бізнес-логіку сервісу/моделі.
     /// </summary>

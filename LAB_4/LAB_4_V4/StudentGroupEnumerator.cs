@@ -7,8 +7,8 @@ namespace lab4agapov;
 /// </summary>
 public class StudentGroupEnumerator : IEnumerator
 {
-    private readonly List<Student> _students;
-    private int _position = -1;
+    private readonly List<Student> students;
+    private int position = -1;
 
     /// <summary>
     /// Ініціалізує перелічувач із переданим списком студентів.
@@ -16,7 +16,7 @@ public class StudentGroupEnumerator : IEnumerator
     /// <param name="students">Список студентів для перебору.</param>
     public StudentGroupEnumerator(List<Student> students)
     {
-        _students = students;
+        this.students = students;
     }
 
     /// <summary>
@@ -24,10 +24,8 @@ public class StudentGroupEnumerator : IEnumerator
     /// </summary>
     public bool MoveNext()
     {
-        // Зсуваємо позицію на один елемент вперед перед перевіркою меж колекції.
-        _position++;
-        // Поки позиція всередині списку, foreach продовжує ітерацію.
-        return _position < _students.Count;
+        position++; // Зсуваємо позицію на один елемент вперед перед перевіркою меж колекції.
+        return position < students.Count; // Поки позиція всередині списку, foreach продовжує ітерацію.
     }
 
     /// <summary>
@@ -35,8 +33,7 @@ public class StudentGroupEnumerator : IEnumerator
     /// </summary>
     public void Reset()
     {
-        // Повертаємо курсор у початковий стан "до першого елемента".
-        _position = -1;
+        position = -1; // Повертаємо курсор у початковий стан "до першого елемента".
     }
 
     /// <summary>
@@ -46,8 +43,7 @@ public class StudentGroupEnumerator : IEnumerator
     {
         get
         {
-            // Повертаємо саме той елемент, на який зараз вказує курсор переліку.
-            return _students[_position];
+            return students[position]; // Повертаємо саме той елемент, на який зараз вказує курсор переліку.
         }
     }
 }
