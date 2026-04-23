@@ -30,6 +30,7 @@ public static class ScientificPaper
         int right = identifiers.Length - 1;
         while (left <= right)
         {
+            // Обчислюємо середину інтервалу без ризику переповнення.
             int mid = left + (right - left) / 2;
             if (identifiers[mid] == target)
             {
@@ -37,13 +38,16 @@ public static class ScientificPaper
             }
             else if (identifiers[mid] < target)
             {
+                // Шукана ID більша, тому відкидаємо ліву половину масиву.
                 left = mid + 1;
             }
             else
             {
+                // Шукана ID менша, тому відкидаємо праву половину масиву.
                 right = mid - 1;
             }
         }
+        // Якщо цикл завершився, елемент відсутній у відсортованому масиві.
         return -1;
     }
 }

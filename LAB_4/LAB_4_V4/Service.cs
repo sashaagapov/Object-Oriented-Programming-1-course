@@ -6,7 +6,9 @@ namespace lab4agapov;
 /// </summary>
 public class Service
 {
-    /// <summary>Виводить привітальне повідомлення з інформацією про автора та номер лабораторної роботи.</summary>
+    /// <summary>
+    /// Виводить привітальне повідомлення з інформацією про автора та номер лабораторної роботи.
+    /// </summary>
     public void WelcomeInfo()
     {
         Console.WriteLine("-------------------------------------------------------------------");
@@ -78,6 +80,7 @@ public class Service
     {
         if (File.Exists(fileName))
         {
+            // Зчитуємо весь вміст файлу построково, бо один рядок відповідає одному студенту.
             string[] lines = File.ReadAllLines(fileName);
 
             Console.WriteLine("\n--- Дані з файлу ---");
@@ -86,6 +89,7 @@ public class Service
                 if (!string.IsNullOrWhiteSpace(line))
                 {
                     string[] parts = line.Split(';');
+                    // Мінімум 3 поля: ім'я, предмет, рейтинг.
                     if (parts.Length >= 3)
                     {
                         Console.WriteLine($"Ім'я: {parts[0]}");
@@ -120,16 +124,19 @@ public class Service
                     string[] parts = line.Split(';');
                     if (parts.Length < 3)
                     {
+                        // Пропускаємо пошкоджені або неповні рядки без винятків.
                         continue;
                     }
 
                     if (!int.TryParse(parts[2], out int rating))
                     {
+                        // Якщо рейтинг не число, рядок також ігноруємо.
                         continue;
                     }
 
                     List<int> grades = new List<int>();
                     grades.Add(rating);
+                    // Створюємо об'єкт Student з мінімально необхідними даними з файлу.
                     Student student = new Student(parts[0], parts[1], grades, 1);
                     group.AddStudent(student);
                 }
@@ -146,14 +153,18 @@ public class Service
         return student.SelectTheme("themes.txt");
     }
 
-    /// <summary>Виводить інформацію про викладача на консоль.</summary>
+    /// <summary>
+    /// Виводить інформацію про викладача на консоль.
+    /// </summary>
     /// <param name="teacher">Об'єкт викладача.</param>
     public void PrintTeacherInfo(Teacher teacher)
     {
         Console.WriteLine($"Викладач: {teacher.Name}, Предмет: {teacher.SubjectName}, Годин: {teacher.SubjectHours}, Студентів: {teacher.QuantityOfStudents}");
     }
 
-    /// <summary>Зберігає дані викладача у текстовий файл.</summary>
+    /// <summary>
+    /// Зберігає дані викладача у текстовий файл.
+    /// </summary>
     /// <param name="teacher">Об'єкт викладача.</param>
     /// <param name="fileName">Ім'я файлу для збереження.</param>
     public void SaveTeacherToFile(Teacher teacher, string fileName)

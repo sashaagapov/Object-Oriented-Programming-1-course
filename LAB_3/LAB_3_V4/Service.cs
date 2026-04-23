@@ -3,10 +3,14 @@ using System.IO;
 using System.Collections.Generic;
 
 namespace lab3agapov;
-/// <summary>Допоміжний клас для введення/виведення даних та їх збереження/читання з файлу.</summary>
+/// <summary>
+/// Допоміжний клас для введення/виведення даних та їх збереження/читання з файлу.
+/// </summary>
 public class Service
 {
-    /// <summary>Виводить привітальне повідомлення з інформацією про автора.</summary>
+    /// <summary>
+    /// Виводить привітальне повідомлення з інформацією про автора.
+    /// </summary>
     public void WelcomeInfo()
     {
         Console.WriteLine("-------------------------------------------------------------------");

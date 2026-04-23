@@ -69,6 +69,9 @@ public partial class Student : Person, IComparable<Student>
         get { return grades; }
         set { grades = value; }
     }
+    /// <summary>
+    /// Кількість виконаних завдань студента. Використовується разом зі списком оцінок при розрахунку рейтингу.
+    /// </summary>
     public int TasksDone
     {
         get { return tasksDone; }
@@ -88,6 +91,9 @@ public partial class Student : Person, IComparable<Student>
         grades.Add(grade);
         tasksDone++;
     }
+    /// <summary>
+    /// Оновлює назву дисципліни для поточного студента без зміни інших даних профілю.
+    /// </summary>
     public void UpdateSubject(string newSubject) { this.SubjectName = newSubject; }
 
     /// <summary>
@@ -105,6 +111,7 @@ public partial class Student : Person, IComparable<Student>
         double rating = 0;
         foreach (int grade in grades)
         {
+            // Накопичуємо суму всіх оцінок для подальшого обчислення середнього.
             rating += grade;
         }
         return rating / tasksDone;
@@ -121,10 +128,18 @@ public partial class Student : Person, IComparable<Student>
         {
             return 1;
         }
-        return other.CalculateRating().CompareTo(this.CalculateRating()); // !
+        // Порівняння в зворотному порядку: більший рейтинг має бути раніше після Sort().
+        return other.CalculateRating().CompareTo(this.CalculateRating()); // Сортування виконується у спадаючому порядку, щоб вищі значення були першими.
     }
+    /// <summary>
+    /// Перевизначений поліморфний вивід даних студента.
+    /// Спочатку показує базову інформацію Person, після чого додає студентські показники.
+    /// </summary>
     public override void DisplayInfo() { base.DisplayInfo(); Console.WriteLine($"   -> Статус: Студент, Рейтинг: {CalculateRating():F2}, Виконано завдань: {TasksDone}"); }
 
+    /// <summary>
+    /// Часткова частина вкладеного класу DiplomaProject. Містить логіку, винесену в окремий файл для кращої структуризації лабораторної.
+    /// </summary>
     public partial class DiplomaProject
     {
         private string nameOfTheme;
@@ -160,25 +175,33 @@ public partial class Student : Person, IComparable<Student>
             get { return nameOfTheme; }
             set { nameOfTheme = value; }
         }
-        /// <summary>Кількість реалізованих алгоритмів у дипломному проекті.</summary>
+        /// <summary>
+        /// Кількість реалізованих алгоритмів у дипломному проекті.
+        /// </summary>
         public int NumOfCompletedAlgorithms
         {
             get { return numOfCompletedAlgorithms; }
             set { numOfCompletedAlgorithms = value; }
         }
-        /// <summary>Ім'я наукового керівника дипломного проекту.</summary>
+        /// <summary>
+        /// Ім'я наукового керівника дипломного проекту.
+        /// </summary>
         public string NameOfTeacher
         {
             get { return nameOfTeacher; }
             set { nameOfTeacher = value; }
         }
-        /// <summary>Складність теми дипломного проекту.</summary>
+        /// <summary>
+        /// Складність теми дипломного проекту.
+        /// </summary>
         public int DificultyOfTheme
         {
             get { return dificultyOfTheme; }
             set { dificultyOfTheme = value; }
         }
-        /// <summary>Оцінка за дипломний проект.</summary>
+        /// <summary>
+        /// Оцінка за дипломний проект.
+        /// </summary>
         public int Mark
         {
             get { return mark; }

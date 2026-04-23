@@ -14,7 +14,9 @@ public partial class Student
     private DiplomaProject studentDiploma;// Поле для зберігання інформації про дипломний проект студента
 
 
-    /// <summary>Порожній конструктор — усі поля ініціалізуються нулями або порожніми значеннями.</summary>
+    /// <summary>
+    /// Порожній конструктор — усі поля ініціалізуються нулями або порожніми значеннями.
+    /// </summary>
     public Student()
     {
         studentName = string.Empty;
@@ -61,21 +63,33 @@ public partial class Student
         get { return studentName; }
         set { studentName = value; }
     }
+    /// <summary>
+    /// Назва дисципліни, з якою пов'язаний поточний об'єкт. Властивість відкриває контрольований доступ до внутрішнього поля.
+    /// </summary>
     public string SubjectName
     {
         get { return subjectName; }
         set { subjectName = value; }
     }
+    /// <summary>
+    /// Колекція поточних оцінок студента, що використовується для обчислення рейтингу.
+    /// </summary>
     public List<int> Grades
     {
         get { return grades; }
         set { grades = value; }
     }
+    /// <summary>
+    /// Кількість виконаних завдань студента. Використовується разом зі списком оцінок при розрахунку рейтингу.
+    /// </summary>
     public int TasksDone
     {
         get { return tasksDone; }
         set { tasksDone = value; }
     }
+    /// <summary>
+    /// Дані дипломного проєкту, пов'язаного з поточним студентом.
+    /// </summary>
     public DiplomaProject Diploma
     {
         get { return studentDiploma; }
@@ -155,25 +169,33 @@ public partial class Student
             get { return nameOfTheme; }
             set { nameOfTheme = value; }
         }
-        /// <summary>Кількість реалізованих алгоритмів у дипломному проекті.</summary>
+        /// <summary>
+        /// Кількість реалізованих алгоритмів у дипломному проекті.
+        /// </summary>
         public int NumOfCompletedAlgorithms
         {
             get { return numOfCompletedAlgorithms; }
             set { numOfCompletedAlgorithms = value; }
         }
-        /// <summary>Ім'я наукового керівника дипломного проекту.</summary>
+        /// <summary>
+        /// Ім'я наукового керівника дипломного проекту.
+        /// </summary>
         public string NameOfTeacher
         {
             get { return nameOfTeacher; }
             set { nameOfTeacher = value; }
         }
-        /// <summary>Складність теми дипломного проекту.</summary>
+        /// <summary>
+        /// Складність теми дипломного проекту.
+        /// </summary>
         public int DificultyOfTheme
         {
             get { return dificultyOfTheme; }
             set { dificultyOfTheme = value; }
         }
-        /// <summary>Оцінка за дипломний проект.</summary>
+        /// <summary>
+        /// Оцінка за дипломний проект.
+        /// </summary>
         public int Mark
         {
             get { return mark; }

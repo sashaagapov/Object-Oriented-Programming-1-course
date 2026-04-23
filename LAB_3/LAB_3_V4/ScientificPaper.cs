@@ -19,6 +19,7 @@ public static class ScientificPaper
         int right = identifiers.Length - 1;
         while (left <= right)
         {
+            // Обчислюємо середину поточного діапазону пошуку.
             int mid = left + (right - left) / 2;
             if (identifiers[mid] == target)
             {
@@ -26,13 +27,16 @@ public static class ScientificPaper
             }
             else if (identifiers[mid] < target)
             {
+                // Ціль більша за середній елемент: шукаємо праворуч.
                 left = mid + 1;
             }
             else
             {
+                // Ціль менша за середній елемент: шукаємо ліворуч.
                 right = mid - 1;
             }
         }
+        // Повертаємо -1, якщо жоден індекс не відповідає шуканому ID.
         return -1;
     }
 }

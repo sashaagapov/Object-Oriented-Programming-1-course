@@ -6,9 +6,11 @@ namespace lab4agapov;
 /// </summary>
 public class StudentTasksComparer : IComparer<Student>
 {
-    /// <summary>Порівнює двох студентів за кількістю виконаних завдань.</summary>
+    /// <summary>
+    /// Порівнює двох студентів за кількістю виконаних завдань.
+    /// </summary>
     public int Compare(Student x, Student y)
     {
-       return y.TasksDone.CompareTo(x.TasksDone); // !
+       return y.TasksDone.CompareTo(x.TasksDone); // Сортування виконується у спадаючому порядку, щоб вищі значення були першими.
     }
 }

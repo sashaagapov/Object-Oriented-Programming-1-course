@@ -4,6 +4,9 @@ using System.Collections.Generic;
 
 namespace lab3agapov_v3;
 
+/// <summary>
+/// Часткова частина класу Student. Виділяє окрему функціональність у самостійний файл без зміни загальної моделі класу.
+/// </summary>
 public partial class Student
 {
     /// <summary>
@@ -12,14 +15,17 @@ public partial class Student
     /// відповідно до принципу розділення відповідальності (часткові класи, Версія 3).
     /// </summary>
     /// <param name="filePath">Шлях до файлу з переліком тем.</param>
-    // ! Баг №1 виправлено: тип повернення змінено з void на bool,
-    // ! щоб Menu знав — тему обрано чи скасовано/помилка.
+    // Баг №1 виправлено: тип повернення змінено з void на bool,
+    // щоб Menu знав — тему обрано чи скасовано/помилка.
+    /// <summary>
+    /// Виконує пошук теми дипломного проєкту за ключовим словом, показує знайдені варіанти та фіксує обрану тему.
+    /// </summary>
     public bool SelectTheme(string filePath)
     {
         if (!File.Exists(filePath))
         {
             Console.WriteLine("Помилка: Файл 'themes.txt' не знайдено!");
-            return false; // ! файл не знайдено — повертаємо false
+            return false; // файл не знайдено — повертаємо false
         }
 
         string[] allThemes = File.ReadAllLines(filePath);
@@ -33,7 +39,7 @@ public partial class Student
 
             if (keyword == "0")
             {
-                return false; // ! користувач скасував — повертаємо false
+                return false; // користувач скасував — повертаємо false
             }
 
             var matched = new List<string>();
@@ -67,6 +73,6 @@ public partial class Student
                 }
             }
         }
-        return true; // ! тему успішно обрано — повертаємо true
+        return true; // тему успішно обрано — повертаємо true
     }
 }

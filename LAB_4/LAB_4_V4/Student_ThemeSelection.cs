@@ -1,6 +1,9 @@
 
 namespace lab4agapov;
 
+/// <summary>
+/// Часткова частина класу Student. Виділяє окрему функціональність у самостійний файл без зміни загальної моделі класу.
+/// </summary>
 public partial class Student
 {
     /// <summary>

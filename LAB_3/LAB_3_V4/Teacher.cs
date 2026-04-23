@@ -58,16 +58,25 @@ public class Teacher
         get { return teacherName; }
         set { teacherName = value; }
     }
+    /// <summary>
+    /// Назва дисципліни, з якою пов'язаний поточний об'єкт. Властивість відкриває контрольований доступ до внутрішнього поля.
+    /// </summary>
     public string SubjectName
     {
         get { return subjectName; }
         set { subjectName = value; }
     }
+    /// <summary>
+    /// Загальна кількість навчальних годин викладача по дисципліні.
+    /// </summary>
     public int SubjectHours
     {
         get { return subjectHours; }
         set { subjectHours = value; }
     }
+    /// <summary>
+    /// Кількість студентів, закріплених за викладачем або навчальною групою.
+    /// </summary>
     public int QuantityOfStudents
     {
         get { return quantityOfStudents; }

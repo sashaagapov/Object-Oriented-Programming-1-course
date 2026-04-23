@@ -10,29 +10,40 @@ public class StudentGroup : IEnumerable
 {
     private List<Student> students = new List<Student>();
 
-    /// <summary>Додає студента до групи.</summary>
+    /// <summary>
+    /// Додає студента до групи.
+    /// </summary>
     /// <param name="student">Об'єкт студента для додавання.</param>
     public void AddStudent(Student student)
     {
         students.Add(student);
     }
 
-    /// <summary>Повертає перелічувач для перебору студентів групи через foreach.</summary>
+    /// <summary>
+    /// Повертає перелічувач для перебору студентів групи через foreach.
+    /// </summary>
     public IEnumerator GetEnumerator()
     {
+        // Повертаємо власний перелічувач, щоб foreach проходив по внутрішньому списку студентів.
         return new StudentGroupEnumerator(students);
     }
 
-    /// <summary>Сортує студентів за рейтингом (використовує IComparable&lt;Student&gt;).</summary>
+    /// <summary>
+    /// Сортує студентів за рейтингом (використовує IComparable&lt;Student&gt;).
+    /// </summary>
     public void SortStudents()
     {
+        // Викликається CompareTo у Student, тому сортування виконується за рейтингом.
         students.Sort();
     }
 
-    /// <summary>Сортує студентів за кількістю виконаних завдань.</summary>
+    /// <summary>
+    /// Сортує студентів за кількістю виконаних завдань.
+    /// </summary>
     public void SortByTasks()
     {
         StudentTasksComparer studentComparer = new StudentTasksComparer();
+        // Користувацький компаратор задає правило порівняння за кількістю виконаних робіт.
         students.Sort(studentComparer);
     }
 }

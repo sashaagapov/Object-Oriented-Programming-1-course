@@ -71,6 +71,9 @@ public partial class Student : Person // Успадкування
         get { return grades; }
         set { grades = value; }
     }
+    /// <summary>
+    /// Кількість виконаних завдань студента. Використовується разом зі списком оцінок при розрахунку рейтингу.
+    /// </summary>
     public int TasksDone
     {
         get { return tasksDone; }
@@ -109,6 +112,9 @@ public partial class Student : Person // Успадкування
         }
         return rating / tasksDone;
     }
+    /// <summary>
+    /// Часткова частина вкладеного класу DiplomaProject. Містить логіку, винесену в окремий файл для кращої структуризації лабораторної.
+    /// </summary>
     public partial class DiplomaProject
     {
         private string nameOfTheme;
@@ -146,25 +152,33 @@ public partial class Student : Person // Успадкування
         }
         // ВИПРАВЛЕНО: XML-коментарі до властивостей у вкладеному класі DiplomaProject
         // замінено на короткі та коректні (синхронізовано з LAB_3_V4).
-        /// <summary>Кількість реалізованих алгоритмів у дипломному проекті.</summary>
+        /// <summary>
+        /// Кількість реалізованих алгоритмів у дипломному проекті.
+        /// </summary>
         public int NumOfCompletedAlgorithms
         {
             get { return numOfCompletedAlgorithms; }
             set { numOfCompletedAlgorithms = value; }
         }
-        /// <summary>Ім'я наукового керівника дипломного проекту.</summary>
+        /// <summary>
+        /// Ім'я наукового керівника дипломного проекту.
+        /// </summary>
         public string NameOfTeacher
         {
             get { return nameOfTeacher; }
             set { nameOfTeacher = value; }
         }
-        /// <summary>Складність теми дипломного проекту.</summary>
+        /// <summary>
+        /// Складність теми дипломного проекту.
+        /// </summary>
         public int DificultyOfTheme
         {
             get { return dificultyOfTheme; }
             set { dificultyOfTheme = value; }
         }
-        /// <summary>Оцінка за дипломний проект.</summary>
+        /// <summary>
+        /// Оцінка за дипломний проект.
+        /// </summary>
         public int Mark
         {
             get { return mark; }

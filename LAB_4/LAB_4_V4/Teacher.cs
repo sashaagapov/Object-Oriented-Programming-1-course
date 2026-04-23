@@ -56,6 +56,9 @@ public class Teacher : Person // Успадкування
         get { return subjectHours; }
         set { subjectHours = value; }
     }
+    /// <summary>
+    /// Кількість студентів, закріплених за викладачем або навчальною групою.
+    /// </summary>
     public int QuantityOfStudents
     {
         get { return quantityOfStudents; }
@@ -71,7 +74,9 @@ public class Teacher : Person // Успадкування
     {
         if (quantityOfStudents + difference >= 0)
         {
+            // Оновлюємо кількість студентів у групах викладача.
             quantityOfStudents += difference;
+            // Навантаження змінюється пропорційно: 2 години на кожного доданого/вилученого студента.
             subjectHours += difference * 2;
         }
         else
@@ -81,6 +86,10 @@ public class Teacher : Person // Успадкування
         }
 
     }
+    /// <summary>
+    /// Перевизначений поліморфний вивід даних викладача.
+    /// Доповнює базову інформацію Person параметрами навантаження та кількості студентів.
+    /// </summary>
     public override void DisplayInfo() { base.DisplayInfo(); Console.WriteLine($"   -> Статус: Викладач, Студентів: {QuantityOfStudents}, Навантаження: {SubjectHours} год."); }
 
 }

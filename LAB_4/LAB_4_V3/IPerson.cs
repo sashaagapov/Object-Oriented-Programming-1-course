@@ -6,10 +6,16 @@ namespace lab4agapov;
 /// </summary>
 public interface IPerson
 {
-    /// <summary>Ім'я особи.</summary>
+    /// <summary>
+    /// Ім'я особи.
+    /// </summary>
     string Name { get; set; }
-    /// <summary>Назва дисципліни.</summary>
+    /// <summary>
+    /// Назва дисципліни.
+    /// </summary>
     string SubjectName { get; set; }
-    /// <summary>Виводить інформацію про особу на консоль.</summary>
+    /// <summary>
+    /// Виводить інформацію про особу на консоль.
+    /// </summary>
     void DisplayInfo();
 }

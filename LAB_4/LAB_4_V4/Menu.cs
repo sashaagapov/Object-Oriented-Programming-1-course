@@ -12,7 +12,9 @@ namespace lab4agapov
         private Student myStudent;
         private bool isStudentCreated;
 
-        /// <summary>Ініціалізує меню з посиланнями на сервіс, наукову статтю, групу студентів та об'єкти даних.</summary>
+        /// <summary>
+        /// Ініціалізує меню з посиланнями на сервіс, наукову статтю, групу студентів та об'єкти даних.
+        /// </summary>
         public Menu(Service service, StudentGroup group, Teacher myTeacher, Student myStudent)
         {
             this.service = service;
@@ -22,7 +24,9 @@ namespace lab4agapov
             isStudentCreated = false;
         }
 
-        /// <summary>Запускає головний цикл меню програми та обробляє вибір користувача.</summary>
+        /// <summary>
+        /// Запускає головний цикл меню програми та обробляє вибір користувача.
+        /// </summary>
         public void Run()
         {
             bool isRunning = true;
@@ -57,7 +61,7 @@ namespace lab4agapov
                         break;
 
                     case "2":
-                        // ! Перевірка наявності викладача перед оновленням навантаження
+                        // Перевірка наявності викладача перед оновленням навантаження
                         if (myTeacher == null || string.IsNullOrEmpty(myTeacher.Name))
                         {
                             Console.WriteLine("Помилка: Спочатку створіть викладача");

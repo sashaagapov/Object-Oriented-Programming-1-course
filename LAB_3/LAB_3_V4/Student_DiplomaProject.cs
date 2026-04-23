@@ -1,7 +1,13 @@
 namespace lab3agapov;
 
+/// <summary>
+/// Часткова частина класу Student. Виділяє окрему функціональність у самостійний файл без зміни загальної моделі класу.
+/// </summary>
 public partial class Student
 {
+    /// <summary>
+    /// Часткова частина вкладеного класу DiplomaProject. Містить логіку, винесену в окремий файл для кращої структуризації лабораторної.
+    /// </summary>
     public partial class DiplomaProject
     {
         /// <summary>

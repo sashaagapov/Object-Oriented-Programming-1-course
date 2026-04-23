@@ -15,7 +15,9 @@ public class Menu
     private List<Student> students;
     private bool isStudentCreated;
 
-    /// <summary>Ініціалізує меню з посиланнями на сервіс та об'єкти даних.</summary>
+    /// <summary>
+    /// Ініціалізує меню з посиланнями на сервіс та об'єкти даних.
+    /// </summary>
     public Menu(Service service, Teacher teacher, Student student, List<Student> students)
     {
         this.service = service;
@@ -25,7 +27,9 @@ public class Menu
         isStudentCreated = false;
     }
 
-    /// <summary>Запускає головний цикл меню програми та обробляє вибір користувача.</summary>
+    /// <summary>
+    /// Запускає головний цикл меню програми та обробляє вибір користувача.
+    /// </summary>
     public void Run()
     {
         bool isRunning = true;
@@ -57,7 +61,7 @@ public class Menu
                     break;
 
                 case "2":
-                    // ! Перевірка наявності викладача перед оновленням навантаження
+                    // Перевірка наявності викладача перед оновленням навантаження
                     if (teacher == null || string.IsNullOrEmpty(teacher.TeacherName))
                     {
                         Console.WriteLine("Помилка: Спочатку створіть викладача");
@@ -118,7 +122,7 @@ public class Menu
                         break;
                     }
                     Console.WriteLine("\n--- Акт 5: Дипломний проєкт ---");
-                    // ! Вибір теми делеговано частковому класу студента
+                    // Вибір теми делеговано частковому класу студента
                     bool themeWasSelected = student.SelectTheme("themes.txt");
                     if (themeWasSelected)
                     {

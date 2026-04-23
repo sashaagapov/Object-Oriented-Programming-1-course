@@ -58,6 +58,9 @@ public class Teacher : Person // Успадкування
         get { return subjectHours; }
         set { subjectHours = value; }
     }
+    /// <summary>
+    /// Кількість студентів, закріплених за викладачем або навчальною групою.
+    /// </summary>
     public int QuantityOfStudents
     {
         get { return quantityOfStudents; }

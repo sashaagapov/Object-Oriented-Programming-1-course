@@ -1,9 +1,13 @@
 
 namespace lab3agapov_v2;
-/// <summary>Допоміжний клас для введення/виведення даних та їх збереження/читання з файлу.</summary>
+/// <summary>
+/// Допоміжний клас для введення/виведення даних та їх збереження/читання з файлу.
+/// </summary>
 public class Service
 {
-    /// <summary>Виводить привітальне повідомлення з інформацією про автора.</summary>
+    /// <summary>
+    /// Виводить привітальне повідомлення з інформацією про автора.
+    /// </summary>
     public void WelcomeInfo()
     {
         Console.WriteLine("-------------------------------------------------------------------");
@@ -100,7 +104,9 @@ public class Service
         Console.WriteLine($"Ім'я викладача: {teacher.TeacherName}. Предмет: {teacher.SubjectName}. Годин: {teacher.SubjectHours}. Студентів: {teacher.QuantityOfStudents}");
     }
 
-    /// <summary>Зчитує ім'я викладача та предмет з консолі, повертає новий Teacher.</summary>
+    /// <summary>
+    /// Зчитує ім'я викладача та предмет з консолі, повертає новий Teacher.
+    /// </summary>
     public Teacher ReadTeacherFromConsole()
     {
         Console.WriteLine("Введіть ім'я викладача:");
@@ -163,15 +169,18 @@ public class Service
     /// Метод для вибору теми диплома. Реалізує логіку взаємодії з файлом та користувачем.
     /// </summary>
     /// <param name="student">Об'єкт студента, якому призначається тема.</param>
-    // ! Баг №1 виправлено: тип повернення змінено з void на bool,
-    // ! щоб Menu знав — була обрана тема чи ні (скасування/помилка).
+    // Баг №1 виправлено: тип повернення змінено з void на bool,
+    // щоб Menu знав — була обрана тема чи ні (скасування/помилка).
+    /// <summary>
+    /// Координує вибір теми дипломного проєкту для студента через відповідну бізнес-логіку сервісу/моделі.
+    /// </summary>
     public bool ChooseDiplomaTheme(Student student)
     {
         string filePath = "themes.txt";
         if (!File.Exists(filePath))
         {
             Console.WriteLine("Помилка: Файл 'themes.txt' не знайдено!");
-            return false; // ! файл не знайдено — повертаємо false
+            return false; // файл не знайдено — повертаємо false
         }
 
         string[] allThemes = File.ReadAllLines(filePath);
@@ -185,7 +194,7 @@ public class Service
 
             if (keyword == "0")
             {
-                return false; // ! користувач скасував — повертаємо false
+                return false; // користувач скасував — повертаємо false
             }
 
             var matched = new List<string>();
@@ -218,6 +227,6 @@ public class Service
                 }
             }
         }
-        return true; // ! тема успішно обрана — повертаємо true
+        return true; // тема успішно обрана — повертаємо true
     }
 }
