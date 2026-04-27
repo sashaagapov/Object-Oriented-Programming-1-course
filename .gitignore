@@ -11,7 +11,6 @@ obj/
 *.sln.docstates
 
 # Local working files
-docs/
 REPORT_AUDIT*.md
 REPORT_REQUIREMENTS*.md
 reports/**/*_Audit*.md
