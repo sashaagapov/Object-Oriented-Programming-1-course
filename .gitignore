@@ -10,7 +10,7 @@ obj/
 *.userosscache
 *.sln.docstates
 
-# Codex / AI working files that should stay local
+# Local working files
 docs/
 REPORT_AUDIT*.md
 REPORT_REQUIREMENTS*.md
@@ -23,9 +23,11 @@ reports/**/*_LayoutPlan.md
 reports/**/*_Alignment.md
 reports/**/*_Comment_Update.md
 reports/**/*_Cleanup*.md
+reports/**/doxygen/
 reports/fixes/
 .codex/
 .ai_work/
+LOCAL_*.md
 repo_cleanup_plan.md
 repo_cleanup_git_commands.md
 # Build folders in all lab projects
