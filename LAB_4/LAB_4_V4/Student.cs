@@ -128,7 +128,7 @@ public partial class Student : Person, IComparable<Student>
         {
             return 1;
         }
-        return other.CalculateRating().CompareTo(this.CalculateRating()); // Сортування виконується у спадаючому порядку, щоб вищі значення були першими. // Порівняння в зворотному порядку: більший рейтинг має бути раніше після Sort().
+        return other.CalculateRating().CompareTo(this.CalculateRating()); // Сортування виконується у спадаючому порядку, щоб вищі значення були першими. 
     }
     /// <summary>
     /// Перевизначений поліморфний вивід даних студента.

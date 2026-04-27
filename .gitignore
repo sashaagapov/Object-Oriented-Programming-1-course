@@ -25,8 +25,6 @@ reports/**/*_Comment_Update.md
 reports/**/*_Cleanup*.md
 reports/**/doxygen/
 reports/fixes/
-.codex/
-.ai_work/
 LOCAL_*.md
 repo_cleanup_plan.md
 repo_cleanup_git_commands.md

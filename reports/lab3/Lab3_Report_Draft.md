@@ -112,7 +112,6 @@
 
 Файл джерела:
 
-- `reports/lab3/Lab3_ClassDiagram.drawio`
 
 ![UML class diagram](images/Lab3_ClassDiagram.png)
 
@@ -145,7 +144,6 @@ Use cases діаграми:
 
 Файл джерела:
 
-- `reports/lab3/Lab3_UseCaseDiagram.drawio`
 
 ![UML Use Case diagram](images/Lab3_UseCaseDiagram.png)
 
@@ -256,31 +254,31 @@ doxygen reports/lab3/Doxyfile
 
 ## 10. Результати виконання програми
 
-![Головне меню](screenshots/images/lab3_01_main_menu.png)
+![Головне меню](images/lab3_01_main_menu.png)
 Показано стартовий екран програми з головним меню.
 
-![Створення викладача](screenshots/images/lab3_02_create_teacher.png)
+![Створення викладача](images/lab3_02_create_teacher.png)
 Показано створення викладача та первинне виведення його даних.
 
-![Оновлення навантаження викладача](screenshots/images/lab3_03_update_teacher_load.png)
+![Оновлення навантаження викладача](images/lab3_03_update_teacher_load.png)
 Показано оновлення навантаження викладача.
 
-![Створення студента](screenshots/images/lab3_04_create_student.png)
+![Створення студента](images/lab3_04_create_student.png)
 Показано введення та створення об’єкта студента.
 
-![Додавання оцінки студенту](screenshots/images/lab3_05_add_grade.png)
+![Додавання оцінки студенту](images/lab3_05_add_grade.png)
 Показано додавання оцінки студенту через консоль.
 
-![Виведення і збереження даних студента](screenshots/images/lab3_06_save_student_to_file.png)
+![Виведення і збереження даних студента](images/lab3_06_save_student_to_file.png)
 Показано виведення даних студента та запис у файл.
 
-![Робота з дипломним проєктом](screenshots/images/lab3_08_diploma_mark.png)
+![Робота з дипломним проєктом](images/lab3_08_diploma_mark.png)
 Показано результат роботи з дипломним проєктом і підсумкову оцінку.
 
-![Пошук у науковій статті](screenshots/images/lab3_09_search_scientific_paper.png)
+![Пошук у науковій статті](images/lab3_09_search_scientific_paper.png)
 Показано пошук ID у масиві посилань наукової статті.
 
-![Завершення програми](screenshots/images/lab3_10_program_exit.png)
+![Завершення програми](images/lab3_10_program_exit.png)
 Показано коректне завершення роботи програми.
 
 ## 11. Аналіз достовірності результатів / контрольний приклад
