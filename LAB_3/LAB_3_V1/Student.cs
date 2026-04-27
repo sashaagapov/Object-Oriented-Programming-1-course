@@ -27,6 +27,10 @@ public class Student
     /// <summary>
     /// Конструктор з параметрами для повної ініціалізації даних студента: ПІБ, предмет, оцінки та кількість виконаних робіт.
     /// </summary>
+    /// <param name="studentName">Ім'я студента.</param>
+    /// <param name="subjectName">Назва предмета.</param>
+    /// <param name="grades">Список поточних оцінок студента.</param>
+    /// <param name="tasksDone">Кількість виконаних завдань.</param>
     public Student(string studentName, string subjectName, List<int> grades, int tasksDone)
     {
         this.studentName = studentName;
@@ -38,6 +42,7 @@ public class Student
     /// <summary>
     /// Конструктор копіювання. Створює новий об'єкт студента на основі вже існуючого екземпляра.
     /// </summary>
+    /// <param name="previousStudent">Існуючий об'єкт студента для копіювання.</param>
     public Student(Student previousStudent)
     {
         this.studentName = previousStudent.studentName;
@@ -82,6 +87,7 @@ public class Student
     /// <summary>
     /// Додає оцінку та збільшує лічильник виконаних завдань.
     /// </summary>
+    /// <param name="grade">Оцінка, яку потрібно додати до списку.</param>
     public void AddGrade(int grade)
     {
         grades.Add(grade);
@@ -91,6 +97,7 @@ public class Student
     /// <summary>
     /// Середнє арифметичне оцінок. Якщо оцінок немає — повертає 0.
     /// </summary>
+    /// <returns>Повертає середній рейтинг студента або 0, якщо оцінки відсутні.</returns>
     public double CalculateRating()
     {
         if (grades.Count == 0 || tasksDone == 0)

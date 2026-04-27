@@ -35,13 +35,13 @@ namespace lab4agapov
                 Console.WriteLine("\n==========================================");
                 Console.WriteLine("          ГОЛОВНЕ МЕНЮ ПРОГРАМИ           ");
                 Console.WriteLine("==========================================");
-                Console.WriteLine("1. Створити викладача (Акт 1)");
-                Console.WriteLine("2. Оновити навантаження викладача (Акт 1)");
-                Console.WriteLine("3. Ввести дані студента з консолі (Акт 2)");
-                Console.WriteLine("4. Додати оцінки студенту (Акт 3)");
-                Console.WriteLine("5. Вивести дані та зберегти у файл (Акт 4)");
-                Console.WriteLine("6. Робота з дипломним проєктом (Акт 5)");
-                Console.WriteLine("7. Пошук у науковій статті (Акт 6)");
+                Console.WriteLine("1. Створити викладача");
+                Console.WriteLine("2. Оновити навантаження викладача");
+                Console.WriteLine("3. Ввести дані студента з консолі");
+                Console.WriteLine("4. Додати оцінки студенту");
+                Console.WriteLine("5. Вивести дані та зберегти у файл");
+                Console.WriteLine("6. Робота з дипломним проєктом");
+                Console.WriteLine("7. Пошук у науковій статті");
                 Console.WriteLine("0. Вихід");
                 Console.WriteLine("------------------------------------------");
                 Console.Write("Ваш вибір: ");
@@ -51,7 +51,7 @@ namespace lab4agapov
                 switch (choice)
                 {
                     case "1":
-                        Console.WriteLine("\n--- Акт 1: Створення викладача ---");
+                        Console.WriteLine("\n--- Пункт 1: Створення викладача ---");
                         myTeacher = service.ReadTeacherFromConsole();
                         service.PrintTeacherInfo(myTeacher);
                         service.SaveTeacherToFile(myTeacher, "teacher_data.txt");
@@ -64,7 +64,7 @@ namespace lab4agapov
                             Console.WriteLine("Помилка: Спочатку створіть викладача");
                             break;
                         }
-                        Console.WriteLine("\n--- Акт 1: Оновлення навантаження викладача ---");
+                        Console.WriteLine("\n--- Пункт 2: Оновлення навантаження викладача ---");
                         myTeacher.UpdateStudentCount(5);
                         Console.WriteLine($"Навантаження оновлено. Поточна кількість студентів: {myTeacher.QuantityOfStudents}");
                         service.PrintTeacherInfo(myTeacher);
@@ -73,7 +73,7 @@ namespace lab4agapov
                         break;
 
                     case "3":
-                        Console.WriteLine("\n--- Акт 2: Створення студента ---");
+                        Console.WriteLine("\n--- Пункт 3: Створення студента ---");
                         myStudent = service.ReadStudentFromConsole();
                         students.Add(myStudent);
                         isStudentCreated = true;
@@ -86,7 +86,7 @@ namespace lab4agapov
                             Console.WriteLine("Помилка: Спочатку створіть студента (пункт 3)!");
                             break;
                         }
-                        Console.WriteLine("\n--- Акт 3: Додавання оцінок ---");
+                        Console.WriteLine("\n--- Пункт 4: Додавання оцінок студенту ---");
                         Console.Write("Введіть оцінку (від 0 до 100): ");
                         if (int.TryParse(Console.ReadLine(), out int grade))
                         {
@@ -105,7 +105,7 @@ namespace lab4agapov
                             Console.WriteLine("Помилка: Спочатку створіть студента (пункт 3)!");
                             break;
                         }
-                        Console.WriteLine("\n--- Акт 4: Робота з даними (Service) ---");
+                        Console.WriteLine("\n--- Пункт 5: Виведення та збереження даних ---");
                         service.PrintStudentInfo(myStudent);
                         string fileName = "student_data.txt";
                         service.SaveStudentToFile(myStudent, fileName);
@@ -118,7 +118,7 @@ namespace lab4agapov
                             Console.WriteLine("Помилка: Спочатку створіть студента (пункт 3)!");
                             break;
                         }
-                        Console.WriteLine("\n--- Акт 5: Дипломний проєкт ---");
+                        Console.WriteLine("\n--- Пункт 6: Робота з дипломним проєктом ---");
                         bool themeWasSelected = service.ChooseDiplomaTheme(myStudent);
                         if (themeWasSelected)
                         {
@@ -130,7 +130,7 @@ namespace lab4agapov
                         break;
 
                     case "7":
-                        Console.WriteLine("\n--- Акт 6: Наукова стаття ---");
+                        Console.WriteLine("\n--- Пункт 7: Пошук у науковій статті ---");
                         int[] references = [12, 34, 56, 78, 90];
                         int targetId = 56;
                         Console.WriteLine($"Пошук ID {targetId} у масиві...");

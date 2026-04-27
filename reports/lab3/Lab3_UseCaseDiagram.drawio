@@ -1,0 +1,98 @@
+<mxfile host="app.diagrams.net" modified="2026-04-27T00:00:00.000Z" agent="Codex" version="26.0.0" type="device">
+  <diagram id="Lab3UseCaseDiagram" name="Lab3 Use Case Diagram">
+    <mxGraphModel dx="1300" dy="800" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1300" pageHeight="800" math="0" shadow="0">
+      <root>
+        <mxCell id="0"/>
+        <mxCell id="1" parent="0"/>
+
+        <mxCell id="actorUser" value="Користувач" style="shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;html=1;outlineConnect=0;strokeColor=#000000;fillColor=#ffffff;fontColor=#000000;fontFamily=Arial;fontSize=14;" vertex="1" parent="1">
+          <mxGeometry x="70" y="310" width="80" height="140" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="systemBoundary" value="LAB_3_V4" style="shape=rectangle;rounded=0;whiteSpace=wrap;html=1;strokeColor=#000000;fillColor=#ffffff;fontColor=#000000;align=left;verticalAlign=top;spacingLeft=12;spacingTop=8;fontStyle=1;fontFamily=Arial;fontSize=14;" vertex="1" parent="1">
+          <mxGeometry x="230" y="60" width="980" height="660" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="ucCreateTeacher" value="Створити викладача" style="ellipse;whiteSpace=wrap;html=1;strokeColor=#000000;fillColor=#ffffff;fontColor=#000000;fontFamily=Arial;fontSize=14;align=center;verticalAlign=middle;spacing=8;" vertex="1" parent="1">
+          <mxGeometry x="320" y="120" width="300" height="80" as="geometry"/>
+        </mxCell>
+        <mxCell id="ucUpdateTeacherLoad" value="Оновити навантаження&lt;br&gt;викладача" style="ellipse;whiteSpace=wrap;html=1;strokeColor=#000000;fillColor=#ffffff;fontColor=#000000;fontFamily=Arial;fontSize=14;align=center;verticalAlign=middle;spacing=8;" vertex="1" parent="1">
+          <mxGeometry x="320" y="260" width="300" height="80" as="geometry"/>
+        </mxCell>
+        <mxCell id="ucCreateStudent" value="Створити студента" style="ellipse;whiteSpace=wrap;html=1;strokeColor=#000000;fillColor=#ffffff;fontColor=#000000;fontFamily=Arial;fontSize=14;align=center;verticalAlign=middle;spacing=8;" vertex="1" parent="1">
+          <mxGeometry x="320" y="400" width="300" height="80" as="geometry"/>
+        </mxCell>
+        <mxCell id="ucAddGrade" value="Додати оцінку&lt;br&gt;студенту" style="ellipse;whiteSpace=wrap;html=1;strokeColor=#000000;fillColor=#ffffff;fontColor=#000000;fontFamily=Arial;fontSize=14;align=center;verticalAlign=middle;spacing=8;" vertex="1" parent="1">
+          <mxGeometry x="320" y="540" width="300" height="80" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="ucSaveStudentData" value="Вивести та зберегти&lt;br&gt;дані студента" style="ellipse;whiteSpace=wrap;html=1;strokeColor=#000000;fillColor=#ffffff;fontColor=#000000;fontFamily=Arial;fontSize=14;align=center;verticalAlign=middle;spacing=8;" vertex="1" parent="1">
+          <mxGeometry x="790" y="120" width="340" height="80" as="geometry"/>
+        </mxCell>
+        <mxCell id="ucDiplomaProject" value="Працювати з дипломним&lt;br&gt;проєктом" style="ellipse;whiteSpace=wrap;html=1;strokeColor=#000000;fillColor=#ffffff;fontColor=#000000;fontFamily=Arial;fontSize=14;align=center;verticalAlign=middle;spacing=8;" vertex="1" parent="1">
+          <mxGeometry x="790" y="260" width="340" height="80" as="geometry"/>
+        </mxCell>
+        <mxCell id="ucScientificSearch" value="Виконати пошук у&lt;br&gt;науковій статті" style="ellipse;whiteSpace=wrap;html=1;strokeColor=#000000;fillColor=#ffffff;fontColor=#000000;fontFamily=Arial;fontSize=14;align=center;verticalAlign=middle;spacing=8;" vertex="1" parent="1">
+          <mxGeometry x="790" y="400" width="340" height="80" as="geometry"/>
+        </mxCell>
+        <mxCell id="ucExit" value="Завершити роботу&lt;br&gt;програми" style="ellipse;whiteSpace=wrap;html=1;strokeColor=#000000;fillColor=#ffffff;fontColor=#000000;fontFamily=Arial;fontSize=14;align=center;verticalAlign=middle;spacing=8;" vertex="1" parent="1">
+          <mxGeometry x="790" y="540" width="340" height="80" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="edgeActorCreateTeacher" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=none;strokeColor=#000000;fontColor=#000000;" edge="1" parent="1" source="actorUser" target="ucCreateTeacher">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="edgeActorUpdateTeacherLoad" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=none;strokeColor=#000000;fontColor=#000000;" edge="1" parent="1" source="actorUser" target="ucUpdateTeacherLoad">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="edgeActorCreateStudent" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=none;strokeColor=#000000;fontColor=#000000;" edge="1" parent="1" source="actorUser" target="ucCreateStudent">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="edgeActorAddGrade" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=none;strokeColor=#000000;fontColor=#000000;" edge="1" parent="1" source="actorUser" target="ucAddGrade">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="edgeActorSaveStudentData" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=none;strokeColor=#000000;fontColor=#000000;" edge="1" parent="1" source="actorUser" target="ucSaveStudentData">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="180" y="380"/>
+              <mxPoint x="180" y="30"/>
+              <mxPoint x="960" y="30"/>
+              <mxPoint x="960" y="120"/>
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="edgeActorDiplomaProject" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=none;strokeColor=#000000;fontColor=#000000;" edge="1" parent="1" source="actorUser" target="ucDiplomaProject">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="190" y="380"/>
+              <mxPoint x="190" y="230"/>
+              <mxPoint x="700" y="230"/>
+              <mxPoint x="700" y="300"/>
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="edgeActorScientificSearch" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=none;strokeColor=#000000;fontColor=#000000;" edge="1" parent="1" source="actorUser" target="ucScientificSearch">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="190" y="380"/>
+              <mxPoint x="190" y="510"/>
+              <mxPoint x="700" y="510"/>
+              <mxPoint x="700" y="440"/>
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="edgeActorExit" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=none;strokeColor=#000000;fontColor=#000000;" edge="1" parent="1" source="actorUser" target="ucExit">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="180" y="380"/>
+              <mxPoint x="180" y="750"/>
+              <mxPoint x="960" y="750"/>
+              <mxPoint x="960" y="620"/>
+            </Array>
+          </mxGeometry>
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

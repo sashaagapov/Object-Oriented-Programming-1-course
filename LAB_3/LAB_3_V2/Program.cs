@@ -20,8 +20,15 @@
 namespace lab3agapov_v2
 {
 
+    /// <summary>
+    /// Клас Program є точкою входу в консольний застосунок версії LAB_3_V2.
+    /// </summary>
     class Program
     {
+        /// <summary>
+        /// Головний метод програми. Створює основні об'єкти та запускає головне меню.
+        /// </summary>
+        /// <param name="args">Аргументи командного рядка, передані під час запуску програми.</param>
         static void Main(string[] args)
         {
             Console.Clear();

@@ -12,6 +12,7 @@ public partial class Student
     /// відповідно до принципу розділення відповідальності (часткові класи, Версія 4).
     /// </summary>
     /// <param name="filePath">Шлях до файлу з переліком тем.</param>
+    /// <returns>Повертає true, якщо тему успішно обрано, і false, якщо вибір скасовано або файл не знайдено.</returns>
     public bool SelectTheme(string filePath)
     {
         if (!File.Exists(filePath))

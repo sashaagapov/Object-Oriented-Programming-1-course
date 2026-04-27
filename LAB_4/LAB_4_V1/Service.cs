@@ -25,7 +25,7 @@ public class Service
     ///  класу Student з цією інформацією. Цей метод використовується для 
     /// створення нового студента на основі введених користувачем даних.
     /// </summary>
-    /// <returns></returns>
+    /// <returns>Повертає новий об'єкт Student з даними, введеними з консолі.</returns>
     public Student ReadStudentFromConsole()
     {
         Console.WriteLine("Введіть ім'я студента:");
@@ -41,7 +41,7 @@ public class Service
     ///  Цей метод використовується для відображення інформації про студента, включаючи його ім'я, назву предмету та поточний рейтинг, 
     /// який обчислюється на основі його оцінок та кількості виконаних завдань.
     /// </summary>
-    /// <param name="student"></param>
+    /// <param name="student">Об'єкт студента, дані якого потрібно вивести.</param>
     public void PrintStudentInfo(Student student)
     {
         Console.WriteLine($"Ім'я студента: {student.Name}. Назва предмету: {student.SubjectName}. Його поточний рейтинг: {student.CalculateRating()}");
@@ -53,8 +53,8 @@ public class Service
     /// для збереження даних студента у текстовому файлі, що дозволяє зберігати 
     /// інформацію про студентів для подальшого використання або аналізу.
     /// </summary>
-    /// <param name="student"></param>
-    /// <param name="fileName"></param>
+    /// <param name="student">Об'єкт студента, дані якого потрібно зберегти.</param>
+    /// <param name="fileName">Ім'я файлу для збереження даних студента.</param>
     public void SaveStudentToFile(Student student, string fileName)
     {
         string data = $"{student.Name};{student.SubjectName};{student.CalculateRating()}\n"; // Додаємо \n в кінці, щоб кожен студент був з нового рядка
@@ -68,7 +68,7 @@ public class Service
     /// Рейтинг: [рейтинг]". Цей метод використовується для читання даних
     /// студента з текстового файлу та відображення цієї інформації на консоль для користувача.
     /// </summary>
-    /// <param name="fileName"></param>
+    /// <param name="fileName">Ім'я файлу для читання даних студента.</param>
     public void ReadStudentFromFile(string fileName)
     {
         if (File.Exists(fileName))
@@ -129,7 +129,7 @@ public class Service
     public void SaveTeacherToFile(Teacher teacher, string fileName)
     {
         string data = $"{teacher.Name};{teacher.SubjectName};{teacher.SubjectHours};{teacher.QuantityOfStudents}\n";
-        File.AppendAllText(fileName, data);
+        File.WriteAllText(fileName, data);
         Console.WriteLine($"Дані викладача збережено у файл: {fileName}");
     }
 

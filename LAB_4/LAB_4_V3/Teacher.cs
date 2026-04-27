@@ -13,9 +13,7 @@ public class Teacher : Person // Успадкування
     private int subjectHours = 0;
     private int quantityOfStudents = 0;
     /// <summary>
-    /// Конструктор за замовчуванням, конструктор з параметрами та конструктор копіювання 
-    /// для класу Teacher, які викликають відповідні конструктори
-    ///  базового класу Person для ініціалізації загальних властивостей.
+    /// Конструктор за замовчуванням для класу Teacher.
     /// </summary>
     public Teacher() : base() // Виклик базового порожнього конструктора
     {
@@ -27,10 +25,10 @@ public class Teacher : Person // Успадкування
     /// класу відповідно до переданих аргументів та викликає конструктор
     ///  базового класу Person для ініціалізації загальних властивостей.
     /// </summary>
-    /// <param name="teacherName"></param>
-    /// <param name="subjectName"></param>
-    /// <param name="subjectHours"></param>
-    /// <param name="quantityOfStudents"></param>
+    /// <param name="teacherName">Ім'я викладача.</param>
+    /// <param name="subjectName">Назва предмета, який викладає викладач.</param>
+    /// <param name="subjectHours">Кількість годин навантаження.</param>
+    /// <param name="quantityOfStudents">Кількість студентів, закріплених за викладачем.</param>
     public Teacher(string teacherName, string subjectName, int subjectHours, int quantityOfStudents)
         : base(teacherName, subjectName) // Передаємо ім'я та предмет у клас Person
     {
@@ -42,7 +40,7 @@ public class Teacher : Person // Успадкування
     ///  основі існуючого об'єкта Teacher, копіюючи всі його поля та викликаючи 
     /// конструктор копіювання базового класу Person для ініціалізації загальних властивостей.
     /// </summary>
-    /// <param name="previousTeacher"></param>
+    /// <param name="previousTeacher">Існуючий об'єкт викладача для копіювання.</param>
     public Teacher(Teacher previousTeacher)
         : base(previousTeacher.Name, previousTeacher.SubjectName)
     {
@@ -71,7 +69,7 @@ public class Teacher : Person // Успадкування
     /// Метод приймає різницю у кількості студентів (positive для збільшення, negative для зменшення) та оновлює відповідно кількість студентів
     /// та годин викладання (припускаючи, що кожен студент додає 2 години викладання). Метод також перевіряє, щоб кількість студентів не стала від'ємною.
     /// </summary>
-    /// <param name="difference"></param>
+    /// <param name="difference">Зміна кількості студентів, яка застосовується до поточного значення.</param>
     public void UpdateStudentCount(int difference)
     {
         if (quantityOfStudents + difference >= 0)

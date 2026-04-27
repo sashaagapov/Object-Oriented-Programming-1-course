@@ -29,10 +29,10 @@ public partial class Student
     /// Конструктор з параметрами для класу Student,
     /// який ініціалізує всі поля класу відповідно до переданих аргументів.
     /// </summary>
-    /// <param name="studentName"></param>
-    /// <param name="subjectName"></param>
-    /// <param name="grades"></param>
-    /// <param name="tasksDone"></param>
+    /// <param name="studentName">Ім'я студента.</param>
+    /// <param name="subjectName">Назва предмета.</param>
+    /// <param name="grades">Список поточних оцінок студента.</param>
+    /// <param name="tasksDone">Кількість виконаних завдань.</param>
     public Student(string studentName, string subjectName, List<int> grades, int tasksDone)
     {
         this.studentName = studentName;
@@ -45,7 +45,7 @@ public partial class Student
     /// Конструктор копіювання для класу Student,
     ///  який створює новий об'єкт на основі існуючого об'єкта Student, копіюючи всі його поля.
     /// </summary>
-    /// <param name="previousStudent"></param>
+    /// <param name="previousStudent">Існуючий об'єкт студента для копіювання.</param>
     public Student(Student previousStudent)
     {
         this.studentName = previousStudent.studentName;
@@ -103,7 +103,7 @@ public partial class Student
     /// завдань на 1. Цей метод використовується для додавання нової 
     /// оцінки студенту та оновлення кількості виконаних завдань відповідно до цієї оцінки.
     /// </summary>
-    /// <param name="grade"></param>
+    /// <param name="grade">Оцінка, яку потрібно додати до списку.</param>
     public void AddGrade(int grade)
     {
         grades.Add(grade);
@@ -113,7 +113,7 @@ public partial class Student
     /// Метод CalculateRating, який обчислює та повертає рейтинг 
     /// студента на основі його оцінок та кількості виконаних завдань. Рейтинг розраховується як середнє значення оцінок, якщо студент має хоча б одну оцінку та виконав хоча б одне завдання. Якщо студент не має оцінок або не виконав жодного завдання, то рейтинг повертається як 0. Цей метод використовується для визначення поточного рейтингу студента на основі його успішності у навчанні.
     /// </summary>
-    /// <returns></returns>
+    /// <returns>Повертає середній рейтинг студента або 0, якщо оцінки відсутні.</returns>
     public double CalculateRating()
     {
         ArgumentNullException.ThrowIfNull(grades);
@@ -129,10 +129,7 @@ public partial class Student
         return rating / tasksDone;
     }
     /// <summary>
-    /// Метод UpdateSubject, який приймає рядок newSubject і 
-    /// оновлює назву предмету, який вивчає студент, на це нове значення.
-    ///  Цей метод використовується для зміни назви предмету, який вивчає
-    ///  студент, відповідно до переданого аргументу.
+    /// Вкладений partial-клас DiplomaProject зберігає дані дипломного проєкту студента.
     /// </summary>
     public partial class DiplomaProject
     {

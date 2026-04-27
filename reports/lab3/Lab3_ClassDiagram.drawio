@@ -1,0 +1,96 @@
+<mxfile host="Electron" agent="Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/28.1.2 Chrome/138.0.7204.243 Electron/37.4.0 Safari/537.36" version="28.1.2">
+  <diagram id="Lab3ClassDiagram" name="Lab3 Class Diagram">
+    <mxGraphModel dx="526" dy="407" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1600" pageHeight="1000" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="program" value="&lt;div style=&quot;text-align:center;font-weight:bold;font-size:14px;&quot;&gt;Program&lt;/div&gt;&lt;hr size=&quot;1&quot;&gt;&lt;div style=&quot;text-align:left;font-size:12px;&quot;&gt;+Main(args)&lt;/div&gt;" style="rounded=0;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacing=10;spacingTop=8;overflow=fill;fontFamily=Arial;fontSize=12;fontColor=#FFFFFF;" parent="1" vertex="1">
+          <mxGeometry x="690" y="40" width="220" height="90" as="geometry" />
+        </mxCell>
+        <mxCell id="menu" value="&lt;div style=&quot;text-align:center;font-weight:bold;font-size:14px;&quot;&gt;Menu&lt;/div&gt;&lt;hr size=&quot;1&quot;&gt;&lt;div style=&quot;text-align:left;font-size:12px;&quot;&gt;-service: Service&lt;br&gt;-teacher: Teacher&lt;br&gt;-student: Student&lt;br&gt;-students: List&amp;lt;Student&amp;gt;&lt;br&gt;-isStudentCreated: bool&lt;/div&gt;&lt;hr size=&quot;1&quot;&gt;&lt;div style=&quot;text-align:left;font-size:12px;&quot;&gt;+Menu(...)&lt;br&gt;+Run()&lt;/div&gt;" style="rounded=0;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacing=10;spacingTop=8;overflow=fill;fontFamily=Arial;fontSize=12;fontColor=#FFFFFF;" parent="1" vertex="1">
+          <mxGeometry x="630" y="190" width="340" height="180" as="geometry" />
+        </mxCell>
+        <mxCell id="service" value="&lt;div style=&quot;text-align:center;font-weight:bold;font-size:14px;&quot;&gt;Service&lt;/div&gt;&lt;hr size=&quot;1&quot;&gt;&lt;div style=&quot;text-align:left;font-size:12px;&quot;&gt;+WelcomeInfo()&lt;br&gt;+ReadStudentFromConsole()&lt;br&gt;+PrintStudentInfo()&lt;br&gt;+SaveStudentToFile()&lt;br&gt;+ReadStudentFromFile()&lt;br&gt;+ReadTeacherFromConsole()&lt;br&gt;+PrintTeacherInfo()&lt;br&gt;+SaveTeacherToFile()&lt;br&gt;+ReadTeacherFromFile()&lt;/div&gt;" style="rounded=0;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacing=10;spacingTop=8;overflow=fill;fontFamily=Arial;fontSize=12;fontColor=#FFFFFF;" parent="1" vertex="1">
+          <mxGeometry x="60" y="220" width="420" height="260" as="geometry" />
+        </mxCell>
+        <mxCell id="student" value="&lt;div style=&quot;text-align:center;font-weight:bold;font-size:14px;&quot;&gt;Student&lt;br&gt;&lt;span style=&quot;font-weight:normal;font-size:11px;&quot;&gt;&amp;lt;&amp;lt;partial&amp;gt;&amp;gt;&lt;/span&gt;&lt;/div&gt;&lt;hr size=&quot;1&quot;&gt;&lt;div style=&quot;text-align:left;font-size:12px;&quot;&gt;-studentName: string&lt;br&gt;-subjectName: string&lt;br&gt;-grades: List&amp;lt;int&amp;gt;&lt;br&gt;-tasksDone: int&lt;br&gt;-studentDiploma: DiplomaProject&lt;/div&gt;&lt;hr size=&quot;1&quot;&gt;&lt;div style=&quot;text-align:left;font-size:12px;&quot;&gt;+StudentName: string&lt;br&gt;+SubjectName: string&lt;br&gt;+TasksDone: int&lt;br&gt;+Diploma: DiplomaProject&lt;br&gt;+AddGrade()&lt;br&gt;+CalculateRating()&lt;br&gt;+SelectTheme()&lt;/div&gt;" style="rounded=0;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacing=10;spacingTop=8;overflow=fill;fontFamily=Arial;fontSize=12;fontColor=#FFFFFF;" parent="1" vertex="1">
+          <mxGeometry x="1120" y="220" width="380" height="260" as="geometry" />
+        </mxCell>
+        <mxCell id="teacher" value="&lt;div style=&quot;text-align:center;font-weight:bold;font-size:14px;&quot;&gt;Teacher&lt;/div&gt;&lt;hr size=&quot;1&quot;&gt;&lt;div style=&quot;text-align:left;font-size:12px;&quot;&gt;-teacherName: string&lt;br&gt;-subjectName: string&lt;br&gt;-subjectHours: int&lt;br&gt;-quantityOfStudents: int&lt;/div&gt;&lt;hr size=&quot;1&quot;&gt;&lt;div style=&quot;text-align:left;font-size:12px;&quot;&gt;+TeacherName: string&lt;br&gt;+SubjectName: string&lt;br&gt;+SubjectHours: int&lt;br&gt;+QuantityOfStudents: int&lt;br&gt;+UpdateStudentCount()&lt;/div&gt;" style="rounded=0;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacing=10;spacingTop=8;overflow=fill;fontFamily=Arial;fontSize=12;fontColor=#FFFFFF;" parent="1" vertex="1">
+          <mxGeometry x="90" y="650" width="360" height="220" as="geometry" />
+        </mxCell>
+        <mxCell id="diploma" value="&lt;div style=&quot;text-align:center;font-weight:bold;font-size:14px;&quot;&gt;Student.DiplomaProject&lt;/div&gt;&lt;hr size=&quot;1&quot;&gt;&lt;div style=&quot;text-align:left;font-size:12px;&quot;&gt;-nameOfTheme: string&lt;br&gt;-numOfCompletedAlgorithms: int&lt;br&gt;-dificultyOfTheme: int&lt;br&gt;-mark: int&lt;br&gt;-nameOfTeacher: string&lt;/div&gt;&lt;hr size=&quot;1&quot;&gt;&lt;div style=&quot;text-align:left;font-size:12px;&quot;&gt;+NameOfTheme: string&lt;br&gt;+Mark: int&lt;br&gt;+CalculateDifficulty()&lt;br&gt;+AssignMark()&lt;/div&gt;" style="rounded=0;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacing=10;spacingTop=8;overflow=fill;fontFamily=Arial;fontSize=12;fontColor=#FFFFFF;" parent="1" vertex="1">
+          <mxGeometry x="1120" y="620" width="380" height="220" as="geometry" />
+        </mxCell>
+        <mxCell id="paper" value="&lt;div style=&quot;text-align:center;font-weight:bold;font-size:14px;&quot;&gt;ScientificPaper&lt;br&gt;&lt;span style=&quot;font-weight:normal;font-size:11px;&quot;&gt;&amp;lt;&amp;lt;static&amp;gt;&amp;gt;&lt;/span&gt;&lt;/div&gt;&lt;hr size=&quot;1&quot;&gt;&lt;div style=&quot;text-align:left;font-size:12px;&quot;&gt;+SearchReference()&lt;/div&gt;" style="rounded=0;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacing=10;spacingTop=8;overflow=fill;fontFamily=Arial;fontSize=12;fontColor=#FFFFFF;" parent="1" vertex="1">
+          <mxGeometry x="620" y="820" width="360" height="100" as="geometry" />
+        </mxCell>
+        <mxCell id="e_program_menu" value="&lt;font style=&quot;&quot;&gt;creates and runs&lt;/font&gt;" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;dashed=1;endArrow=open;endFill=0;fontColor=#FFFFFF;fontFamily=Arial;fontSize=12;" parent="1" source="program" target="menu" edge="1">
+          <mxGeometry x="0.0101" relative="1" as="geometry">
+            <mxPoint x="800" y="130" as="sourcePoint" />
+            <mxPoint x="800" y="190" as="targetPoint" />
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e_program_service" value="creates" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;dashed=1;endArrow=open;endFill=0;fontColor=#FFFFFF;fontFamily=Arial;fontSize=12;" parent="1" source="program" target="service" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="270" y="85" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e_program_student" value="creates" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;dashed=1;endArrow=open;endFill=0;fontColor=#FFFFFF;fontFamily=Arial;fontSize=12;" parent="1" source="program" target="student" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1310" y="85" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e_program_teacher" value="creates" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;dashed=1;endArrow=open;endFill=0;fontColor=#FFFFFF;fontFamily=Arial;fontSize=12;" parent="1" source="program" target="teacher" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="20" y="85" />
+              <mxPoint x="20" y="760" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e_menu_service" value="uses" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=open;endFill=0;fontColor=#FFFFFF;fontFamily=Arial;fontSize=12;" parent="1" source="menu" target="service" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_menu_student" value="uses" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=open;endFill=0;fontColor=#FFFFFF;fontFamily=Arial;fontSize=12;" parent="1" source="menu" target="student" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_menu_teacher" value="uses" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=open;endFill=0;fontColor=#FFFFFF;fontFamily=Arial;fontSize=12;" parent="1" source="menu" target="teacher" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="520" y="340" />
+              <mxPoint x="520" y="760" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e_menu_paper" value="calls" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;dashed=1;endArrow=open;endFill=0;fontColor=#FFFFFF;fontFamily=Arial;fontSize=12;" parent="1" source="menu" target="paper" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_service_student" value="&lt;font&gt;creates / reads / writes&lt;/font&gt;" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;dashed=1;endArrow=open;endFill=0;fontColor=#FFFFFF;fontFamily=Arial;fontSize=12;" parent="1" source="service" target="student" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="540" y="450" />
+              <mxPoint x="540" y="560" />
+              <mxPoint x="1060" y="560" />
+              <mxPoint x="1060" y="350" />
+            </Array>
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e_service_teacher" value="creates / reads / writes" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;dashed=1;endArrow=open;endFill=0;fontColor=#FFFFFF;fontFamily=Arial;fontSize=12;" parent="1" source="service" target="teacher" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e_student_diploma" value="contains" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=none;startArrow=diamondThin;startFill=1;fontColor=#FFFFFF;fontFamily=Arial;fontSize=12;" parent="1" source="student" target="diploma" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

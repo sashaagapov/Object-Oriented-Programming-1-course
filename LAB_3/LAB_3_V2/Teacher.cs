@@ -12,12 +12,8 @@ public class Teacher
     private int subjectHours = 0;
     private int quantityOfStudents = 0;
     /// <summary>
-    /// Конструктор за замовчуванням, конструктор з параметрами та конструктор копіювання для класу Teacher.
+    /// Конструктор за замовчуванням для класу Teacher.
     /// </summary>
-    /// <param name="teacherName">Ім'я викладача.</param>
-    /// <param name="subjectName">Назва предмету, який викладає викладач.</param>
-    /// <param name="subjectHours">Кількість годин, відведених на викладання предмету.</param>
-    /// <param name="quantityOfStudents">Кількість студентів, які навчаються у викладача.</param>
     public Teacher()
     {
         teacherName = string.Empty;
@@ -28,10 +24,10 @@ public class Teacher
     /// <summary>
     /// Конструктор з параметрами для класу Teacher, який ініціалізує всі поля класу відповідно до переданих аргументів.
     /// </summary>
-    /// <param name="teacherName"></param>
-    /// <param name="subjectName"></param>
-    /// <param name="subjectHours"></param>
-    /// <param name="quantityOfStudents"></param>
+    /// <param name="teacherName">Ім'я викладача.</param>
+    /// <param name="subjectName">Назва предмета, який викладає викладач.</param>
+    /// <param name="subjectHours">Кількість годин навантаження.</param>
+    /// <param name="quantityOfStudents">Кількість студентів, закріплених за викладачем.</param>
     public Teacher(string teacherName, string subjectName, int subjectHours, int quantityOfStudents)
     {
         this.teacherName = teacherName;
@@ -42,7 +38,7 @@ public class Teacher
     /// <summary>
     /// Конструктор копіювання для класу Teacher, який створює новий об'єкт на основі існуючого об'єкта Teacher, копіюючи всі його поля.
     /// </summary>
-    /// <param name="previousTeacher"></param>
+    /// <param name="previousTeacher">Існуючий об'єкт викладача для копіювання.</param>
     public Teacher(Teacher previousTeacher)
     {
         this.teacherName = previousTeacher.teacherName;
@@ -85,7 +81,7 @@ public class Teacher
     /// <summary>
     /// Метод UpdateStudentCount, який приймає ціле число difference і оновлює кількість студентів та години викладання відповідно до цього числа. Якщо difference додано до quantityOfStudents не призводить до від'ємного значення, то quantityOfStudents оновлюється на це нове значення. Якщо difference додано до quantityOfStudents не призводить до від'ємного значення, то subjectHours оновлюється на це нове значення, яке є поточним subjectHours плюс двічі difference. Якщо ж додавання difference до quantityOfStudents призводить до від'ємного значення, то метод просто повертається без змін.
     /// </summary>
-    /// <param name="difference"></param>
+    /// <param name="difference">Зміна кількості студентів, яка застосовується до поточного значення.</param>
     public void UpdateStudentCount(int difference)
     {
         if (quantityOfStudents + difference >= 0)

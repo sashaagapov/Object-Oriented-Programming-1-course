@@ -20,8 +20,15 @@
  */
 namespace lab4agapov
 {
+    /// <summary>
+    /// Клас Program є точкою входу в консольний застосунок версії LAB_4_V4.
+    /// </summary>
     class Program
     {
+        /// <summary>
+        /// Головний метод програми. Створює основні об'єкти, завантажує дані студентів і запускає головне меню.
+        /// </summary>
+        /// <param name="args">Аргументи командного рядка, передані під час запуску програми.</param>
         static void Main(string[] args)
         {
             Console.Clear();
