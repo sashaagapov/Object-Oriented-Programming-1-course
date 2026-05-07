@@ -1,4 +1,4 @@
-namespace lab4agapov_v2
+namespace lab4agapov_v4
 {
     /// <summary>
     /// Інтерфейс IPerson описує спільні властивості людини.

@@ -1,38 +1,44 @@
-namespace lab3agapov;
-/// <summary>
-/// Статичний клас ScientificPaper, який містить метод SearchReference
-///  для пошуку наукових статей за їх унікальними ідентифікаторами.
-/// </summary>
-public static class ScientificPaper
+namespace lab3agapov_v1
 {
     /// <summary>
-    /// Метод SearchReference, який реалізує алгоритм бінарного пошуку для знаходження
-    /// наукової статті за її унікальним ідентифікатором
-    /// у відсортованому масиві ідентифікаторів. 
+    /// Статичний клас ScientificPaper містить допоміжну логіку для роботи з науковими статтями.
+    /// У четвертій версії лабораторної роботи він демонструє використання статичного класу.
     /// </summary>
-    /// <param name="identifiers">Відсортований масив унікальних ідентифікаторів наукових статей</param>
-    /// <param name="target">Цільовий ідентифікатор для пошуку</param>
-    /// <returns>Повертає індекс знайденого ідентифікатора або -1, якщо ідентифікатор не знайдено</returns>
-    public static int SearchReference(int[] identifiers, int target)
+    public static class ScientificPaper
     {
-        int left = 0;
-        int right = identifiers.Length - 1;
-        while (left <= right)
+        /// <summary>
+        /// Виконує класичний ітеративний бінарний пошук ідентифікатора статті у відсортованому масиві.
+        /// Метод не використовує готові засоби пошуку, а проходить масив через межі low, high і mid.
+        /// </summary>
+        /// <param name="idArray">Відсортований масив ідентифікаторів наукових статей.</param>
+        /// <param name="targetId">Ідентифікатор статті, який потрібно знайти.</param>
+        /// <returns>Індекс знайденого елемента або -1, якщо такого ідентифікатора немає в масиві.</returns>
+        public static int BinarySearchPaper(int[] idArray, int targetId)
         {
-            int mid = left + (right - left) / 2; // Обчислюємо середину поточного діапазону пошуку.
-            if (identifiers[mid] == target)
+            int low = 0;
+            int high = idArray.Length - 1;
+            int mid;
+
+            while (low <= high)
             {
-                return mid;
+                mid = (low + high) / 2;
+
+                if (idArray[mid] == targetId)
+                {
+                    return mid;
+                }
+
+                if (idArray[mid] < targetId)
+                {
+                    low = mid + 1;
+                }
+                else
+                {
+                    high = mid - 1;
+                }
             }
-            else if (identifiers[mid] < target)
-            {
-                left = mid + 1; // Ціль більша за середній елемент: шукаємо праворуч.
-            }
-            else
-            {
-                right = mid - 1; // Ціль менша за середній елемент: шукаємо ліворуч.
-            }
+
+            return -1;
         }
-        return -1; // Повертаємо -1, якщо жоден індекс не відповідає шуканому ID.
     }
 }

@@ -1,55 +1,97 @@
-
-/* * ДЕКЛАРАЦІЯ ПРО ВИКОРИСТАННЯ ШІ:
-
- * Штучний інтелект використовувався у цій лабораторній роботі виключно
-
- * як навчальний асистент: для розбору логіки, дебагу та кращого розуміння матеріалу.
-
- */
-/* * Версія 3.0
- * Лабораторна робота №4 з курсу "Об'єктно-орієнтоване програмування 1"
- * Виконав: Агапов Олександр | Група: ІПЗ-11(1) | Варіант: 1
- * * ЕТАПИ ЗАВДАННЯ (Версія 3):
- * 1. Створення інтерфейсу IPerson: визначення контракту для всіх учасників освітнього процесу.
- * 2. Реалізація трирівневої ієрархії: IPerson -> Person (базовий клас) -> Student/Teacher (похідні класи).
- * 3. Поліморфізм: демонстрація роботи з об'єктами класів-нащадків через посилання на інтерфейс IPerson.
- * * ОСНОВНІ ВИМОГИ:
- * - Клас Person у цій версії є не абстрактним та реалізує інтерфейс IPerson.
- * - Використання інтерфейсів для часткового обходу обмеження на множинне успадкування.
- */
 using System;
+using System.Collections.Generic;
 
-namespace lab4agapov
+namespace lab4agapov_v2
 {
     /// <summary>
-    /// Клас Program є точкою входу в консольний застосунок версії LAB_4_V3.
+    /// Клас Program містить точку входу в третю версію лабораторної роботи 4.
+    /// Тут створюються початкові об'єкти викладача, студента, сервісу і меню.
     /// </summary>
-    class Program
+    public class Program
     {
         /// <summary>
-        /// Головний метод програми. Створює основні об'єкти, демонструє поліморфізм і запускає головне меню.
+        /// Назва програми для прикладу конструктора з параметрами.
         /// </summary>
-        /// <param name="args">Аргументи командного рядка, передані під час запуску програми.</param>
-        static void Main(string[] args)
+        private string programName;
+
+        /// <summary>
+        /// Конструктор за замовчуванням створює програму з порожньою назвою.
+        /// </summary>
+        public Program()
+        {
+            programName = "";
+        }
+
+        /// <summary>
+        /// Конструктор з параметрами задає назву програми.
+        /// </summary>
+        /// <param name="programName">Назва програми.</param>
+        public Program(string programName)
+        {
+            this.programName = programName;
+        }
+
+        /// <summary>
+        /// Конструктор копії створює програму з назвою іншого об'єкта Program.
+        /// </summary>
+        /// <param name="other">Об'єкт Program, з якого копіюється назва.</param>
+        public Program(Program other)
+        {
+            programName = other.programName;
+        }
+
+        /// <summary>
+        /// Властивість для читання та зміни назви програми.
+        /// </summary>
+        public string ProgramName
+        {
+            get { return programName; }
+            set { programName = value; }
+        }
+
+        /// <summary>
+        /// Головний метод програми. Він очищає консоль, створює початкові дані
+        /// та запускає меню для роботи з освітнім процесом.
+        /// </summary>
+        /// <param name="args">Аргументи командного рядка, які в цій програмі не використовуються.</param>
+        public static void Main(string[] args)
         {
             Console.Clear();
-            Service service = new Service();
-            service.WelcomeInfo();
 
-            Console.WriteLine("--- Демонстрація поліморфізму (Версія 3) ---"); // --- Демонстрація поліморфізму через інтерфейс IPerson (Вимога Версії 3) ---
-            IPerson person1 = new Student("Олег", "Математика", new List<int> { 90, 95 }, 2);
-            IPerson person2 = new Teacher("Марія Іванівна", "Фізика", 120, 30);
-            person1.DisplayInfo();
-            Console.WriteLine("--------------------------------------------");
-            person2.DisplayInfo();
-            Console.WriteLine("--------------------------------------------\n");
+            Service service = new Service("text", "student_report.txt", "");
 
-            Teacher myTeacher = new Teacher();
-            Student myStudent = new Student();
-            List<Student> students = new List<Student>();
+            WelcomeInfo(service);
+            ShowInterfaceDemo();
 
-            Menu menu = new Menu(service, myTeacher, myStudent, students);
+            Teacher teacher = new Teacher("Ковалюк Т.В.", "ООП", 120, 1, "", "Матеріали до лабораторної роботи 4");
+            Student student = new Student("Агапов Олександр", "ООП", new List<int>(), 0, "", 0);
+
+            Menu menu = new Menu(service, teacher, student);
             menu.Run();
+        }
+
+        /// <summary>
+        /// Виводить початкове повідомлення програми.
+        /// </summary>
+        /// <param name="service">Сервіс для виведення повідомлення.</param>
+        private static void WelcomeInfo(Service service)
+        {
+            service.PrintToConsole("Програму запущено. Початкові об'єкти створені.");
+        }
+
+        /// <summary>
+        /// Демонструє роботу з об'єктами Student і Teacher через інтерфейс IPerson.
+        /// </summary>
+        private static void ShowInterfaceDemo()
+        {
+            IPerson firstPerson = new Student("Студент для інтерфейсу", "ООП", new List<int>(), 0, "", 0);
+            IPerson secondPerson = new Teacher("Викладач для інтерфейсу", "ООП", 100, 1, "", "Матеріал для інтерфейсу");
+
+            Console.WriteLine("\n--- Демонстрація інтерфейсу IPerson ---");
+            Console.WriteLine("Перший об'єкт: " + firstPerson.Name);
+            Console.WriteLine("Дисципліна першого об'єкта: " + firstPerson.SubjectName);
+            Console.WriteLine("Другий об'єкт: " + secondPerson.Name);
+            Console.WriteLine("Дисципліна другого об'єкта: " + secondPerson.SubjectName);
         }
     }
 }

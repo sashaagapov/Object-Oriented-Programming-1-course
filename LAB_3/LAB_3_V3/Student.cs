@@ -1,204 +1,351 @@
-using System;
 using System.Collections.Generic;
-namespace lab3agapov_v3;
-/// <summary>
-/// Клас Student, який містить поля для зберігання інформації про студента
-/// та методи для роботи з цією інформацією, включаючи вкладений клас DiplomaProject для зберігання інформації про дипломний проект студента.
-/// </summary>
-public partial class Student
+
+namespace lab3agapov_v1
 {
-    private string studentName = "";
-    private string subjectName = "";
-    private List<int> grades = new List<int>();
-    private int tasksDone = 0;
-    private DiplomaProject studentDiploma;// Поле для зберігання інформації про дипломний проект студента
-
-
     /// <summary>
-    /// Порожній конструктор — усі поля ініціалізуються нулями або порожніми значеннями.
+    /// Частковий клас Student описує студента, його оцінки, виконані роботи,
+    /// отримані матеріали та пов'язаний з ним дипломний проєкт.
     /// </summary>
-    public Student()
+    public partial class Student
     {
-        studentName = string.Empty;
-        subjectName = string.Empty;
-        grades = new List<int>();
-        tasksDone = 0;
-        studentDiploma = new DiplomaProject();
-    }
-    /// <summary>
-    /// Конструктор з параметрами для класу Student,
-    /// який ініціалізує всі поля класу відповідно до переданих аргументів.
-    /// </summary>
-    /// <param name="studentName">Ім'я студента.</param>
-    /// <param name="subjectName">Назва предмета.</param>
-    /// <param name="grades">Список поточних оцінок студента.</param>
-    /// <param name="tasksDone">Кількість виконаних завдань.</param>
-    public Student(string studentName, string subjectName, List<int> grades, int tasksDone)
-    {
-        this.studentName = studentName;
-        this.subjectName = subjectName;
-        this.grades = grades;
-        this.tasksDone = tasksDone;
-        studentDiploma = new DiplomaProject();
-    }
-    /// <summary>
-    /// Конструктор копіювання для класу Student,
-    ///  який створює новий об'єкт на основі існуючого об'єкта Student, копіюючи всі його поля.
-    /// </summary>
-    /// <param name="previousStudent">Існуючий об'єкт студента для копіювання.</param>
-    public Student(Student previousStudent)
-    {
-        this.studentName = previousStudent.studentName;
-        this.subjectName = previousStudent.subjectName;
-        this.grades = new List<int>(previousStudent.grades);
-        this.tasksDone = previousStudent.tasksDone;
-        this.studentDiploma = previousStudent.studentDiploma;
-    }
-    /// <summary>
-    /// Властивості для доступу до полів класу Student: StudentName, 
-    /// SubjectName, Grades та TasksDone. Вони дозволяють отримувати та встановлювати значення відповідних полів.
-    /// </summary>
-    public string StudentName
-    {
-        get { return studentName; }
-        set { studentName = value; }
-    }
-    /// <summary>
-    /// Назва дисципліни, з якою пов'язаний поточний об'єкт. Властивість відкриває контрольований доступ до внутрішнього поля.
-    /// </summary>
-    public string SubjectName
-    {
-        get { return subjectName; }
-        set { subjectName = value; }
-    }
-    /// <summary>
-    /// Колекція поточних оцінок студента, що використовується для обчислення рейтингу.
-    /// </summary>
-    public List<int> Grades
-    {
-        get { return grades; }
-        set { grades = value; }
-    }
-    /// <summary>
-    /// Кількість виконаних завдань студента. Використовується разом зі списком оцінок при розрахунку рейтингу.
-    /// </summary>
-    public int TasksDone
-    {
-        get { return tasksDone; }
-        set { tasksDone = value; }
-    }
-    /// <summary>
-    /// Дані дипломного проєкту, пов'язаного з поточним студентом.
-    /// </summary>
-    public DiplomaProject Diploma
-    {
-        get { return studentDiploma; }
-        set { studentDiploma = value; }
-    }
-
-
-    /// <summary>
-    /// Метод AddGrade, який приймає ціле число grade і додає його до 
-    /// списку оцінок студента, а також збільшує кількість виконаних 
-    /// завдань на 1. Цей метод використовується для додавання нової 
-    /// оцінки студенту та оновлення кількості виконаних завдань відповідно до цієї оцінки.
-    /// </summary>
-    /// <param name="grade">Оцінка, яку потрібно додати до списку.</param>
-    public void AddGrade(int grade)
-    {
-        grades.Add(grade);
-        tasksDone++;
-    }
-    /// <summary>
-    /// Метод CalculateRating, який обчислює та повертає рейтинг 
-    /// студента на основі його оцінок та кількості виконаних завдань. Рейтинг розраховується як середнє значення оцінок, якщо студент має хоча б одну оцінку та виконав хоча б одне завдання. Якщо студент не має оцінок або не виконав жодного завдання, то рейтинг повертається як 0. Цей метод використовується для визначення поточного рейтингу студента на основі його успішності у навчанні.
-    /// </summary>
-    /// <returns>Повертає середній рейтинг студента або 0, якщо оцінки відсутні.</returns>
-    public double CalculateRating()
-    {
-        ArgumentNullException.ThrowIfNull(grades);
-        if (grades.Count == 0 || tasksDone == 0)
-        {
-            return 0;
-        }
-        double rating = 0;
-        foreach (int grade in grades)
-        {
-            rating += grade;
-        }
-        return rating / tasksDone;
-    }
-    /// <summary>
-    /// Вкладений partial-клас DiplomaProject зберігає дані дипломного проєкту студента.
-    /// </summary>
-    public partial class DiplomaProject
-    {
-        private string nameOfTheme;
-        private int numOfCompletedAlgorithms;
-
-        private int dificultyOfTheme;
-        private int mark;
-        private string nameOfTeacher;
         /// <summary>
-        /// Конструктор за замовчуванням для класу DiplomaProject, 
-        /// який ініціалізує всі поля класу значеннями за замовчуванням. 
-        /// Поля ініціалізуються порожніми рядками або нулями відповідно 
-        /// до їх типів даних. Цей конструктор використовується для 
-        /// створення об'єкта DiplomaProject з початковими значеннями,
-        ///  які можуть бути змінені пізніше за допомогою властивостей або методів класу.
+        /// Повне ім'я студента.
         /// </summary>
-        public DiplomaProject()
-        {
-            nameOfTheme = "";
-            numOfCompletedAlgorithms = 0;
-            dificultyOfTheme = 0;
-            mark = 0;
-            nameOfTeacher = "";
-        }
+        private string studentName;
+
         /// <summary>
-        /// Властивості для доступу до полів класу DiplomaProject:
-        ///  NameOfTheme, NumOfCompletedAlgorithms, NameOfTeacher,
-        ///  DificultyOfTheme та Mark. Вони дозволяють отримувати 
-        /// та встановлювати значення відповідних полів.
+        /// Назва дисципліни, яку студент вивчає в межах лабораторної роботи.
         /// </summary>
-        public string NameOfTheme
-        {
-            get { return nameOfTheme; }
-            set { nameOfTheme = value; }
-        }
+        private string subjectName;
+
         /// <summary>
-        /// Кількість реалізованих алгоритмів у дипломному проекті.
+        /// Список оцінок студента з дисципліни.
         /// </summary>
-        public int NumOfCompletedAlgorithms
-        {
-            get { return numOfCompletedAlgorithms; }
-            set { numOfCompletedAlgorithms = value; }
-        }
+        private List<int> gradesList;
+
         /// <summary>
-        /// Ім'я наукового керівника дипломного проекту.
+        /// Кількість навчальних робіт, виконаних студентом.
         /// </summary>
-        public string NameOfTeacher
-        {
-            get { return nameOfTeacher; }
-            set { nameOfTeacher = value; }
-        }
+        private int tasksDone;
+
         /// <summary>
-        /// Складність теми дипломного проекту.
+        /// Навчальний матеріал, який студент отримав від викладача.
         /// </summary>
-        public int DificultyOfTheme
-        {
-            get { return dificultyOfTheme; }
-            set { dificultyOfTheme = value; }
-        }
+        private string downloadedMaterial;
+
         /// <summary>
-        /// Оцінка за дипломний проект.
+        /// Поточний рейтинг студента, який розраховується як середнє значення оцінок.
         /// </summary>
-        public int Mark
+        private double rating;
+
+        /// <summary>
+        /// Дипломний проєкт, закріплений за студентом у третій версії роботи.
+        /// </summary>
+        private DiplomaProject diploma;
+
+        /// <summary>
+        /// Конструктор за замовчуванням створює студента з порожніми текстовими полями,
+        /// нульовими числовими значеннями, порожнім списком оцінок і новим дипломним проєктом.
+        /// </summary>
+        public Student()
         {
-            get { return mark; }
-            set { mark = value; }
+            studentName = "";
+            subjectName = "";
+            gradesList = new List<int>();
+            tasksDone = 0;
+            downloadedMaterial = "";
+            rating = 0;
+            diploma = new DiplomaProject();
         }
 
+        /// <summary>
+        /// Конструктор з параметрами створює студента з уже відомими навчальними даними.
+        /// </summary>
+        /// <param name="studentName">Повне ім'я студента.</param>
+        /// <param name="subjectName">Назва дисципліни студента.</param>
+        /// <param name="gradesList">Список оцінок студента.</param>
+        /// <param name="tasksDone">Кількість виконаних робіт.</param>
+        /// <param name="downloadedMaterial">Матеріал, отриманий студентом.</param>
+        /// <param name="rating">Початковий рейтинг студента.</param>
+        /// <param name="diploma">Дипломний проєкт студента.</param>
+        public Student(string studentName, string subjectName, List<int> gradesList, int tasksDone, string downloadedMaterial, double rating, DiplomaProject diploma)
+        {
+            this.studentName = studentName;
+            this.subjectName = subjectName;
+            this.gradesList = gradesList;
+            this.tasksDone = tasksDone;
+            this.downloadedMaterial = downloadedMaterial;
+            this.rating = rating;
+            this.diploma = diploma;
+        }
+
+        /// <summary>
+        /// Конструктор копії створює нового студента з такими самими даними, як в іншого студента.
+        /// Список оцінок і дипломний проєкт копіюються в окремі об'єкти.
+        /// </summary>
+        /// <param name="other">Інший студент, дані якого потрібно скопіювати.</param>
+        public Student(Student other)
+        {
+            studentName = other.studentName;
+            subjectName = other.subjectName;
+            gradesList = new List<int>(other.gradesList);
+            tasksDone = other.tasksDone;
+            downloadedMaterial = other.downloadedMaterial;
+            rating = other.rating;
+            diploma = new DiplomaProject(other.diploma);
+        }
+
+        /// <summary>
+        /// Властивість для читання та зміни імені студента.
+        /// </summary>
+        public string StudentName
+        {
+            get { return studentName; }
+            set { studentName = value; }
+        }
+
+        /// <summary>
+        /// Властивість для читання та зміни назви дисципліни студента.
+        /// </summary>
+        public string SubjectName
+        {
+            get { return subjectName; }
+            set { subjectName = value; }
+        }
+
+        /// <summary>
+        /// Властивість для доступу до списку оцінок студента.
+        /// </summary>
+        public List<int> GradesList
+        {
+            get { return gradesList; }
+            set { gradesList = value; }
+        }
+
+        /// <summary>
+        /// Властивість для читання та зміни кількості виконаних робіт.
+        /// </summary>
+        public int TasksDone
+        {
+            get { return tasksDone; }
+            set { tasksDone = value; }
+        }
+
+        /// <summary>
+        /// Властивість для читання та зміни матеріалу, який студент отримав від викладача.
+        /// </summary>
+        public string DownloadedMaterial
+        {
+            get { return downloadedMaterial; }
+            set { downloadedMaterial = value; }
+        }
+
+        /// <summary>
+        /// Властивість для читання та зміни рейтингу студента.
+        /// </summary>
+        public double Rating
+        {
+            get { return rating; }
+            set { rating = value; }
+        }
+
+        /// <summary>
+        /// Властивість для доступу до дипломного проєкту студента.
+        /// </summary>
+        public DiplomaProject Diploma
+        {
+            get { return diploma; }
+            set { diploma = value; }
+        }
+
+        /// <summary>
+        /// Додає нову оцінку до списку студента і збільшує кількість виконаних робіт.
+        /// </summary>
+        /// <param name="grade">Оцінка, яку потрібно додати студенту.</param>
+        public void AddGrade(int grade)
+        {
+            gradesList.Add(grade);
+            tasksDone = tasksDone + 1;
+        }
+
+        /// <summary>
+        /// Повертає всі оцінки студента у вигляді одного простого текстового рядка.
+        /// </summary>
+        /// <returns>Текст зі списком оцінок або повідомлення про їх відсутність.</returns>
+        public string ViewGrades()
+        {
+            string result = "";
+            int i;
+
+            if (gradesList.Count == 0)
+            {
+                return "Оцінок немає";
+            }
+
+            for (i = 0; i < gradesList.Count; i++)
+            {
+                result = result + gradesList[i];
+
+                if (i < gradesList.Count - 1)
+                {
+                    result = result + ", ";
+                }
+            }
+
+            return result;
+        }
+
+        /// <summary>
+        /// Розраховує середній рейтинг студента за всіма оцінками та записує результат у поле rating.
+        /// </summary>
+        /// <returns>Поточний рейтинг студента після розрахунку.</returns>
+        public double CalculateRating()
+        {
+            double sum = 0;
+            int i;
+
+            if (gradesList.Count == 0)
+            {
+                rating = 0;
+                return rating;
+            }
+
+            for (i = 0; i < gradesList.Count; i++)
+            {
+                sum = sum + gradesList[i];
+            }
+
+            rating = sum / gradesList.Count;
+            return rating;
+        }
+
+        /// <summary>
+        /// Зберігає в об'єкті студента навчальний матеріал, отриманий від викладача.
+        /// </summary>
+        /// <param name="material">Текст або назва навчального матеріалу.</param>
+        public void DownloadMaterial(string material)
+        {
+            downloadedMaterial = material;
+        }
+
+        /// <summary>
+        /// Частковий вкладений клас DiplomaProject описує дипломний проєкт студента:
+        /// тему, кількість методів, складність, оцінку та наукового керівника.
+        /// </summary>
+        public partial class DiplomaProject
+        {
+            /// <summary>
+            /// Назва теми дипломного проєкту.
+            /// </summary>
+            private string themeName;
+
+            /// <summary>
+            /// Кількість методів, реалізованих у дипломному проєкті.
+            /// </summary>
+            private int methodsCount;
+
+            /// <summary>
+            /// Загальна складність теми, отримана як сума складностей окремих методів.
+            /// </summary>
+            private int themeComplexity;
+
+            /// <summary>
+            /// Оцінка за дипломний проєкт.
+            /// </summary>
+            private int grade;
+
+            /// <summary>
+            /// Ім'я керівника дипломного проєкту.
+            /// </summary>
+            private string supervisorName;
+
+            /// <summary>
+            /// Конструктор за замовчуванням створює порожній дипломний проєкт з нульовими числовими значеннями.
+            /// </summary>
+            public DiplomaProject()
+            {
+                themeName = "";
+                methodsCount = 0;
+                themeComplexity = 0;
+                grade = 0;
+                supervisorName = "";
+            }
+
+            /// <summary>
+            /// Конструктор з параметрами створює дипломний проєкт з усіма основними характеристиками.
+            /// </summary>
+            /// <param name="themeName">Назва теми дипломного проєкту.</param>
+            /// <param name="methodsCount">Кількість методів у проєкті.</param>
+            /// <param name="themeComplexity">Сумарна складність теми.</param>
+            /// <param name="grade">Оцінка за дипломний проєкт.</param>
+            /// <param name="supervisorName">Ім'я керівника дипломного проєкту.</param>
+            public DiplomaProject(string themeName, int methodsCount, int themeComplexity, int grade, string supervisorName)
+            {
+                this.themeName = themeName;
+                this.methodsCount = methodsCount;
+                this.themeComplexity = themeComplexity;
+                this.grade = grade;
+                this.supervisorName = supervisorName;
+            }
+
+            /// <summary>
+            /// Конструктор копії створює новий дипломний проєкт з такими самими значеннями,
+            /// як у вже існуючого дипломного проєкту.
+            /// </summary>
+            /// <param name="other">Інший дипломний проєкт, з якого копіюються дані.</param>
+            public DiplomaProject(DiplomaProject other)
+            {
+                themeName = other.themeName;
+                methodsCount = other.methodsCount;
+                themeComplexity = other.themeComplexity;
+                grade = other.grade;
+                supervisorName = other.supervisorName;
+            }
+
+            /// <summary>
+            /// Властивість для читання та зміни назви теми дипломного проєкту.
+            /// </summary>
+            public string ThemeName
+            {
+                get { return themeName; }
+                set { themeName = value; }
+            }
+
+            /// <summary>
+            /// Властивість для читання та зміни кількості методів у дипломному проєкті.
+            /// </summary>
+            public int MethodsCount
+            {
+                get { return methodsCount; }
+                set { methodsCount = value; }
+            }
+
+            /// <summary>
+            /// Властивість для читання та зміни сумарної складності теми.
+            /// </summary>
+            public int ThemeComplexity
+            {
+                get { return themeComplexity; }
+                set { themeComplexity = value; }
+            }
+
+            /// <summary>
+            /// Властивість для читання та зміни оцінки за дипломний проєкт.
+            /// </summary>
+            public int Grade
+            {
+                get { return grade; }
+                set { grade = value; }
+            }
+
+            /// <summary>
+            /// Властивість для читання та зміни імені керівника дипломного проєкту.
+            /// </summary>
+            public string SupervisorName
+            {
+                get { return supervisorName; }
+                set { supervisorName = value; }
+            }
+        }
     }
-
 }

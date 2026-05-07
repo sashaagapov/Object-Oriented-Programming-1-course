@@ -1,44 +1,31 @@
-/* * ДЕКЛАРАЦІЯ ПРО ВИКОРИСТАННЯ ШІ:
-
- * Штучний інтелект використовувався у цій лабораторній роботі виключно 
-
- * як навчальний асистент: для розбору логіки, дебагу та кращого розуміння матеріалу.
-
- */
-/* * Версія 1.0 
- * Лабораторна робота №3 з курсу "Об'єктно-орієнтоване програмування 1"
- * Виконав: Агапов Олександр | Група: ІПЗ-11(1) | Варіант: 1
- * ЕТАПИ ЗАВДАННЯ (Версія 1):
- * 1. Створення базових класів Teacher та Student з інкапсуляцією даних.
- * 2. Реалізація консольного меню (Menu) та сервісного класу (Service).
- * 3. Додавання методів для зміни навантаження викладача та розрахунку рейтингу студента.
- */
-
-
+using System;
+using System.Collections.Generic;
 
 namespace lab3agapov_v1
 {
-
     /// <summary>
-    /// Клас Program є точкою входу в консольний застосунок версії LAB_3_V1.
+    /// Клас Program містить точку входу в першу версію лабораторної роботи.
+    /// Тут створюються початкові об'єкти одного викладача, одного студента і сервісу.
     /// </summary>
     class Program
     {
         /// <summary>
-        /// Головний метод програми. Створює основні об'єкти та запускає головне меню.
+        /// Головний метод програми. Він очищає консоль, створює початкові дані
+        /// та запускає меню для роботи з освітнім процесом.
         /// </summary>
-        /// <param name="args">Аргументи командного рядка, передані під час запуску програми.</param>
+        /// <param name="args">Аргументи командного рядка, які в цій програмі не використовуються.</param>
         static void Main(string[] args)
         {
             Console.Clear();
-            Service service = new Service();
-            service.WelcomeInfo();
 
-            Teacher myTeacher = new Teacher();
-            Student myStudent = new Student();
-            List<Student> students = new List<Student>();
+            Service service = new Service("text", "student_report.txt", "");
 
-            Menu menu = new Menu(service, myTeacher, myStudent, students);
+            Teacher teacher = new Teacher("Ковалюк Т.В.", "ООП", 120, 1, "", "Матеріали до лабораторної роботи 3");
+            Student student = new Student("Агапов Олександр", "ООП", new List<int>(), 0, "", 0);
+
+            service.PrintToConsole("Програму запущено. Початкові об'єкти створені.");
+
+            Menu menu = new Menu(service, teacher, student);
             menu.Run();
         }
     }

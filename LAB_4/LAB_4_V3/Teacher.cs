@@ -1,96 +1,174 @@
-using System;
-
-namespace lab4agapov;
-/// <summary>
-/// Клас Teacher, який містить поля для зберігання інформації про викладача
-/// та метод для зміни кількості студентів та годин викладання.
-/// Успадкування від класу Person, який містить загальні властивості
-/// для викладача та студента, такі як ім'я та назва предмету. 
-/// Додано метод UpdateStudentCount для зміни кількості студентів та відповідного оновлення годин викладання.
-/// </summary>
-public class Teacher : Person // Успадкування
+namespace lab4agapov_v2
 {
-    private int subjectHours = 0;
-    private int quantityOfStudents = 0;
     /// <summary>
-    /// Конструктор за замовчуванням для класу Teacher.
+    /// Клас Teacher представляє викладача лабораторної роботи 4.
+    /// Викладач успадковує ім'я та дисципліну від класу Person.
     /// </summary>
-    public Teacher() : base() // Виклик базового порожнього конструктора
+    public class Teacher : Person
     {
-        subjectHours = 0;
-        quantityOfStudents = 0;
-    }
-    /// <summary>
-    /// Конструктор з параметрами для класу Teacher, який ініціалізує всі поля 
-    /// класу відповідно до переданих аргументів та викликає конструктор
-    ///  базового класу Person для ініціалізації загальних властивостей.
-    /// </summary>
-    /// <param name="teacherName">Ім'я викладача.</param>
-    /// <param name="subjectName">Назва предмета, який викладає викладач.</param>
-    /// <param name="subjectHours">Кількість годин навантаження.</param>
-    /// <param name="quantityOfStudents">Кількість студентів, закріплених за викладачем.</param>
-    public Teacher(string teacherName, string subjectName, int subjectHours, int quantityOfStudents)
-        : base(teacherName, subjectName) // Передаємо ім'я та предмет у клас Person
-    {
-        this.subjectHours = subjectHours;
-        this.quantityOfStudents = quantityOfStudents;
-    }
-    /// <summary>
-    /// Конструктор копіювання для класу Teacher, який створює новий об'єкт на
-    ///  основі існуючого об'єкта Teacher, копіюючи всі його поля та викликаючи 
-    /// конструктор копіювання базового класу Person для ініціалізації загальних властивостей.
-    /// </summary>
-    /// <param name="previousTeacher">Існуючий об'єкт викладача для копіювання.</param>
-    public Teacher(Teacher previousTeacher)
-        : base(previousTeacher.Name, previousTeacher.SubjectName)
-    {
-        this.subjectHours = previousTeacher.subjectHours;
-        this.quantityOfStudents = previousTeacher.quantityOfStudents;
-    }
-    /// <summary>
-    /// Властивості для доступу до полів класу Teacher: SubjectHours та QuantityOfStudents. 
-    /// Вони дозволяють отримувати та встановлювати значення відповідних полів.
-    /// </summary>
-    public int SubjectHours
-    {
-        get { return subjectHours; }
-        set { subjectHours = value; }
-    }
-    /// <summary>
-    /// Кількість студентів, закріплених за викладачем або навчальною групою.
-    /// </summary>
-    public int QuantityOfStudents
-    {
-        get { return quantityOfStudents; }
-        set { quantityOfStudents = value; }
-    }
-    /// <summary>
-    /// Метод UpdateStudentCount для зміни кількості студентів та відповідного оновлення годин викладання.
-    /// Метод приймає різницю у кількості студентів (positive для збільшення, negative для зменшення) та оновлює відповідно кількість студентів
-    /// та годин викладання (припускаючи, що кожен студент додає 2 години викладання). Метод також перевіряє, щоб кількість студентів не стала від'ємною.
-    /// </summary>
-    /// <param name="difference">Зміна кількості студентів, яка застосовується до поточного значення.</param>
-    public void UpdateStudentCount(int difference)
-    {
-        if (quantityOfStudents + difference >= 0)
+        /// <summary>
+        /// Кількість навчальних годин за дисципліною.
+        /// </summary>
+        private int studyHours;
+
+        /// <summary>
+        /// Кількість студентів, закріплених за викладачем.
+        /// </summary>
+        private int quantityOfStudents;
+
+        /// <summary>
+        /// Журнал, у який викладач записує виставлені оцінки.
+        /// </summary>
+        private string gradesJournal;
+
+        /// <summary>
+        /// Навчальний матеріал, який викладач передає студенту.
+        /// </summary>
+        private string studyMaterial;
+
+        /// <summary>
+        /// Конструктор за замовчуванням створює викладача з порожніми рядками та нульовими числами.
+        /// </summary>
+        public Teacher() : base()
         {
-            quantityOfStudents += difference;
-            subjectHours += difference * 2;
-        }
-        else
-        {
-            Console.WriteLine("Некоректні данні");
-            return;
+            studyHours = 0;
+            quantityOfStudents = 0;
+            gradesJournal = "";
+            studyMaterial = "";
         }
 
-    }
-    /// <summary>
-    /// Перевизначає базовий метод DisplayInfo — виводить загальну інформацію про особу,
-    /// а також специфічні дані викладача: кількість студентів та годин.
-    /// </summary>
-    public override void DisplayInfo()
-    {
-        base.DisplayInfo();
-        Console.WriteLine($"[Викладач] Кількість студентів: {QuantityOfStudents}, Годин: {SubjectHours}");
+        /// <summary>
+        /// Конструктор з параметрами створює викладача з усіма значеннями полів.
+        /// </summary>
+        /// <param name="teacherName">Повне ім'я викладача.</param>
+        /// <param name="subjectName">Назва дисципліни.</param>
+        /// <param name="studyHours">Кількість навчальних годин.</param>
+        /// <param name="quantityOfStudents">Кількість студентів.</param>
+        /// <param name="gradesJournal">Початковий журнал оцінок.</param>
+        /// <param name="studyMaterial">Навчальний матеріал.</param>
+        public Teacher(string teacherName, string subjectName, int studyHours, int quantityOfStudents, string gradesJournal, string studyMaterial) : base(teacherName, subjectName)
+        {
+            this.studyHours = studyHours;
+            this.quantityOfStudents = quantityOfStudents;
+            this.gradesJournal = gradesJournal;
+            this.studyMaterial = studyMaterial;
+        }
+
+        /// <summary>
+        /// Конструктор копії створює нового викладача з даними іншого викладача.
+        /// </summary>
+        /// <param name="other">Викладач, з якого копіюються поля.</param>
+        public Teacher(Teacher other) : base(other)
+        {
+            studyHours = other.studyHours;
+            quantityOfStudents = other.quantityOfStudents;
+            gradesJournal = other.gradesJournal;
+            studyMaterial = other.studyMaterial;
+        }
+
+        /// <summary>
+        /// Властивість для читання та зміни імені викладача через базовий клас.
+        /// </summary>
+        public string TeacherName
+        {
+            get { return Name; }
+            set { Name = value; }
+        }
+
+        /// <summary>
+        /// Властивість для читання та зміни навчального навантаження викладача.
+        /// </summary>
+        public int StudyHours
+        {
+            get { return studyHours; }
+            set { studyHours = value; }
+        }
+
+        /// <summary>
+        /// Властивість для читання та зміни кількості студентів.
+        /// </summary>
+        public int QuantityOfStudents
+        {
+            get { return quantityOfStudents; }
+            set { quantityOfStudents = value; }
+        }
+
+        /// <summary>
+        /// Властивість для читання та зміни журналу оцінок.
+        /// </summary>
+        public string GradesJournal
+        {
+            get { return gradesJournal; }
+            set { gradesJournal = value; }
+        }
+
+        /// <summary>
+        /// Властивість для читання та зміни навчального матеріалу.
+        /// </summary>
+        public string StudyMaterial
+        {
+            get { return studyMaterial; }
+            set { studyMaterial = value; }
+        }
+
+        /// <summary>
+        /// Збільшує кількість студентів на задане число.
+        /// </summary>
+        /// <param name="count">Кількість студентів, яку потрібно додати.</param>
+        public void IncreaseStudents(int count)
+        {
+            quantityOfStudents = quantityOfStudents + count;
+        }
+
+        /// <summary>
+        /// Зменшує кількість студентів, якщо поточна кількість дозволяє це зробити.
+        /// </summary>
+        /// <param name="count">Кількість студентів, яку потрібно відняти.</param>
+        public void DecreaseStudents(int count)
+        {
+            if (quantityOfStudents >= count)
+            {
+                quantityOfStudents = quantityOfStudents - count;
+            }
+        }
+
+        /// <summary>
+        /// Змінює кількість навчальних годин викладача.
+        /// </summary>
+        /// <param name="newHours">Нове значення навчального навантаження.</param>
+        public void ChangeStudyHours(int newHours)
+        {
+            studyHours = newHours;
+        }
+
+        /// <summary>
+        /// Виставляє студенту оцінку через метод студента і записує результат у журнал.
+        /// </summary>
+        /// <param name="student">Студент, який отримує оцінку.</param>
+        /// <param name="grade">Оцінка студента.</param>
+        public void GradeStudent(Student student, int grade)
+        {
+            student.AddGrade(grade);
+            WriteGradeToJournal(student, grade);
+        }
+
+        /// <summary>
+        /// Передає студенту поточний навчальний матеріал викладача.
+        /// </summary>
+        /// <param name="student">Студент, який отримує матеріал.</param>
+        public void GiveMaterial(Student student)
+        {
+            student.DownloadMaterial(studyMaterial);
+        }
+
+        /// <summary>
+        /// Додає до журналу текстовий запис про оцінку конкретного студента.
+        /// </summary>
+        /// <param name="student">Студент, про якого створюється запис.</param>
+        /// <param name="grade">Оцінка, яка записується в журнал.</param>
+        public void WriteGradeToJournal(Student student, int grade)
+        {
+            gradesJournal = gradesJournal + "Студент " + student.StudentName + " отримав оцінку " + grade + " з дисципліни " + SubjectName + ".\n";
+        }
     }
 }

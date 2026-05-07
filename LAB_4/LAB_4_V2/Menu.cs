@@ -1,153 +1,294 @@
-namespace lab4agapov
+namespace lab4agapov_v2
 {
     /// <summary>
-    /// Клас Menu відповідає виключно за відображення меню та обробку вибору користувача.
-    /// Відповідає принципу SRP: одна відповідальність — управління навігацією в меню.
+    /// Клас Menu керує роботою користувача з програмою.
+    /// Він показує пункти меню і передає дії відповідним об'єктам.
     /// </summary>
     public class Menu
     {
-        private readonly Service service;
-        private Teacher myTeacher;
-        private Student myStudent;
-        private List<Student> students;
-        private bool isStudentCreated;
+        /// <summary>
+        /// Сервіс для введення, виведення та збереження звіту.
+        /// </summary>
+        private Service service;
 
         /// <summary>
-        /// Ініціалізує меню з посиланнями на сервіс, наукову статтю та об'єкти даних.
+        /// Викладач, який взаємодіє зі студентом.
         /// </summary>
-        public Menu(Service service, Teacher myTeacher, Student myStudent, List<Student> students)
+        private Teacher teacher;
+
+        /// <summary>
+        /// Студент, з яким працює викладач.
+        /// </summary>
+        private Student student;
+
+        /// <summary>
+        /// Конструктор за замовчуванням створює порожні об'єкти для меню.
+        /// </summary>
+        public Menu()
         {
-            this.service = service;
-            this.myTeacher = myTeacher;
-            this.myStudent = myStudent;
-            this.students = students;
-            isStudentCreated = false;
+            service = new Service();
+            teacher = new Teacher();
+            student = new Student();
         }
 
         /// <summary>
-        /// Запускає головний цикл меню програми та обробляє вибір користувача.
+        /// Конструктор з параметрами створює меню для вже підготовлених об'єктів програми.
+        /// </summary>
+        /// <param name="service">Сервіс для роботи з консоллю та файлами.</param>
+        /// <param name="teacher">Викладач освітнього процесу.</param>
+        /// <param name="student">Студент освітнього процесу.</param>
+        public Menu(Service service, Teacher teacher, Student student)
+        {
+            this.service = service;
+            this.teacher = teacher;
+            this.student = student;
+        }
+
+        /// <summary>
+        /// Конструктор копії створює меню з копіями об'єктів іншого меню.
+        /// </summary>
+        /// <param name="other">Меню, з якого копіюються дані.</param>
+        public Menu(Menu other)
+        {
+            service = new Service(other.service);
+            teacher = new Teacher(other.teacher);
+            student = new Student(other.student);
+        }
+
+        /// <summary>
+        /// Запускає головний цикл меню і виконує команду, яку обирає користувач.
         /// </summary>
         public void Run()
         {
             bool isRunning = true;
+
             while (isRunning)
             {
-                Console.WriteLine("\n==========================================");
-                Console.WriteLine("          ГОЛОВНЕ МЕНЮ ПРОГРАМИ           ");
-                Console.WriteLine("==========================================");
-                Console.WriteLine("1. Створити викладача");
-                Console.WriteLine("2. Оновити навантаження викладача");
-                Console.WriteLine("3. Ввести дані студента з консолі");
-                Console.WriteLine("4. Додати оцінки студенту");
-                Console.WriteLine("5. Вивести дані та зберегти у файл");
-                Console.WriteLine("6. Робота з дипломним проєктом");
-                Console.WriteLine("7. Пошук у науковій статті");
-                Console.WriteLine("0. Вихід");
-                Console.WriteLine("------------------------------------------");
-                Console.Write("Ваш вибір: ");
+                service.PrintToConsole("\n--- Меню освітнього процесу ---");
+                service.PrintToConsole("1. Показати інформацію про викладача та студента");
+                service.PrintToConsole("2. Викладач: змінити кількість годин навантаження");
+                service.PrintToConsole("3. Викладач: передати навчальний матеріал студенту");
+                service.PrintToConsole("4. Викладач: поставити оцінку студенту");
+                service.PrintToConsole("5. Зберегти результати у файл");
+                service.PrintToConsole("6. Викладач: збільшити кількість студентів");
+                service.PrintToConsole("7. Викладач: зменшити кількість студентів");
+                service.PrintToConsole("0. Вийти");
+                service.PrintToConsole("Оберіть пункт:");
 
-                string choice = Console.ReadLine();
+                string choice = service.ReadFromConsole();
 
                 switch (choice)
                 {
                     case "1":
-                        Console.WriteLine("\n--- Пункт 1: Створення викладача ---");
-                        myTeacher = service.ReadTeacherFromConsole();
-                        service.PrintTeacherInfo(myTeacher);
-                        service.SaveTeacherToFile(myTeacher, "teacher_data.txt");
+                        ShowInformation();
                         break;
 
                     case "2":
-                        if (myTeacher == null || string.IsNullOrEmpty(myTeacher.Name)) // Перевірка наявності викладача перед оновленням навантаження
-                        {
-                            Console.WriteLine("Помилка: Спочатку створіть викладача");
-                            break;
-                        }
-                        Console.WriteLine("\n--- Пункт 2: Оновлення навантаження викладача ---");
-                        myTeacher.UpdateStudentCount(5);
-                        Console.WriteLine($"Навантаження оновлено. Поточна кількість студентів: {myTeacher.QuantityOfStudents}");
-                        service.PrintTeacherInfo(myTeacher);
-                        service.SaveTeacherToFile(myTeacher, "teacher_data.txt");
+                        ChangeTeacherHours();
                         break;
 
                     case "3":
-                        Console.WriteLine("\n--- Пункт 3: Створення студента ---");
-                        myStudent = service.ReadStudentFromConsole();
-                        students.Add(myStudent);
-                        isStudentCreated = true;
-                        Console.WriteLine($"Студента {myStudent.Name} успішно додано до бази. Всього студентів у базі: {students.Count}");
+                        GiveMaterialToStudent();
                         break;
 
                     case "4":
-                        if (!isStudentCreated)
-                        {
-                            Console.WriteLine("Помилка: Спочатку створіть студента (пункт 3)!");
-                            break;
-                        }
-                        Console.WriteLine("\n--- Пункт 4: Додавання оцінок студенту ---");
-                        Console.Write("Введіть оцінку (від 0 до 100): ");
-                        if (int.TryParse(Console.ReadLine(), out int grade))
-                        {
-                            myStudent.AddGrade(grade);
-                            Console.WriteLine($"Оцінку {grade} успішно додано студенту {myStudent.Name}.");
-                        }
-                        else
-                        {
-                            Console.WriteLine("Помилка: введіть коректне число.");
-                        }
+                        GradeStudent();
                         break;
 
                     case "5":
-                        if (!isStudentCreated)
-                        {
-                            Console.WriteLine("Помилка: Спочатку створіть студента (пункт 3)!");
-                            break;
-                        }
-                        Console.WriteLine("\n--- Пункт 5: Виведення та збереження даних ---");
-                        service.PrintStudentInfo(myStudent);
-                        string fileName = "student_data.txt";
-                        service.SaveStudentToFile(myStudent, fileName);
-                        service.ReadStudentFromFile(fileName);
+                        SaveData();
                         break;
 
                     case "6":
-                        if (!isStudentCreated)
-                        {
-                            Console.WriteLine("Помилка: Спочатку створіть студента (пункт 3)!");
-                            break;
-                        }
-                        Console.WriteLine("\n--- Пункт 6: Робота з дипломним проєктом ---");
-                        bool themeWasSelected = service.ChooseDiplomaTheme(myStudent);
-                        if (themeWasSelected)
-                        {
-                            myStudent.Diploma.CalculateDifficulty();
-                            myStudent.Diploma.AssignMark();
-                            Console.WriteLine($"\nРезультат: {myStudent.Diploma.NameOfTheme}");
-                            Console.WriteLine($"Підсумкова оцінка за диплом: {myStudent.Diploma.Mark} балів");
-                        }
+                        IncreaseStudents();
                         break;
 
                     case "7":
-                        Console.WriteLine("\n--- Пункт 7: Пошук у науковій статті ---");
-                        int[] references = [12, 34, 56, 78, 90];
-                        int targetId = 56;
-                        Console.WriteLine($"Пошук ID {targetId} у масиві...");
-                        int foundIndex = ScientificPaper.SearchReference(references, targetId);
-                        if (foundIndex != -1)
-                            Console.WriteLine($"ID знайдено. Позиція в списку: {foundIndex}");
-                        else
-                            Console.WriteLine("ID в списку літератури не знайдено.");
+                        DecreaseStudents();
                         break;
 
                     case "0":
-                        Console.WriteLine("Завершення роботи.");
                         isRunning = false;
+                        service.PrintToConsole("Програму завершено");
                         break;
 
                     default:
-                        Console.WriteLine("Некоректний вибір. Спробуйте ще раз.");
+                        service.PrintToConsole("Невідома команда");
                         break;
                 }
+            }
+        }
+
+        /// <summary>
+        /// Показує поточні дані викладача і студента.
+        /// </summary>
+        private void ShowInformation()
+        {
+            service.PrintToConsole("\nВикладач: " + teacher.TeacherName);
+            service.PrintToConsole("Дисципліна викладача: " + teacher.SubjectName);
+            service.PrintToConsole("Навчальне навантаження: " + teacher.StudyHours);
+            service.PrintToConsole("Кількість студентів: " + teacher.QuantityOfStudents);
+            service.PrintToConsole("Навчальний матеріал викладача: " + teacher.StudyMaterial);
+            service.PrintToConsole("Журнал оцінок:\n" + teacher.GradesJournal);
+            service.PrintToConsole("Студент: " + student.StudentName);
+            service.PrintToConsole("Дисципліна студента: " + student.SubjectName);
+            service.PrintToConsole("Оцінки студента: " + student.ViewGrades());
+            service.PrintToConsole("Обсяг виконаних робіт: " + student.TasksDone);
+            service.PrintToConsole("Рейтинг студента: " + student.CalculateRating());
+            service.PrintToConsole("Отриманий матеріал: " + student.DownloadedMaterial);
+        }
+
+        /// <summary>
+        /// Зчитує нове навчальне навантаження та передає його викладачу.
+        /// </summary>
+        private void ChangeTeacherHours()
+        {
+            int newHours;
+
+            newHours = ReadNumberInRange("Введіть нову кількість годин навчального навантаження", 0, 300);
+            teacher.ChangeStudyHours(newHours);
+            service.PrintToConsole("Години успішно змінено");
+        }
+
+        /// <summary>
+        /// Запитує навчальний матеріал і організовує його передачу від викладача до студента.
+        /// </summary>
+        private void GiveMaterialToStudent()
+        {
+            string material;
+
+            material = ReadNotEmptyText("Введіть назву матеріалу");
+            teacher.StudyMaterial = material;
+            teacher.GiveMaterial(student);
+            service.PrintToConsole("Матеріал передано студенту");
+        }
+
+        /// <summary>
+        /// Запитує оцінку і запускає виставлення цієї оцінки студенту через викладача.
+        /// </summary>
+        private void GradeStudent()
+        {
+            int grade;
+
+            grade = ReadNumberInRange("Введіть оцінку студента", 0, 100);
+            teacher.GradeStudent(student, grade);
+            service.PrintToConsole("Оцінку виставлено і записано в журнал");
+        }
+
+        /// <summary>
+        /// Передає сервісу об'єкти викладача і студента для формування та збереження звіту.
+        /// </summary>
+        private void SaveData()
+        {
+            service.SaveReport(teacher, student);
+            service.PrintToConsole("Дані успішно оброблені сервісом та збережені у файл student_report.txt");
+        }
+
+        /// <summary>
+        /// Збільшує кількість студентів у викладача з перевіркою максимальної межі.
+        /// </summary>
+        private void IncreaseStudents()
+        {
+            int count;
+            int maxStudents = 120;
+            bool isCorrect = false;
+
+            if (teacher.QuantityOfStudents >= maxStudents)
+            {
+                service.PrintToConsole("Кількість студентів уже максимальна: " + maxStudents + ". Збільшення неможливе.");
+                return;
+            }
+
+            while (!isCorrect)
+            {
+                count = ReadNumberInRange("На скільки збільшити кількість студентів", 1, 100);
+
+                if (teacher.QuantityOfStudents + count <= maxStudents)
+                {
+                    teacher.IncreaseStudents(count);
+                    service.PrintToConsole("Кількість студентів збільшено. Поточна кількість: " + teacher.QuantityOfStudents);
+                    isCorrect = true;
+                }
+                else
+                {
+                    service.PrintToConsole("Не можна перевищити максимальну кількість студентів: " + maxStudents + ".");
+                    service.PrintToConsole("Поточна кількість: " + teacher.QuantityOfStudents + ". Можна додати не більше: " + (maxStudents - teacher.QuantityOfStudents) + ".");
+                }
+            }
+        }
+
+        /// <summary>
+        /// Зменшує кількість студентів у викладача з перевіркою поточної кількості.
+        /// </summary>
+        private void DecreaseStudents()
+        {
+            int count;
+            bool isCorrect = false;
+
+            while (!isCorrect)
+            {
+                count = ReadNumberInRange("На скільки зменшити кількість студентів", 1, 100);
+
+                if (count <= teacher.QuantityOfStudents)
+                {
+                    teacher.DecreaseStudents(count);
+                    service.PrintToConsole("Кількість студентів зменшено");
+                    isCorrect = true;
+                }
+                else
+                {
+                    service.PrintToConsole("Не можна зменшити більше, ніж є студентів зараз. Поточна кількість: " + teacher.QuantityOfStudents);
+                }
+            }
+        }
+
+        /// <summary>
+        /// Читає ціле число в заданих межах і повторює запит, доки введення не стане коректним.
+        /// </summary>
+        /// <param name="message">Текст запиту до користувача.</param>
+        /// <param name="min">Мінімальне допустиме значення.</param>
+        /// <param name="max">Максимальне допустиме значення.</param>
+        /// <returns>Коректне ціле число в заданих межах.</returns>
+        private int ReadNumberInRange(string message, int min, int max)
+        {
+            int number;
+
+            while (true)
+            {
+                service.PrintToConsole(message + " (" + min + "-" + max + "):");
+
+                if (int.TryParse(service.ReadFromConsole(), out number))
+                {
+                    if (number >= min && number <= max)
+                    {
+                        return number;
+                    }
+                }
+
+                service.PrintToConsole("Некоректне введення. Введіть ціле число в межах від " + min + " до " + max + ".");
+            }
+        }
+
+        /// <summary>
+        /// Читає непорожній текст і пояснює користувачу помилку, якщо рядок порожній.
+        /// </summary>
+        /// <param name="message">Повідомлення перед введенням тексту.</param>
+        /// <returns>Непорожній рядок.</returns>
+        private string ReadNotEmptyText(string message)
+        {
+            string text;
+
+            while (true)
+            {
+                service.PrintToConsole(message + ":");
+                text = service.ReadFromConsole();
+
+                if (!string.IsNullOrWhiteSpace(text))
+                {
+                    return text;
+                }
+
+                service.PrintToConsole("Поле не може бути порожнім. Введіть текст ще раз.");
             }
         }
     }

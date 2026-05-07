@@ -1,45 +1,31 @@
+using System;
+using System.Collections.Generic;
 
-/* * ДЕКЛАРАЦІЯ ПРО ВИКОРИСТАННЯ ШІ:
-
- * Штучний інтелект використовувався у цій лабораторній роботі виключно 
-
- * як навчальний асистент: для розбору логіки, дебагу та кращого розуміння матеріалу.
-
- */
-/* * Версія 2.0 
- * Лабораторна робота №3 з курсу "Об'єктно-орієнтоване програмування 1"
- * Виконав: Агапов Олександр | Група: ІПЗ-11(1) | Варіант: 1
- * ЕТАПИ ЗАВДАННЯ (Версія 2 = Версія 1 + п.7):
- * 1. Усі класи з Версії 1.
- * 2. Додано вкладений клас DiplomaProject у клас Student.
- * 3. Вибір теми диплому з текстового файлу за ключовим словом.
- * 4. Обчислення складності алгоритмів та автоматичне виставлення оцінки.
- */
-
-
-namespace lab3agapov_v2
+namespace lab3agapov_v1
 {
-
     /// <summary>
-    /// Клас Program є точкою входу в консольний застосунок версії LAB_3_V2.
+    /// Клас Program містить точку входу в другу версію лабораторної роботи.
+    /// У цій версії разом зі студентом створюється його вкладений дипломний проєкт.
     /// </summary>
     class Program
     {
         /// <summary>
-        /// Головний метод програми. Створює основні об'єкти та запускає головне меню.
+        /// Головний метод програми створює сервіс, одного викладача, один дипломний проєкт,
+        /// одного студента і запускає меню для роботи з ними.
         /// </summary>
-        /// <param name="args">Аргументи командного рядка, передані під час запуску програми.</param>
+        /// <param name="args">Аргументи командного рядка, які не використовуються у програмі.</param>
         static void Main(string[] args)
         {
             Console.Clear();
-            Service service = new Service();
-            service.WelcomeInfo();
 
-            Teacher myTeacher = new Teacher();
-            Student myStudent = new Student();
-            List<Student> students = new List<Student>();
+            Service service = new Service("text", "student_report.txt", "");
+            Teacher teacher = new Teacher("Ковалюк Т.В.", "ООП", 120, 1, "", "Матеріали до лабораторної роботи 3");
+            Student.DiplomaProject diploma = new Student.DiplomaProject("", 0, 0, 0, "Ковалюк Т.В.");
+            Student student = new Student("Агапов Олександр", "ООП", new List<int>(), 0, "", 0, diploma);
 
-            Menu menu = new Menu(service, myTeacher, myStudent, students);
+            service.PrintToConsole("Лабораторна робота 3, версія 2. Початкові об'єкти створені.");
+
+            Menu menu = new Menu(service, teacher, student);
             menu.Run();
         }
     }

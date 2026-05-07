@@ -1,48 +1,71 @@
-
-/* * ДЕКЛАРАЦІЯ ПРО ВИКОРИСТАННЯ ШІ:
-
- * Штучний інтелект використовувався у цій лабораторній роботі виключно
-
- * як навчальний асистент: для розбору логіки, дебагу та кращого розуміння матеріалу.
-
- */
-/* * Версія 1.0
- * Лабораторна робота №4 з курсу "Об'єктно-орієнтоване програмування 1"
- * Виконав: Агапов Олександр | Група: ІПЗ-11(1) | Варіант: 1
- * * ЕТАПИ ЗАВДАННЯ (Версія 1):
- * 1. Клас Person (базовий): винесення спільних атрибутів (ім'я, назва дисципліни) для учасників освітнього процесу. Конструктор protected.
- * 2. Клас Teacher (похідний): успадковує Person, додає специфічні поля (навантаження, кількість студентів) та специфічні методи.
- * 3. Клас Student (похідний): успадковує Person, додає специфічні поля (оцінки, обсяг робіт) та специфічні методи.
- * 4. Клас Service: інструмент для вводу/виводу даних та роботи з файлами (без успадкування).
- * * ОСНОВНІ ВИМОГИ:
- * - Реалізація успадкування класів (відношення "is-a").
- * - Виклик конструкторів базового класу через ключове слово base.
- * - Дотримання принципів SOLID (зокрема SRP — єдина відповідальність).
- */
 using System;
+using System.Collections.Generic;
 
-namespace lab4agapov
+namespace lab4agapov_v1
 {
     /// <summary>
-    /// Клас Program є точкою входу в консольний застосунок версії LAB_4_V1.
+    /// Клас Program містить точку входу в першу версію лабораторної роботи 4.
+    /// Тут створюються початкові об'єкти викладача, студента, сервісу і меню.
     /// </summary>
-    class Program
+    public class Program
     {
         /// <summary>
-        /// Головний метод програми. Створює основні об'єкти та запускає головне меню.
+        /// Назва програми для прикладу конструктора з параметрами.
         /// </summary>
-        /// <param name="args">Аргументи командного рядка, передані під час запуску програми.</param>
-        static void Main(string[] args)
+        private string programName;
+
+        /// <summary>
+        /// Конструктор за замовчуванням створює програму з порожньою назвою.
+        /// </summary>
+        public Program()
+        {
+            programName = "";
+        }
+
+        /// <summary>
+        /// Конструктор з параметрами задає назву програми.
+        /// </summary>
+        /// <param name="programName">Назва програми.</param>
+        public Program(string programName)
+        {
+            this.programName = programName;
+        }
+
+        /// <summary>
+        /// Конструктор копії створює програму з назвою іншого об'єкта Program.
+        /// </summary>
+        /// <param name="other">Об'єкт Program, з якого копіюється назва.</param>
+        public Program(Program other)
+        {
+            programName = other.programName;
+        }
+
+        /// <summary>
+        /// Властивість для читання та зміни назви програми.
+        /// </summary>
+        public string ProgramName
+        {
+            get { return programName; }
+            set { programName = value; }
+        }
+
+        /// <summary>
+        /// Головний метод програми. Він очищає консоль, створює початкові дані
+        /// та запускає меню для роботи з освітнім процесом.
+        /// </summary>
+        /// <param name="args">Аргументи командного рядка, які в цій програмі не використовуються.</param>
+        public static void Main(string[] args)
         {
             Console.Clear();
-            Service service = new Service();
-            service.WelcomeInfo();
 
-            Teacher myTeacher = new Teacher();
-            Student myStudent = new Student();
-            List<Student> students = new List<Student>();
+            Service service = new Service("text", "student_report.txt", "");
 
-            Menu menu = new Menu(service, myTeacher, myStudent, students);
+            Teacher teacher = new Teacher("Ковалюк Т.В.", "ООП", 120, 1, "", "Матеріали до лабораторної роботи 4");
+            Student student = new Student("Агапов Олександр", "ООП", new List<int>(), 0, "", 0);
+
+            service.PrintToConsole("Програму запущено. Початкові об'єкти створені.");
+
+            Menu menu = new Menu(service, teacher, student);
             menu.Run();
         }
     }

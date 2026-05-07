@@ -1,49 +1,76 @@
 using System.Collections;
-namespace lab4agapov;
+using System.Collections.Generic;
 
-/// <summary>
-/// Перелічувач для класу StudentGroup. Реалізує IEnumerator для послідовного
-/// перебору студентів групи через foreach.
-/// </summary>
-public class StudentGroupEnumerator : IEnumerator
+namespace lab4agapov_v4
 {
-    private readonly List<Student> students;
-    private int position = -1;
-
     /// <summary>
-    /// Ініціалізує перелічувач із переданим списком студентів.
+    /// Клас StudentGroupEnumerator виконує ручний перебір студентів групи.
     /// </summary>
-    /// <param name="students">Список студентів для перебору.</param>
-    public StudentGroupEnumerator(List<Student> students)
+    public class StudentGroupEnumerator : IEnumerator
     {
-        this.students = students;
-    }
+        /// <summary>
+        /// Список студентів для перебору.
+        /// </summary>
+        private List<Student> students;
 
-    /// <summary>
-    /// Переміщує курсор до наступного елемента. Повертає false, якщо елементи закінчились.
-    /// </summary>
-    public bool MoveNext()
-    {
-        position++; // Зсуваємо позицію на один елемент вперед перед перевіркою меж колекції.
-        return position < students.Count; // Поки позиція всередині списку, foreach продовжує ітерацію.
-    }
+        /// <summary>
+        /// Поточна позиція перебору.
+        /// </summary>
+        private int position = -1;
 
-    /// <summary>
-    /// Скидає курсор на позицію перед першим елементом.
-    /// </summary>
-    public void Reset()
-    {
-        position = -1; // Повертаємо курсор у початковий стан "до першого елемента".
-    }
-
-    /// <summary>
-    /// Повертає поточний елемент перебору.
-    /// </summary>
-    public object Current
-    {
-        get
+        /// <summary>
+        /// Конструктор за замовчуванням створює порожній перебирач.
+        /// </summary>
+        public StudentGroupEnumerator()
         {
-            return students[position]; // Повертаємо саме той елемент, на який зараз вказує курсор переліку.
+            students = new List<Student>();
+            position = -1;
+        }
+
+        /// <summary>
+        /// Конструктор з параметрами задає список студентів.
+        /// </summary>
+        /// <param name="students">Список студентів.</param>
+        public StudentGroupEnumerator(List<Student> students)
+        {
+            this.students = students;
+            position = -1;
+        }
+
+        /// <summary>
+        /// Конструктор копії копіює перебирач.
+        /// </summary>
+        /// <param name="other">Перебирач, з якого копіюються дані.</param>
+        public StudentGroupEnumerator(StudentGroupEnumerator other)
+        {
+            students = new List<Student>(other.students);
+            position = other.position;
+        }
+
+        /// <summary>
+        /// Переходить до наступного студента.
+        /// </summary>
+        /// <returns>true, якщо студент існує.</returns>
+        public bool MoveNext()
+        {
+            position = position + 1;
+            return position < students.Count;
+        }
+
+        /// <summary>
+        /// Скидає перебір на початок.
+        /// </summary>
+        public void Reset()
+        {
+            position = -1;
+        }
+
+        /// <summary>
+        /// Повертає поточного студента.
+        /// </summary>
+        public object Current
+        {
+            get { return students[position]; }
         }
     }
 }

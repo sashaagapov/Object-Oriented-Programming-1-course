@@ -1,58 +1,79 @@
-namespace lab4agapov;
+using System;
 
-/// <summary>
-/// Базовий клас Person, що реалізує інтерфейс IPerson.
-/// Зберігає загальні дані для учасників освітнього процесу: ім'я та назву предмету.
-/// Конструктори protected — клас призначений тільки для успадкування.
-/// </summary>
-public class Person : IPerson
+namespace lab4agapov_v2
 {
-    protected string name;
-    protected string subjectName;
-
     /// <summary>
-    /// Конструктор за замовчуванням — ініціалізує поля порожніми рядками.
+    /// Базовий клас Person описує спільні дані людини в освітньому процесі.
+    /// У третій версії він реалізує інтерфейс IPerson.
     /// </summary>
-    protected Person()
+    public class Person : IPerson
     {
-        name = string.Empty;
-        subjectName = string.Empty;
-    }
+        /// <summary>
+        /// Ім'я людини.
+        /// </summary>
+        private string name;
 
-    /// <summary>
-    /// Конструктор з параметрами для ініціалізації імені та предмету.
-    /// </summary>
-    /// <param name="name">Ім'я особи.</param>
-    /// <param name="subjectName">Назва дисципліни.</param>
-    protected Person(string name, string subjectName)
-    {
-        this.name = name;
-        this.subjectName = subjectName;
-    }
+        /// <summary>
+        /// Назва дисципліни людини.
+        /// </summary>
+        private string subjectName;
 
-    /// <summary>
-    /// Ім'я особи.
-    /// </summary>
-    public string Name
-    {
-        get { return name; }
-        set { name = value; }
-    }
+        /// <summary>
+        /// Конструктор за замовчуванням задає порожні значення.
+        /// </summary>
+        public Person()
+        {
+            name = "";
+            subjectName = "";
+        }
 
-    /// <summary>
-    /// Назва дисципліни.
-    /// </summary>
-    public string SubjectName
-    {
-        get { return subjectName; }
-        set { subjectName = value; }
-    }
+        /// <summary>
+        /// Конструктор з параметрами задає ім'я і дисципліну.
+        /// </summary>
+        /// <param name="name">Ім'я людини.</param>
+        /// <param name="subjectName">Назва дисципліни.</param>
+        public Person(string name, string subjectName)
+        {
+            this.name = name;
+            this.subjectName = subjectName;
+        }
 
-    /// <summary>
-    /// Виводить базову інформацію про особу. Virtual — дозволяє перевизначення у спадкоємцях.
-    /// </summary>
-    public virtual void DisplayInfo()
-    {
-        Console.WriteLine($"Особа: {Name}, Предмет: {SubjectName}");
+        /// <summary>
+        /// Конструктор копії копіює спільні поля іншої людини.
+        /// </summary>
+        /// <param name="other">Людина, з якої копіюються дані.</param>
+        public Person(Person other)
+        {
+            name = other.name;
+            subjectName = other.subjectName;
+        }
+
+        /// <summary>
+        /// Властивість для читання та зміни імені людини.
+        /// </summary>
+        public string Name
+        {
+            get { return name; }
+            set { name = value; }
+        }
+
+        /// <summary>
+        /// Властивість для читання та зміни назви дисципліни.
+        /// </summary>
+        public string SubjectName
+        {
+            get { return subjectName; }
+            set { subjectName = value; }
+        }
+
+        /// <summary>
+        /// Виводить загальну інформацію про людину.
+        /// </summary>
+        public virtual void DisplayInfo()
+        {
+            Console.WriteLine("Ім'я: " + name);
+            Console.WriteLine("Дисципліна: " + subjectName);
+        }
+
     }
 }

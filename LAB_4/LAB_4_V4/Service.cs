@@ -1,185 +1,164 @@
+using System;
+using System.Collections.Generic;
+using System.IO;
 
-namespace lab4agapov;
-/// <summary>
-/// Сервісний клас service, який містить статичні методи для роботи з об'єктами 
-/// класу Student, включаючи читання та запис даних у файл, а також виведення інформації про студента на консоль.
-/// </summary>
-public class Service
+namespace lab4agapov_v4
 {
     /// <summary>
-    /// Виводить привітальне повідомлення з інформацією про автора та номер лабораторної роботи.
+    /// Клас Service відповідає за консольне введення, консольне виведення,
+    /// читання з файлу та формування текстового звіту.
     /// </summary>
-    public void WelcomeInfo()
+    public class Service
     {
-        Console.WriteLine("-------------------------------------------------------------------");
-        Console.WriteLine("Агапов Олександр, ІПЗ-11(1), 1 курс, sasha_agapov@knu.ua");
-        Console.WriteLine("                  Лабораторна робота №4(Варіант 1)                 ");
-        Console.WriteLine("-------------------------------------------------------------------");
-    }
-    /// <summary>
-    /// Метод ReadStudentFromConsole, який зчитує інформацію про студента 
-    /// з консолі, включаючи його ім'я та назву предмету, і повертає об'єкт
-    ///  класу Student з цією інформацією. Цей метод використовується для 
-    /// створення нового студента на основі введених користувачем даних.
-    /// </summary>
-    /// <returns>Повертає новий об'єкт Student з даними, введеними з консолі.</returns>
-    public Student ReadStudentFromConsole()
-    {
-        string name;
-        do
-        {
-            Console.WriteLine("Введіть ім'я студента:");
-            name = Console.ReadLine() ?? "";
-        } while (string.IsNullOrWhiteSpace(name));
+        /// <summary>
+        /// Формат виведення або збереження даних.
+        /// </summary>
+        private string outputFormat;
 
-        string subject;
-        do
-        {
-            Console.WriteLine("Введіть назву предмета:");
-            subject = Console.ReadLine() ?? "";
-        } while (string.IsNullOrWhiteSpace(subject));
+        /// <summary>
+        /// Шлях до файлу, з яким працює сервіс.
+        /// </summary>
+        private string filePath;
 
-        return new Student(name, subject, new List<int>(), 0);
-    }
-    /// <summary>
-    /// Метод PrintStudentInfo, який приймає об'єкт класу Student і виводить його інформацію на консоль 
-    /// у форматі: "Ім'я студента: [ім'я]. Назва предмету: [назва предмету]. Його поточний рейтинг: [рейтинг]".
-    ///  Цей метод використовується для відображення інформації про студента, включаючи його ім'я, назву предмету та поточний рейтинг, 
-    /// який обчислюється на основі його оцінок та кількості виконаних завдань.
-    /// </summary>
-    /// <param name="student">Об'єкт студента, дані якого потрібно вивести.</param>
-    public void PrintStudentInfo(Student student)
-    {
-        Console.WriteLine($"Ім'я студента: {student.Name}. Назва предмету: {student.SubjectName}. Його поточний рейтинг: {student.CalculateRating()}");
-    }
-    /// <summary>
-    /// Метод SaveStudentToFile, який приймає об'єкт класу Student та ім'я файлу, 
-    /// і зберігає інформацію про студента у вказаний файл у форматі: 
-    /// "Ім'я студента;Назва предмету;Рейтинг". Цей метод використовується 
-    /// для збереження даних студента у текстовому файлі, що дозволяє зберігати 
-    /// інформацію про студентів для подальшого використання або аналізу.
-    /// </summary>
-    /// <param name="student">Об'єкт студента, дані якого потрібно зберегти.</param>
-    /// <param name="fileName">Ім'я файлу для збереження даних студента.</param>
-    public void SaveStudentToFile(Student student, string fileName)
-    {
-        string data = $"{student.Name};{student.SubjectName};{student.CalculateRating()}\n"; // Додаємо \n в кінці, щоб кожен студент був з нового рядка
-        File.AppendAllText(fileName, data); // AppendAllText ДОДАЄ в кінець файлу, а не стирає!
-        Console.WriteLine($"\nДані студента збережено у файл: {fileName}");
-    }
-    /// <summary>
-    /// Метод ReadStudentFromFile, який приймає ім'я файлу,
-    ///  зчитує інформацію про студента з цього файлу та виводить 
-    /// її на консоль у форматі: "Ім'я: [ім'я]. Предмет: [назва предмету]. 
-    /// Рейтинг: [рейтинг]". Цей метод використовується для читання даних
-    /// студента з текстового файлу та відображення цієї інформації на консоль для користувача.
-    /// </summary>
-    /// <param name="fileName">Ім'я файлу для читання даних студента.</param>
-    public void ReadStudentFromFile(string fileName)
-    {
-        if (File.Exists(fileName))
-        {
-            string[] lines = File.ReadAllLines(fileName); // Зчитуємо весь вміст файлу построково, бо один рядок відповідає одному студенту.
+        /// <summary>
+        /// Дані, які сервіс підготував до запису у файл.
+        /// </summary>
+        private string dataToProcess;
 
-            Console.WriteLine("\n--- Дані з файлу ---");
-            foreach (string line in lines)
+        /// <summary>
+        /// Протокол роботи програми з консоллю.
+        /// </summary>
+        private List<string> protocol;
+
+        /// <summary>
+        /// Конструктор за замовчуванням створює сервіс з порожніми текстовими полями.
+        /// </summary>
+        public Service()
+        {
+            outputFormat = "";
+            filePath = "";
+            dataToProcess = "";
+            protocol = new List<string>();
+        }
+
+        /// <summary>
+        /// Конструктор з параметрами задає формат, шлях до файлу і початкові дані для обробки.
+        /// </summary>
+        /// <param name="outputFormat">Формат виведення.</param>
+        /// <param name="filePath">Шлях до файлу.</param>
+        /// <param name="dataToProcess">Початкові дані для обробки.</param>
+        public Service(string outputFormat, string filePath, string dataToProcess)
+        {
+            this.outputFormat = outputFormat;
+            this.filePath = filePath;
+            this.dataToProcess = dataToProcess;
+            protocol = new List<string>();
+        }
+
+        /// <summary>
+        /// Конструктор копії створює сервіс з такими самими службовими полями, як в іншого сервісу.
+        /// </summary>
+        /// <param name="other">Сервіс, з якого копіюються дані.</param>
+        public Service(Service other)
+        {
+            outputFormat = other.outputFormat;
+            filePath = other.filePath;
+            dataToProcess = other.dataToProcess;
+            protocol = new List<string>(other.protocol);
+        }
+
+        /// <summary>
+        /// Властивість для читання та зміни формату виведення.
+        /// </summary>
+        public string OutputFormat
+        {
+            get { return outputFormat; }
+            set { outputFormat = value; }
+        }
+
+        /// <summary>
+        /// Властивість для читання та зміни шляху до файлу.
+        /// </summary>
+        public string FilePath
+        {
+            get { return filePath; }
+            set { filePath = value; }
+        }
+
+        /// <summary>
+        /// Властивість для читання та зміни даних, підготовлених до обробки.
+        /// </summary>
+        public string DataToProcess
+        {
+            get { return dataToProcess; }
+            set { dataToProcess = value; }
+        }
+
+        /// <summary>
+        /// Виводить повідомлення в консоль.
+        /// </summary>
+        /// <param name="msg">Текст повідомлення для користувача.</param>
+        public void PrintToConsole(string msg)
+        {
+            Console.WriteLine(msg);
+            protocol.Add(msg);
+        }
+
+        /// <summary>
+        /// Читає один рядок з консолі.
+        /// </summary>
+        /// <returns>Рядок, введений користувачем.</returns>
+        public string ReadFromConsole()
+        {
+            string input;
+
+            input = Console.ReadLine() + "";
+            protocol.Add("> " + input);
+
+            return input;
+        }
+
+        /// <summary>
+        /// Формує звіт про викладача і студента та записує його у файл.
+        /// </summary>
+        /// <param name="teacher">Викладач, дані якого додаються до звіту.</param>
+        /// <param name="student">Студент, дані якого додаються до звіту.</param>
+        public void SaveReport(Teacher teacher, Student student)
+        {
+            dataToProcess = "--- ЗВІТ ПРО ОСВІТНІЙ ПРОЦЕС ---\n";
+            dataToProcess = dataToProcess + "Викладач: " + teacher.TeacherName + "\n";
+            dataToProcess = dataToProcess + "Дисципліна: " + teacher.SubjectName + "\n";
+            dataToProcess = dataToProcess + "Навантаження: " + teacher.StudyHours + " год.\n";
+            dataToProcess = dataToProcess + "Студентів у групі: " + teacher.QuantityOfStudents + "\n";
+            dataToProcess = dataToProcess + "Матеріал: " + teacher.StudyMaterial + "\n";
+            dataToProcess = dataToProcess + "Журнал оцінок:\n" + teacher.GradesJournal + "\n";
+            dataToProcess = dataToProcess + "Студент: " + student.StudentName + "\n";
+            dataToProcess = dataToProcess + "Оцінки: " + student.ViewGrades() + "\n";
+            dataToProcess = dataToProcess + "Виконано робіт: " + student.TasksDone + "\n";
+            dataToProcess = dataToProcess + "Рейтинг: " + student.CalculateRating() + "\n";
+            dataToProcess = dataToProcess + "Матеріал у студента: " + student.DownloadedMaterial + "\n";
+            dataToProcess = dataToProcess + "\n--- ПРОТОКОЛ РОБОТИ ПРОГРАМИ ---\n";
+
+            foreach (string item in protocol)
             {
-                if (!string.IsNullOrWhiteSpace(line))
-                {
-                    string[] parts = line.Split(';');
-                    if (parts.Length >= 3) // Мінімум 3 поля: ім'я, предмет, рейтинг.
-                    {
-                        Console.WriteLine($"Ім'я: {parts[0]}");
-                        Console.WriteLine($"Предмет: {parts[1]}");
-                        Console.WriteLine($"Рейтинг: {parts[2]}");
-                        Console.WriteLine("-------------------");
-                    }
-                }
+                dataToProcess = dataToProcess + item + "\n";
             }
-        }
-        else
-        {
-            Console.WriteLine("Файл не знайдено!");
-        }
-    }
 
-    /// <summary>
-    /// Зчитує студентів з файлу та додає їх до групи StudentGroup.
-    /// Кожен рядок файлу містить: ім'я;предмет;рейтинг.
-    /// </summary>
-    /// <param name="group">Група, до якої додаються студенти.</param>
-    /// <param name="fileName">Ім'я файлу для читання.</param>
-    public void LoadStudentFromFile(StudentGroup group, string fileName)
-    {
-        if (File.Exists(fileName))
+            File.WriteAllText(filePath, dataToProcess);
+        }
+
+        /// <summary>
+        /// Читає весь текст з основного файлу, якщо він існує.
+        /// </summary>
+        /// <returns>Вміст файлу або порожній рядок, якщо файл не знайдено.</returns>
+        public string ReadFromFile()
         {
-            string[] lines = File.ReadAllLines(fileName);
-            foreach (string line in lines)
+            if (File.Exists(filePath))
             {
-                if (!(string.IsNullOrWhiteSpace(line)))
-                {
-                    string[] parts = line.Split(';');
-                    if (parts.Length < 3)
-                    {
-                        continue; // Пропускаємо пошкоджені або неповні рядки без винятків.
-                    }
-
-                    if (!int.TryParse(parts[2], out int rating))
-                    {
-                        continue; // Якщо рейтинг не число, рядок також ігноруємо.
-                    }
-
-                    List<int> grades = new List<int>();
-                    grades.Add(rating);
-                    Student student = new Student(parts[0], parts[1], grades, 1); // Створюємо об'єкт Student з мінімально необхідними даними з файлу.
-                    group.AddStudent(student);
-                }
+                return File.ReadAllText(filePath);
             }
+
+            return "";
         }
-    }
-
-    /// <summary>
-    /// Метод для вибору теми диплома. Делегує логіку вибору методу Student.SelectTheme (Версія 4).
-    /// </summary>
-    /// <param name="student">Об'єкт студента, якому призначається тема.</param>
-    /// <returns>Повертає true, якщо тему успішно обрано, і false, якщо вибір скасовано або файл не знайдено.</returns>
-    public bool ChooseDiplomaTheme(Student student)
-    {
-        return student.SelectTheme("themes.txt");
-    }
-
-    /// <summary>
-    /// Виводить інформацію про викладача на консоль.
-    /// </summary>
-    /// <param name="teacher">Об'єкт викладача.</param>
-    public void PrintTeacherInfo(Teacher teacher)
-    {
-        Console.WriteLine($"Викладач: {teacher.Name}, Предмет: {teacher.SubjectName}, Годин: {teacher.SubjectHours}, Студентів: {teacher.QuantityOfStudents}");
-    }
-
-    /// <summary>
-    /// Зберігає дані викладача у текстовий файл.
-    /// </summary>
-    /// <param name="teacher">Об'єкт викладача.</param>
-    /// <param name="fileName">Ім'я файлу для збереження.</param>
-    public void SaveTeacherToFile(Teacher teacher, string fileName)
-    {
-        string data = $"{teacher.Name};{teacher.SubjectName};{teacher.SubjectHours};{teacher.QuantityOfStudents}\n";
-        File.WriteAllText(fileName, data);
-        Console.WriteLine($"Дані викладача збережено у файл: {fileName}");
-    }
-
-    /// <summary>
-    /// Зчитує дані викладача з консолі та повертає новий об'єкт Teacher.
-    /// </summary>
-    public Teacher ReadTeacherFromConsole()
-    {
-        Console.WriteLine("Введіть ім'я викладача:");
-        string name = Console.ReadLine() ?? "";
-
-        Console.WriteLine("Введіть назву предмета:");
-        string subject = Console.ReadLine() ?? "";
-
-        return new Teacher(name, subject, 0, 0);
     }
 }

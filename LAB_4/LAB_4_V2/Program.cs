@@ -1,43 +1,74 @@
+using System;
+using System.Collections.Generic;
 
-/* * ДЕКЛАРАЦІЯ ПРО ВИКОРИСТАННЯ ШІ:
-
- * Штучний інтелект використовувався у цій лабораторній роботі виключно
-
- * як навчальний асистент: для розбору логіки, дебагу та кращого розуміння матеріалу.
-
- */
-/* * Версія 2.0
- * * ЕТАПИ ЗАВДАННЯ (Версія 2):
- * 1. Модифікація класу Person: перетворення базового класу на абстрактний (abstract).
- * 2. Перевірка обмежень: підтвердження неможливості створення екземплярів класу Person.
- * 3. Успадкування: збереження можливості використання Person як базового типу для Student та Teacher.
- * 4. Дотримання принципів SOLID: реалізація принципів OCP (відкритості/закритості) та LSP (підстановки Лісков).
- * - Використання ключового слова abstract для запобігання нерелевантній ініціалізації базового класу.
- * - Демонстрація роботи з об'єктами через посилання на базовий абстрактний клас.
- */
-
-namespace lab4agapov
+namespace lab4agapov_v2
 {
     /// <summary>
-    /// Клас Program є точкою входу в консольний застосунок версії LAB_4_V2.
+    /// Клас Program містить точку входу в другу версію лабораторної роботи 4.
+    /// Тут створюються початкові об'єкти викладача, студента, сервісу і меню.
     /// </summary>
-    class Program
+    public class Program
     {
         /// <summary>
-        /// Головний метод програми. Створює основні об'єкти та запускає головне меню.
+        /// Назва програми для прикладу конструктора з параметрами.
         /// </summary>
-        /// <param name="args">Аргументи командного рядка, передані під час запуску програми.</param>
-        static void Main(string[] args)
+        private string programName;
+
+        /// <summary>
+        /// Конструктор за замовчуванням створює програму з порожньою назвою.
+        /// </summary>
+        public Program()
+        {
+            programName = "";
+        }
+
+        /// <summary>
+        /// Конструктор з параметрами задає назву програми.
+        /// </summary>
+        /// <param name="programName">Назва програми.</param>
+        public Program(string programName)
+        {
+            this.programName = programName;
+        }
+
+        /// <summary>
+        /// Конструктор копії створює програму з назвою іншого об'єкта Program.
+        /// </summary>
+        /// <param name="other">Об'єкт Program, з якого копіюється назва.</param>
+        public Program(Program other)
+        {
+            programName = other.programName;
+        }
+
+        /// <summary>
+        /// Властивість для читання та зміни назви програми.
+        /// </summary>
+        public string ProgramName
+        {
+            get { return programName; }
+            set { programName = value; }
+        }
+
+        /// <summary>
+        /// Головний метод програми. Він очищає консоль, створює початкові дані
+        /// та запускає меню для роботи з освітнім процесом.
+        /// </summary>
+        /// <param name="args">Аргументи командного рядка, які в цій програмі не використовуються.</param>
+        public static void Main(string[] args)
         {
             Console.Clear();
-            Service service = new Service(); // Person testPerson = new Person(); // Помилка компіляції: неможливо створити екземпляр абстрактного класу Person
-            service.WelcomeInfo();
 
-            Teacher myTeacher = new Teacher();
-            Student myStudent = new Student();
-            List<Student> students = new List<Student>();
+            Service service = new Service("text", "student_report.txt", "");
 
-            Menu menu = new Menu(service, myTeacher, myStudent, students);
+            // Доказ для Версії 2: Неможливо створити об'єкт абстрактного класу Person. Це призведе до помилки компіляції (CS0144), оскільки абстрактні класи призначені лише для успадкування.
+            // Person person = new Person();
+
+            Teacher teacher = new Teacher("Ковалюк Т.В.", "ООП", 120, 1, "", "Матеріали до лабораторної роботи 4");
+            Student student = new Student("Агапов Олександр", "ООП", new List<int>(), 0, "", 0);
+
+            service.PrintToConsole("Програму запущено. Початкові об'єкти створені.");
+
+            Menu menu = new Menu(service, teacher, student);
             menu.Run();
         }
     }
