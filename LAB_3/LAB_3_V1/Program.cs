@@ -1,20 +1,11 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 
 namespace lab3agapov_v1
 {
-    /// <summary>
-    /// Клас Program містить точку входу в першу версію лабораторної роботи.
-    /// Тут створюються початкові об'єкти одного викладача, одного студента і сервісу.
-    /// </summary>
     class Program
     {
-        /// <summary>
-        /// Головний метод програми. Він очищає консоль, створює початкові дані
-        /// та запускає меню для роботи з освітнім процесом.
-        /// </summary>
-        /// <param name="args">Аргументи командного рядка, які в цій програмі не використовуються.</param>
-        static void Main(string[] args)
+        public static void Main(string[] args)
         {
             Console.Clear();
 

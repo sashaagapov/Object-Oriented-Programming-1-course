@@ -1,59 +1,10 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 
 namespace lab4agapov_v1
 {
-    /// <summary>
-    /// Клас Program містить точку входу в першу версію лабораторної роботи 4.
-    /// Тут створюються початкові об'єкти викладача, студента, сервісу і меню.
-    /// </summary>
     public class Program
     {
-        /// <summary>
-        /// Назва програми для прикладу конструктора з параметрами.
-        /// </summary>
-        private string programName;
-
-        /// <summary>
-        /// Конструктор за замовчуванням створює програму з порожньою назвою.
-        /// </summary>
-        public Program()
-        {
-            programName = "";
-        }
-
-        /// <summary>
-        /// Конструктор з параметрами задає назву програми.
-        /// </summary>
-        /// <param name="programName">Назва програми.</param>
-        public Program(string programName)
-        {
-            this.programName = programName;
-        }
-
-        /// <summary>
-        /// Конструктор копії створює програму з назвою іншого об'єкта Program.
-        /// </summary>
-        /// <param name="other">Об'єкт Program, з якого копіюється назва.</param>
-        public Program(Program other)
-        {
-            programName = other.programName;
-        }
-
-        /// <summary>
-        /// Властивість для читання та зміни назви програми.
-        /// </summary>
-        public string ProgramName
-        {
-            get { return programName; }
-            set { programName = value; }
-        }
-
-        /// <summary>
-        /// Головний метод програми. Він очищає консоль, створює початкові дані
-        /// та запускає меню для роботи з освітнім процесом.
-        /// </summary>
-        /// <param name="args">Аргументи командного рядка, які в цій програмі не використовуються.</param>
         public static void Main(string[] args)
         {
             Console.Clear();
