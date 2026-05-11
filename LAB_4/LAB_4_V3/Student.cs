@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 
 namespace lab4agapov_v2
@@ -181,6 +182,28 @@ namespace lab4agapov_v2
         public void DownloadMaterial(string material)
         {
             downloadedMaterial = material;
+        }
+
+        /// <summary>
+        /// Повертає повну текстову інформацію про студента на основі базових і спеціалізованих полів.
+        /// </summary>
+        /// <returns>Форматований рядок з даними студента.</returns>
+        public override string GetInfo()
+        {
+            string baseInfo = base.GetInfo();
+            return baseInfo
+                + "\nОцінки: " + ViewGrades()
+                + "\nВиконано робіт: " + tasksDone
+                + "\nРейтинг: " + CalculateRating()
+                + "\nОтриманий матеріал: " + downloadedMaterial;
+        }
+
+        /// <summary>
+        /// Виводить інформацію про студента через перевизначену реалізацію.
+        /// </summary>
+        public override void DisplayInfo()
+        {
+            Console.WriteLine(GetInfo());
         }
     }
 }

@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 
@@ -6,7 +7,7 @@ namespace lab4agapov_v4
     /// <summary>
     /// Клас StudentGroup зберігає допоміжну групу студентів для перебору і сортування.
     /// </summary>
-    public class StudentGroup : IEnumerable
+    public class StudentGroup : IEnumerable, ICloneable
     {
         /// <summary>
         /// Список студентів групи.
@@ -27,7 +28,15 @@ namespace lab4agapov_v4
         /// <param name="students">Список студентів.</param>
         public StudentGroup(List<Student> students)
         {
-            this.students = students;
+            this.students = new List<Student>();
+
+            if (students != null)
+            {
+                foreach (Student student in students)
+                {
+                    this.students.Add((Student)student.Clone());
+                }
+            }
         }
 
         /// <summary>
@@ -40,7 +49,7 @@ namespace lab4agapov_v4
 
             foreach (Student student in other.students)
             {
-                students.Add(student);
+                students.Add((Student)student.Clone());
             }
         }
 
@@ -63,10 +72,27 @@ namespace lab4agapov_v4
         }
 
         /// <summary>
+        /// Створює глибоку копію групи студентів.
+        /// </summary>
+        /// <returns>Клонований об'єкт StudentGroup.</returns>
+        public object Clone()
+        {
+            StudentGroup clonedGroup = new StudentGroup();
+
+            foreach (Student student in students)
+            {
+                clonedGroup.AddStudent((Student)student.Clone());
+            }
+
+            return clonedGroup;
+        }
+
+        /// <summary>
         /// Сортує студентів за рейтингом.
         /// </summary>
         public void SortStudents()
         {
+            // Природне сортування виконується через реалізацію IComparable у класі Student.
             students.Sort();
         }
 
@@ -76,6 +102,7 @@ namespace lab4agapov_v4
         public void SortByTasks()
         {
             StudentTasksComparer comparer = new StudentTasksComparer();
+            // Альтернативне сортування виконується через IComparer за кількістю робіт.
             students.Sort(comparer);
         }
     }

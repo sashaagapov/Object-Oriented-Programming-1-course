@@ -7,7 +7,7 @@ namespace lab4agapov_v4
     /// Клас Student представляє студента лабораторної роботи 4.
     /// Студент успадковує ім'я та дисципліну від класу Person.
     /// </summary>
-    public class Student : Person, IComparable<Student>
+    public partial class Student : Person, IComparable<Student>, ICloneable
     {
         /// <summary>
         /// Список оцінок студента.
@@ -51,7 +51,7 @@ namespace lab4agapov_v4
         /// <param name="rating">Початковий рейтинг студента.</param>
         public Student(string studentName, string subjectName, List<int> gradesList, int tasksDone, string downloadedMaterial, double rating) : base(studentName, subjectName)
         {
-            this.gradesList = new List<int>(gradesList);
+            this.gradesList = gradesList == null ? new List<int>() : new List<int>(gradesList);
             this.tasksDone = tasksDone;
             this.downloadedMaterial = downloadedMaterial;
             this.rating = rating;
@@ -83,8 +83,8 @@ namespace lab4agapov_v4
         /// </summary>
         public List<int> GradesList
         {
-            get { return gradesList; }
-            set { gradesList = value; }
+            get { return new List<int>(gradesList); }
+            set { gradesList = value == null ? new List<int>() : new List<int>(value); }
         }
 
         /// <summary>
@@ -182,6 +182,15 @@ namespace lab4agapov_v4
         public void DownloadMaterial(string material)
         {
             downloadedMaterial = material;
+        }
+
+        /// <summary>
+        /// Створює глибоку копію студента.
+        /// </summary>
+        /// <returns>Клон студента.</returns>
+        public object Clone()
+        {
+            return new Student(this);
         }
 
         /// <summary>

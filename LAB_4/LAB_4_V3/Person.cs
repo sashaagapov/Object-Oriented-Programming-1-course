@@ -19,30 +19,30 @@ namespace lab4agapov_v2
         private string subjectName;
 
         /// <summary>
-        /// Конструктор за замовчуванням задає порожні значення.
+        /// Захищений конструктор за замовчуванням задає порожні значення.
         /// </summary>
-        public Person()
+        protected Person()
         {
             name = "";
             subjectName = "";
         }
 
         /// <summary>
-        /// Конструктор з параметрами задає ім'я і дисципліну.
+        /// Захищений конструктор з параметрами задає ім'я і дисципліну.
         /// </summary>
         /// <param name="name">Ім'я людини.</param>
         /// <param name="subjectName">Назва дисципліни.</param>
-        public Person(string name, string subjectName)
+        protected Person(string name, string subjectName)
         {
             this.name = name;
             this.subjectName = subjectName;
         }
 
         /// <summary>
-        /// Конструктор копії копіює спільні поля іншої людини.
+        /// Захищений конструктор копії копіює спільні поля іншої людини.
         /// </summary>
         /// <param name="other">Людина, з якої копіюються дані.</param>
-        public Person(Person other)
+        protected Person(Person other)
         {
             name = other.name;
             subjectName = other.subjectName;
@@ -67,12 +67,20 @@ namespace lab4agapov_v2
         }
 
         /// <summary>
-        /// Виводить загальну інформацію про людину.
+        /// Формує загальну інформацію про людину як один текстовий блок.
+        /// </summary>
+        /// <returns>Рядок з іменем і назвою дисципліни.</returns>
+        public virtual string GetInfo()
+        {
+            return "Ім'я: " + name + "\nДисципліна: " + subjectName;
+        }
+
+        /// <summary>
+        /// Базова реалізація виведення інформації про людину.
         /// </summary>
         public virtual void DisplayInfo()
         {
-            Console.WriteLine("Ім'я: " + name);
-            Console.WriteLine("Дисципліна: " + subjectName);
+            Console.WriteLine(GetInfo());
         }
 
     }

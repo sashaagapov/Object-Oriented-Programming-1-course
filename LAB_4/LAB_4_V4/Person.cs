@@ -1,12 +1,10 @@
-using System;
-
 namespace lab4agapov_v4
 {
     /// <summary>
     /// Базовий клас Person описує спільні дані людини в освітньому процесі.
     /// У четвертій версії він реалізує інтерфейс IPerson.
     /// </summary>
-    public abstract class Person : IPerson
+    public class Person : IPerson
     {
         /// <summary>
         /// Ім'я людини.
@@ -67,12 +65,12 @@ namespace lab4agapov_v4
         }
 
         /// <summary>
-        /// Виводить загальну інформацію про людину.
+        /// Формує загальну інформацію про людину як один текстовий блок.
         /// </summary>
-        public virtual void DisplayInfo()
+        /// <returns>Рядок з іменем і назвою дисципліни.</returns>
+        public virtual string GetInfo()
         {
-            Console.WriteLine("Ім'я: " + name);
-            Console.WriteLine("Дисципліна: " + subjectName);
+            return "Ім'я: " + name + "\nДисципліна: " + subjectName;
         }
 
     }

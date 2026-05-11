@@ -1,3 +1,5 @@
+using System;
+
 namespace lab4agapov_v2
 {
     /// <summary>
@@ -169,6 +171,28 @@ namespace lab4agapov_v2
         public void WriteGradeToJournal(Student student, int grade)
         {
             gradesJournal = gradesJournal + "Студент " + student.StudentName + " отримав оцінку " + grade + " з дисципліни " + SubjectName + ".\n";
+        }
+
+        /// <summary>
+        /// Повертає повну текстову інформацію про викладача на основі базових і спеціалізованих полів.
+        /// </summary>
+        /// <returns>Форматований рядок з даними викладача.</returns>
+        public override string GetInfo()
+        {
+            string baseInfo = base.GetInfo();
+            return baseInfo
+                + "\nНавчальне навантаження: " + studyHours
+                + "\nКількість студентів: " + quantityOfStudents
+                + "\nНавчальний матеріал: " + studyMaterial
+                + "\nЖурнал оцінок:\n" + gradesJournal;
+        }
+
+        /// <summary>
+        /// Виводить інформацію про викладача через перевизначену реалізацію.
+        /// </summary>
+        public override void DisplayInfo()
+        {
+            Console.WriteLine(GetInfo());
         }
     }
 }

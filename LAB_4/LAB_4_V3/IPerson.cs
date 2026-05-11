@@ -8,5 +8,7 @@ namespace lab4agapov_v2
         string Name { get; set; }
 
         string SubjectName { get; set; }
+
+        void DisplayInfo();
     }
 }
