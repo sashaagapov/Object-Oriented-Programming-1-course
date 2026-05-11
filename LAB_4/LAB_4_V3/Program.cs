@@ -30,8 +30,10 @@ namespace lab4agapov_v2
             service.PrintToConsole("\n--- Демонстрація інтерфейсу IPerson ---");
             service.PrintToConsole("Перший об'єкт через IPerson (Student):");
             firstPerson.DisplayInfo();
+            service.PrintAndSave(((Person)firstPerson).GetInfo());
             service.PrintToConsole("Другий об'єкт через IPerson (Teacher):");
             secondPerson.DisplayInfo();
+            service.PrintAndSave(((Person)secondPerson).GetInfo());
 
             Teacher teacher = new Teacher("Ковалюк Т.В.", "ООП", 120, 1, "", "Матеріали до лабораторної роботи 4");
             Student student = new Student("Агапов Олександр", "ООП", new List<int>(), 0, "", 0);

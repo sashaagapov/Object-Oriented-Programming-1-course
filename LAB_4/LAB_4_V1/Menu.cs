@@ -108,6 +108,7 @@ namespace lab4agapov_v1
                         break;
 
                     case "0":
+                        service.SaveReport(teacher, student);
                         isRunning = false;
                         service.PrintToConsole("Програму завершено");
                         break;

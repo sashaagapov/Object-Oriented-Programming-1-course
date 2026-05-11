@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.IO;
 
 namespace lab4agapov_v2
@@ -25,6 +26,11 @@ namespace lab4agapov_v2
         private string dataToProcess;
 
         /// <summary>
+        /// Протокол роботи програми: усі повідомлення консолі та введення користувача.
+        /// </summary>
+        private List<string> protocol;
+
+        /// <summary>
         /// Конструктор за замовчуванням створює сервіс з порожніми текстовими полями.
         /// </summary>
         public Service()
@@ -32,6 +38,7 @@ namespace lab4agapov_v2
             outputFormat = "";
             filePath = "";
             dataToProcess = "";
+            protocol = new List<string>();
         }
 
         /// <summary>
@@ -45,6 +52,7 @@ namespace lab4agapov_v2
             this.outputFormat = outputFormat;
             this.filePath = filePath;
             this.dataToProcess = dataToProcess;
+            protocol = new List<string>();
         }
 
         /// <summary>
@@ -56,6 +64,7 @@ namespace lab4agapov_v2
             outputFormat = other.outputFormat;
             filePath = other.filePath;
             dataToProcess = other.dataToProcess;
+            protocol = new List<string>(other.protocol);
         }
 
         /// <summary>
@@ -91,7 +100,17 @@ namespace lab4agapov_v2
         /// <param name="msg">Текст повідомлення для користувача.</param>
         public void PrintToConsole(string msg)
         {
-            Console.WriteLine(msg);
+            PrintAndSave(msg);
+        }
+
+        /// <summary>
+        /// Виводить повідомлення в консоль і додає його до протоколу.
+        /// </summary>
+        /// <param name="text">Текст повідомлення.</param>
+        public void PrintAndSave(string text)
+        {
+            Console.WriteLine(text);
+            protocol.Add(text);
         }
 
         /// <summary>
@@ -100,7 +119,18 @@ namespace lab4agapov_v2
         /// <returns>Рядок, введений користувачем.</returns>
         public string ReadFromConsole()
         {
-            return Console.ReadLine() + "";
+            string input = Console.ReadLine() + "";
+            protocol.Add("> " + input);
+            return input;
+        }
+
+        /// <summary>
+        /// Зберігає протокол виконання програми у текстовий файл.
+        /// </summary>
+        /// <param name="fileName">Ім'я або шлях до файлу.</param>
+        public void SaveProtocolToFile(string fileName)
+        {
+            File.WriteAllLines(fileName, protocol);
         }
 
         /// <summary>
@@ -122,6 +152,12 @@ namespace lab4agapov_v2
             dataToProcess = dataToProcess + "Виконано робіт: " + student.TasksDone + "\n";
             dataToProcess = dataToProcess + "Рейтинг: " + student.CalculateRating() + "\n";
             dataToProcess = dataToProcess + "Матеріал у студента: " + student.DownloadedMaterial + "\n";
+            dataToProcess = dataToProcess + "\n--- ПРОТОКОЛ РОБОТИ ПРОГРАМИ ---\n";
+
+            foreach (string item in protocol)
+            {
+                dataToProcess = dataToProcess + item + "\n";
+            }
 
             File.WriteAllText(filePath, dataToProcess);
         }
