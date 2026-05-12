@@ -130,6 +130,7 @@ namespace lab3agapov_v1
             dataToProcess = dataToProcess + "Оцінка за диплом: " + student.Diploma.Grade + "\n";
             dataToProcess = dataToProcess + "Керівник: " + student.Diploma.SupervisorName + "\n";
 
+            // Записуємо сформований звіт одним проходом, щоб уникнути часткових записів.
             File.WriteAllText(filePath, dataToProcess);
         }
 
@@ -141,6 +142,7 @@ namespace lab3agapov_v1
         {
             if (File.Exists(filePath))
             {
+                // Читаємо звіт тільки після перевірки наявності файлу.
                 return File.ReadAllText(filePath);
             }
 
@@ -157,6 +159,7 @@ namespace lab3agapov_v1
         {
             if (File.Exists(path))
             {
+                // Повертаємо всі рядки для подальшого поетапного аналізу в доменній логіці.
                 return File.ReadAllLines(path);
             }
 

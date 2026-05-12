@@ -21,6 +21,7 @@ namespace lab3agapov_v1
 
             while (low <= high)
             {
+                // Обчислюємо центральний індекс поточного інтервалу пошуку.
                 mid = (low + high) / 2;
 
                 if (idArray[mid] == targetId)
@@ -30,10 +31,12 @@ namespace lab3agapov_v1
 
                 if (idArray[mid] < targetId)
                 {
+                    // Шукана ціль праворуч від середини, тому зсуваємо нижню межу.
                     low = mid + 1;
                 }
                 else
                 {
+                    // Шукана ціль ліворуч від середини, тому зсуваємо верхню межу.
                     high = mid - 1;
                 }
             }

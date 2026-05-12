@@ -1,10 +1,21 @@
-﻿using System;
+﻿/*
+Суть версії: Використання partial-класів та вкладених класів (Composition).
+Декларація про ШІ: Під час написання та рефакторингу коду використовувався штучний інтелект (AI) як асистент для навчальних цілей та дотримання принципів Clean Code.
+*/
+using System;
 using System.Collections.Generic;
 
 namespace lab3agapov_v1
 {
+    /// <summary>
+    /// Клас Program містить точку входу для запуску третьої версії лабораторної роботи 3.
+    /// </summary>
     class Program
     {
+        /// <summary>
+        /// Налаштовує сутності з partial та вкладеними структурами і запускає меню взаємодії.
+        /// </summary>
+        /// <param name="args">Аргументи командного рядка.</param>
         public static void Main(string[] args)
         {
             Console.Clear();
