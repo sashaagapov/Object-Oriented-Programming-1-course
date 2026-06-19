@@ -1,26 +1,39 @@
-namespace lab6agapov_v1
+namespace LAB_6_V1
 {
     /// <summary>
-    /// Двері ізотермічної шафи.
+    /// Двері холодильника.
     /// </summary>
     public class Door
     {
         private string openingType;
-        private string sealingType;
+        private string sealType;
         private bool isOpen;
 
         /// <summary>
-        /// Ініціалізує двері параметрами відкривання та ущільнення.
+        /// Конструктор за замовчуванням.
         /// </summary>
-        public Door(string openingType, string sealingType)
+        public Door()
         {
-            this.openingType = openingType;
-            this.sealingType = sealingType;
+            openingType = "Права";
+            sealType = "Магнітне ущільнення";
             isOpen = false;
         }
 
         /// <summary>
-        /// Тип відкривання.
+        /// Конструктор з параметрами.
+        /// </summary>
+        /// <param name="openingTypeValue">Тип відкривання</param>
+        /// <param name="sealTypeValue">Тип ущільнення</param>
+        /// <param name="isOpenValue">Стан дверей</param>
+        public Door(string openingTypeValue, string sealTypeValue, bool isOpenValue)
+        {
+            openingType = openingTypeValue;
+            sealType = sealTypeValue;
+            isOpen = isOpenValue;
+        }
+
+        /// <summary>
+        /// Повертає або задає значення властивості OpeningType.
         /// </summary>
         public string OpeningType
         {
@@ -29,26 +42,28 @@ namespace lab6agapov_v1
         }
 
         /// <summary>
-        /// Тип ущільнення.
+        /// Повертає або задає значення властивості SealType.
         /// </summary>
-        public string SealingType
+        public string SealType
         {
-            get { return sealingType; }
-            set { sealingType = value; }
+            get { return sealType; }
+            set { sealType = value; }
         }
 
         /// <summary>
-        /// Ознака відкритих дверей.
+        /// Повертає або задає значення властивості IsOpen.
         /// </summary>
         public bool IsOpen
         {
             get { return isOpen; }
+            set { isOpen = value; }
         }
 
         /// <summary>
         /// Відкриває двері.
         /// </summary>
-        public string OpenDoor()
+        /// <returns>Результат дії</returns>
+        public string Open()
         {
             isOpen = true;
             return "Двері холодильника відкрито.";
@@ -57,18 +72,20 @@ namespace lab6agapov_v1
         /// <summary>
         /// Закриває двері.
         /// </summary>
-        public string CloseDoor()
+        /// <returns>Результат дії</returns>
+        public string Close()
         {
             isOpen = false;
             return "Двері холодильника закрито.";
         }
 
         /// <summary>
-        /// Виконує контроль ущільнення дверей.
+        /// Перевіряє стан ущільнення.
         /// </summary>
-        public string ControlSealing()
+        /// <returns>Стан ущільнення</returns>
+        public string CheckSeal()
         {
-            return "Ущільнення " + sealingType + " працює коректно.";
+            return "Ущільнення дверей типу \"" + sealType + "\" працює нормально.";
         }
     }
 }

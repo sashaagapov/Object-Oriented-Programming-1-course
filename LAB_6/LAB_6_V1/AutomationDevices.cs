@@ -1,22 +1,35 @@
-namespace lab6agapov_v1
+namespace LAB_6_V1
 {
     /// <summary>
-    /// Прилади автоматики (датчики, реле).
+    /// Прилади автоматики холодильника.
     /// </summary>
     public class AutomationDevices
     {
         private string type;
+        private bool eventDetected;
 
         /// <summary>
-        /// Ініціалізує прилади автоматики.
+        /// Конструктор за замовчуванням.
         /// </summary>
-        public AutomationDevices(string type)
+        public AutomationDevices()
         {
-            this.type = type;
+            type = "Датчики та реле";
+            eventDetected = false;
         }
 
         /// <summary>
-        /// Тип приладів автоматики.
+        /// Конструктор з параметрами.
+        /// </summary>
+        /// <param name="typeValue">Тип автоматики</param>
+        /// <param name="eventDetectedValue">Ознака події</param>
+        public AutomationDevices(string typeValue, bool eventDetectedValue)
+        {
+            type = typeValue;
+            eventDetected = eventDetectedValue;
+        }
+
+        /// <summary>
+        /// Повертає або задає значення властивості Type.
         /// </summary>
         public string Type
         {
@@ -25,27 +38,31 @@ namespace lab6agapov_v1
         }
 
         /// <summary>
-        /// Реагує на подію.
+        /// Повертає або задає значення властивості EventDetected.
         /// </summary>
-        public string ReactToEvent(string eventName)
+        public bool EventDetected
         {
-            return "Автоматика відреагувала на подію: " + eventName + ".";
+            get { return eventDetected; }
+            set { eventDetected = value; }
         }
 
         /// <summary>
-        /// Формує повідомлення про подію.
+        /// Реагує на зміну стану.
         /// </summary>
-        public string NotifyEvent(string message)
+        /// <returns>Результат реакції</returns>
+        public string ReactToEvent()
         {
-            return "Оповіщення автоматики: " + message;
+            eventDetected = true;
+            return "Автоматика відреагувала на зміну стану.";
         }
 
         /// <summary>
         /// Контролює навантаження.
         /// </summary>
+        /// <returns>Інформація про навантаження</returns>
         public string ControlLoad()
         {
-            return "Навантаження в межах норми.";
+            return "Автоматика контролює навантаження системи.";
         }
     }
 }

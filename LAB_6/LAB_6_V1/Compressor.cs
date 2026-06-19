@@ -1,55 +1,69 @@
-namespace lab6agapov_v1
+namespace LAB_6_V1
 {
     /// <summary>
     /// Компресор холодильника.
     /// </summary>
     public class Compressor
     {
-        private int power;
-        private bool isRunning;
+        private double power;
+        private bool isWorking;
 
         /// <summary>
-        /// Ініціалізує компресор потужністю.
+        /// Конструктор за замовчуванням.
         /// </summary>
-        public Compressor(int power)
+        public Compressor()
         {
-            this.power = power;
-            isRunning = false;
+            power = 180.0;
+            isWorking = false;
         }
 
         /// <summary>
-        /// Потужність компресора.
+        /// Конструктор з параметрами.
         /// </summary>
-        public int Power
+        /// <param name="powerValue">Потужність</param>
+        /// <param name="isWorkingValue">Стан роботи</param>
+        public Compressor(double powerValue, bool isWorkingValue)
+        {
+            power = powerValue;
+            isWorking = isWorkingValue;
+        }
+
+        /// <summary>
+        /// Повертає або задає значення властивості Power.
+        /// </summary>
+        public double Power
         {
             get { return power; }
             set { power = value; }
         }
 
         /// <summary>
+        /// Повертає або задає значення властивості IsWorking.
+        /// </summary>
+        public bool IsWorking
+        {
+            get { return isWorking; }
+            set { isWorking = value; }
+        }
+
+        /// <summary>
         /// Запускає компресор.
         /// </summary>
+        /// <returns>Результат запуску</returns>
         public string Start()
         {
-            isRunning = true;
+            isWorking = true;
             return "Компресор запущено.";
         }
 
         /// <summary>
         /// Зупиняє компресор.
         /// </summary>
+        /// <returns>Результат зупинки</returns>
         public string Stop()
         {
-            isRunning = false;
+            isWorking = false;
             return "Компресор зупинено.";
-        }
-
-        /// <summary>
-        /// Моніторить параметри компресора.
-        /// </summary>
-        public string MonitorParameters()
-        {
-            return "Компресор: потужність " + power + " Вт, стан: " + (isRunning ? "працює" : "зупинено") + ".";
         }
     }
 }

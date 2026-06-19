@@ -1,24 +1,39 @@
-namespace lab6agapov_v1
+namespace LAB_6_V1
 {
     /// <summary>
-    /// Корпус ізотермічної шафи.
+    /// Корпус холодильника.
     /// </summary>
     public class Body
     {
         private string material;
         private string color;
+        private bool isDamaged;
 
         /// <summary>
-        /// Ініціалізує корпус заданим матеріалом і кольором.
+        /// Конструктор за замовчуванням.
         /// </summary>
-        public Body(string material, string color)
+        public Body()
         {
-            this.material = material;
-            this.color = color;
+            material = "Метал";
+            color = "Сріблястий";
+            isDamaged = false;
         }
 
         /// <summary>
-        /// Матеріал корпусу.
+        /// Конструктор з параметрами.
+        /// </summary>
+        /// <param name="materialValue">Матеріал</param>
+        /// <param name="colorValue">Колір</param>
+        /// <param name="isDamagedValue">Пошкодження</param>
+        public Body(string materialValue, string colorValue, bool isDamagedValue)
+        {
+            material = materialValue;
+            color = colorValue;
+            isDamaged = isDamagedValue;
+        }
+
+        /// <summary>
+        /// Повертає або задає значення властивості Material.
         /// </summary>
         public string Material
         {
@@ -27,7 +42,7 @@ namespace lab6agapov_v1
         }
 
         /// <summary>
-        /// Колір корпусу.
+        /// Повертає або задає значення властивості Color.
         /// </summary>
         public string Color
         {
@@ -36,16 +51,32 @@ namespace lab6agapov_v1
         }
 
         /// <summary>
-        /// Перевіряє цілісність корпусу.
+        /// Повертає або задає значення властивості IsDamaged.
         /// </summary>
-        public string CheckIntegrity()
+        public bool IsDamaged
         {
-            return "Цілісність корпусу перевірено: пошкоджень не виявлено.";
+            get { return isDamaged; }
+            set { isDamaged = value; }
         }
 
         /// <summary>
-        /// Очищує поверхню корпусу.
+        /// Перевіряє цілісність корпусу.
         /// </summary>
+        /// <returns>Стан корпусу</returns>
+        public string CheckIntegrity()
+        {
+            if (isDamaged)
+            {
+                return "Корпус має пошкодження.";
+            }
+
+            return "Корпус цілий.";
+        }
+
+        /// <summary>
+        /// Повертає повідомлення про очищення поверхні.
+        /// </summary>
+        /// <returns>Результат очищення</returns>
         public string CleanSurface()
         {
             return "Поверхню корпусу очищено.";

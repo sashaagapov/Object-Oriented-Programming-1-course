@@ -1,6 +1,5 @@
 ﻿/*
 Суть версії: Статичні класи, алгоритми пошуку та робота з файлами.
-Декларація про ШІ: Під час написання та рефакторингу коду використовувався штучний інтелект (AI) як асистент для навчальних цілей та дотримання принципів Clean Code.
 */
 using System;
 using System.Collections.Generic;
@@ -26,9 +25,10 @@ namespace lab3agapov_v1
             Student student = new Student("Агапов Олександр", "ООП", new List<int>(), 0, "", 0, diploma);
 
             service.PrintToConsole("Лабораторна робота 3, версія 4. Початкові об'єкти створені.");
+            teacher.RunDemoScenario(service, student);
 
-            Menu menu = new Menu(service, teacher, student);
-            menu.Run();
+            Menu menu = new Menu();
+            teacher.RunScenario(service, menu, student);
         }
     }
 }

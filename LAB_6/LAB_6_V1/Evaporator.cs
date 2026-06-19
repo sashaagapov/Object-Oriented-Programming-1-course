@@ -1,4 +1,4 @@
-namespace lab6agapov_v1
+namespace LAB_6_V1
 {
     /// <summary>
     /// Випарник холодильника.
@@ -8,15 +8,24 @@ namespace lab6agapov_v1
         private double temperature;
 
         /// <summary>
-        /// Ініціалізує випарник заданою температурою.
+        /// Конструктор за замовчуванням.
         /// </summary>
-        public Evaporator(double temperature)
+        public Evaporator()
         {
-            this.temperature = temperature;
+            temperature = -12.0;
         }
 
         /// <summary>
-        /// Температура випарника.
+        /// Конструктор з параметром.
+        /// </summary>
+        /// <param name="temperatureValue">Температура випарника</param>
+        public Evaporator(double temperatureValue)
+        {
+            temperature = temperatureValue;
+        }
+
+        /// <summary>
+        /// Повертає або задає значення властивості Temperature.
         /// </summary>
         public double Temperature
         {
@@ -25,11 +34,12 @@ namespace lab6agapov_v1
         }
 
         /// <summary>
-        /// Контролює охолодження.
+        /// Імітує керування охолодженням.
         /// </summary>
+        /// <returns>Результат роботи</returns>
         public string ControlCooling()
         {
-            return "Охолодження контролюється, t=" + temperature + " °C.";
+            return "Випарник підтримує температуру " + temperature.ToString("F1") + " °C.";
         }
     }
 }

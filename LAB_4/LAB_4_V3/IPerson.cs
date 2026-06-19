@@ -1,7 +1,7 @@
-namespace lab4agapov_v2
+namespace lab4agapov_v3
 {
     /// <summary>
-    /// Інтерфейс IPerson описує спільні властивості людини.
+    /// Інтерфейс IPerson описує спільний контракт людини.
     /// </summary>
     public interface IPerson
     {
@@ -9,6 +9,6 @@ namespace lab4agapov_v2
 
         string SubjectName { get; set; }
 
-        void DisplayInfo();
+        string GetInfo();
     }
 }

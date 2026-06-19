@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Лабораторна робота №4 - HTML звіт</title>
+<style>
+:root{--bg:#f6f8fb;--card:#ffffff;--text:#1e2430;--muted:#586174;--accent:#145da0;--border:#d9e1ee}
+*{box-sizing:border-box}body{margin:0;font:20px/1.8 "Segoe UI",Arial,sans-serif;color:var(--text);background:var(--bg)}
+a{color:var(--accent);text-decoration:none}a:hover{text-decoration:underline}
+.layout{display:grid;grid-template-columns:280px 1fr;min-height:100vh}
+nav{position:sticky;top:0;align-self:start;height:100vh;overflow:auto;background:#0f2742;color:#f4f7fb;padding:24px 20px}
+nav h1{font-size:1.35rem;line-height:1.4;margin:0 0 12px}nav p{font-size:1.1rem}nav ul{list-style:none;padding:0;margin:0}nav li{margin:12px 0}nav a{color:#dce9f8;font-size:1.1rem}nav a:hover{color:#fff}
+main{padding:28px;max-width:1400px;width:100%;font-size:21px}section{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:24px;margin:0 0 22px;box-shadow:0 6px 18px rgba(19,46,84,.05)}
+h2{margin-top:0;color:#123d68;font-size:2.1rem}h3{font-size:1.6rem}ul{padding-left:24px}
+p,li{font-size:1.08rem;line-height:1.8}
+code{background:#eef3f9;padding:2px 6px;border-radius:6px;font-size:1em}
+img{max-width:100%;height:auto;border:1px solid var(--border);border-radius:12px;background:#fff}
+figure{margin:18px 0;max-width:100%;overflow-x:auto}
+figure img{display:block;max-width:100%;width:auto;height:auto;margin:0 auto}
+figcaption{font-size:1.16rem;color:var(--muted);margin-top:8px;line-height:1.75}
+.diagram-figure{padding:16px;overflow-x:auto;background:#f8fbff;border:1px solid var(--border);border-radius:14px}
+.diagram-figure img{display:block;width:100%;max-width:100%;height:auto;object-fit:contain;margin:0 auto}
+.note{border-left:4px solid #d9822b;background:#fff7ed;padding:14px 16px;border-radius:10px;color:#7c4a14;font-size:1.14rem;line-height:1.75}
+.footer{font-size:1.14rem;color:var(--muted)}
+@media (max-width:980px){.layout{grid-template-columns:1fr}nav{position:relative;height:auto}main{padding:18px}}
+</style>
+</head>
+<body>
+<div class="layout">
+<nav>
+<h1>Лабораторна робота №4</h1>
+<p>HTML-звіт для LAB_4_V4</p>
+<ul>
+<li><a href="#goal">Мета роботи</a></li>
+<li><a href="#task">Умова задачі</a></li>
+<li><a href="#ooa">OOA</a></li>
+<li><a href="#ood">OOD</a></li>
+<li><a href="#structure">Структура</a></li>
+<li><a href="#architecture">Архітектурні зміни</a></li>
+<li><a href="#results">Результати</a></li>
+<li><a href="#verification">Перевірка працездатності</a></li>
+<li><a href="#conclusion">Висновок</a></li>
+</ul>
+</nav>
+<main>
+<section id="goal">
+<h2>1. Мета роботи</h2>
+<p>Лабораторна робота №4 розвиває виправлену ЛР3 і демонструє спадкування, абстракцію, власні інтерфейси та стандартні інтерфейси .NET для порівняння, сортування і перебору.</p>
+</section>
+
+<section id="task">
+<h2>2. Умова задачі</h2>
+<p>Фінальна версія <code>LAB_4_V4</code> моделює освітній процес з викладачем, студентом і групою студентів. У ній збережено розвиток версій <code>V1-V4</code>: успадкування, <code>abstract Person</code>, <code>IPerson</code>, <code>IComparable</code>, <code>IComparer</code>, <code>IEnumerable</code>, <code>IEnumerator</code>.</p>
+</section>
+
+<section id="ooa">
+<h2>3. Аналіз задачі / OOA</h2>
+<ul>
+<li><code>Person</code> — базова узагальнена сутність.</li>
+<li><code>Teacher</code> — викладач, який веде предметний сценарій.</li>
+<li><code>Student</code> — студент з оцінками, роботами і рейтингом.</li>
+<li><code>StudentGroup</code> — група студентів для колекційної логіки.</li>
+<li><code>IPerson</code>, <code>StudentTasksComparer</code>, <code>StudentGroupEnumerator</code> — допоміжні елементи моделі.</li>
+<li><code>Program</code>, <code>Menu</code>, <code>Service</code> — технічні класи.</li>
+</ul>
+</section>
+
+<section id="ood">
+<h2>4. Об'єктно-орієнтоване проєктування / OOD</h2>
+<ul>
+<li><code>V1</code> — <code>Person -&gt; Teacher / Student</code>.</li>
+<li><code>V2</code> — <code>abstract Person</code>.</li>
+<li><code>V3</code> — <code>IPerson -&gt; Person -&gt; Teacher / Student</code>.</li>
+<li><code>V4</code> — <code>StudentGroup</code>, <code>IComparable</code>, <code>IComparer</code>, <code>IEnumerable</code>, <code>IEnumerator</code>.</li>
+</ul>
+<figure class="diagram-figure">
+<img src="images/diagrams/lab4_class_diagram.png" alt="UML діаграма класів LAB_4_V4">
+<figcaption>Діаграма класів фінальної версії LAB_4_V4 показує ієрархію Person → Teacher / Student, реалізацію стандартних інтерфейсів у класах Student, StudentGroup, StudentGroupEnumerator і StudentTasksComparer, а також допоміжні класи Service і Menu.</figcaption>
+</figure>
+<figure class="diagram-figure">
+<img src="images/diagrams/lab4_use_case_diagram.png" alt="UML діаграма використання LAB_4">
+<figcaption>Діаграма використання відображає сценарії демонстрації успадкування, абстрактного базового класу, інтерфейсної ієрархії та роботи з групою студентів.</figcaption>
+</figure>
+</section>
+
+<section id="structure">
+<h2>5. Структура програми</h2>
+<ul>
+<li><code>Program.cs</code> — створює <code>Service</code>, <code>Teacher</code>, <code>Student</code>, <code>StudentGroup</code>, <code>Menu</code> і запускає сценарій через <code>Teacher</code>.</li>
+<li><code>Menu.cs</code> — містить тільки <code>PrintOptions(Service service)</code> і <code>ReadCommand(Service service)</code>.</li>
+<li><code>Service.cs</code> — працює тільки з консоллю, текстом, протоколом і файлами.</li>
+<li><code>Teacher.cs</code> — предметна логіка викладача і demo-сценарій.</li>
+<li><code>Student.cs</code> — логіка студента та <code>IComparable&lt;Student&gt;</code>.</li>
+<li><code>StudentGroup.cs</code> — група студентів та <code>IEnumerable</code>.</li>
+<li><code>StudentTasksComparer.cs</code> — <code>IComparer&lt;Student&gt;</code>.</li>
+<li><code>StudentGroupEnumerator.cs</code> — <code>IEnumerator</code>.</li>
+</ul>
+</section>
+
+<section id="architecture">
+<h2>6. Архітектурні зміни після перевірки реалізації</h2>
+<p>Після перевірки реалізації було уточнено розподіл відповідальностей між класами і приведено структуру програми до єдиного архітектурного принципу.</p>
+<ul>
+<li><code>Program</code> залишено тільки як точку запуску: він створює об'єкти і запускає сценарій.</li>
+<li>Demo-сценарій знаходиться в <code>Teacher</code>, бо викладач є активною предметною сутністю освітнього процесу.</li>
+<li><code>Menu</code> не має <code>Teacher</code>, <code>Student</code>, <code>StudentGroup</code> як полів і більше не керує предметною областю.</li>
+<li><code>Menu</code> виконує тільки <code>PrintOptions(Service service)</code> та <code>ReadCommand(Service service)</code>.</li>
+<li><code>Service</code> не керує предметними об'єктами і працює тільки з консоллю, текстом, протоколом і файлами.</li>
+<li>Предметні класи самі формують свою логіку і текстові результати, а <code>Service</code> тільки виводить або зберігає готовий текст.</li>
+<li>Окремий <code>DemoScenario</code> не створювався.</li>
+</ul>
+</section>
+
+<section id="results">
+<h2>7. Результати виконання програми</h2>
+<div class="note"><strong>Результати за версіями:</strong> у звіті показано виконання кожної версії лабораторної роботи окремо.</div>
+<h3>7.1. Результат виконання LAB_4_V1</h3>
+<p>Перша версія показує сам факт переходу від окремих класів до ієрархії з базовим класом <code>Person</code>. На скріншоті видно, що спільні властивості винесено в базову сутність, а <code>Teacher</code> і <code>Student</code> залишаються носіями своєї предметної поведінки.</p>
+<figure><img src="images/screenshots/lab4_v1_demo_scenario.png" alt="Результат виконання LAB_4_V1"><figcaption>Результат виконання demo-сценарію LAB_4_V1: демонстрація успадкування Person -&gt; Teacher / Student.</figcaption></figure>
+<h3>7.2. Результат виконання LAB_4_V2</h3>
+<p>У другій версії перевіряється ідея абстрактної базової сутності: <code>Person</code> більше не розглядається як самостійний об'єкт предметної області. Це підкреслює, що реальні учасники освітнього процесу — саме викладач і студент.</p>
+<figure><img src="images/screenshots/lab4_v2_demo_scenario.png" alt="Результат виконання LAB_4_V2"><figcaption>Результат виконання demo-сценарію LAB_4_V2: демонстрація abstract Person.</figcaption></figure>
+<h3>7.3. Результат виконання LAB_4_V3</h3>
+<p>Третя версія демонструє інтерфейсний рівень над базовим класом і показує поліморфізм через <code>IPerson</code>. Це підтверджує, що спільний контракт можна використати без втрати конкретної поведінки <code>Teacher</code> і <code>Student</code>.</p>
+<figure><img src="images/screenshots/lab4_v3_demo_scenario.png" alt="Результат виконання LAB_4_V3"><figcaption>Результат виконання demo-сценарію LAB_4_V3: демонстрація ієрархії interface -&gt; Person -&gt; Teacher / Student.</figcaption></figure>
+<h3>7.4. Результат виконання LAB_4_V4</h3>
+<p>Фінальна версія додає групу студентів і перевіряє вже не лише спадкування, а й стандартні інтерфейси .NET для сортування та перебору. На цьому етапі добре видно, що <code>StudentGroup</code> стала окремою колекційною сутністю, а не технічним додатком до меню.</p>
+<figure><img src="images/screenshots/lab4_v4_demo_scenario.png" alt="Результат виконання LAB_4_V4"><figcaption>Результат виконання demo-сценарію LAB_4_V4: демонстрація StudentGroup, IComparable, IComparer, IEnumerable, IEnumerator.</figcaption></figure>
+</section>
+
+<section id="verification">
+<h2>8. Перевірка працездатності</h2>
+<ul>
+<li><code>LAB_4_V1</code> — Build succeeded, 0 Warning(s), 0 Error(s)</li>
+<li><code>LAB_4_V2</code> — Build succeeded, 0 Warning(s), 0 Error(s)</li>
+<li><code>LAB_4_V3</code> — Build succeeded, 0 Warning(s), 0 Error(s)</li>
+<li><code>LAB_4_V4</code> — Build succeeded, 0 Warning(s), 0 Error(s)</li>
+</ul>
+<p>Фінальна версія також була запущена: <code>LAB_4_V4</code>.</p>
+</section>
+
+<section id="conclusion">
+<h2>9. Висновок</h2>
+<p>У лабораторній роботі №4 реалізовано розвиток предметної моделі від простого успадкування до використання інтерфейсів і стандартних колекційних механізмів C#. Архітектурне уточнення зробило ролі класів зрозумілішими: доменні сутності відповідають за змістову поведінку, а технічні класи тільки обслуговують запуск, консоль і файл.</p>
+<p>Demo-сценарій у <code>Teacher</code> дає змогу швидко побачити, як у різних версіях перевіряються спадкування, абстракція, поліморфізм і робота з групою студентів через стандартні інтерфейси.</p>
+<p><strong>Документація коду Doxygen.</strong> Для фінальної версії <code>LAB_4_V4</code> згенеровано HTML-документацію Doxygen. Вона містить перелік класів, файлів, методів, властивостей і XML-коментарів до коду.</p>
+<p class="footer"><a href="doxygen/html/index.html">Відкрити Doxygen HTML для LAB_4</a></p>
+</section>
+</main>
+</div>
+</body>
+</html>

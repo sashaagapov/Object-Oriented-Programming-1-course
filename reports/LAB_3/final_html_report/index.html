@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Лабораторна робота №3 - HTML звіт</title>
+<style>
+:root{--bg:#f6f8fb;--card:#ffffff;--text:#1e2430;--muted:#586174;--accent:#145da0;--border:#d9e1ee}
+*{box-sizing:border-box}body{margin:0;font:20px/1.8 "Segoe UI",Arial,sans-serif;color:var(--text);background:var(--bg)}
+a{color:var(--accent);text-decoration:none}a:hover{text-decoration:underline}
+.layout{display:grid;grid-template-columns:280px 1fr;min-height:100vh}
+nav{position:sticky;top:0;align-self:start;height:100vh;overflow:auto;background:#0f2742;color:#f4f7fb;padding:24px 20px}
+nav h1{font-size:1.35rem;line-height:1.4;margin:0 0 12px}nav p{font-size:1.1rem}nav ul{list-style:none;padding:0;margin:0}nav li{margin:12px 0}nav a{color:#dce9f8;font-size:1.1rem}nav a:hover{color:#fff}
+main{padding:28px;max-width:1400px;width:100%}section{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:24px;margin:0 0 22px;box-shadow:0 6px 18px rgba(19,46,84,.05)}
+h1,h2,h3{line-height:1.3}h2{margin-top:0;color:#123d68;font-size:2rem}h3{font-size:1.5rem}
+ul{padding-left:24px}code{background:#eef3f9;padding:2px 6px;border-radius:6px;font-size:.95em}
+img{max-width:100%;height:auto;border:1px solid var(--border);border-radius:12px;background:#fff}
+figure{margin:18px 0;max-width:100%;overflow-x:auto}
+figure img{display:block;max-width:100%;width:auto;height:auto;margin:0 auto}
+figcaption{font-size:1.12rem;color:var(--muted);margin-top:8px;line-height:1.7}
+.diagram-figure{padding:16px;overflow-x:auto;background:#f8fbff;border:1px solid var(--border);border-radius:14px}
+.diagram-figure img{display:block;width:100%;max-width:100%;height:auto;object-fit:contain;margin:0 auto}
+.note{border-left:4px solid #d9822b;background:#fff7ed;padding:14px 16px;border-radius:10px;color:#7c4a14;font-size:1.1rem;line-height:1.7}
+.footer{font-size:1.08rem;color:var(--muted)}
+@media (max-width:980px){.layout{grid-template-columns:1fr}nav{position:relative;height:auto}main{padding:18px}}
+</style>
+</head>
+<body>
+<div class="layout">
+<nav>
+<h1>Лабораторна робота №3</h1>
+<p>HTML-звіт для LAB_3_V4</p>
+<ul>
+<li><a href="#goal">Мета роботи</a></li>
+<li><a href="#task">Умова задачі</a></li>
+<li><a href="#ooa">OOA</a></li>
+<li><a href="#ood">OOD</a></li>
+<li><a href="#structure">Структура</a></li>
+<li><a href="#architecture">Архітектурні зміни</a></li>
+<li><a href="#results">Результати</a></li>
+<li><a href="#verification">Перевірка працездатності</a></li>
+<li><a href="#conclusion">Висновок</a></li>
+</ul>
+</nav>
+<main>
+<section id="goal">
+<h2>1. Мета роботи</h2>
+<p>Лабораторна робота №3 присвячена побудові консольної моделі спрощеного освітнього процесу з використанням класів, конструкторів, властивостей, вкладеного класу, <code>partial class</code>, <code>static class</code> і файлових операцій.</p>
+</section>
+
+<section id="task">
+<h2>2. Умова задачі</h2>
+<p>Фінальна версія <code>LAB_3_V4</code> моделює пару "один викладач - один студент" і демонструє передавання матеріалу, виставлення оцінки, обчислення рейтингу, роботу з дипломним проєктом і допоміжний пошук через <code>ScientificPaper</code>.</p>
+</section>
+
+<section id="ooa">
+<h2>3. Аналіз задачі / OOA</h2>
+<ul>
+<li><code>Teacher</code> — активна предметна сутність, яка веде сценарій роботи.</li>
+<li><code>Student</code> — зберігає оцінки, рейтинг, матеріали і дипломний проєкт.</li>
+<li><code>Student.DiplomaProject</code> — відповідає за тему, складність і оцінку дипломного проєкту.</li>
+<li><code>ScientificPaper</code> — допоміжний <code>static class</code> для пошуку ID статті.</li>
+<li><code>Program</code>, <code>Menu</code>, <code>Service</code> — технічні класи.</li>
+</ul>
+</section>
+
+<section id="ood">
+<h2>4. Об'єктно-орієнтоване проєктування / OOD</h2>
+<p>Розвиток лабораторної за версіями:</p>
+<ul>
+<li><code>V1</code> — базові класи освітнього процесу.</li>
+<li><code>V2</code> — вкладений <code>DiplomaProject</code> і робота з <code>themes.txt</code>.</li>
+<li><code>V3</code> — <code>partial class Student</code>.</li>
+<li><code>V4</code> — <code>ScientificPaper</code> як <code>static class</code> і фінальна архітектура.</li>
+</ul>
+<figure class="diagram-figure">
+<img src="images/diagrams/lab3_class_diagram.png" alt="UML діаграма класів LAB_3_V4">
+<figcaption>Діаграма класів фінальної версії LAB_3_V4 відображає предметні класи Teacher, Student, вкладений Student::DiplomaProject, ScientificPaper, а також допоміжні класи Service і Menu.</figcaption>
+</figure>
+<figure class="diagram-figure">
+<img src="images/diagrams/lab3_use_case_diagram.png" alt="UML діаграма використання LAB_3">
+<figcaption>Діаграма використання показує основні сценарії роботи освітнього процесу: взаємодію викладача і студента, роботу з дипломним проєктом, пошук наукової роботи та збереження результатів.</figcaption>
+</figure>
+</section>
+
+<section id="structure">
+<h2>5. Структура програми</h2>
+<ul>
+<li><code>Program.cs</code> — створює об'єкти і запускає сценарій.</li>
+<li><code>Menu.cs</code> — містить тільки <code>PrintOptions(Service service)</code> і <code>ReadCommand(Service service)</code>.</li>
+<li><code>Service.cs</code> — працює тільки з консоллю, текстом, протоколом і файлами.</li>
+<li><code>Teacher.cs</code> — містить предметну логіку викладача і demo-сценарій.</li>
+<li><code>Student.cs</code>, <code>StudentDiplomaLogic.cs</code> — логіка студента і дипломного проєкту.</li>
+<li><code>ScientificPaper.cs</code> — статичний алгоритмічний пошук.</li>
+</ul>
+</section>
+
+<section id="architecture">
+<h2>6. Архітектурні зміни після перевірки реалізації</h2>
+<p>Після перевірки реалізації було уточнено розподіл відповідальностей між класами і приведено структуру програми до єдиного архітектурного принципу.</p>
+<ul>
+<li><code>Program</code> залишено тільки як точку запуску: він створює об'єкти і запускає сценарій.</li>
+<li>Demo-сценарій знаходиться в <code>Teacher</code>, бо викладач є активною предметною сутністю освітнього процесу.</li>
+<li><code>Menu</code> більше не керує предметною областю і виконує тільки <code>PrintOptions(Service service)</code> та <code>ReadCommand(Service service)</code>.</li>
+<li><code>Service</code> більше не керує <code>Teacher</code>, <code>Student</code>, <code>DiplomaProject</code>, <code>ScientificPaper</code>.</li>
+<li><code>Service</code> працює тільки з консоллю, текстом, протоколом і файлами.</li>
+<li>Предметні класи самі формують свою логіку і текстові результати, а <code>Service</code> тільки виводить або зберігає готовий текст.</li>
+<li>Окремий <code>DemoScenario</code> не створювався, щоб не вводити додатковий керуючий клас поза предметною областю.</li>
+<li>Таке рішення відповідає принципу єдиної відповідальності: предметна логіка відділена від технічної.</li>
+</ul>
+</section>
+
+<section id="results">
+<h2>7. Результати виконання програми</h2>
+<div class="note"><strong>Результати за версіями:</strong> у звіті показано виконання кожної версії лабораторної роботи окремо.</div>
+<h3>7.1. Результат виконання LAB_3_V1</h3>
+<p>У першій версії видно базову предметну взаємодію між викладачем і студентом без додаткових розширень наступних етапів. Сценарій перевіряє, що <code>Teacher</code> веде послідовність дій, а <code>Student</code> коректно приймає матеріал, оцінку і перераховує рейтинг.</p>
+<figure><img src="images/screenshots/lab3_v1_demo_scenario.png" alt="Результат виконання LAB_3_V1"><figcaption>Результат виконання demo-сценарію LAB_3_V1: базова взаємодія викладача і студента, створення об'єктів, передавання матеріалу, оцінювання і рейтинг.</figcaption></figure>
+<h3>7.2. Результат виконання LAB_3_V2</h3>
+<p>Друга версія розвиває базову модель і показує, що структура ЛР3 підтримує подальше нарощування функціоналу без зміни предметної області. На цьому етапі важливо, що вже наявні класи зберігають свої ролі, а сценарій лишається зрозумілим при запуску.</p>
+<figure><img src="images/screenshots/lab3_v2_demo_scenario.png" alt="Результат виконання LAB_3_V2"><figcaption>Результат виконання demo-сценарію LAB_3_V2: розвиток функціоналу LAB_3_V1 відповідно до другої версії завдання.</figcaption></figure>
+<h3>7.3. Результат виконання LAB_3_V3</h3>
+<p>Третя версія вже демонструє додаткову логіку студента, пов'язану з дипломним проєктом, і показує користь поділу коду на partial-файли. Саме тут видно, що предметна поведінка студента стала змістовнішою, але не була винесена в технічні класи.</p>
+<figure><img src="images/screenshots/lab3_v3_demo_scenario.png" alt="Результат виконання LAB_3_V3"><figcaption>Результат виконання demo-сценарію LAB_3_V3: демонстрація дипломного проєкту і додаткової логіки студента цієї версії.</figcaption></figure>
+<h3>7.4. Результат виконання LAB_3_V4</h3>
+<p>Фінальна версія збирає разом основний сценарій взаємодії викладача і студента, роботу з дипломним проєктом та допоміжний алгоритмічний компонент <code>ScientificPaper</code>. Цей результат підтверджує, що предметна логіка, технічне меню і файлове / консольне обслуговування розділені між класами коректно.</p>
+<figure><img src="images/screenshots/lab3_v4_demo_scenario.png" alt="Результат виконання LAB_3_V4"><figcaption>Результат виконання demo-сценарію LAB_3_V4: фінальна версія LAB_3 з основним сценарієм, дипломним проєктом, ScientificPaper і технічним меню.</figcaption></figure>
+</section>
+
+<section id="verification">
+<h2>8. Перевірка працездатності</h2>
+<ul>
+<li><code>LAB_3_V1</code> — Build succeeded, 0 Warning(s), 0 Error(s)</li>
+<li><code>LAB_3_V2</code> — Build succeeded, 0 Warning(s), 0 Error(s)</li>
+<li><code>LAB_3_V3</code> — Build succeeded, 0 Warning(s), 0 Error(s)</li>
+<li><code>LAB_3_V4</code> — Build succeeded, 0 Warning(s), 0 Error(s)</li>
+</ul>
+<p>Фінальна версія також була запущена: <code>LAB_3_V4</code>.</p>
+</section>
+
+<section id="conclusion">
+<h2>9. Висновок</h2>
+<p>У лабораторній роботі №3 реалізовано базову предметну модель освітнього процесу з подальшим розширенням до дипломного проєкту та допоміжного статичного алгоритму. Архітектурне уточнення зробило розподіл відповідальностей чіткішим: предметна логіка лишилася в доменних класах, а <code>Program</code>, <code>Menu</code> і <code>Service</code> виконують лише свої окремі ролі.</p>
+<p>Demo-сценарій у <code>Teacher</code> дає змогу швидко перевірити ключові частини програми при запуску і добре показує, як змінюється функціональність від версії до версії без перебудови предметної області.</p>
+<p><strong>Документація коду Doxygen.</strong> Для фінальної версії <code>LAB_3_V4</code> згенеровано HTML-документацію Doxygen. Вона містить перелік класів, файлів, методів, властивостей і XML-коментарів до коду.</p>
+<p class="footer"><a href="doxygen/html/index.html">Відкрити Doxygen HTML для LAB_3</a></p>
+</section>
+</main>
+</div>
+</body>
+</html>

@@ -1,70 +1,211 @@
 using System;
+using System.Collections.Generic;
 using System.IO;
 
-namespace lab6agapov_v1
+namespace LAB_6_V1
 {
     /// <summary>
-    /// Технічний сервіс для консолі і збереження протоколу.
+    /// Технічний сервіс для консольного виводу, введення та протоколювання.
     /// </summary>
     public class Service
     {
-        private string outputFormat;
-        private string filePath;
-        private string protocol;
+        private readonly string versionTitle;
+        private readonly List<string> protocolLines;
+        private string protocolFilePath;
 
         /// <summary>
-        /// Ініціалізує сервіс.
+        /// Ініціалізує сервіс зі стандартним шляхом до протоколу.
         /// </summary>
-        public Service(string outputFormat, string filePath)
+        public Service()
         {
-            this.outputFormat = outputFormat;
-            this.filePath = filePath;
-            protocol = "";
+            versionTitle = "Версія 1: композиція, агрегація, асоціація";
+            protocolFilePath = Path.Combine(Directory.GetCurrentDirectory(), "refrigerator_protocol_v1.txt");
+            protocolLines = new List<string>();
         }
 
         /// <summary>
-        /// Формат виведення.
+        /// Ініціалізує сервіс з явно заданим шляхом до файлу протоколу.
         /// </summary>
-        public string OutputFormat
+        /// <param name="filePath">Шлях до файлу протоколу.</param>
+        public Service(string filePath)
         {
-            get { return outputFormat; }
-            set { outputFormat = value; }
+            versionTitle = "Версія 1: композиція, агрегація, асоціація";
+            protocolFilePath = filePath;
+            protocolLines = new List<string>();
         }
 
         /// <summary>
-        /// Шлях до файлу протоколу.
+        /// Повертає або задає шлях до файлу збереження протоколу.
         /// </summary>
-        public string FilePath
+        public string ProtocolFilePath
         {
-            get { return filePath; }
-            set { filePath = value; }
+            get { return protocolFilePath; }
+            set { protocolFilePath = value; }
         }
 
         /// <summary>
-        /// Виводить повідомлення в консоль і додає його в протокол.
+        /// Друкує заголовок лабораторної роботи та фіксує старт програми в протоколі.
         /// </summary>
-        public void PrintToConsole(string message)
+        public void PrintHeader()
         {
-            Console.WriteLine(message);
-            protocol = protocol + message + "\n";
+            Console.WriteLine("==============================================");
+            Console.WriteLine("ЛАБОРАТОРНА РОБОТА №6 - SMART REFRIGERATOR");
+            Console.WriteLine(versionTitle);
+            Console.WriteLine("==============================================");
+            AppendToProtocol("Програму запущено.");
         }
 
         /// <summary>
-        /// Зчитує рядок з консолі та додає введення в протокол.
+        /// Друкує інформаційне повідомлення.
         /// </summary>
-        public string ReadFromConsole()
+        /// <param name="message">Текст повідомлення.</param>
+        public void PrintInfo(string message)
         {
-            string value = Console.ReadLine() + "";
-            protocol = protocol + "[INPUT] " + value + "\n";
+            WriteMessage(message, ConsoleColor.White);
+        }
+
+        /// <summary>
+        /// Друкує службове статусне повідомлення.
+        /// </summary>
+        /// <param name="message">Текст повідомлення.</param>
+        public void PrintStatus(string message)
+        {
+            WriteMessage(message, ConsoleColor.Cyan);
+        }
+
+        /// <summary>
+        /// Друкує повідомлення про успішне виконання дії.
+        /// </summary>
+        /// <param name="message">Текст повідомлення.</param>
+        public void PrintSuccess(string message)
+        {
+            WriteMessage(message, ConsoleColor.Green);
+        }
+
+        /// <summary>
+        /// Друкує попередження.
+        /// </summary>
+        /// <param name="message">Текст повідомлення.</param>
+        public void PrintWarning(string message)
+        {
+            WriteMessage(message, ConsoleColor.Yellow);
+        }
+
+        /// <summary>
+        /// Друкує повідомлення про помилку.
+        /// </summary>
+        /// <param name="message">Текст повідомлення.</param>
+        public void PrintError(string message)
+        {
+            WriteMessage(message, ConsoleColor.Red);
+        }
+
+        /// <summary>
+        /// Зчитує рядок із консолі та додає введене значення до протоколу.
+        /// </summary>
+        /// <param name="prompt">Підказка для користувача.</param>
+        /// <returns>Введений рядок.</returns>
+        public string ReadString(string prompt)
+        {
+            Console.Write(prompt + ": ");
+            string value = Console.ReadLine() ?? string.Empty;
+            AppendToProtocol("Ввід рядка [" + prompt + "] = " + value);
             return value;
+        }
+
+        /// <summary>
+        /// Зчитує ціле число з повторними спробами, доки користувач не введе коректне значення.
+        /// </summary>
+        /// <param name="prompt">Підказка для користувача.</param>
+        /// <returns>Введене ціле число.</returns>
+        public int ReadInt(string prompt)
+        {
+            while (true)
+            {
+                Console.Write(prompt + ": ");
+                string input = Console.ReadLine() ?? string.Empty;
+
+                if (int.TryParse(input, out int value))
+                {
+                    AppendToProtocol("Ввід числа [" + prompt + "] = " + value);
+                    return value;
+                }
+
+                PrintWarning("Некоректне ціле число. Спробуйте ще раз.");
+            }
+        }
+
+        /// <summary>
+        /// Зчитує дійсне число з повторними спробами.
+        /// </summary>
+        /// <param name="prompt">Підказка для користувача.</param>
+        /// <returns>Введене число з плаваючою комою.</returns>
+        public double ReadDouble(string prompt)
+        {
+            while (true)
+            {
+                Console.Write(prompt + ": ");
+                string input = Console.ReadLine() ?? string.Empty;
+
+                if (double.TryParse(input, out double value))
+                {
+                    AppendToProtocol("Ввід числа з плаваючою комою [" + prompt + "] = " + value);
+                    return value;
+                }
+
+                PrintWarning("Некоректне число з плаваючою комою. Спробуйте ще раз.");
+            }
+        }
+
+        /// <summary>
+        /// Додає повідомлення до внутрішнього протоколу з часовою позначкою.
+        /// </summary>
+        /// <param name="message">Повідомлення для протоколювання.</param>
+        public void AppendToProtocol(string message)
+        {
+            string normalizedMessage = (message ?? string.Empty)
+                .Replace("\r\n", "\n")
+                .Replace('\r', '\n');
+
+            string[] lines = normalizedMessage.Split('\n');
+
+            foreach (string line in lines)
+            {
+                protocolLines.Add(DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss") + " | " + line);
+            }
         }
 
         /// <summary>
         /// Зберігає поточний протокол у файл.
         /// </summary>
-        public void SaveProtocol()
+        /// <param name="filePath">Шлях до файлу збереження.</param>
+        public void SaveProtocol(string filePath)
         {
-            File.WriteAllText(filePath, protocol);
+            SaveText(filePath, string.Join(Environment.NewLine, protocolLines));
+        }
+
+        /// <summary>
+        /// Зберігає довільний текст у файл.
+        /// </summary>
+        /// <param name="filePath">Шлях до файлу.</param>
+        /// <param name="text">Текст для запису.</param>
+        public void SaveText(string filePath, string text)
+        {
+            File.WriteAllText(filePath, text);
+        }
+
+        /// <summary>
+        /// Внутрішній допоміжний метод для кольорового виводу та синхронного протоколювання.
+        /// </summary>
+        /// <param name="message">Текст повідомлення.</param>
+        /// <param name="color">Колір повідомлення в консолі.</param>
+        private void WriteMessage(string message, ConsoleColor color)
+        {
+            ConsoleColor previousColor = Console.ForegroundColor;
+            Console.ForegroundColor = color;
+            Console.WriteLine(message);
+            Console.ForegroundColor = previousColor;
+            AppendToProtocol(message);
         }
     }
 }

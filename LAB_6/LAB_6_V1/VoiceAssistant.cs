@@ -1,24 +1,38 @@
-namespace lab6agapov_v1
+namespace LAB_6_V1
 {
     /// <summary>
-    /// Голосовий помічник холодильника.
+    /// Голосовий помічник, асоційований із холодильником.
     /// </summary>
     public class VoiceAssistant
     {
         private string voiceType;
         private string language;
+        private bool isActive;
 
         /// <summary>
-        /// Ініціалізує голосовий помічник.
+        /// Конструктор за замовчуванням.
         /// </summary>
-        public VoiceAssistant(string voiceType, string language)
+        public VoiceAssistant()
         {
-            this.voiceType = voiceType;
-            this.language = language;
+            voiceType = "Жіночий"; // Базовий тип голосу для демонстрації.
+            language = "Українська"; // Базова локалізація асистента.
+            isActive = true; // У V1 асистент відразу доступний для команд.
         }
 
         /// <summary>
-        /// Тип голосу.
+        /// Конструктор з параметрами.
+        /// </summary>
+        /// <param name="voiceTypeValue">Тип голосу</param>
+        /// <param name="languageValue">Мова</param>
+        public VoiceAssistant(string voiceTypeValue, string languageValue)
+        {
+            voiceType = voiceTypeValue;
+            language = languageValue;
+            isActive = true;
+        }
+
+        /// <summary>
+        /// Повертає або задає значення властивості VoiceType.
         /// </summary>
         public string VoiceType
         {
@@ -27,7 +41,7 @@ namespace lab6agapov_v1
         }
 
         /// <summary>
-        /// Мова взаємодії.
+        /// Повертає або задає значення властивості Language.
         /// </summary>
         public string Language
         {
@@ -36,11 +50,61 @@ namespace lab6agapov_v1
         }
 
         /// <summary>
-        /// Виконує дію за командою користувача.
+        /// Повертає або задає значення властивості IsActive.
         /// </summary>
-        public string PerformUserAction(string action)
+        public bool IsActive
         {
-            return "Голосовий помічник виконав дію: " + action + ".";
+            get { return isActive; }
+            set { isActive = value; }
+        }
+
+        /// <summary>
+        /// Імітує прослуховування команди.
+        /// </summary>
+        /// <returns>Текст реакції</returns>
+        public string Listen()
+        {
+            return "Голосовий помічник очікує команду.";
+        }
+
+        /// <summary>
+        /// Імітує озвучування відповіді.
+        /// </summary>
+        /// <param name="message">Повідомлення</param>
+        /// <returns>Озвучене повідомлення</returns>
+        public string Speak(string message)
+        {
+            return "Помічник (" + voiceType + ", " + language + "): " + message;
+        }
+
+        /// <summary>
+        /// Інтерпретує просту команду користувача.
+        /// </summary>
+        /// <param name="command">Команда</param>
+        /// <returns>Тлумачення команди</returns>
+        public string InterpretCommand(string command)
+        {
+            if (command == "status")
+            {
+                return Speak("Показую поточний статус холодильника."); // Команда перегляду стану.
+            }
+
+            if (command == "cool")
+            {
+                return Speak("Запускаю цикл охолодження."); // Команда запуску охолодження.
+            }
+
+            if (command == "analyze")
+            {
+                return Speak("Аналізую наявні продукти.");
+            }
+
+            if (command == "update")
+            {
+                return Speak("Розпочинаю оновлення програмного забезпечення.");
+            }
+
+            return Speak("Команду отримано, але для неї немає окремого сценарію.");
         }
     }
 }

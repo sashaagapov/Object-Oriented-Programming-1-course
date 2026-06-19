@@ -5,7 +5,7 @@ namespace lab3agapov_v1
 {
     /// <summary>
     /// Клас Service відповідає за консольне введення, консольне виведення,
-    /// читання з файлу та формування текстового звіту першої версії.
+    /// читання з файлу та запис тексту у файл.
     /// </summary>
     public class Service
     {
@@ -102,25 +102,12 @@ namespace lab3agapov_v1
         }
 
         /// <summary>
-        /// Формує звіт про викладача і студента та записує його у файл, шлях до якого зберігається в полі filePath.
+        /// Записує переданий текст у файл, шлях до якого зберігається в полі filePath.
         /// </summary>
-        /// <param name="teacher">Викладач, дані якого додаються до звіту.</param>
-        /// <param name="student">Студент, дані якого додаються до звіту.</param>
-        public void SaveReport(Teacher teacher, Student student)
+        /// <param name="text">Готовий текст для запису.</param>
+        public void WriteToFile(string text)
         {
-            dataToProcess = "--- ЗВІТ ПРО ОСВІТНІЙ ПРОЦЕС ---\n";
-            dataToProcess = dataToProcess + "Викладач: " + teacher.TeacherName + "\n";
-            dataToProcess = dataToProcess + "Дисципліна: " + teacher.SubjectName + "\n";
-            dataToProcess = dataToProcess + "Навантаження: " + teacher.StudyHours + " год.\n";
-            dataToProcess = dataToProcess + "Студентів у групі: " + teacher.QuantityOfStudents + "\n";
-            dataToProcess = dataToProcess + "Матеріал: " + teacher.StudyMaterial + "\n";
-            dataToProcess = dataToProcess + "Журнал оцінок:\n" + teacher.GradesJournal + "\n";
-            dataToProcess = dataToProcess + "Студент: " + student.StudentName + "\n";
-            dataToProcess = dataToProcess + "Оцінки: " + student.ViewGrades() + "\n";
-            dataToProcess = dataToProcess + "Виконано робіт: " + student.TasksDone + "\n";
-            dataToProcess = dataToProcess + "Рейтинг: " + student.CalculateRating() + "\n";
-            dataToProcess = dataToProcess + "Матеріал у студента: " + student.DownloadedMaterial + "\n";
-
+            dataToProcess = text;
             File.WriteAllText(filePath, dataToProcess);
         }
 

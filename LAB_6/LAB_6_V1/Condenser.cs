@@ -1,4 +1,4 @@
-namespace lab6agapov_v1
+namespace LAB_6_V1
 {
     /// <summary>
     /// Конденсатор холодильника.
@@ -8,15 +8,24 @@ namespace lab6agapov_v1
         private string coolingType;
 
         /// <summary>
-        /// Ініціалізує конденсатор типом охолодження.
+        /// Конструктор за замовчуванням.
         /// </summary>
-        public Condenser(string coolingType)
+        public Condenser()
         {
-            this.coolingType = coolingType;
+            coolingType = "Повітряний";
         }
 
         /// <summary>
-        /// Тип охолодження конденсатора.
+        /// Конструктор з параметром.
+        /// </summary>
+        /// <param name="coolingTypeValue">Тип охолодження</param>
+        public Condenser(string coolingTypeValue)
+        {
+            coolingType = coolingTypeValue;
+        }
+
+        /// <summary>
+        /// Повертає або задає значення властивості CoolingType.
         /// </summary>
         public string CoolingType
         {
@@ -25,19 +34,21 @@ namespace lab6agapov_v1
         }
 
         /// <summary>
-        /// Відводить тепло.
+        /// Імітує відведення тепла.
         /// </summary>
-        public string DissipateHeat()
+        /// <returns>Результат роботи</returns>
+        public string RemoveHeat()
         {
-            return "Конденсатор відводить тепло (" + coolingType + ").";
+            return "Конденсатор відводить тепло через " + coolingType + " охолодження.";
         }
 
         /// <summary>
-        /// Діагностує стан конденсатора.
+        /// Повертає стан конденсатора.
         /// </summary>
+        /// <returns>Стан конденсатора</returns>
         public string DiagnoseState()
         {
-            return "Стан конденсатора справний.";
+            return "Стан конденсатора нормальний.";
         }
     }
 }

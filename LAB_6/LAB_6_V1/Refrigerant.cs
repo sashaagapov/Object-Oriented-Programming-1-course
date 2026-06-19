@@ -1,7 +1,7 @@
-namespace lab6agapov_v1
+namespace LAB_6_V1
 {
     /// <summary>
-    /// Холодоагент у холодильній системі.
+    /// Холодоагент холодильника.
     /// </summary>
     public class Refrigerant
     {
@@ -9,16 +9,27 @@ namespace lab6agapov_v1
         private double mass;
 
         /// <summary>
-        /// Ініціалізує холодоагент заданими параметрами.
+        /// Конструктор за замовчуванням.
         /// </summary>
-        public Refrigerant(string type, double mass)
+        public Refrigerant()
         {
-            this.type = type;
-            this.mass = mass;
+            type = "R600a";
+            mass = 0.08;
         }
 
         /// <summary>
-        /// Тип холодоагенту.
+        /// Конструктор з параметрами.
+        /// </summary>
+        /// <param name="typeValue">Тип холодоагенту</param>
+        /// <param name="massValue">Маса</param>
+        public Refrigerant(string typeValue, double massValue)
+        {
+            type = typeValue;
+            mass = massValue;
+        }
+
+        /// <summary>
+        /// Повертає або задає значення властивості Type.
         /// </summary>
         public string Type
         {
@@ -27,7 +38,7 @@ namespace lab6agapov_v1
         }
 
         /// <summary>
-        /// Маса холодоагенту.
+        /// Повертає або задає значення властивості Mass.
         /// </summary>
         public double Mass
         {
@@ -38,14 +49,16 @@ namespace lab6agapov_v1
         /// <summary>
         /// Перевіряє рівень холодоагенту.
         /// </summary>
+        /// <returns>Опис рівня</returns>
         public string CheckLevel()
         {
-            return "Рівень холодоагенту: " + mass + " кг.";
+            return "Рівень холодоагенту в нормі. Маса = " + mass.ToString("F2") + " кг.";
         }
 
         /// <summary>
         /// Повертає тип холодоагенту.
         /// </summary>
+        /// <returns>Тип холодоагенту</returns>
         public string DetermineType()
         {
             return "Тип холодоагенту: " + type + ".";

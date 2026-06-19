@@ -165,7 +165,7 @@ namespace lab3agapov_v1
         public void AddGrade(int grade)
         {
             gradesList.Add(grade);
-            tasksDone = tasksDone + 1;
+            tasksDone += 1;
         }
 
         /// <summary>
@@ -212,7 +212,7 @@ namespace lab3agapov_v1
 
             for (i = 0; i < gradesList.Count; i++)
             {
-                sum = sum + gradesList[i];
+                sum += gradesList[i];
             }
 
             rating = sum / gradesList.Count;

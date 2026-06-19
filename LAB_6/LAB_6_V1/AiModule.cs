@@ -1,7 +1,7 @@
-namespace lab6agapov_v1
+namespace LAB_6_V1
 {
     /// <summary>
-    /// AI-модуль для аналітики і рекомендацій.
+    /// AI-модуль холодильника.
     /// </summary>
     public class AiModule
     {
@@ -9,16 +9,27 @@ namespace lab6agapov_v1
         private string algorithmType;
 
         /// <summary>
-        /// Ініціалізує AI-модуль.
+        /// Конструктор за замовчуванням.
         /// </summary>
-        public AiModule(string model, string algorithmType)
+        public AiModule()
         {
-            this.model = model;
-            this.algorithmType = algorithmType;
+            model = "FoodVision";
+            algorithmType = "Pattern Analysis";
         }
 
         /// <summary>
-        /// Назва моделі.
+        /// Конструктор з параметрами.
+        /// </summary>
+        /// <param name="modelValue">Модель</param>
+        /// <param name="algorithmTypeValue">Тип алгоритму</param>
+        public AiModule(string modelValue, string algorithmTypeValue)
+        {
+            model = modelValue;
+            algorithmType = algorithmTypeValue;
+        }
+
+        /// <summary>
+        /// Повертає або задає значення властивості Model.
         /// </summary>
         public string Model
         {
@@ -27,7 +38,7 @@ namespace lab6agapov_v1
         }
 
         /// <summary>
-        /// Тип алгоритму.
+        /// Повертає або задає значення властивості AlgorithmType.
         /// </summary>
         public string AlgorithmType
         {
@@ -36,27 +47,30 @@ namespace lab6agapov_v1
         }
 
         /// <summary>
-        /// Виконує навчання AI-моделі.
+        /// Імітує навчання на звичках користувача.
         /// </summary>
+        /// <returns>Результат навчання</returns>
         public string Learn()
         {
-            return "AI-модуль навчається на історії споживання.";
+            return "AI-модуль вивчає звички користувача.";
         }
 
         /// <summary>
-        /// Генерує рекомендації.
+        /// Імітує генерацію рекомендацій.
         /// </summary>
-        public string GenerateRecommendations(string context)
+        /// <returns>Рекомендації</returns>
+        public string GenerateRecommendations()
         {
-            return "Рекомендації згенеровано для контексту: " + context + ".";
+            return "AI рекомендує додати овочі, молочні продукти та питну воду.";
         }
 
         /// <summary>
-        /// Аналізує дані споживання.
+        /// Імітує аналіз споживання.
         /// </summary>
+        /// <returns>Результат аналізу</returns>
         public string AnalyzeConsumptionData()
         {
-            return "AI-аналіз споживання завершено: тенденція до збільшення овочів.";
+            return "AI визначив, що запаси фруктів і йогуртів потрібно поповнити.";
         }
     }
 }

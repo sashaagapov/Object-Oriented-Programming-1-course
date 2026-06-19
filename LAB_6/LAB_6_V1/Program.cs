@@ -1,53 +1,36 @@
 using System;
 
-namespace lab6agapov_v1
+namespace LAB_6_V1
 {
     /// <summary>
-    /// Точка входу для запуску ЛР6 версії 1.
+    /// Точка входу для демонстрації першої версії лабораторної роботи.
     /// </summary>
-    public class Program
+    internal class Program
     {
         /// <summary>
-        /// Створює модель розумного холодильника і запускає меню.
+        /// Створює технічні та предметні об'єкти й запускає автоматичний demo-сценарій.
         /// </summary>
         /// <param name="args">Аргументи командного рядка.</param>
-        public static void Main(string[] args)
+        private static void Main(string[] args)
         {
-            Console.Clear();
+            Service service = new Service();
+            ElectricalEquipment electricalEquipment = new ElectricalEquipment("No Frost");
+            WiFiModule wiFiModule = new WiFiModule("Wi-Fi 6", 1200.0);
+            Sensors sensors = new Sensors(4.0, 35.0, false, 55.0);
+            VoiceAssistant assistant = new VoiceAssistant("Жіночий", "Українська");
 
-            Service service = new Service("text", "refrigerator_report.txt");
-
-            ElectricalEquipment electricalEquipment = new ElectricalEquipment("NoFrostCoolingSystem");
-            WifiModule wifiModule = new WifiModule("Wi-Fi 6", 1200);
-            Sensors sensors = new Sensors(4.0, 11.5, 63.0, true);
-            VoiceAssistant voiceAssistant = new VoiceAssistant("Жіночий", "Українська");
-
-            SmartRefrigerator smartRefrigerator = new SmartRefrigerator(
-                "KNU Smart Fridge X",
-                1.2,
-                380,
+            // Агреговані об'єкти створюються в Program і передаються в конструктор холодильника.
+            SmartRefrigerator refrigerator = new SmartRefrigerator(
+                "SmartCool X1",
+                1.4,
+                420.0,
+                "1.0.0",
                 electricalEquipment,
-                wifiModule,
-                sensors,
-                voiceAssistant);
+                wiFiModule,
+                sensors
+            );
 
-            service.PrintToConsole("Розумний холодильник створено.");
-
-            // Початкова демонстрація виклику ключових методів усіх сутностей V1.
-            service.PrintToConsole(smartRefrigerator.ElectricalEquipment.ElectricMotor.CheckLoad());
-            service.PrintToConsole(smartRefrigerator.ElectricalEquipment.AutomationDevices.ControlLoad());
-            service.PrintToConsole(smartRefrigerator.ElectricalEquipment.Evaporator.ControlCooling());
-            service.PrintToConsole("Температура терморегулятора: " + smartRefrigerator.ElectricalEquipment.Thermoregulator.ReadTemperature());
-            service.PrintToConsole(smartRefrigerator.Microprocessor.ExecuteAlgorithm("Оптимізація охолодження"));
-            service.PrintToConsole(smartRefrigerator.Microprocessor.TransferData());
-            service.PrintToConsole(smartRefrigerator.Microprocessor.ControlEquipment(smartRefrigerator.ElectricalEquipment));
-            service.PrintToConsole(smartRefrigerator.AIDevices.AiModule.GenerateRecommendations("Стартовий аналіз"));
-            service.PrintToConsole(smartRefrigerator.AIDevices.Camera.TakeSnapshot());
-            service.PrintToConsole(smartRefrigerator.Sensors.SignalDeviation());
-            service.PrintToConsole(smartRefrigerator.WifiModule.TransferData("Синхронізація недоступна без підключення"));
-
-            Menu menu = new Menu(service, smartRefrigerator);
-            menu.Run();
+            refrigerator.RunDemoScenario(service, assistant);
         }
     }
 }

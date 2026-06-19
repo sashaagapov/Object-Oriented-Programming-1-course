@@ -5,7 +5,7 @@ namespace lab3agapov_v1
 {
     /// <summary>
     /// Клас Service відповідає за прості операції введення, виведення та роботу з файлами.
-    /// Він не приймає рішень замість викладача чи студента, але формує підсумковий звіт для збереження.
+    /// Він не приймає рішень замість викладача чи студента і працює тільки з текстом та файлами.
     /// </summary>
     public class Service
     {
@@ -104,32 +104,12 @@ namespace lab3agapov_v1
         }
 
         /// <summary>
-        /// Формує повний текстовий звіт про викладача, студента та дипломний проєкт,
-        /// після чого записує цей звіт у файл, шлях до якого зберігається в полі filePath.
+        /// Записує готовий текст у файл, шлях до якого зберігається в полі filePath.
         /// </summary>
-        /// <param name="teacher">Викладач, дані якого додаються до звіту.</param>
-        /// <param name="student">Студент, дані якого додаються до звіту.</param>
-        public void SaveReport(Teacher teacher, Student student)
+        /// <param name="text">Готовий текст для запису.</param>
+        public void WriteToFile(string text)
         {
-            dataToProcess = "--- ЗВІТ ПРО ОСВІТНІЙ ПРОЦЕС ---\n";
-            dataToProcess = dataToProcess + "Викладач: " + teacher.TeacherName + "\n";
-            dataToProcess = dataToProcess + "Дисципліна: " + teacher.SubjectName + "\n";
-            dataToProcess = dataToProcess + "Навантаження: " + teacher.StudyHours + " год.\n";
-            dataToProcess = dataToProcess + "Кількість студентів: " + teacher.QuantityOfStudents + "\n";
-            dataToProcess = dataToProcess + "Матеріал викладача: " + teacher.StudyMaterial + "\n";
-            dataToProcess = dataToProcess + "Журнал оцінок:\n" + teacher.GradesJournal + "\n";
-            dataToProcess = dataToProcess + "Студент: " + student.StudentName + "\n";
-            dataToProcess = dataToProcess + "Дисципліна студента: " + student.SubjectName + "\n";
-            dataToProcess = dataToProcess + "Оцінки: " + student.ViewGrades() + "\n";
-            dataToProcess = dataToProcess + "Виконано робіт: " + student.TasksDone + "\n";
-            dataToProcess = dataToProcess + "Рейтинг: " + student.CalculateRating() + "\n";
-            dataToProcess = dataToProcess + "Матеріал студента: " + student.DownloadedMaterial + "\n";
-            dataToProcess = dataToProcess + "Тема дипломного проєкту: " + student.Diploma.ThemeName + "\n";
-            dataToProcess = dataToProcess + "Кількість методів: " + student.Diploma.MethodsCount + "\n";
-            dataToProcess = dataToProcess + "Складність теми: " + student.Diploma.ThemeComplexity + "\n";
-            dataToProcess = dataToProcess + "Оцінка за диплом: " + student.Diploma.Grade + "\n";
-            dataToProcess = dataToProcess + "Керівник: " + student.Diploma.SupervisorName + "\n";
-
+            dataToProcess = text;
             File.WriteAllText(filePath, dataToProcess);
         }
 

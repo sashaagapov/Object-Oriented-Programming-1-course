@@ -135,7 +135,7 @@ namespace lab5agapov_v1
         public void AddGrade(int grade)
         {
             gradesList.Add(grade);
-            tasksDone = tasksDone + 1;
+            tasksDone += 1;
         }
 
         /// <summary>
@@ -182,7 +182,7 @@ namespace lab5agapov_v1
 
             for (i = 0; i < gradesList.Count; i++)
             {
-                sum = sum + gradesList[i];
+                sum += gradesList[i];
             }
 
             rating = sum / gradesList.Count;
@@ -209,10 +209,10 @@ namespace lab5agapov_v1
                 : string.Join(", ", GradesList);
 
             return base.GetInfo()
-                + $"\nОцінки студента: {gradesText}"
-                + $"\nОбсяг виконаних робіт: {TasksDone}"
-                + $"\nРейтинг студента: {CalculateRating()}"
-                + $"\nДипломний проєкт: {DiplomaProject.GetInfo()}";
+                + "\nОцінки студента: " + gradesText
+                + "\nОбсяг виконаних робіт: " + TasksDone
+                + "\nРейтинг студента: " + CalculateRating()
+                + "\nДипломний проєкт: " + DiplomaProject.GetInfo();
         }
     }
 }

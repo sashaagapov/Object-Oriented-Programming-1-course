@@ -107,7 +107,7 @@ namespace lab3agapov_v1
                         {
                             if (currentComplexity >= 1 && currentComplexity <= 10)
                             {
-                                sum = sum + currentComplexity;
+                                sum += currentComplexity;
                                 isCorrect = true;
                             }
                             else

@@ -9,29 +9,11 @@ namespace lab4agapov_v4
     /// </summary>
     public partial class Student : Person, IComparable<Student>, ICloneable
     {
-        /// <summary>
-        /// Список оцінок студента.
-        /// </summary>
         private List<int> gradesList;
-
-        /// <summary>
-        /// Кількість робіт, виконаних студентом.
-        /// </summary>
         private int tasksDone;
-
-        /// <summary>
-        /// Матеріал, отриманий студентом від викладача.
-        /// </summary>
         private string downloadedMaterial;
-
-        /// <summary>
-        /// Середній рейтинг студента за оцінками.
-        /// </summary>
         private double rating;
 
-        /// <summary>
-        /// Конструктор за замовчуванням створює студента з порожніми значеннями.
-        /// </summary>
         public Student() : base()
         {
             gradesList = new List<int>();
@@ -40,15 +22,6 @@ namespace lab4agapov_v4
             rating = 0;
         }
 
-        /// <summary>
-        /// Конструктор з параметрами створює студента з готовими навчальними даними.
-        /// </summary>
-        /// <param name="studentName">Повне ім'я студента.</param>
-        /// <param name="subjectName">Назва дисципліни.</param>
-        /// <param name="gradesList">Список оцінок.</param>
-        /// <param name="tasksDone">Кількість виконаних робіт.</param>
-        /// <param name="downloadedMaterial">Отриманий навчальний матеріал.</param>
-        /// <param name="rating">Початковий рейтинг студента.</param>
         public Student(string studentName, string subjectName, List<int> gradesList, int tasksDone, string downloadedMaterial, double rating) : base(studentName, subjectName)
         {
             this.gradesList = gradesList == null ? new List<int>() : new List<int>(gradesList);
@@ -57,10 +30,6 @@ namespace lab4agapov_v4
             this.rating = rating;
         }
 
-        /// <summary>
-        /// Конструктор копії створює нового студента на основі іншого студента.
-        /// </summary>
-        /// <param name="other">Студент, дані якого копіюються.</param>
         public Student(Student other) : base(other)
         {
             gradesList = new List<int>(other.gradesList);
@@ -69,65 +38,42 @@ namespace lab4agapov_v4
             rating = other.rating;
         }
 
-        /// <summary>
-        /// Властивість для читання та зміни імені студента через базовий клас.
-        /// </summary>
         public string StudentName
         {
             get { return Name; }
             set { Name = value; }
         }
 
-        /// <summary>
-        /// Властивість для доступу до списку оцінок студента.
-        /// </summary>
         public List<int> GradesList
         {
             get { return new List<int>(gradesList); }
             set { gradesList = value == null ? new List<int>() : new List<int>(value); }
         }
 
-        /// <summary>
-        /// Властивість для читання та зміни кількості виконаних робіт.
-        /// </summary>
         public int TasksDone
         {
             get { return tasksDone; }
             set { tasksDone = value; }
         }
 
-        /// <summary>
-        /// Властивість для читання та зміни отриманого навчального матеріалу.
-        /// </summary>
         public string DownloadedMaterial
         {
             get { return downloadedMaterial; }
             set { downloadedMaterial = value; }
         }
 
-        /// <summary>
-        /// Властивість для читання та зміни рейтингу студента.
-        /// </summary>
         public double Rating
         {
             get { return rating; }
             set { rating = value; }
         }
 
-        /// <summary>
-        /// Додає оцінку до списку студента і збільшує кількість виконаних робіт.
-        /// </summary>
-        /// <param name="grade">Оцінка, яку отримав студент.</param>
         public void AddGrade(int grade)
         {
             gradesList.Add(grade);
-            tasksDone = tasksDone + 1;
+            tasksDone += 1;
         }
 
-        /// <summary>
-        /// Повертає оцінки студента як один текстовий рядок.
-        /// </summary>
-        /// <returns>Список оцінок або повідомлення про відсутність оцінок.</returns>
         public string ViewGrades()
         {
             string result = "";
@@ -140,21 +86,17 @@ namespace lab4agapov_v4
 
             for (i = 0; i < gradesList.Count; i++)
             {
-                result = result + gradesList[i];
+                result += gradesList[i];
 
                 if (i < gradesList.Count - 1)
                 {
-                    result = result + ", ";
+                    result += ", ";
                 }
             }
 
             return result;
         }
 
-        /// <summary>
-        /// Обчислює середній рейтинг студента, записує його в поле rating і повертає результат.
-        /// </summary>
-        /// <returns>Поточний розрахований рейтинг студента.</returns>
         public double CalculateRating()
         {
             double sum = 0;
@@ -168,36 +110,35 @@ namespace lab4agapov_v4
 
             for (i = 0; i < gradesList.Count; i++)
             {
-                sum = sum + gradesList[i];
+                sum += gradesList[i];
             }
 
             rating = sum / gradesList.Count;
             return rating;
         }
 
-        /// <summary>
-        /// Зберігає навчальний матеріал, який студент отримав від викладача.
-        /// </summary>
-        /// <param name="material">Текст або назва отриманого матеріалу.</param>
         public void DownloadMaterial(string material)
         {
             downloadedMaterial = material;
         }
 
-        /// <summary>
-        /// Створює глибоку копію студента.
-        /// </summary>
-        /// <returns>Клон студента.</returns>
+        public override string GetInfo()
+        {
+            string info = base.GetInfo();
+
+            info += "\nОцінки: " + ViewGrades();
+            info += "\nВиконано робіт: " + tasksDone;
+            info += "\nРейтинг: " + CalculateRating();
+            info += "\nОтриманий матеріал: " + downloadedMaterial;
+
+            return info;
+        }
+
         public object Clone()
         {
             return new Student(this);
         }
 
-        /// <summary>
-        /// Порівнює студентів за рейтингом за спаданням.
-        /// </summary>
-        /// <param name="other">Інший студент для порівняння.</param>
-        /// <returns>Результат порівняння.</returns>
         public int CompareTo(Student other)
         {
             if (other == null)

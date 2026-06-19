@@ -1,26 +1,38 @@
-namespace lab6agapov_v1
+namespace LAB_6_V1
 {
     /// <summary>
     /// Wi-Fi модуль холодильника.
     /// </summary>
-    public class WifiModule
+    public class WiFiModule
     {
         private string protocol;
-        private int speed;
+        private double speed;
         private bool isConnected;
 
         /// <summary>
-        /// Ініціалізує Wi-Fi модуль.
+        /// Конструктор за замовчуванням.
         /// </summary>
-        public WifiModule(string protocol, int speed)
+        public WiFiModule()
         {
-            this.protocol = protocol;
-            this.speed = speed;
+            protocol = "Wi-Fi 5";
+            speed = 600.0;
             isConnected = false;
         }
 
         /// <summary>
-        /// Протокол Wi-Fi.
+        /// Конструктор з параметрами.
+        /// </summary>
+        /// <param name="protocolValue">Протокол</param>
+        /// <param name="speedValue">Швидкість</param>
+        public WiFiModule(string protocolValue, double speedValue)
+        {
+            protocol = protocolValue;
+            speed = speedValue;
+            isConnected = false;
+        }
+
+        /// <summary>
+        /// Повертає або задає значення властивості Protocol.
         /// </summary>
         public string Protocol
         {
@@ -29,55 +41,65 @@ namespace lab6agapov_v1
         }
 
         /// <summary>
-        /// Швидкість з'єднання.
+        /// Повертає або задає значення властивості Speed.
         /// </summary>
-        public int Speed
+        public double Speed
         {
             get { return speed; }
             set { speed = value; }
         }
 
         /// <summary>
-        /// Ознака підключення до мережі.
+        /// Повертає або задає значення властивості IsConnected.
         /// </summary>
         public bool IsConnected
         {
             get { return isConnected; }
+            set { isConnected = value; }
         }
 
         /// <summary>
-        /// Підключається до мережі.
+        /// Імітує підключення до мережі.
         /// </summary>
+        /// <returns>Результат підключення</returns>
         public string Connect()
         {
             isConnected = true;
-            return "Wi-Fi модуль підключено (" + protocol + ").";
+            return "Wi-Fi модуль підключено через " + protocol + ".";
         }
 
         /// <summary>
-        /// Передає дані в мережу.
+        /// Імітує передачу даних.
         /// </summary>
-        public string TransferData(string payload)
+        /// <returns>Результат передачі</returns>
+        public string SendData()
         {
-            if (!isConnected)
-            {
-                return "Передача даних неможлива: немає з'єднання.";
-            }
-
-            return "Дані передано: " + payload;
+            return "Wi-Fi модуль передав дані зі швидкістю " + speed.ToString("F1") + " Мбіт/с.";
         }
 
         /// <summary>
-        /// Отримує оновлення ПЗ.
+        /// Імітує отримання оновлення.
         /// </summary>
+        /// <returns>Результат отримання</returns>
         public string ReceiveUpdate()
         {
-            if (!isConnected)
+            return "Оновлення програмного забезпечення успішно отримано.";
+        }
+
+        /// <summary>
+        /// Повертає коротку інформацію про модуль.
+        /// </summary>
+        /// <returns>Короткий опис</returns>
+        public string GetSummary()
+        {
+            string state = "не підключено";
+
+            if (isConnected)
             {
-                return "Оновлення недоступне: Wi-Fi не підключено.";
+                state = "підключено";
             }
 
-            return "Оновлення ПЗ отримано через Wi-Fi.";
+            return "протокол = " + protocol + ", стан = " + state;
         }
     }
 }

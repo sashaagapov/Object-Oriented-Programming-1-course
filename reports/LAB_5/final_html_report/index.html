@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Лабораторна робота №5 - HTML звіт</title>
+<style>
+:root{--bg:#f6f8fb;--card:#ffffff;--text:#1e2430;--muted:#586174;--accent:#145da0;--border:#d9e1ee}
+*{box-sizing:border-box}body{margin:0;font:20px/1.8 "Segoe UI",Arial,sans-serif;color:var(--text);background:var(--bg)}
+a{color:var(--accent);text-decoration:none}a:hover{text-decoration:underline}
+.layout{display:grid;grid-template-columns:280px 1fr;min-height:100vh}
+nav{position:sticky;top:0;align-self:start;height:100vh;overflow:auto;background:#0f2742;color:#f4f7fb;padding:24px 20px}
+nav h1{font-size:1.35rem;line-height:1.4;margin:0 0 12px}nav p{font-size:1.1rem}nav ul{list-style:none;padding:0;margin:0}nav li{margin:12px 0}nav a{color:#dce9f8;font-size:1.1rem}nav a:hover{color:#fff}
+main{padding:28px;max-width:1400px;width:100%;font-size:21px}section{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:24px;margin:0 0 22px;box-shadow:0 6px 18px rgba(19,46,84,.05)}
+h2{margin-top:0;color:#123d68;font-size:2.1rem}h3{font-size:1.6rem}ul{padding-left:24px}
+p,li{font-size:1.08rem;line-height:1.8}
+code{background:#eef3f9;padding:2px 6px;border-radius:6px;font-size:1em}
+img{max-width:100%;height:auto;border:1px solid var(--border);border-radius:12px;background:#fff}
+figure{margin:18px 0;max-width:100%;overflow-x:auto}
+figure img{display:block;max-width:100%;width:auto;height:auto;margin:0 auto}
+figcaption{font-size:1.16rem;color:var(--muted);margin-top:8px;line-height:1.75}
+.diagram-figure{padding:16px;overflow-x:auto;background:#f8fbff;border:1px solid var(--border);border-radius:14px}
+.diagram-figure img{display:block;width:100%;max-width:100%;height:auto;object-fit:contain;margin:0 auto}
+.note{border-left:4px solid #d9822b;background:#fff7ed;padding:14px 16px;border-radius:10px;color:#7c4a14;font-size:1.14rem;line-height:1.75}
+.footer{font-size:1.14rem;color:var(--muted)}
+@media (max-width:980px){.layout{grid-template-columns:1fr}nav{position:relative;height:auto}main{padding:18px}}
+</style>
+</head>
+<body>
+<div class="layout">
+<nav>
+<h1>Лабораторна робота №5</h1>
+<p>HTML-звіт для LAB_5_V3</p>
+<ul>
+<li><a href="#goal">Мета роботи</a></li>
+<li><a href="#task">Умова задачі</a></li>
+<li><a href="#ooa">OOA</a></li>
+<li><a href="#ood">OOD</a></li>
+<li><a href="#structure">Структура</a></li>
+<li><a href="#architecture">Архітектурні зміни</a></li>
+<li><a href="#results">Результати</a></li>
+<li><a href="#verification">Перевірка працездатності</a></li>
+<li><a href="#conclusion">Висновок</a></li>
+</ul>
+</nav>
+<main>
+<section id="goal">
+<h2>1. Мета роботи</h2>
+<p>Лабораторна робота №5 розвиває виправлену ЛР4 і демонструє динамічний поліморфізм, перевантаження операторів, індексатор і конструктор копіювання на прикладі освітньої моделі.</p>
+</section>
+
+<section id="task">
+<h2>2. Умова задачі</h2>
+<p>Фінальна версія <code>LAB_5_V3</code> зберігає три етапи розвитку лабораторної:</p>
+<ul>
+<li><code>V1</code> — dynamic polymorphism через <code>Person</code>, <code>Teacher</code>, <code>Student</code>.</li>
+<li><code>V2</code> — operator overloading у <code>Teacher</code>, <code>Student</code>, <code>DiplomaProject</code>.</li>
+<li><code>V3</code> — <code>StudentGroup</code>, індексатор і copy constructor <code>DiplomaProject</code>.</li>
+</ul>
+</section>
+
+<section id="ooa">
+<h2>3. Аналіз задачі / OOA</h2>
+<ul>
+<li><code>Person</code> — абстрактна базова сутність.</li>
+<li><code>Teacher</code> — активна предметна сутність, яка веде сценарій роботи.</li>
+<li><code>Student</code> — студент з оцінками, рейтингом і матеріалами.</li>
+<li><code>DiplomaProject</code> — дипломний проєкт з темою, складністю, алгоритмами та оцінкою.</li>
+<li><code>StudentGroup</code> — група студентів у версії <code>V3</code>.</li>
+<li><code>Program</code>, <code>Menu</code>, <code>Service</code> — технічні класи.</li>
+</ul>
+</section>
+
+<section id="ood">
+<h2>4. Об'єктно-орієнтоване проєктування / OOD</h2>
+<ul>
+<li><code>Person</code> збережено як <code>abstract class</code>.</li>
+<li><code>Teacher</code> і <code>Student</code> успадковують <code>Person</code> і перевизначають поліморфний метод.</li>
+<li><code>Teacher</code>, <code>Student</code>, <code>DiplomaProject</code> містять перевантажені оператори.</li>
+<li><code>StudentGroup</code> містить <code>Count</code>, <code>AddStudent(Student)</code> і індексатор <code>this[int index]</code>.</li>
+<li><code>DiplomaProject(DiplomaProject other)</code> створює копію з основними даними, але без оцінки (<code>Mark = 0</code>).</li>
+</ul>
+<figure class="diagram-figure">
+<img src="images/diagrams/lab5_class_diagram.png" alt="UML діаграма класів LAB_5_V3">
+<figcaption>Діаграма класів фінальної версії LAB_5_V3 показує abstract Person, похідні класи Teacher і Student, клас DiplomaProject з перевантаженими операторами та конструктором копіювання, StudentGroup з індексатором, а також Service і Menu.</figcaption>
+</figure>
+<figure class="diagram-figure">
+<img src="images/diagrams/lab5_use_case_diagram.png" alt="UML діаграма використання LAB_5">
+<figcaption>Діаграма використання показує сценарії динамічного поліморфізму, перевантаження операторів, роботи з StudentGroup, індексатором і конструктором копіювання DiplomaProject.</figcaption>
+</figure>
+<figure class="diagram-figure">
+<img src="images/diagrams/lab5_activity_diagram.png" alt="UML діаграма діяльності LAB_5">
+<figcaption>Діаграма діяльності описує сценарій роботи з StudentGroup, індексатором, обробкою неправильного індексу та створенням копії DiplomaProject.</figcaption>
+</figure>
+<figure class="diagram-figure">
+<img src="images/diagrams/lab5_sequence_diagram.png" alt="UML діаграма послідовності LAB_5">
+<figcaption>Діаграма послідовності показує предметну взаємодію Teacher, StudentGroup, Student і DiplomaProject без технічних класів Program, Menu і Service.</figcaption>
+</figure>
+</section>
+
+<section id="structure">
+<h2>5. Структура програми</h2>
+<ul>
+<li><code>Program.cs</code> — створює об'єкти і запускає сценарій через <code>Teacher</code>.</li>
+<li><code>Menu.cs</code> — містить тільки <code>PrintOptions(Service service)</code> і <code>ReadCommand(Service service)</code>.</li>
+<li><code>Service.cs</code> — працює тільки з консоллю, текстом, протоколом і файлами.</li>
+<li><code>Teacher.cs</code> — предметна логіка викладача і demo-сценарій.</li>
+<li><code>Student.cs</code> — логіка студента і перевантажені оператори.</li>
+<li><code>DiplomaProject.cs</code> — логіка дипломного проєкту, оператори, copy constructor.</li>
+<li><code>StudentGroup.cs</code> — група студентів та індексатор.</li>
+</ul>
+</section>
+
+<section id="architecture">
+<h2>6. Архітектурні зміни після перевірки реалізації</h2>
+<p>Після перевірки реалізації було уточнено розподіл відповідальностей між класами і приведено структуру програми до єдиного архітектурного принципу.</p>
+<ul>
+<li><code>Program</code> залишено тільки як точку запуску: він створює об'єкти і запускає сценарій.</li>
+<li>Demo-сценарій знаходиться в <code>Teacher</code>, бо викладач є активною предметною сутністю освітнього процесу.</li>
+<li><code>Menu</code> більше не керує <code>Teacher</code>, <code>Student</code>, <code>DiplomaProject</code>, <code>StudentGroup</code>.</li>
+<li><code>Menu</code> виконує тільки <code>PrintOptions(Service service)</code> та <code>ReadCommand(Service service)</code>.</li>
+<li><code>Service</code> не керує предметними класами і працює тільки з консоллю, текстом, протоколом і файлами.</li>
+<li>Предметні класи самі формують свою логіку і текстові результати, а <code>Service</code> тільки виводить або зберігає готовий текст.</li>
+<li>Окремий <code>DemoScenario</code> не створювався.</li>
+</ul>
+</section>
+
+<section id="results">
+<h2>7. Результати виконання програми</h2>
+<div class="note"><strong>Результати за версіями:</strong> у звіті показано виконання кожної версії лабораторної роботи окремо. Для LAB_5_V2 і LAB_5_V3 результат подано кількома скріншотами через великий обсяг виводу.</div>
+<h3>7.1. Результат виконання LAB_5_V1</h3>
+<p>У першій версії перевіряється динамічний поліморфізм: один і той самий поліморфний виклик дає різний результат для <code>Teacher</code> і <code>Student</code>. Це підтверджує, що базовий клас <code>Person</code> використовується не формально, а як реальна основа для <code>override</code>-поведінки.</p>
+<figure><img src="images/screenshots/lab5_v1_demo_scenario.png" alt="Результат виконання LAB_5_V1"><figcaption>Результат виконання demo-сценарію LAB_5_V1: демонстрація dynamic polymorphism через Person -&gt; Teacher / Student.</figcaption></figure>
+<h3>7.2. Результат виконання LAB_5_V2</h3>
+<p>Друга версія присвячена статичному поліморфізму через перевантаження операторів у предметних класах. Оскільки вивід демонструє кілька окремих груп операцій і порівнянь, результат подано кількома послідовними частинами.</p>
+<p>Результат виконання demo-сценарію LAB_5_V2: демонстрація динамічного поліморфізму та статичного поліморфізму через перевантаження операторів у класах DiplomaProject, Student і Teacher. Через великий обсяг виводу результат подано кількома скріншотами.</p>
+<figure><img src="images/screenshots/lab5_v2_demo_scenario1.png" alt="Результат виконання LAB_5_V2, частина 1"><figcaption>Частина 1 — демонстрація операторів <code>DiplomaProject</code>.</figcaption></figure>
+<figure><img src="images/screenshots/lab5_v2_demo_scenario2.png" alt="Результат виконання LAB_5_V2, частина 2"><figcaption>Частина 2 — демонстрація операторів <code>Student</code>.</figcaption></figure>
+<figure><img src="images/screenshots/lab5_v2_demo_scenario3.png" alt="Результат виконання LAB_5_V2, частина 3"><figcaption>Частина 3 — демонстрація операторів <code>Teacher</code>.</figcaption></figure>
+<figure><img src="images/screenshots/lab5_v2_demo_scenario4.png" alt="Результат виконання LAB_5_V2, частина 4"><figcaption>Частина 4 — результати порівняння, рівності та пов'язаних перевірок.</figcaption></figure>
+<figure><img src="images/screenshots/lab5_v2_demo_scenario5.png" alt="Результат виконання LAB_5_V2, частина 5"><figcaption>Частина 5 — завершальний фрагмент комбінованого operator-based сценарію.</figcaption></figure>
+<h3>7.3. Результат виконання LAB_5_V3</h3>
+<p>Третя версія перевіряє вже не лише оператори, а й роботу з групою студентів як окремою сутністю, доступ до елементів через індексатор та коректне копіювання дипломного проєкту. Через обсяг консолі результат теж подано кількома частинами, щоб окремо показати колекційну логіку і копіювання.</p>
+<p>Результат виконання demo-сценарію LAB_5_V3: демонстрація динамічного поліморфізму, перевантаження операторів, StudentGroup, індексатора, обробки неправильного індексу та конструктора копіювання DiplomaProject. Через великий обсяг виводу результат подано кількома скріншотами.</p>
+<figure><img src="images/screenshots/lab5_v3_demo_scenario1.png" alt="Результат виконання LAB_5_V3, частина 1"><figcaption>Частина 1 — <code>StudentGroup</code> та індексатор.</figcaption></figure>
+<figure><img src="images/screenshots/lab5_v3_demo_scenario2.png" alt="Результат виконання LAB_5_V3, частина 2"><figcaption>Частина 2 — неправильний індекс і copy constructor <code>DiplomaProject</code>.</figcaption></figure>
+</section>
+
+<section id="verification">
+<h2>8. Перевірка працездатності</h2>
+<ul>
+<li><code>LAB_5_V1</code> — Build succeeded, 0 Warning(s), 0 Error(s)</li>
+<li><code>LAB_5_V2</code> — Build succeeded, 0 Warning(s), 0 Error(s)</li>
+<li><code>LAB_5_V3</code> — Build succeeded, 0 Warning(s), 0 Error(s)</li>
+</ul>
+<p>Фінальна версія також була запущена: <code>LAB_5_V3</code>.</p>
+</section>
+
+<section id="conclusion">
+<h2>9. Висновок</h2>
+<p>У лабораторній роботі №5 реалізовано ключові механізми поліморфізму, операторної поведінки, індексаторів і контрольованого копіювання об'єктів на прикладі освітньої моделі. Архітектурне уточнення покращило розподіл відповідальностей: предметні класи відповідають за змістові дії, а <code>Program</code>, <code>Menu</code> і <code>Service</code> не підміняють доменну логіку.</p>
+<p>Demo-сценарій у <code>Teacher</code> дозволяє швидко перевірити всі ключові частини реалізації — від dynamic polymorphism до <code>StudentGroup</code> і конструктора копіювання — без окремого керуючого класу поза предметною областю.</p>
+<p><strong>Документація коду Doxygen.</strong> Для фінальної версії <code>LAB_5_V3</code> згенеровано HTML-документацію Doxygen. Вона містить перелік класів, файлів, методів, властивостей і XML-коментарів до коду.</p>
+<p class="footer"><a href="doxygen/html/index.html">Відкрити Doxygen HTML для LAB_5</a></p>
+</section>
+</main>
+</div>
+</body>
+</html>

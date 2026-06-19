@@ -1,36 +1,55 @@
-namespace lab6agapov_v1
+namespace LAB_6_V1
 {
     /// <summary>
-    /// Електричне обладнання холодильника.
+    /// Електрообладнання холодильника.
     /// </summary>
     public class ElectricalEquipment
     {
         private string systemType;
+        private bool isRunning;
         private Compressor compressor;
         private ElectricMotor electricMotor;
         private Refrigerant refrigerant;
         private Evaporator evaporator;
         private Condenser condenser;
-        private Thermoregulator thermoregulator;
+        private TemperatureController temperatureController;
         private AutomationDevices automationDevices;
 
         /// <summary>
-        /// Ініціалізує електричне обладнання і створює його частини (композиція).
+        /// Конструктор за замовчуванням.
         /// </summary>
-        public ElectricalEquipment(string systemType)
+        public ElectricalEquipment()
         {
-            this.systemType = systemType;
-            compressor = new Compressor(450);
-            electricMotor = new ElectricMotor("Inverter", 320);
-            refrigerant = new Refrigerant("R600a", 0.18);
-            evaporator = new Evaporator(-7.0);
-            condenser = new Condenser("AirCooling");
-            thermoregulator = new Thermoregulator(-25, 8);
-            automationDevices = new AutomationDevices("SensorsAndRelays");
+            systemType = "Standard Cooling";
+            isRunning = false;
+            compressor = new Compressor();
+            electricMotor = new ElectricMotor();
+            refrigerant = new Refrigerant();
+            evaporator = new Evaporator();
+            condenser = new Condenser();
+            temperatureController = new TemperatureController();
+            automationDevices = new AutomationDevices();
         }
 
         /// <summary>
-        /// Тип системи електрообладнання.
+        /// Конструктор з параметром типу системи.
+        /// </summary>
+        /// <param name="systemTypeValue">Тип системи</param>
+        public ElectricalEquipment(string systemTypeValue)
+        {
+            systemType = systemTypeValue;
+            isRunning = false;
+            compressor = new Compressor();
+            electricMotor = new ElectricMotor();
+            refrigerant = new Refrigerant();
+            evaporator = new Evaporator();
+            condenser = new Condenser();
+            temperatureController = new TemperatureController();
+            automationDevices = new AutomationDevices();
+        }
+
+        /// <summary>
+        /// Повертає або задає значення властивості SystemType.
         /// </summary>
         public string SystemType
         {
@@ -39,7 +58,16 @@ namespace lab6agapov_v1
         }
 
         /// <summary>
-        /// Доступ до компресора.
+        /// Повертає або задає значення властивості IsRunning.
+        /// </summary>
+        public bool IsRunning
+        {
+            get { return isRunning; }
+            set { isRunning = value; }
+        }
+
+        /// <summary>
+        /// Повертає значення властивості Compressor.
         /// </summary>
         public Compressor Compressor
         {
@@ -47,7 +75,7 @@ namespace lab6agapov_v1
         }
 
         /// <summary>
-        /// Доступ до електродвигуна.
+        /// Повертає значення властивості ElectricMotor.
         /// </summary>
         public ElectricMotor ElectricMotor
         {
@@ -55,7 +83,7 @@ namespace lab6agapov_v1
         }
 
         /// <summary>
-        /// Доступ до холодоагенту.
+        /// Повертає значення властивості Refrigerant.
         /// </summary>
         public Refrigerant Refrigerant
         {
@@ -63,7 +91,7 @@ namespace lab6agapov_v1
         }
 
         /// <summary>
-        /// Доступ до випарника.
+        /// Повертає значення властивості Evaporator.
         /// </summary>
         public Evaporator Evaporator
         {
@@ -71,7 +99,7 @@ namespace lab6agapov_v1
         }
 
         /// <summary>
-        /// Доступ до конденсатора.
+        /// Повертає значення властивості Condenser.
         /// </summary>
         public Condenser Condenser
         {
@@ -79,15 +107,15 @@ namespace lab6agapov_v1
         }
 
         /// <summary>
-        /// Доступ до терморегулятора.
+        /// Повертає значення властивості TemperatureController.
         /// </summary>
-        public Thermoregulator Thermoregulator
+        public TemperatureController TemperatureController
         {
-            get { return thermoregulator; }
+            get { return temperatureController; }
         }
 
         /// <summary>
-        /// Доступ до автоматики.
+        /// Повертає значення властивості AutomationDevices.
         /// </summary>
         public AutomationDevices AutomationDevices
         {
@@ -97,25 +125,59 @@ namespace lab6agapov_v1
         /// <summary>
         /// Запускає систему охолодження.
         /// </summary>
+        /// <returns>Результат запуску</returns>
         public string StartSystem()
         {
+            isRunning = true;
             return compressor.Start() + " " + electricMotor.Start();
         }
 
         /// <summary>
         /// Зупиняє систему охолодження.
         /// </summary>
+        /// <returns>Результат зупинки</returns>
         public string StopSystem()
         {
+            isRunning = false;
             return compressor.Stop() + " Система охолодження зупинена.";
         }
 
         /// <summary>
-        /// Виявляє несправність у системі.
+        /// Повертає базовий стан електрообладнання.
         /// </summary>
-        public string DetectFault()
+        /// <returns>Стан електрообладнання</returns>
+        public string DetectFailure()
         {
-            return automationDevices.NotifyEvent("Критичних несправностей не виявлено.");
+            return "Електрообладнання справне. " + automationDevices.ControlLoad();
+        }
+
+        /// <summary>
+        /// Імітує регулювання охолодження.
+        /// </summary>
+        /// <returns>Результат регулювання</returns>
+        public string RegulateCooling()
+        {
+            return evaporator.ControlCooling()
+                + " "
+                + condenser.RemoveHeat()
+                + " "
+                + temperatureController.ReadTemperature();
+        }
+
+        /// <summary>
+        /// Повертає коротку інформацію про електрообладнання.
+        /// </summary>
+        /// <returns>Короткий опис</returns>
+        public string GetSummary()
+        {
+            string state = "зупинено";
+
+            if (isRunning)
+            {
+                state = "працює";
+            }
+
+            return "тип = " + systemType + ", стан = " + state;
         }
     }
 }

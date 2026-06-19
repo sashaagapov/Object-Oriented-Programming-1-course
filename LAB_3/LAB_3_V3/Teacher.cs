@@ -1,3 +1,5 @@
+using System;
+
 namespace lab3agapov_v1
 {
     /// <summary>
@@ -142,7 +144,7 @@ namespace lab3agapov_v1
         /// <param name="count">Кількість студентів, яку потрібно додати.</param>
         public void IncreaseStudents(int count)
         {
-            quantityOfStudents = quantityOfStudents + count;
+            quantityOfStudents += count;
         }
 
         /// <summary>
@@ -153,7 +155,7 @@ namespace lab3agapov_v1
         {
             if (quantityOfStudents >= count)
             {
-                quantityOfStudents = quantityOfStudents - count;
+                quantityOfStudents -= count;
             }
         }
 
@@ -205,6 +207,203 @@ namespace lab3agapov_v1
         {
             student.Diploma.DetermineGrade();
             gradesJournal = gradesJournal + "Викладач оцінив дипломний проєкт студента " + student.StudentName + ". Оцінка: " + student.Diploma.Grade + ".\n";
+        }
+
+        /// <summary>
+        /// Запускає короткий demo-сценарій перед переходом до меню.
+        /// </summary>
+        public void RunDemoScenario(Service service, Student student)
+        {
+            service.PrintToConsole("\n--- Demo-сценарій V3 ---");
+            service.PrintToConsole("Створено викладача: " + teacherName);
+            service.PrintToConsole("Створено студента: " + student.StudentName);
+
+            studyMaterial = "Демо-матеріал: partial-класи та композиція";
+            GiveMaterial(student);
+            service.PrintToConsole("Викладач передав матеріал студенту.");
+
+            GradeStudent(student, 97);
+            service.PrintToConsole("Викладач виставив студенту оцінку 97.");
+            service.PrintToConsole("Поточний рейтинг студента: " + student.CalculateRating());
+
+            student.Diploma.ThemeName = "Демо-тема: система підтримки навчання";
+            student.Diploma.MethodsCount = 5;
+            student.Diploma.ThemeComplexity = 34;
+            EvaluateDiploma(student);
+            service.PrintToConsole("Дипломний проєкт оцінено викладачем.");
+            service.PrintToConsole("Поточна оцінка за диплом: " + student.Diploma.Grade);
+            service.PrintToConsole("--- Demo-сценарій завершено. Далі доступне меню. ---");
+        }
+
+        /// <summary>
+        /// Запускає інтерактивний предметний сценарій через допоміжне меню.
+        /// </summary>
+        public void RunScenario(Service service, Menu menu, Student student)
+        {
+            bool isRunning = true;
+            int command;
+
+            while (isRunning)
+            {
+                menu.PrintOptions(service);
+                command = menu.ReadCommand(service);
+
+                switch (command)
+                {
+                    case 1:
+                        ShowInformation(service, student);
+                        break;
+                    case 2:
+                        ChangeTeacherHoursFromInput(service);
+                        break;
+                    case 3:
+                        GiveMaterialToStudentFromInput(service, student);
+                        break;
+                    case 4:
+                        GradeStudentFromInput(service, student);
+                        break;
+                    case 5:
+                        SaveData(service, student);
+                        break;
+                    case 6:
+                        WorkWithDiplomaProject(service, student);
+                        break;
+                    case 0:
+                        isRunning = false;
+                        service.PrintToConsole("Програму завершено");
+                        break;
+                    default:
+                        service.PrintToConsole("Невідома команда");
+                        break;
+                }
+            }
+        }
+
+        private void ShowInformation(Service service, Student student)
+        {
+            service.PrintToConsole("\nВикладач: " + teacherName);
+            service.PrintToConsole("Дисципліна викладача: " + subjectName);
+            service.PrintToConsole("Навчальне навантаження: " + studyHours);
+            service.PrintToConsole("Кількість студентів: " + quantityOfStudents);
+            service.PrintToConsole("Навчальний матеріал викладача: " + studyMaterial);
+            service.PrintToConsole("Журнал оцінок:\n" + gradesJournal);
+            service.PrintToConsole("Студент: " + student.StudentName);
+            service.PrintToConsole("Дисципліна студента: " + student.SubjectName);
+            service.PrintToConsole("Оцінки студента: " + student.ViewGrades());
+            service.PrintToConsole("Обсяг виконаних робіт: " + student.TasksDone);
+            service.PrintToConsole("Рейтинг студента: " + student.CalculateRating());
+            service.PrintToConsole("Отриманий матеріал: " + student.DownloadedMaterial);
+            service.PrintToConsole("Тема дипломного проєкту: " + student.Diploma.ThemeName);
+            service.PrintToConsole("Оцінка за дипломний проєкт: " + student.Diploma.Grade);
+        }
+
+        private void ChangeTeacherHoursFromInput(Service service)
+        {
+            int newHours;
+
+            newHours = ReadNumberInRange(service, "Введіть нову кількість годин навчального навантаження", 0, 300);
+            ChangeStudyHours(newHours);
+            service.PrintToConsole("Години успішно змінено");
+        }
+
+        private void GiveMaterialToStudentFromInput(Service service, Student student)
+        {
+            string material;
+
+            material = ReadNotEmptyText(service, "Введіть назву матеріалу");
+            studyMaterial = material;
+            GiveMaterial(student);
+            service.PrintToConsole("Матеріал передано студенту");
+        }
+
+        private void GradeStudentFromInput(Service service, Student student)
+        {
+            int grade;
+
+            grade = ReadNumberInRange(service, "Введіть оцінку студента", 0, 100);
+            GradeStudent(student, grade);
+            service.PrintToConsole("Оцінку виставлено і записано в журнал");
+        }
+
+        private void SaveData(Service service, Student student)
+        {
+            service.WriteToFile(BuildReport(student));
+            service.PrintToConsole("Дані збережено у файл");
+        }
+
+        private void WorkWithDiplomaProject(Service service, Student student)
+        {
+            service.PrintToConsole("--- Робота з дипломним проєктом ---");
+            student.Diploma.ChooseTheme(service, "themes.txt");
+            student.Diploma.DetermineComplexity(service);
+            EvaluateDiploma(student);
+
+            service.PrintToConsole("Тема дипломного проєкту: " + student.Diploma.ThemeName);
+            service.PrintToConsole("Складність теми: " + student.Diploma.ThemeComplexity);
+            service.PrintToConsole("Оцінка за дипломний проєкт: " + student.Diploma.Grade);
+        }
+
+        private string BuildReport(Student student)
+        {
+            string report = "--- ЗВІТ ПРО ОСВІТНІЙ ПРОЦЕС ---\n";
+
+            report = report + "Викладач: " + teacherName + "\n";
+            report = report + "Дисципліна: " + subjectName + "\n";
+            report = report + "Навантаження: " + studyHours + " год.\n";
+            report = report + "Кількість студентів: " + quantityOfStudents + "\n";
+            report = report + "Матеріал викладача: " + studyMaterial + "\n";
+            report = report + "Журнал оцінок:\n" + gradesJournal + "\n";
+            report = report + "Студент: " + student.StudentName + "\n";
+            report = report + "Дисципліна студента: " + student.SubjectName + "\n";
+            report = report + "Оцінки: " + student.ViewGrades() + "\n";
+            report = report + "Виконано робіт: " + student.TasksDone + "\n";
+            report = report + "Рейтинг: " + student.CalculateRating() + "\n";
+            report = report + "Матеріал студента: " + student.DownloadedMaterial + "\n";
+            report = report + "Тема дипломного проєкту: " + student.Diploma.ThemeName + "\n";
+            report = report + "Кількість методів: " + student.Diploma.MethodsCount + "\n";
+            report = report + "Складність теми: " + student.Diploma.ThemeComplexity + "\n";
+            report = report + "Оцінка за диплом: " + student.Diploma.Grade + "\n";
+            report = report + "Керівник: " + student.Diploma.SupervisorName + "\n";
+
+            return report;
+        }
+
+        private int ReadNumberInRange(Service service, string message, int min, int max)
+        {
+            int number;
+
+            while (true)
+            {
+                service.PrintToConsole(message + " (" + min + "-" + max + "):");
+
+                if (int.TryParse(service.ReadFromConsole(), out number))
+                {
+                    if (number >= min && number <= max)
+                    {
+                        return number;
+                    }
+                }
+
+                service.PrintToConsole("Некоректне введення. Введіть ціле число в межах від " + min + " до " + max + ".");
+            }
+        }
+
+        private string ReadNotEmptyText(Service service, string message)
+        {
+            string text;
+
+            while (true)
+            {
+                service.PrintToConsole(message + ":");
+                text = service.ReadFromConsole();
+
+                if (!string.IsNullOrWhiteSpace(text))
+                {
+                    return text;
+                }
+
+                service.PrintToConsole("Поле не може бути порожнім. Введіть текст ще раз.");
+            }
         }
     }
 }

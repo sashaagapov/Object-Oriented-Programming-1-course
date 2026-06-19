@@ -159,7 +159,7 @@ namespace lab3agapov_v1
         public void AddGrade(int grade)
         {
             gradesList.Add(grade);
-            tasksDone = tasksDone + 1;
+            tasksDone += 1;
         }
 
         /// <summary>
@@ -206,7 +206,7 @@ namespace lab3agapov_v1
 
             for (i = 0; i < gradesList.Count; i++)
             {
-                sum = sum + gradesList[i];
+                sum += gradesList[i];
             }
 
             rating = sum / gradesList.Count;
@@ -429,7 +429,7 @@ namespace lab3agapov_v1
                         {
                             if (currentComplexity >= 1 && currentComplexity <= 10)
                             {
-                                sum = sum + currentComplexity;
+                                sum += currentComplexity;
                                 isCorrect = true;
                             }
                             else

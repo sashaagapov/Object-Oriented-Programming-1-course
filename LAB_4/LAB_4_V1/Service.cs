@@ -5,34 +5,16 @@ using System.IO;
 namespace lab4agapov_v1
 {
     /// <summary>
-    /// Клас Service відповідає за консольне введення, консольне виведення,
-    /// читання з файлу та формування текстового звіту.
+    /// Клас Service відповідає тільки за консольний ввід/вивід,
+    /// текстовий протокол і роботу з файлами.
     /// </summary>
     public class Service
     {
-        /// <summary>
-        /// Формат виведення або збереження даних.
-        /// </summary>
         private string outputFormat;
-
-        /// <summary>
-        /// Шлях до файлу, з яким працює сервіс.
-        /// </summary>
         private string filePath;
-
-        /// <summary>
-        /// Дані, які сервіс підготував до запису у файл.
-        /// </summary>
         private string dataToProcess;
-
-        /// <summary>
-        /// Протокол роботи програми: усі повідомлення консолі та введення користувача.
-        /// </summary>
         private List<string> protocol;
 
-        /// <summary>
-        /// Конструктор за замовчуванням створює сервіс з порожніми текстовими полями.
-        /// </summary>
         public Service()
         {
             outputFormat = "";
@@ -41,12 +23,6 @@ namespace lab4agapov_v1
             protocol = new List<string>();
         }
 
-        /// <summary>
-        /// Конструктор з параметрами задає формат, шлях до файлу і початкові дані для обробки.
-        /// </summary>
-        /// <param name="outputFormat">Формат виведення.</param>
-        /// <param name="filePath">Шлях до файлу.</param>
-        /// <param name="dataToProcess">Початкові дані для обробки.</param>
         public Service(string outputFormat, string filePath, string dataToProcess)
         {
             this.outputFormat = outputFormat;
@@ -55,10 +31,6 @@ namespace lab4agapov_v1
             protocol = new List<string>();
         }
 
-        /// <summary>
-        /// Конструктор копії створює сервіс з такими самими службовими полями, як в іншого сервісу.
-        /// </summary>
-        /// <param name="other">Сервіс, з якого копіюються дані.</param>
         public Service(Service other)
         {
             outputFormat = other.outputFormat;
@@ -67,105 +39,62 @@ namespace lab4agapov_v1
             protocol = new List<string>(other.protocol);
         }
 
-        /// <summary>
-        /// Властивість для читання та зміни формату виведення.
-        /// </summary>
         public string OutputFormat
         {
             get { return outputFormat; }
             set { outputFormat = value; }
         }
 
-        /// <summary>
-        /// Властивість для читання та зміни шляху до файлу.
-        /// </summary>
         public string FilePath
         {
             get { return filePath; }
             set { filePath = value; }
         }
 
-        /// <summary>
-        /// Властивість для читання та зміни даних, підготовлених до обробки.
-        /// </summary>
         public string DataToProcess
         {
             get { return dataToProcess; }
             set { dataToProcess = value; }
         }
 
-        /// <summary>
-        /// Виводить повідомлення в консоль.
-        /// </summary>
-        /// <param name="msg">Текст повідомлення для користувача.</param>
         public void PrintToConsole(string msg)
         {
-            PrintAndSave(msg);
+            Console.WriteLine(msg);
+            protocol.Add(msg);
         }
 
-        /// <summary>
-        /// Виводить повідомлення в консоль і додає його до протоколу.
-        /// </summary>
-        /// <param name="text">Текст повідомлення.</param>
-        public void PrintAndSave(string text)
-        {
-            Console.WriteLine(text);
-            protocol.Add(text);
-        }
-
-        /// <summary>
-        /// Читає один рядок з консолі.
-        /// </summary>
-        /// <returns>Рядок, введений користувачем.</returns>
         public string ReadFromConsole()
         {
             string input = Console.ReadLine() + "";
+
             protocol.Add("> " + input);
             return input;
         }
 
-        /// <summary>
-        /// Зберігає протокол виконання програми у текстовий файл.
-        /// </summary>
-        /// <param name="fileName">Ім'я або шлях до файлу.</param>
+        public void WriteToFile(string text)
+        {
+            dataToProcess = text;
+            File.WriteAllText(filePath, dataToProcess);
+        }
+
+        public string AppendProtocol(string text)
+        {
+            string result = text + "\n--- ПРОТОКОЛ РОБОТИ ПРОГРАМИ ---\n";
+            int i;
+
+            for (i = 0; i < protocol.Count; i++)
+            {
+                result += protocol[i] + "\n";
+            }
+
+            return result;
+        }
+
         public void SaveProtocolToFile(string fileName)
         {
             File.WriteAllLines(fileName, protocol);
         }
 
-        /// <summary>
-        /// Формує звіт про викладача і студента та записує його у файл.
-        /// </summary>
-        /// <param name="teacher">Викладач, дані якого додаються до звіту.</param>
-        /// <param name="student">Студент, дані якого додаються до звіту.</param>
-        public void SaveReport(Teacher teacher, Student student)
-        {
-            dataToProcess = "--- ЗВІТ ПРО ОСВІТНІЙ ПРОЦЕС ---\n";
-            dataToProcess = dataToProcess + "Викладач: " + teacher.TeacherName + "\n";
-            dataToProcess = dataToProcess + "Дисципліна: " + teacher.SubjectName + "\n";
-            dataToProcess = dataToProcess + "Навантаження: " + teacher.StudyHours + " год.\n";
-            dataToProcess = dataToProcess + "Студентів у групі: " + teacher.QuantityOfStudents + "\n";
-            dataToProcess = dataToProcess + "Матеріал: " + teacher.StudyMaterial + "\n";
-            dataToProcess = dataToProcess + "Журнал оцінок:\n" + teacher.GradesJournal + "\n";
-            dataToProcess = dataToProcess + "Студент: " + student.StudentName + "\n";
-            dataToProcess = dataToProcess + "Оцінки: " + student.ViewGrades() + "\n";
-            dataToProcess = dataToProcess + "Виконано робіт: " + student.TasksDone + "\n";
-            dataToProcess = dataToProcess + "Рейтинг: " + student.CalculateRating() + "\n";
-            dataToProcess = dataToProcess + "Матеріал у студента: " + student.DownloadedMaterial + "\n";
-            dataToProcess = dataToProcess + "\n--- ПРОТОКОЛ РОБОТИ ПРОГРАМИ ---\n";
-
-            foreach (string item in protocol)
-            {
-                dataToProcess = dataToProcess + item + "\n";
-            }
-
-            File.WriteAllText(filePath, dataToProcess);
-        }
-
-        /// <summary>
-        /// Читає весь текст з основного файлу, якщо він існує.
-        /// </summary>
-        /// <returns>Вміст файлу або порожній рядок, якщо файл не знайдено.</returns>
         public string ReadFromFile()
         {
             if (File.Exists(filePath))

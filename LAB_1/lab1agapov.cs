@@ -1,11 +1,4 @@
 ﻿
-/* * ДЕКЛАРАЦІЯ ПРО ВИКОРИСТАННЯ ШІ:
-
- * Штучний інтелект використовувався у цій лабораторній роботі виключно 
-
- * як навчальний асистент: для розбору логіки, дебагу та кращого розуміння матеріалу.
-
- */
 /*
  * Ім'я файлу: Program.cs
  * Автор: Агапов Олександр, гр. ІПЗ-11(1)
@@ -29,8 +22,9 @@ namespace lab1agapov
         /// Точка входу програми. Відображає головне меню та обробляє вибір користувача.
         /// </summary>
         /// <param name="args">Аргументи командного рядка (не використовуються).</param>
-        void Main(string[] args)
+        static void Main(string[] args)
         {
+            Program app = new Program();
 
             Console.OutputEncoding = Encoding.UTF8;
             Console.InputEncoding = Encoding.UTF8;
@@ -52,20 +46,20 @@ namespace lab1agapov
                 switch (choice)
                 {
                     case "1":
-                        WelcomeInfo();// Виводить анкетні дані та виконує обчислення полінома
-                        CalculatePolynomial();// Виконує обчислення полінома для введеного x
+                        app.WelcomeInfo();// Виводить анкетні дані та виконує обчислення полінома
+                        app.CalculatePolynomial();// Виконує обчислення полінома для введеного x
                         break;
                     case "2":
-                        CalculateMathFunction();// Виконує обчислення математичного виразу для введених a та b
+                        app.CalculateMathFunction();// Виконує обчислення математичного виразу для введених a та b
                         break;
                     case "3":
-                        CalculatePiecewiseFunction();// Виконує обчислення кускової функції f(x) для введеного x
+                        app.CalculatePiecewiseFunction();// Виконує обчислення кускової функції f(x) для введеного x
                         break;
                     case "4":
-                        GetMonthName();// Виводить назву місяця за введеним номером місяця (1-12)
+                        app.GetMonthName();// Виводить назву місяця за введеним номером місяця (1-12)
                         break;
                     case "5":
-                        CalculateSeries();// Виконує обчислення добутку ряду для введеного натурального числа n
+                        app.CalculateSeries();// Виконує обчислення добутку ряду для введеного натурального числа n
                         break;
                     case "0":
                         menuStopping = false;

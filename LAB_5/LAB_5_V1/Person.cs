@@ -70,7 +70,7 @@ namespace lab5agapov_v1
         /// <returns>Рядок з базовими полями особи.</returns>
         public virtual string GetInfo()
         {
-            return $"Ім'я: {Name}\nДисципліна: {SubjectName}";
+            return "Ім'я: " + Name + "\nДисципліна: " + SubjectName;
         }
 
     }

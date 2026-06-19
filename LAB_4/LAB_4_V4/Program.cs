@@ -1,4 +1,8 @@
-﻿using System;
+﻿/*
+ * Лабораторна робота №4 — Версія 4 (Фінальна)
+ * Суть версії: Стандартні інтерфейси .NET для колекцій, сортування, перебору та глибокого копіювання об'єктів.
+ */
+using System;
 using System.Collections.Generic;
 
 namespace lab4agapov_v4
@@ -7,21 +11,23 @@ namespace lab4agapov_v4
     {
         public static void Main(string[] args)
         {
-            Console.Clear();
-
-            Service service = new Service("text", "student_report.txt", "");
-            service.PrintToConsole("Програму запущено.");
-
-            Teacher teacher = new Teacher("Ковалюк Т.В.", "ООП", 120, 1, "", "Матеріали до лабораторної роботи 4");
-            IPerson demoPerson = teacher;
-            service.PrintToConsole("Демонстрація IPerson: " + demoPerson.Name);
-
-            Student student = new Student("Агапов Олександр", "ООП", new List<int>(), 0, "", 0);
-
-            StudentGroup group = new StudentGroup();
             List<int> gradesOne = new List<int>();
             List<int> gradesTwo = new List<int>();
             List<int> gradesThree = new List<int>();
+            Teacher teacher;
+            Student student;
+            Student secondStudent;
+            Student thirdStudent;
+            Student fourthStudent;
+            StudentGroup group;
+            Service service;
+            Menu menu;
+
+            Console.Clear();
+
+            service = new Service("text", "student_report.txt", "");
+            teacher = new Teacher("Ковалюк Т.В.", "ООП", 120, 4, "", "Матеріали до лабораторної роботи 4");
+            student = new Student("Агапов Олександр", "ООП", new List<int>(), 0, "", 0);
 
             gradesOne.Add(90);
             gradesOne.Add(95);
@@ -35,31 +41,21 @@ namespace lab4agapov_v4
             gradesThree.Add(98);
             gradesThree.Add(94);
 
-            Student secondStudent = new Student("Іваненко Марія", "ООП", gradesOne, 3, "Матеріал до ЛР4", 0);
-            Student thirdStudent = new Student("Петренко Назар", "ООП", gradesTwo, 2, "Матеріал до ЛР4", 0);
-            Student fourthStudent = new Student("Сидоренко Олена", "ООП", gradesThree, 4, "Матеріал до ЛР4", 0);
+            secondStudent = new Student("Іваненко Марія", "ООП", gradesOne, 3, "Матеріал до ЛР4", 0);
+            thirdStudent = new Student("Петренко Назар", "ООП", gradesTwo, 2, "Матеріал до ЛР4", 0);
+            fourthStudent = new Student("Сидоренко Олена", "ООП", gradesThree, 4, "Матеріал до ЛР4", 0);
 
+            group = new StudentGroup();
             group.AddStudent(student);
             group.AddStudent(secondStudent);
             group.AddStudent(thirdStudent);
             group.AddStudent(fourthStudent);
 
-            teacher.GiveMaterial(student);
-            teacher.GradeStudent(student, 95);
-            student.CalculateRating();
-            service.PrintToConsole("Викладач передав матеріал і поставив оцінку основному студенту.");
+            service.PrintToConsole("Програму запущено. Початкові об'єкти створені.");
+            teacher.RunDemoScenario(service, student, group);
 
-            group.SortStudents();
-            service.PrintToConsole("Групу відсортовано за рейтингом через IComparable<Student>.");
-
-            group.SortByTasks();
-            service.PrintToConsole("Групу відсортовано за кількістю робіт через IComparer<Student>.");
-
-            Menu menu = new Menu(service, teacher, student, group);
-            menu.Run();
-
-            service.PrintToConsole("Фінальний звіт буде збережено у файл student_report.txt.");
-            service.SaveReport(teacher, student);
+            menu = new Menu();
+            teacher.RunScenario(service, menu, student, group);
         }
     }
 }
